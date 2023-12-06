@@ -15,8 +15,11 @@
 		"js-cookie": "latest"
 	},
 	"devDependencies": {
+		"autoprefixer": "^10.4.16",
 		"dotenv": "latest",
+		"postcss": "^8.4.32",
 		"sass": "latest",
+		"tailwindcss": "^3.3.6",
 		"vite": "latest",
 		"vite-plugin-mkcert": "latest",
 		"vite-plugin-restart": "latest"

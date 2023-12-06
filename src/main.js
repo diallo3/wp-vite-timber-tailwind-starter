@@ -11,6 +11,7 @@ import '../src/main.scss';
 
 // glob import all scss files
 import.meta.glob('../templates/**/*.scss', { eager: true });
+import.meta.glob('../templates/**/*.css', { eager: true });
 
 // component imports
 import Menu from '../templates/components/menu/menu';
