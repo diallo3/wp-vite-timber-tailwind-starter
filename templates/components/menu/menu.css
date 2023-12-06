@@ -78,8 +78,8 @@ button.menu-link {
 	text-align: left;
 	font-weight: 600;
 	padding: 0.5rem 0;
-	//padding: 0.5em;
-	//color: var(--color-text);
+	/* padding: 0.5em;
+	color: var(--color-text); */
 }
 
 .direction-indicator {
@@ -94,7 +94,7 @@ button.menu-link {
 .menu-list {
 	&[data-level='1'] {
 		.menu-link {
-			//font-size:: 1.25rem;
+			/* font-size: 1.25rem; */
 		}
 		> li {
 			padding: 0.5rem 1rem;
@@ -164,7 +164,7 @@ li.menu-list-item[data-state='open'] {
 		}
 		.menu-list-item {
 			position: relative;
-			//min-width: 8rem;
+			/* min-width: 8rem; */
 		}
 		.menu-list-item ul.menu-list {
 			position: absolute;

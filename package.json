@@ -11,6 +11,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"alpinejs": "^3.13.3",
 		"baselayer.css": "latest",
 		"js-cookie": "latest"
 	},

@@ -1,4 +1,10 @@
 // Vite Stuff
+import Alpine from 'alpinejs';
+
+// Alpine.js
+window.Alpine = Alpine;
+Alpine.start();
+
 // Accept HMR as per: https://vitejs.dev/guide/api-hmr.html
 if (import.meta.hot) {
 	import.meta.hot.accept(() => {
