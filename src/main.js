@@ -6,11 +6,10 @@ if (import.meta.hot) {
 	});
 }
 
-// SCSS
-import '../src/main.scss';
+// import SCSS files if applicable
 
-// glob import all scss files
-import.meta.glob('../templates/**/*.scss', { eager: true });
+
+// glob import all css or scss files
 import.meta.glob('../templates/**/*.css', { eager: true });
 
 // component imports
