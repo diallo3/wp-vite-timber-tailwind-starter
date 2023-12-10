@@ -11,11 +11,18 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"@alpinejs/collapse": "^3.13.3",
+		"@alpinejs/focus": "^3.13.3",
+		"@alpinejs/persist": "^3.13.3",
+		"@tailwindcss/container-queries": "^0.1.1",
 		"alpinejs": "^3.13.3",
 		"baselayer.css": "latest",
 		"js-cookie": "latest"
 	},
 	"devDependencies": {
+		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@tailwindcss/forms": "^0.5.7",
+		"@tailwindcss/typography": "^0.5.10",
 		"autoprefixer": "^10.4.16",
 		"dotenv": "latest",
 		"postcss": "^8.4.32",

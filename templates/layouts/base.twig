@@ -31,7 +31,9 @@
 
 	</head>
 
-	<body class="{{ body_class }}">
+	<body 
+        x-init="console.log('Im initing')"
+        class="{{ body_class }}" >
 	
 		{% block alert %}
 			{% for alert in alerts %}

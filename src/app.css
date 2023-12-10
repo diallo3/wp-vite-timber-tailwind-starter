@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html {
-    @apply bg-blue-500;
+    @apply bg-red-500;
 }
