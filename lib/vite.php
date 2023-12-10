@@ -125,7 +125,6 @@ class WPVite {
 			$i++;
 			wp_enqueue_style($this->wpEnqueueId . '-style-' . $i, $this->distUri . '/' . $file);
 		}
-
 		$i = 0;
 		foreach ($filelist['js'] as $file) {
 			$i++;

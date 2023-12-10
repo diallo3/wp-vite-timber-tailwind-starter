@@ -27,7 +27,7 @@ export default defineConfig(({ command }) => {
 		plugins: [
 			mkcert(),
 			ViteRestart({
-				reload: ['/**/*.html', '/**/*.twig', '/**/*.php', '!vendor/**/*', '!node_modules/**/*'],
+				reload: ['./**/*.html', './**/*.twig', './**/*.php', '!vendor/**/*', '!node_modules/**/*'],
 			}),
 		],
 		server: {
@@ -42,6 +42,7 @@ export default defineConfig(({ command }) => {
 			hmr: {
 				host: process.env.VITE_HOST,
 			},
+            host: true
 		},
 	};
 });

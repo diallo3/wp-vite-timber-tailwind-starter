@@ -13,7 +13,7 @@ if (import.meta.hot) {
 }
 
 // import SCSS files if applicable
-
+import '../src/app.css';
 
 // glob import all css or scss files
 import.meta.glob('../templates/**/*.css', { eager: true });
