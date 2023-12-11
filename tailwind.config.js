@@ -2,11 +2,12 @@
 const plugin = require('tailwindcss/plugin');
 const colors = require('tailwindcss/colors');
 
-export default {
-  content: [
-    './*.php',
-    './templates/**/*.twig', 
-    './src/**/*.js'
+module.exports = {
+    darkMode: 'class',
+    content: [
+        './*.php',
+        './templates/**/*.twig', 
+        './src/**/*.js'
     ],
     theme: {
         extend: {},

@@ -1,11 +1,13 @@
 {% set level = level + 1 %}
-<ul class="{{ name }}" data-level="{{ level }}">
+<menu class="{{ name }}" data-level="{{ level }}">
 	{% for item in items %}
 		<li class="{{ item.classes|join(' ') }}">
 			{% if item.link == "#" %}
 				<div class="menu-heading">{{ item.title }}</div>	
 			{% else %}
-				<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+				<a href="{{ item.link }}" target="{{ item.target }}" class="text-sm">
+                    <span class="inline-flex">{{ item.title }}</span>
+                </a>
 			{% endif %}
 			
 			{% if item.children %}
@@ -13,4 +15,4 @@
 			{% endif %}
 		</li>
 	{% endfor %}
-</ul>
+</menu>

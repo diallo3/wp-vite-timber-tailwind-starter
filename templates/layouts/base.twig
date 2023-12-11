@@ -43,7 +43,7 @@
 
 		<header id="header" class="header" >
 			{% block header %}
-				{% include 'components/menu/menu.twig' %}
+				{% include 'partials/_partial-header.twig' %}
 			{% endblock %}
 		</header>
 
@@ -54,7 +54,7 @@
 		</main>
 
 		{% block footer %}
-			{% include 'components/footer/footer.twig' %}
+            {% include 'partials/_partial-footer.twig' %}
 		{% endblock %}
 
 		{{ function('wp_footer') }}

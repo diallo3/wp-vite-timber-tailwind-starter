@@ -1,7 +1,6 @@
 <?php
 
 use Timber\Timber;
-use Timber\Site;
 
 /**
  * Timber starter-theme

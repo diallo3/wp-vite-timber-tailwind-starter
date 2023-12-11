@@ -16,10 +16,3 @@ import '../src/app.css';
 import.meta.glob('../templates/**/*.css', { eager: true });
 
 // component imports
-import Menu from '../templates/components/menu/menu';
-
-const menu = document.querySelector('nav.menu');
-if (menu) {
-	console.log(menu);
-	new Menu(menu);
-}

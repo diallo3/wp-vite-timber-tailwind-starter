@@ -1,4 +1,6 @@
 <?php
+use Timber\Site;
+
 class StarterTimber extends Site {
 	/** Add timber support. */
 	public function __construct() {

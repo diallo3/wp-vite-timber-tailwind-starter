@@ -1,0 +1,92 @@
+<!-- Main Header -->
+<header
+	x-data="{ mobileNavOpen: false }" 
+    id="siteHeader" 
+    class="relative flex items-center flex-none px-6 py-8 site-header lg:px-8">
+	<!-- Main Header Content -->
+	<div
+		class="container flex items-center justify-between mx-auto text-center xl:max-w-screen-2xl">
+		<!-- Left Section -->
+		<div
+			class="flex items-center">
+			<!-- Logo -->
+			<a 
+                href="javascript:void(0)" 
+                class="inline-flex items-center space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
+				<svg class="inline-block w-5 h-5 text-blue-600 transition hi-mini hi-cube-transparent group-hover:scale-110 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+					<path fill-rule="evenodd" d="M9.638 1.093a.75.75 0 01.724 0l2 1.104a.75.75 0 11-.724 1.313L10 2.607l-1.638.903a.75.75 0 11-.724-1.313l2-1.104zM5.403 4.287a.75.75 0 01-.295 1.019l-.805.444.805.444a.75.75 0 01-.724 1.314L3.5 7.02v.73a.75.75 0 01-1.5 0v-2a.75.75 0 01.388-.657l1.996-1.1a.75.75 0 011.019.294zm9.194 0a.75.75 0 011.02-.295l1.995 1.101A.75.75 0 0118 5.75v2a.75.75 0 01-1.5 0v-.73l-.884.488a.75.75 0 11-.724-1.314l.806-.444-.806-.444a.75.75 0 01-.295-1.02zM7.343 8.284a.75.75 0 011.02-.294L10 8.893l1.638-.903a.75.75 0 11.724 1.313l-1.612.89v1.557a.75.75 0 01-1.5 0v-1.557l-1.612-.89a.75.75 0 01-.295-1.019zM2.75 11.5a.75.75 0 01.75.75v1.557l1.608.887a.75.75 0 01-.724 1.314l-1.996-1.101A.75.75 0 012 14.25v-2a.75.75 0 01.75-.75zm14.5 0a.75.75 0 01.75.75v2a.75.75 0 01-.388.657l-1.996 1.1a.75.75 0 11-.724-1.313l1.608-.887V12.25a.75.75 0 01.75-.75zm-7.25 4a.75.75 0 01.75.75v.73l.888-.49a.75.75 0 01.724 1.313l-2 1.104a.75.75 0 01-.724 0l-2-1.104a.75.75 0 11.724-1.313l.888.49v-.73a.75.75 0 01.75-.75z" clip-rule="evenodd"/>
+				</svg>
+				<span>Company Name</span>
+			</a>
+			<!-- END Logo -->
+		</div>
+		<!-- END Left Section -->
+
+		<!-- Right Section -->
+		<div
+			class="flex items-center">
+			<!-- Navigation -->
+			<nav class="hidden space-x-3 md:space-x-6 lg:block">
+				{% if menu.header_nav %}
+                    {% include 'components/menu-list/menu-list-header.twig' with {
+                            items: menu.header_nav.get_items, 
+                            name: 'menu-header-nav'
+                        } 
+                    %}
+                {% endif %}
+			</nav>
+			<!-- END Navigation -->
+
+			<!-- Divider -->
+			<div class="hidden w-px h-8 mx-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-700 lg:block"></div>
+
+			<!-- Actions -->
+			<div class="flex items-center justify-center gap-2">
+				<a href="javascript:void(0)" class="items-center justify-center hidden px-3 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none lg:inline-flex">
+					<span>Sign In</span>
+				</a>
+				<a href="javascript:void(0)" class="inline-flex items-center justify-center px-3 py-2 space-x-2 text-sm font-semibold leading-5 text-white bg-blue-700 border border-blue-700 rounded-lg hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:border-blue-700 active:bg-blue-700 dark:focus:ring-blue-400 dark:focus:ring-opacity-90">
+					<span>Get Access</span>
+					<svg class="hidden w-5 h-5 opacity-50 hi-mini hi-arrow-right sm:inline-block" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+					</svg>
+				</a>
+			</div>
+			<!-- END Actions -->
+
+			<!-- Open Mobile Navigation  -->
+			<div class="ml-3 lg:hidden">
+				<button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-3 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
+					<svg class="inline-block w-5 h-5 hi-mini hi-bars-3" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>
+					</svg>
+				</button>
+			</div>
+			<!-- END Open Mobile Navigation -->
+		</div>
+		<!-- END Right Section -->
+	</div>
+	<!-- END Main Header Content -->
+
+    {% embed 'components/containers/slideover/_component-slideover.twig' with {
+            trigger: 'mobileNavOpen',
+            slideTitle: 'Navigation',
+        }
+    %}
+        {% block slideContent %}
+            <nav class="flex flex-col items-start justify-between flex-1 space-y-4">
+                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
+                    <span>Features</span>
+                </a>
+                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
+                    <span>Pricing</span>
+                </a>
+                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
+                    <span>Support</span>
+                </a>
+            </nav>
+        {% endblock %}
+    {% endembed  %}
+</header>
+<!-- END Main Header -->
+
