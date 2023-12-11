@@ -10,13 +10,13 @@
     }  | merge(options)  %}
 
     {% set typeClass = {
-        'primary': 'bg-blue-700 border border-blue-700 text-white hover:text-white hover:bg-blue-600 hover:border-blue-600 focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700',
-        'secondary': 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded',
-        'simple': 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded',
+        'primary': 'bg-blue-700 border-blue-700 text-white hover:text-white hover:bg-blue-600 hover:border-blue-600 focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700',
+        'secondary': 'bg-blue-100 border-blue-200 text-blue-800 hover:border-blue-300 focus:ring focus:ring-blue-300 focus:ring-opacity-25 active:border-blue-200 active:shadow-none',
+        'simple': 'bg-white border-gray-200 text-gray-800 hover:border-gray-300 hover:shadow-sm',
     }[options.type] %}
 
     {% set sizeClass = {
-        'sm': 'py-1.5 px-2 text-sm',
+        'sm': 'py-1.5 px-2.5 text-sm',
         'md': 'py-2 px-4 text-sm',
         'lg': 'py-3 px-6 text-base',
     }[options.size] %}
