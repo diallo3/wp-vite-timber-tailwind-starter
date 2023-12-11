@@ -1,0 +1,39 @@
+{% macro btnHref(options=[]) %}
+    {% import "/templates/components/ui/_macro-icon.twig" as icons %}
+    
+    {% set options = {
+        text: 'Button Text',
+        type: 'primary',
+        size: 'md',
+        icon: null,
+        href: null,
+    }  | merge(options)  %}
+
+    {% set typeClass = {
+        'primary': 'bg-blue-700 border border-blue-700 text-white hover:text-white hover:bg-blue-600 hover:border-blue-600 focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700',
+        'secondary': 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded',
+        'simple': 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded',
+    }[options.type] %}
+
+    {% set sizeClass = {
+        'sm': 'py-1.5 px-2 text-sm',
+        'md': 'py-2 px-4 text-sm',
+        'lg': 'py-3 px-6 text-base',
+    }[options.size] %}
+
+    {# Generate button HTML #}
+    <a href="{{ options.href }}" class="{{ typeClass }} {{ sizeClass }} border inline-flex items-center justify-center space-x-2 leading-5 font-semibold rounded-lg">
+
+        <span>{{ options.text }}</span>
+        {# Include an optional SVG icon #}
+        {% if options.icon is not null %}
+            <span class="inline-flex items-center opacity-50">
+                {{ icons.icon(options.icon, 'w-5 h-5') }}
+            </span>
+        {% endif %}
+    </a>
+{% endmacro %}
+
+
+
+
