@@ -33,7 +33,7 @@
 
 	<body 
         x-init="console.log('Im initing')"
-        class="{{ body_class }}" >
+        class="{{ body_class }} bg-gray-900" >
 	
 		{% block alert %}
 			{% for alert in alerts %}
@@ -47,7 +47,7 @@
 			{% endblock %}
 		</header>
 
-		<main id="content" class="layout" role="main">
+		<main id="content" class="bg-white layout" role="main">
 			{% block content %}
 				Sorry, no content
 			{% endblock %}

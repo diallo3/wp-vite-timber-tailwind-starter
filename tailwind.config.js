@@ -13,10 +13,10 @@ module.exports = {
         extend: {},
     },
     plugins: [
-        '@tailwindcss/forms', 
-        '@tailwindcss/typography',
-        '@tailwindcss/aspect-ratio',
-        '@tailwindcss/container-queries',
+        require('@tailwindcss/forms'), 
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/container-queries'),
         plugin(function ({ addUtilities }) {
             const utilFormSwitch = {
                 ".form-switch": {

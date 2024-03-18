@@ -1,4 +1,4 @@
-{% macro btnHref(options=[]) %}
+{% macro btnLink(options=[]) %}
     {% import "/templates/components/ui/_macro-icon.twig" as icons %}
     
     {% set options = {
@@ -6,7 +6,7 @@
         type: 'primary',
         size: 'md',
         icon: null,
-        href: null,
+        link: null,
     }  | merge(options)  %}
 
     {% set typeClass = {
@@ -22,7 +22,7 @@
     }[options.size] %}
 
     {# Generate button HTML #}
-    <a href="{{ options.href }}" class="{{ typeClass }} {{ sizeClass }} border inline-flex items-center justify-center space-x-2 leading-5 font-semibold rounded-lg">
+    <a href="{{ options.link }}" class="{{ typeClass }} {{ sizeClass }} border inline-flex items-center justify-center space-x-2 leading-5 font-semibold rounded-lg">
 
         <span>{{ options.text }}</span>
         {# Include an optional SVG icon #}
