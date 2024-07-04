@@ -1,0 +1,78 @@
+
+{# mega menu #}
+{% macro render_mega_menu(menu, options=[]) %}
+    {% set options = {
+        
+    } | merge(options) %}
+
+    {% if menu %}
+        <menu class="flex items-center justify-between" data-level="{{ level }}">
+            {% for item in menu.items %}
+                <li
+                    x-data="{ 
+                        open: false 
+                    }"
+                    @mouseenter="open = true"
+                    @mouseleave="open = false"
+                    class="{{ item.classes | join(' ') }} group cursor-pointer relative">
+                    <a href="{{ item.link }}" target="{{ item.target }}">{{ item.title }}</a>
+
+                    {# item children #}
+                    {% if item.children %}
+                       <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200 transform"
+                            x-transition:enter-start="opacity-0 -translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-out duration-200"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            x-cloak
+                            @focusout="await $nextTick();!$el.contains($focus.focused()) && (open = false)"
+                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden"
+                        >
+                            {% if item.meta('mega_menu_item') %} 
+                                {{ item.meta('mega_menu_item') }}
+                            {% else %}
+                                 {{ _self.render_mega_menu(item.children) }}
+                            {% endif %}
+                           
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </menu>
+    {% endif %}
+{% endmacro %}
+
+{# accordion menu #}
+{% macro render_accordion_menu(menu, options=[]) %}
+    {% if menu %}
+        <menu class="">
+            {% for item in menu.items %}
+                <li class="{{ item.classes | join(' ') }}">
+                    <a href="{{ item.link }}">{{ item.title }}</a>
+                    {% if item.children %}
+                        {{ _self.render_menu(item.children) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </menu>
+    {% endif %}
+{% endmacro %}
+
+{# basic menu #}
+{% macro render_menu(menu, options=[]) %}
+    {% if menu %}
+        <ul>
+            {% for item in menu.items %}
+                <li class="{{ item.classes | join(' ') }}">
+                    <a href="{{ item.link }}">{{ item.title }}</a>
+                    {% if item.children %}
+                        {{ _self.render_menu(item.children) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}

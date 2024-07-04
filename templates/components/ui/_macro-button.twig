@@ -7,6 +7,7 @@
         size: 'md',
         icon: null,
         link: null,
+        classes: '',
     }  | merge(options)  %}
 
     {% set typeClass = {
@@ -22,7 +23,7 @@
     }[options.size] %}
 
     {# Generate button HTML #}
-    <a href="{{ options.link }}" class="{{ typeClass }} {{ sizeClass }} border inline-flex items-center justify-center space-x-2 leading-5 font-semibold rounded-lg">
+    <a href="{{ options.link }}" class="{{ typeClass }} {{ sizeClass }} {{ options.classes }} border inline-flex items-center justify-center space-x-2 leading-5 font-semibold rounded-lg">
 
         <span>{{ options.text }}</span>
         {# Include an optional SVG icon #}

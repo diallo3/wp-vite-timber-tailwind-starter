@@ -1,3 +1,4 @@
+
 {% import "components/ui/_macro-icon.twig" as icons %}
 {% import "components/ui/_macro-button.twig" as btns %}
 
@@ -5,7 +6,7 @@
 <header
 	x-data="{ mobileNavOpen: false }" 
     id="siteHeader" 
-    class="relative flex items-center flex-none px-6 py-8 bg-white site-header lg:px-8">
+    class="relative flex items-center flex-none px-4 py-4 bg-white lg:py-8 site-header lg:px-8">
 	<!-- Main Header Content -->
 	<div
 		class="container flex items-center justify-between mx-auto text-center xl:max-w-screen-2xl">
@@ -17,7 +18,7 @@
                 href="javascript:void(0)" 
                 class="inline-flex items-center space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
 				{{ icons.icon('temp-logo', 'w-8 h-8 text-blue-600 group-hover:text-blue-500') }}
-				<span>Company Name</span>
+				<span class="hidden lg:inline-block whitespace-nowrap">{{ site.title }}</span>
 			</a>
 			<!-- END Logo -->
 		</div>
@@ -25,45 +26,42 @@
 
 		<!-- Right Section -->
 		<div
-			class="flex items-center">
-			<!-- Navigation -->
-			<nav class="hidden space-x-3 md:space-x-6 lg:block">
-				{% if menu.header_nav %}
-                    {% include 'components/menu-list/menu-list-header.twig' with {
-                            items: menu.header_nav.get_items, 
-                            name: 'menu-header-nav'
-                        } 
-                    %}
-                {% endif %}
-			</nav>
-			<!-- END Navigation -->
+			class="flex items-center justify-between">
 
-			<!-- Divider -->
-			<div class="hidden w-px h-8 mx-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-700 lg:block"></div>
+            <div class="hidden lg:items-center lg:flex">
+                <!-- Navigation -->
+                <nav class="space-x-3 md:space-x-6">
+                    {% if menu.header_nav %}
+                        {% include 'components/menu-list/menu-list-header.twig' with {
+                                items: menu.header_nav.get_items, 
+                                name: 'menu-header-nav'
+                            } 
+                        %}
+                    {% endif %}
+                </nav>
+                <!-- END Navigation -->
 
-			<!-- Actions -->
-			<div class="flex items-center justify-center gap-2">
+                <!-- Divider -->
 
-                {% for item in menu.header_buttons.get_items %}
-                    {{ btns.btnLink({
-                        text: item.title,
-                        link: item.link,
-                        type: 'simple',
-                        icon: 'arrow-right',
-                    }) }}
-                {% endfor %}
+                <!-- Actions -->
+                <div class="flex items-center justify-center gap-2">
 
-                
-                
-			</div>
-			<!-- END Actions -->
+                    {% if menu.header_buttons %}
+                        {% include 'components/menu-list/menu-list-buttons.twig' with {
+                            items: menu.header_buttons.get_items, 
+                            name: 'menu-header-buttons'} 
+                        %}
+                    {% endif %}
+
+                </div>
+                <!-- END Actions -->
+            </div>  
 
 			<!-- Open Mobile Navigation  -->
 			<div class="ml-3 lg:hidden">
-				<button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-3 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
-					<svg class="inline-block w-5 h-5 hi-mini hi-bars-3" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-						<path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>
-					</svg>
+				<button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
+					{{ icons.icon('menu', 'w-6 h-6') }}
+                    <span class="sr-only">Menu</span>
 				</button>
 			</div>
 			<!-- END Open Mobile Navigation -->
@@ -79,15 +77,20 @@
     %}
         {% block slideContent %}
             <nav class="flex flex-col items-start justify-between flex-1 space-y-4">
-                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
-                    <span>Features</span>
-                </a>
-                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
-                    <span>Pricing</span>
-                </a>
-                <a href="javascript:void(0)" class="text-sm font-semibold text-gray-900 hover:text-blue-600">
-                    <span>Support</span>
-                </a>
+                {% if menu.header_nav %}
+                    {% include 'components/menu-list/menu-list-header.twig' with {
+                            items: menu.header_nav.get_items, 
+                            name: 'menu-header-nav'
+                        } 
+                    %}
+                {% endif %}
+
+                {% if menu.header_buttons %}
+                    {% include 'components/menu-list/menu-list-buttons.twig' with {
+                        items: menu.header_buttons.get_items, 
+                        name: 'menu-header-buttons'} 
+                    %}
+                {% endif %}
             </nav>
         {% endblock %}
     {% endembed  %}
