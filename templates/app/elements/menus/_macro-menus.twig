@@ -1,13 +1,17 @@
+{% import "@Elements/_macro-buttons" as buttons %}
 
 {# mega menu #}
-{% macro render_mega_menu(menu, options=[]) %}
+{% macro render_mega_menu(menu, options={}) %}
+
     {% set options = {
-        
+        level: 0,
+        classes: [],
     } | merge(options) %}
 
     {% if menu %}
-        <menu class="flex items-center justify-between" data-level="{{ level }}">
-            {% for item in menu.items %}
+   
+        <menu class="lg:flex items-center justify-between space-x-2 hidden {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
+            {% for item in menu %}
                 <li
                     x-data="{ 
                         open: false 
@@ -15,7 +19,7 @@
                     @mouseenter="open = true"
                     @mouseleave="open = false"
                     class="{{ item.classes | join(' ') }} group cursor-pointer relative">
-                    <a href="{{ item.link }}" target="{{ item.target }}">{{ item.title }}</a>
+                    <a href="{{ item.link }}" class="block p-2" target="{{ item.target }}">{{ item.title }}</a>
 
                     {# item children #}
                     {% if item.children %}
@@ -29,12 +33,13 @@
                             x-transition:leave-end="opacity-0"
                             x-cloak
                             @focusout="await $nextTick();!$el.contains($focus.focused()) && (open = false)"
-                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden"
+                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
+                            data-level="{{ options.level + 1 }}"
                         >
                             {% if item.meta('mega_menu_item') %} 
-                                {{ item.meta('mega_menu_item') }}
+                                {# {{ item.meta('mega_menu_item') }} #}
                             {% else %}
-                                 {{ _self.render_mega_menu(item.children) }}
+                                 {{ _self.render_menu(item.children) }}
                             {% endif %}
                            
                         </div>
@@ -46,10 +51,10 @@
 {% endmacro %}
 
 {# accordion menu #}
-{% macro render_accordion_menu(menu, options=[]) %}
+{% macro render_accordion_menu(menu) %}
     {% if menu %}
         <menu class="">
-            {% for item in menu.items %}
+            {% for item in menu %}
                 <li class="{{ item.classes | join(' ') }}">
                     <a href="{{ item.link }}">{{ item.title }}</a>
                     {% if item.children %}
@@ -61,11 +66,30 @@
     {% endif %}
 {% endmacro %}
 
-{# basic menu #}
-{% macro render_menu(menu, options=[]) %}
+{# menu buttons #}
+{% macro render_buttons_menu(params) %}
     {% if menu %}
-        <ul>
-            {% for item in menu.items %}
+         <ul class="menu">
+            {% for item in menu %}
+                <li class="{{ item.classes | join(' ') }}">
+                    {# {{ buttons.btnLink({
+                        text: item.title,
+                        link: item.link,
+                        type: 'simple',
+                        classes: item.classes | join(' '),
+                    }) }} #}
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{# basic menu #}
+{% macro render_menu(menu) %}
+    {% if menu %}
+        <ul class="menu">
+            {% for item in menu %}
                 <li class="{{ item.classes | join(' ') }}">
                     <a href="{{ item.link }}">{{ item.title }}</a>
                     {% if item.children %}

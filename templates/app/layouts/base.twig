@@ -41,78 +41,11 @@
 			{% endfor %}
 		{% endblock %}
 
-		<header id="header" class=" header" >
-			{% block header %}
-				<!-- Main Header -->
-                <header
-                    x-data="{ mobileNavOpen: false }" 
-                    id="siteHeader" 
-                    class="relative flex items-center flex-none px-4 py-4 bg-white lg:py-8 site-header lg:px-8">
-                    <!-- Main Header Content -->
-                    <div id="headerBrand" class="container flex items-center justify-between mx-auto text-center xl:max-w-screen-2xl site-header__left">
-                        <!-- Left Section -->
-                        <div
-                            class="flex items-center">
-                            <!-- Logo -->
-                            <a 
-                                href="javascript:void(0)" 
-                                class="inline-flex items-center space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
-                                {{ icons.icon('temp-logo', 'w-8 h-8 text-blue-600 group-hover:text-blue-500') }}
-                                <span class="hidden lg:inline-block whitespace-nowrap">{{ site.title }}</span>
-                            </a>
-                            <!-- END Logo -->
-                        </div>
-                        
 
-                        {# center navigation #}
-                        <div id="headerNavigation" class="site-header__center">Center</div>
+        {% block header %}
+            {% include '@Globals/headers/_global-header-main.twig' %}
+        {% endblock %}
 
-                        {# right actions #}
-                        <div id="headerActions" class="flex items-center justify-between site-header__right">
-
-                            right 
-
-                            <!-- Open Mobile Navigation  -->
-                            <div class="ml-3 lg:hidden">
-                                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
-                                    {{ icons.icon('menu', 'w-6 h-6') }}
-                                    <span class="sr-only">Menu</span>
-                                </button>
-                            </div>
-                            <!-- END Open Mobile Navigation -->
-                        </div>
-                        <!-- END Right Section -->
-                    </div>
-                    <!-- END Main Header Content -->
-
-                    {% embed 'components/containers/slideover/_component-slideover.twig' with {
-                            trigger: 'mobileNavOpen',
-                            slideTitle: 'Navigation',
-                        }
-                    %}
-                        {% block slideContent %}
-                            <nav class="flex flex-col items-start justify-between flex-1 space-y-4">
-                                {% if menu.header_nav %}
-                                    {% include 'components/menu-list/menu-list-header.twig' with {
-                                            items: menu.header_nav.get_items, 
-                                            name: 'menu-header-nav'
-                                        } 
-                                    %}
-                                {% endif %}
-
-                                {% if menu.header_buttons %}
-                                    {% include 'components/menu-list/menu-list-buttons.twig' with {
-                                        items: menu.header_buttons.get_items, 
-                                        name: 'menu-header-buttons'} 
-                                    %}
-                                {% endif %}
-                            </nav>
-                        {% endblock %}
-                    {% endembed  %}
-                </header>
-                <!-- END Main Header -->
-			{% endblock %}
-		</header>
 
 		<main id="content" class="bg-white layout" role="main">
 			{% block content %}

@@ -158,6 +158,6 @@ add_filter('timber/loader/loader', function($loader) {
     $loader->addPath(get_template_directory() . '/templates/app/components/', 'Components');
     $loader->addPath(get_template_directory() . '/templates/app/layouts/', 'Layouts');
     $loader->addPath(get_template_directory() . '/templates/app/globals/', 'Globals');
-    // $loader->addPath(get_template_directory() . '/templates/app/pages/', 'Pages');
+    $loader->addPath(get_template_directory() . '/templates/app/elements/', 'Elements');
     return $loader;
 });

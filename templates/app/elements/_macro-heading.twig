@@ -1,0 +1,100 @@
+{% macro displayHeadingOne(options={}) %}
+    {% set options = {
+        title: 'Heading Display',
+        color: 'text-white',
+        font: font | default('font-serif'),
+        size: size | default('fluid-text-6xl'),
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight  %}
+
+    <h1 class="{{ headingOptions }}">{{ options.title }}</h1>
+{% endmacro %}
+
+{# Heading One #}
+{% macro headingOne(options=[]) %}
+
+    {% set options = {
+        title: 'Heading One',
+        color: 'text-white',
+        font: font | default('font-serif'),
+        size: size | default('fluid-text-5xl'),
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
+
+    <h1 class="{{ headingOptions }} font-bold">{{ options.title }}</h1>
+{% endmacro %}
+
+{# Heading Two #}
+{% macro headingTwo(options=[]) %}
+
+    {% set options = {
+        title: 'Heading Two',
+        color: color,
+        font: font | default('font-serif'),
+        size: size ?? 'fluid-text-3xl',
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
+
+
+    <h2 class="{{ headingOptions }} font-bold">{{ options.title }}</h2>
+    
+{% endmacro %}
+
+{# Heading Three #}
+{% macro headingThree(options={}) %}
+
+    {% set options = {
+        title: 'Heading Three',
+        color: 'text-white',
+        font: font | default('font-serif'),
+        size: size | default('fluid-text-2xl'),
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
+
+    <h3 class="{{ headingOptions }} font-semibold ">{{ options.title }}</h3>
+{% endmacro %}
+
+{# Heading four #}
+{% macro headingFour(options={}) %}
+
+    {% set options = {
+        title: 'Heading Four',
+        color: 'text-white',
+        font: font | default('font-serif'),
+        size: size | default('fluid-text-xl'),
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
+
+    <h4 class="{{ headingOptions }} font-bold">{{ options.title }}</h4>
+{% endmacro %}
+
+{% macro headingFive(options=[]) %}
+
+    {% set options = {
+        title: 'Heading Five',
+        color: 'text-white',
+        font: font | default('font-serif'),
+        size: size | default('fluid-text-lg'),
+        weight: weight | default('font-semibold'),
+        case: case
+    } | merge(options)  %}
+
+    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
+
+    <h4 class="{{ headingOptions }} font-bold">{{ options.title }}</h4>
+{% endmacro %}
