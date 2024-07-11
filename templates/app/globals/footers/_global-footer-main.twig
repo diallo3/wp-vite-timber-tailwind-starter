@@ -1,0 +1,46 @@
+
+{% import "@Elements/menus/_macro-menus.twig" as menus %}
+{% import "components/ui/_macro-icon.twig" as icons %}
+
+<footer class="px-6 bg-gray-900 lg:px-8" aria-labelledby="footer-heading">
+	<h2 id="footer-heading" class="sr-only">Footer</h2>
+	<div class="pt-16 pb-8 mx-auto max-w-screen-2xl sm:pt-24 lg:pt-32">
+		<div class="xl:grid xl:grid-cols-3 xl:gap-8">
+			<div class="space-y-8">
+				<div class="flex items-center space-x-2 text-gray-500">
+                    {{ icons.icon('temp-logo', 'w-8 h-8') }}
+                    <span class="sr-only">{{ site.title }}</span>
+                </div>
+                <div class="xl:max-w-sm">
+                    <p class="text-sm leading-6 text-gray-300">Making the world a better place through constructing elegant hierarchies.</p>
+                </div>
+				
+				<div class="flex items-center space-x-6">
+                    {{ menus.render_social_menu(menu.footer_social.get_items, {
+                        name: 'footer-social',
+                        classes: 'flex space-x-6',
+                        link_classes: 'text-gray-500 hover:text-gray-400',
+                        icon_classes: 'w-5 h-5',
+                    
+                    }) }}
+					
+				</div>
+			</div>
+			<div class="lg:col-span-2">
+                {{ menus.render_menu(menu.footer_nav.get_items, {
+                    level: 0,
+                    classes: 'grid grid-cols-4 gap-8 mt-16 xl:mt-0',
+                    link_classes: 'text-base font-semibold leading-6 text-gray-300 hover:text-white',
+                    child_classes: 'text-sm leading-6 text-gray-300 mt-4 space-y-2',
+                    child_link_classes: 'hover:text-white',
+                
+                }) }}
+			</div>
+
+            
+		</div>
+		<div class="pt-8 mt-16 border-t border-white/10 sm:mt-20 lg:mt-24">
+			<p class="text-xs leading-5 text-gray-400">&copy; {{ 'now' | date('Y')  ~ ' ' ~ site.title  }}, Inc. All rights reserved.</p>
+		</div>
+	</div>
+</footer>

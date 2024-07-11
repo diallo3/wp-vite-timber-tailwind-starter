@@ -1,8 +1,19 @@
 {# icons marco #}
-{% macro icon(name, classes) %}
+{% macro icon(options={}) %}
 
-    {% include '/public/icons/icon-' ~ name ~  '.svg' with {
-        'class': classes
+    {% set options = {
+        name: name,
+        classes: [],
+        path: path ?  options.path : '', 
+    } | merge(options) %}
+    
+        {# Include the SVG icon #}
+        {# The icon path is set in the options.path variable #}
+        {# The icon name is set in the options.name variable #}
+        {# The icon class is set in the options.class variable #}
+        {# The icon class is an array of classes that are joined together #}
+    {% include '/public/icons/' ~  options.path ~ '/icon-' ~ options.name ~  '.svg' with {
+        'class': options.classes|join(' ')
         } only
     %}
     

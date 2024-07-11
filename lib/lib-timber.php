@@ -123,7 +123,7 @@ class StarterTimber extends Site {
 				'header_nav' => esc_html__('Header Nav', 'StarterTimber'),
 				'header_buttons' => esc_html__('Header Buttons', 'StarterTimber'),
 				'footer_nav' => esc_html__('Footer Nav', 'StarterTimber'),
-				'footer_social' => esc_html__('Footer Social Links', 'StarterTimber')
+				'footer_social' => esc_html__('Social Links', 'StarterTimber')
 			]
 		);
 

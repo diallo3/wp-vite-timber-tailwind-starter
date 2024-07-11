@@ -1,34 +1,34 @@
-{% macro render_button_link(options=[]) %}
+{% macro render_button_link(options = {}) %}
     {% import "@Elements/_macro-icon.twig" as icons %}
-    
+
     {% set options = {
         text: 'Button Text',
         style: 'solid',
         size: 'default',
         icon: null,
         link: null,
-    }  | merge(options)  %}
+    } | merge(options) %}
 
     {% set type_class = {
-        solid: ' border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none',
-        outline: ' border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none',
-        ghost: ' border-transparent text-blue-600 hover:bg-blue-100 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none',
-        soft: ' border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none',
-        white: 'order-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none',
-        link: ' border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none',
-    }[options.type] %}
+        solid: 'border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none',
+        outline: 'border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none',
+        ghost: 'border-transparent text-blue-600 hover:bg-blue-100 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none',
+        soft: 'border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none',
+        white: 'border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none',
+        link: 'border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none',
+    }[options.style] %}
 
     {% set size_class = {
-        'small': 'py-2 px-3 text-sm',
-        'default': 'py-2.5 px-5 text-sm',
-        'large': 'p-4 sm:p-5 text-sm lg:text-base',
+        small: 'py-2 px-3 text-sm',
+        default: 'py-2.5 px-5 text-sm',
+        large: 'p-4 sm:p-5 text-sm lg:text-base',
     }[options.size] %}
 
     {% set button_classes = [
         type_class,
         size_class,
         'inline-flex items-center gap-x-2 justify-center border rounded leading-5 font-semibold tracking-widest transition-all duration-200 ease-in-out cursor-pointer group'
-    ] %}
+    ]|join(' ') %}
 
     {% set button_text %}
         <span class="inline-flex">{{ options.text }}</span>
@@ -40,7 +40,7 @@
         {% endif %}
     {% endset %}
 
-    {% if options.link is not null %}
+    {% if options.link is not empty %}
         {# Generate button HTML #}
         <a href="{{ options.link }}" class="{{ button_classes }}">
             {{ button_text }}
@@ -50,6 +50,7 @@
             {{ button_text }}
         </button>
     {% endif %}
+    
 
     
 {% endmacro %}
