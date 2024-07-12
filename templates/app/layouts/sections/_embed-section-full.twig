@@ -1,0 +1,7 @@
+<section id="{{ id }}" class="relative {{ class }} {{ paddingInline ?: 'px-8 sm:px-20 lg:px-8 ' }} {{ paddingBlock ?: ' py-8 sm:py-12 lg:py-20 ' }}  {{ inview == 'false' ? '' : 'inview-container opacity-0' }} " {{ data }}>
+    <div class="px-0 mx-auto {{ maxWidth ?? 'max-w-screen-2xl' }} sm-px-8 xl:px-12">
+        {% block section_content %}
+            <p>Section Content</p>
+        {% endblock %}
+    </div>
+</section>
