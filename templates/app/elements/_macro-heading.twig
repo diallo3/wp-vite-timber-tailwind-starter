@@ -1,8 +1,8 @@
-{% macro displayHeadingOne(options={}) %}
+{% macro render_heading_display(options={}) %}
     {% set options = {
         title: 'Heading Display',
         color: 'text-white',
-        font: font | default('font-serif'),
+        font: font | default('font-sans'),
         size: size | default('fluid-text-6xl'),
         weight: weight | default('font-semibold'),
         case: case
@@ -14,12 +14,12 @@
 {% endmacro %}
 
 {# Heading One #}
-{% macro headingOne(options=[]) %}
+{% macro render_heading_one(options=[]) %}
 
     {% set options = {
         title: 'Heading One',
-        color: 'text-white',
-        font: font | default('font-serif'),
+        color: color ?: currentColor,
+        font: font | default('font-sans'),
         size: size | default('fluid-text-5xl'),
         weight: weight | default('font-semibold'),
         case: case
@@ -31,13 +31,13 @@
 {% endmacro %}
 
 {# Heading Two #}
-{% macro headingTwo(options=[]) %}
+{% macro render_heading_two(options={}) %}
 
     {% set options = {
         title: 'Heading Two',
-        color: color,
-        font: font | default('font-serif'),
-        size: size ?? 'fluid-text-3xl',
+        color: color ?: currentColor,
+        font: font | default('font-sans'),
+        size: size ?? 'fluid-text-xl/snug',
         weight: weight | default('font-semibold'),
         case: case
     } | merge(options)  %}
@@ -50,13 +50,13 @@
 {% endmacro %}
 
 {# Heading Three #}
-{% macro headingThree(options={}) %}
+{% macro render_heading_three(options={}) %}
 
     {% set options = {
         title: 'Heading Three',
-        color: 'text-white',
-        font: font | default('font-serif'),
-        size: size | default('fluid-text-2xl'),
+        color: color ?: currentColor,
+        font: font | default('font-sans'),
+        size: size | default('fluid-text-lg/snug'),
         weight: weight | default('font-semibold'),
         case: case
     } | merge(options)  %}
@@ -67,12 +67,12 @@
 {% endmacro %}
 
 {# Heading four #}
-{% macro headingFour(options={}) %}
+{% macro render_heading_four(options={}) %}
 
     {% set options = {
         title: 'Heading Four',
         color: 'text-white',
-        font: font | default('font-serif'),
+        font: font | default('font-sans'),
         size: size | default('fluid-text-xl'),
         weight: weight | default('font-semibold'),
         case: case
@@ -83,12 +83,12 @@
     <h4 class="{{ headingOptions }} font-bold">{{ options.title }}</h4>
 {% endmacro %}
 
-{% macro headingFive(options=[]) %}
+{% macro render_heading_five(options=[]) %}
 
     {% set options = {
         title: 'Heading Five',
         color: 'text-white',
-        font: font | default('font-serif'),
+        font: font | default('font-sans'),
         size: size | default('fluid-text-lg'),
         weight: weight | default('font-semibold'),
         case: case

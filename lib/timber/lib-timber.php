@@ -49,6 +49,7 @@ class StarterTimber extends Site {
 
 		$context['menu'] = $menu;
 		$context['site']  = $this;
+        $context['options'] = get_fields('option');
 		return $context;
 	}
 
@@ -153,12 +154,3 @@ class StarterTimber extends Site {
 		return $twig;
 	}
 }
-
-add_filter('timber/loader/loader', function($loader) {
-    $loader->addPath(get_template_directory() . '/templates/app/components/', 'Components');
-    $loader->addPath(get_template_directory() . '/templates/app/layouts/', 'Layouts');
-    $loader->addPath(get_template_directory() . '/templates/app/globals/', 'Globals');
-    $loader->addPath(get_template_directory() . '/templates/app/elements/', 'Elements');
-    $loader->addPath(get_template_directory() . '/templates/pages', 'Pages');
-    return $loader;
-});

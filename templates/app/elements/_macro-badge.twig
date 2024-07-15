@@ -1,4 +1,4 @@
-{% macro accentBadge(options=[]) %}
+{% macro render_accent_badge(options=[]) %}
 
     {% set options = {
         title: title | default('Badge'),
@@ -10,7 +10,7 @@
     </span>
 {% endmacro %}
 
-{% macro containedBadge(options=[]) %}
+{% macro render_contained_badge(options=[]) %}
 
     {% set options = {
         title: title | default('Badge'),

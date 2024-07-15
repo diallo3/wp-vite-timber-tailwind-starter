@@ -1,35 +1,22 @@
-<div class="px-6 pb-20 content-wrapper lg:px-8 inview-container">
+<div class="content-wrapper inview-container">
     
-    <div class="max-w-screen-xl mx-auto">
+    <div class="">
         {# archive hero #}
-        <article
-            id="{{ post.type_archive }}_hero" 
-            class="relative py-8 lg:py-12 archive-hero post-{{ post.type }} inview-hero">
-            
-            <div class="relative gap-4 archive-hero__entry lg:grid lg:grid-cols-12 lg:gap-8">
-                <div
-                    class="space-y-8 page-hero__content lg:col-span-9">
-                    <!-- hero content -->
-                    <div class="space-y-2 hero-heading inview-hero__item">
-                        <span class="block text-sm font-medium tracking-tight text-blue-600 uppercase hero-heading__accent font-alexandria">
-                            {{ badges.accentBadge({
-                                title: post_title,
-                            }) }}
-                        </span>
-                        <h1 class="flex flex-col secondary-heading-display hero-heading__title">
-                            {{ title ? title : 'Longer Page Title Description' }}
-                        </h1>
-                    </div>
+        {% embed "@Layouts/sections/_embed-section-full.twig" with {
+                inview: 'false',
+            } %}
+                {% block section_content %}
 
-                    {% if subtitle %}
-                        <div class="prose xl:prose-lg hero-entry lg:mt-8 inview-hero__item">
-                            <p class="font-medium lg:lead">{{ subtitle }}</p>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-            
-        </article>
+                   {% include "@Layouts/archives/partials/_partial-archive-header-default.twig" with {
+                        accent: archive_fields.accent,
+                        title: archive_fields.title,
+                        subtitle: archive_fields.sub_title,
+                        entry: archive_fields.entry,
+                        ctas: archive_fields.call_to_actions
+                   } %}
+                {% endblock %}
+        {% endembed %}
+        
 
         <div class="archive-body inview-content">
             {% block archive_content %}
@@ -38,7 +25,7 @@
         </div>
 
         <div class="archive-pagination">
-            {# {% include 'components/pagination/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %} #}
+             {% include '@Layouts/archives/partials/_partial-pagination-default.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
         </div>
     </div>
 </div>

@@ -17,7 +17,10 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"alpinejs": "^3.13.3",
 		"baselayer.css": "latest",
-		"js-cookie": "latest"
+		"js-cookie": "latest",
+		"motion": "^10.18.0",
+		"swup": "^4.6.1",
+		"tailwindcss-fluid-type": "^2.0.6"
 	},
 	"devDependencies": {
 		"@tailwindcss/aspect-ratio": "^0.4.2",

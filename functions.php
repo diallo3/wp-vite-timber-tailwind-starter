@@ -10,21 +10,30 @@ use Timber\Timber;
 // Load Composer dependencies.
 require_once __DIR__ . '/vendor/autoload.php';
 
+
+// load classes
+// require_once get_template_directory() . '/lib/classes/ACFContext.php';
+
 // Set up Vite
-require_once get_template_directory() . '/lib/lib-vite.php';
+require_once get_template_directory() . '/lib/functions/lib-vite.php';
 new WPVite(isChild: false);
 
 // Get Utility functions
-require_once get_template_directory() . '/lib/lib-utilities.php';
+require_once get_template_directory() . '/lib/functions/lib-utilities.php';
 
 // Get ACF and ACF Blocks defaults
-require_once get_template_directory() . '/lib/lib-acf.php';
+require_once get_template_directory() . '/lib/functions/lib-acf.php';
+
+
+// 
+require_once get_template_directory() . '/lib/functions/lib-flexible-content.php';
 
 /**
  * We're going to configure our theme inside of a subclass of Timber\Site
  */
 
-require_once get_template_directory() . '/lib/lib-timber.php';
+require_once get_template_directory() . '/lib/timber/lib-timber.php';
+require_once get_template_directory() . '/lib/timber/lib-timber-filters.php';
 
 Timber::init();
 

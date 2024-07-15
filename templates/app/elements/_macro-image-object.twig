@@ -1,10 +1,10 @@
 {% macro render_image(options={}) %}
     {% set options = {
-        src: src | towebp,
-        class [],
-        fit: fit | default('object-cover w-full h-full'),
-        alt: alt ? alt : 'Image alt text',
-    } | merge(options)  %}
+        src: options.src,
+        class: options.class,
+        fit: options.fit | default('object-cover w-full h-full'),
+        alt: options.alt | default('Image alt text'),
+    } | merge(options) %}
 
     {# Image #}
     <img src="{{ options.src }}" class="{{ options.fit }} {{ options.class|join(' ') }}" alt="{{ options.alt }}" loading="lazy">

@@ -17,6 +17,12 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/container-queries'),
+        require("tailwindcss-fluid-type")({
+            settings: {
+              // ...
+              prefix: "fluid-",
+            },
+        }),
         plugin(function ({ addUtilities }) {
             const utilFormSwitch = {
                 ".form-switch": {

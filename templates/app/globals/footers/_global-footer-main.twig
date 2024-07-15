@@ -1,6 +1,6 @@
 
 {% import "@Elements/menus/_macro-menus.twig" as menus %}
-{% import "components/ui/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-icon.twig" as icons %}
 
 <footer class="px-6 bg-gray-900 lg:px-8" aria-labelledby="footer-heading">
 	<h2 id="footer-heading" class="sr-only">Footer</h2>
@@ -8,7 +8,10 @@
 		<div class="xl:grid xl:grid-cols-3 xl:gap-8">
 			<div class="space-y-8">
 				<div class="flex items-center space-x-2 text-gray-500">
-                    {{ icons.icon('temp-logo', 'w-8 h-8') }}
+                    {{ icons.icon({
+                        name: 'temp-logo',
+                        classes: 'size-8'
+                    }) }}
                     <span class="sr-only">{{ site.title }}</span>
                 </div>
                 <div class="xl:max-w-sm">

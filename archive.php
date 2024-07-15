@@ -16,9 +16,13 @@
  */
 
 use Timber\Timber;
+// Get the queried post type
+$post_type = get_post_type();
 
 $context = Timber::context();
 
+// Add post type to the context
+$context['post_type'] = $post_type;
 $context['title'] = 'Archive';
 
 $templates = [
@@ -40,6 +44,7 @@ if (is_day()) {
 	array_unshift($templates, 'pages/' . $templateName . '/' . $templateName . '.twig');
 } elseif (is_post_type_archive()) {
 	$context['title'] = post_type_archive_title('', false);
+    $context['archive_fields'] = get_fields( get_post_type() . '_archive' );
 	$templateName = 'archive-' . get_post_type();
 	array_unshift($templates, 'pages/' . $templateName . '/' . $templateName . '.twig');
 }

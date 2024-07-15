@@ -24,12 +24,23 @@
 
 use Timber\Timber;
 
+// Ensure the ACFContext class is available
+require_once get_template_directory() . '/lib/classes/ACFContext.php';
+
+// Define the ACF Flexible Content field name
+$field_name = 'page_content';
+
 $context = Timber::context();
 
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
+
+// Collect flexible content data
+$context['flexible_content'] = render_acf_flexible_content($timber_post->ID);
+
 $templates = [
 	'pages/page-' . $timber_post->post_name . '/page-' . $timber_post->post_name . '.twig',
 	'pages/page/page.twig'
 ];
 Timber::render($templates, $context);
+

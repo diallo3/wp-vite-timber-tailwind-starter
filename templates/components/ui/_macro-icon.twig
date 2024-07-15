@@ -1,9 +1,0 @@
-{# icons marco #}
-{% macro icon(name, classes) %}
-
-    {% include '/public/icons/icon-' ~ name ~  '.svg' with {
-        'class': classes
-        } only
-    %}
-    
-{% endmacro %}
