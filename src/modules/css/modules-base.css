@@ -1,0 +1,11 @@
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    .admin-bar {
+        .site-header, .site-header__mobile-nav {
+            top: 32px;
+        }
+    }
+}

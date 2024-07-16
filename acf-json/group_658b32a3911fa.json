@@ -1,6 +1,6 @@
 {
     "key": "group_658b32a3911fa",
-    "title": "General Hero",
+    "title": "Component Hero",
     "fields": [
         {
             "key": "field_667c879c3e2da",
@@ -17,8 +17,8 @@
                 "id": ""
             },
             "choices": {
-                "act": "Accent",
                 "title": "Title",
+                "act": "Accent",
                 "sub": "Subtitle",
                 "entry": "Entry",
                 "cta": "CTAs",
@@ -27,7 +27,7 @@
             "default_value": [
                 "title"
             ],
-            "return_format": "array",
+            "return_format": "value",
             "min": "",
             "max": "",
             "allow_custom": 0,
@@ -55,7 +55,8 @@
             "border": "",
             "border_endpoint": [
                 "endpoint"
-            ]
+            ],
+            "repeatable": true
         },
         {
             "key": "field_659bdd4d28518",
@@ -83,7 +84,8 @@
             "maxlength": "",
             "placeholder": "Title Accent",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "repeatable": true
         },
         {
             "key": "field_658b32a38d95c",
@@ -93,15 +95,7 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_667c879c3e2da",
-                        "operator": "==",
-                        "value": "title"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -109,7 +103,7 @@
             },
             "default_value": "",
             "maxlength": "",
-            "placeholder": "",
+            "placeholder": "Descriptive Title",
             "prepend": "",
             "append": ""
         },
@@ -137,7 +131,7 @@
             },
             "default_value": "",
             "maxlength": "",
-            "placeholder": "",
+            "placeholder": "Descriptive Sub Title",
             "prepend": "",
             "append": ""
         },
@@ -182,7 +176,8 @@
             "delay": 1,
             "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_min_height": 300,
-            "acfe_wysiwyg_toolbar_buttons": []
+            "acfe_wysiwyg_toolbar_buttons": [],
+            "repeatable": true
         },
         {
             "key": "field_659fef4b2d488",
@@ -214,6 +209,7 @@
             "collapsed": "",
             "button_label": "Add CTA",
             "rows_per_page": 20,
+            "repeatable": true,
             "sub_fields": [
                 {
                     "key": "field_659fef5d2d489",
@@ -230,7 +226,8 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "parent_repeater": "field_659fef4b2d488"
+                    "parent_repeater": "field_659fef4b2d488",
+                    "repeatable": true
                 }
             ]
         },
@@ -253,7 +250,8 @@
             "border": "",
             "border_endpoint": [
                 "endpoint"
-            ]
+            ],
+            "repeatable": true
         },
         {
             "key": "field_658b34c50bc71",
@@ -278,8 +276,10 @@
                 "id": ""
             },
             "uploader": "",
-            "acfe_thumbnail": 1,
             "return_format": "array",
+            "library": "all",
+            "upload_folder": "",
+            "acfe_thumbnail": 1,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -287,20 +287,10 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "preview_size": "large",
-            "library": "all",
-            "upload_folder": ""
+            "preview_size": "full"
         }
     ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "all"
-            }
-        ]
-    ],
+    "location": [],
     "menu_order": 0,
     "position": "acf_after_title",
     "style": "default",
@@ -309,13 +299,28 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1,
+    "show_in_rest": 0,
     "acfe_autosync": [
+        "php",
         "json"
     ],
     "acfe_form": 0,
-    "acfe_display_title": "Hero",
+    "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1720921034
+    "is_acf_component": 1,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": [
+            "hide-outer-boundary",
+            "hide-outer-label"
+        ]
+    },
+    "modified": 1721088164
 }

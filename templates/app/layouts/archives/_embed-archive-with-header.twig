@@ -4,6 +4,7 @@
         {# archive hero #}
         {% embed "@Layouts/sections/_embed-section-full.twig" with {
                 inview: 'false',
+                padding_block: 'py-0',
             } %}
                 {% block section_content %}
 
@@ -24,8 +25,16 @@
             {% endblock %}
         </div>
 
-        <div class="archive-pagination">
-             {% include '@Layouts/archives/partials/_partial-pagination-default.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-        </div>
+        {% embed "@Layouts/sections/_embed-section-full.twig" with {
+                inview: 'false',
+                padding_block: 'pb-8 sm:pb-12 lg:pb-20 pt-0',
+            } %}
+            {% block section_content %}
+                <div class="archive-pagination">
+                    {% include '@Layouts/archives/partials/_partial-pagination-default.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+        
     </div>
 </div>

@@ -1,9 +1,12 @@
 {% import "@Elements/menus/_macro-menus.twig" as menus %}
 {% import "@Elements/_macro-icon.twig" as icons %}
 
-<header x-data="{ mobileNavOpen: false }" 
-        id="siteHeader" 
-        class="relative z-10 flex items-center flex-none px-4 py-4 bg-white lg:py-8 site-header lg:px-8"
+<header x-data="{ mobileNavOpen: false,  scrolledFromTop: false  }" 
+        id="site-header" 
+         x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
+        @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+        :class="{ 'border-b shadow' : scrolledFromTop }"
+        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header"
 >
     <!-- Main Header Content -->
     <div id="headerBrand" class="container flex items-center justify-between mx-auto text-center xl:max-w-screen-2xl site-header__left">
@@ -53,6 +56,7 @@
     <!-- END Main Header Content -->
 
     {% embed '@Layouts/slideovers/_component-slideover.twig' with {
+            name: 'site-header__mobile-nav',
             trigger: 'mobileNavOpen',
             slideTitle: 'Navigation',
         }
@@ -60,13 +64,6 @@
         {% block slideContent %}
             {% import "@Elements/menus/_macro-menus.twig" as menus %}
             <nav class="flex flex-col items-start justify-between flex-1 space-y-4">
-                {# {% if menu.header_nav %}
-                    {% include 'components/menu-list/menu-list-header.twig' with {
-                            items: menu.header_nav.get_items, 
-                            name: 'menu-header-nav'
-                        } 
-                    %}
-                {% endif %} #}
 
                  {{ menus.render_accordion_menu(menu.header_nav.get_items, {
                     level: 0,
@@ -76,9 +73,6 @@
                     child_link_classes: 'hover:text-white',
                 
                 }) }}
-
-
-
     
             </nav>
         {% endblock %}

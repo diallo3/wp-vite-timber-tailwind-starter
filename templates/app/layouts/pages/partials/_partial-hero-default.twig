@@ -1,0 +1,56 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+<header id="{{ post.id }}-hero page-hero">
+    <div class="pb-8 page-hero__content">
+        <div class="">
+            {# accent #}
+            {% if hero_accent or post.title %}
+                <div class="hero__accent hero-content__item">
+                    {{ badges.render_accent_badge({
+                        title: hero_accent
+                    })}} 
+                </div>
+            {% endif %}
+
+            {# headings #}
+            <hgroup class="mx-auto mt-8 space-y-2 hero__headings">
+                {% if hero_title %}
+
+                    {{ headings.render_heading_one({
+                            title: hero_title,
+                    })}}
+    
+                    {% if hero_sub_title %}
+                        {{ headings.render_heading_two({
+                            title: hero_sub_title,
+                        })}}
+                    {% endif %}
+                {% endif %}
+            </hgroup>
+
+            {% if hero_entry %}
+                {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
+                    {% block prose_content %}
+                        {{ hero_entry }}
+                    {% endblock %}
+                {% endembed %}
+            {% endif %}
+
+            <ul class="gap-4 page-hero__cta lg:flex lg:items-center">
+                {% for cta in hero_ctas %}
+                    <li class="page-hero__cta-item">
+                        {{ buttons.render_button_link({
+                            text: cta.link.title,
+                            link: cta.link.link,
+                            style: 'solid'
+                        }) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</header>

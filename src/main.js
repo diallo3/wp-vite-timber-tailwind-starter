@@ -7,7 +7,10 @@ if (import.meta.hot) {
 }
 
 // import JS files if applicable
-import '../src/modules/module-alpine.js';
+import { initializeAlpine } from './modules/js/module-alpine';
+import { initializeSwup } from './modules/js/module-swup';
+import { generalInView } from './modules/js/module-motionOne';
+import { initializeHeadroom } from './modules/js/module-headroom';
 
 // import SCSS files if applicable
 import '../src/app.css';
@@ -18,3 +21,9 @@ import.meta.glob([
 ], { eager: true });
 
 // component imports
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAlpine();
+    initializeSwup();
+    generalInView();
+    initializeHeadroom();
+});

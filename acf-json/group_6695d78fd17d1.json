@@ -1,13 +1,13 @@
 {
-    "key": "group_665a3401f2a45",
-    "title": "Mega Menu",
+    "key": "group_6695d78fd17d1",
+    "title": "Component Video",
     "fields": [
         {
-            "key": "field_665a340253b57",
-            "label": "Mega Menu Item",
-            "name": "mega_menu_item",
+            "key": "field_6695d790d4b12",
+            "label": "Video",
+            "name": "video",
             "aria-label": "",
-            "type": "true_false",
+            "type": "oembed",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,23 +16,11 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1,
-            "style": "small_rounded"
+            "width": "",
+            "height": ""
         }
     ],
-    "location": [
-        [
-            {
-                "param": "nav_menu_item",
-                "operator": "==",
-                "value": "location\/header_nav"
-            }
-        ]
-    ],
+    "location": [],
     "menu_order": 0,
     "position": "normal",
     "style": "default",
@@ -43,13 +31,14 @@
     "description": "",
     "show_in_rest": 0,
     "acfe_autosync": [
+        "php",
         "json"
     ],
     "acfe_form": 0,
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "is_acf_component": 0,
+    "is_acf_component": 1,
     "acf_component_defaults": {
         "layout": "block",
         "repeatable": "0",
@@ -58,7 +47,10 @@
         "min": "",
         "max": "",
         "button_label": "",
-        "appearances": ""
+        "appearances": [
+            "hide-outer-boundary",
+            "hide-outer-label"
+        ]
     },
-    "modified": 1721060778
+    "modified": 1721096144
 }

@@ -1,3 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "modules/css/modules-base.css";
+
+@import "tailwindcss/components";
+@import "modules/css/modules-components.css";
+
+@import "tailwindcss/utilities";
+@import "modules/css/modules-utilities.css";
+
+@import "modules/css/module-headroom.css";

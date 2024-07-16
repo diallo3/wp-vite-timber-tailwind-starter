@@ -2,10 +2,22 @@
 
 {% block content %}
 
+    <script>console.log({{post.meta('page_hero') | json_encode | raw }})</script>
 
-<article class="">
-    {% include "@Layouts/flexible-content.twig" with { 'flexible_content': flexible_content }  %}
-</article>
+    {% set hero = post.meta('page_hero')[0]  %}
 
-			
+    {% embed "@Layouts/pages/_embed-page-with-header.twig" with {
+        'hero_accent': hero.accent,
+        'hero_title': hero.title,
+        'hero_entry': hero.entry,
+        'hero_sub_title': hero.sub_title,
+        'hero_image': hero.image.src,
+        'hero_ctas': hero.call_to_actions
+    
+    } %}
+        {% block page_content %}
+            {% include "@Layouts/flexible-content.twig" with { 'flexible_content': flexible_content }  %}
+        {% endblock %}
+    {% endembed %}
+
 {% endblock %}

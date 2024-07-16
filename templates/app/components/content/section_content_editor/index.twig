@@ -1,0 +1,9 @@
+
+{# Section Content Entry #}
+{% set entry = component.content[0].entry %}
+
+<div id="section-component-content-entry-{{ loop.index }}" class="section-component section-component-content-entry">
+    <div class="prose max-w-none">
+        {{ entry }}
+    </div>
+</div>
