@@ -1,9 +1,9 @@
 
 {# Section Content Entry #}
-{% set entry = component.content[0].entry %}
+{% set component = component.content[0] %}
 
 <div id="section-component-content-entry-{{ loop.index }}" class="section-component section-component-content-entry">
     <div class="prose max-w-none">
-        {{ entry }}
+        {{ component.entry }}
     </div>
 </div>

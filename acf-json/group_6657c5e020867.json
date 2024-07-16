@@ -202,7 +202,10 @@
         "min": "",
         "max": "",
         "button_label": "",
-        "appearances": ""
+        "appearances": [
+            "hide-outer-boundary",
+            "hide-outer-label"
+        ]
     },
-    "modified": 1721091012
+    "modified": 1721139655
 }

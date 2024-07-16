@@ -1,9 +1,9 @@
 {% macro render_image(options={}) %}
     {% set options = {
-        src: options.src,
-        class: options.class,
-        fit: options.fit | default('object-cover w-full h-full'),
-        alt: options.alt | default('Image alt text'),
+        src: src | default('https://via.placeholder.com/150'),
+        class: class,
+        fit: fit | default('object-cover w-full h-full'),
+        alt: alt | default('Image alt text'),
     } | merge(options) %}
 
     {# Image #}

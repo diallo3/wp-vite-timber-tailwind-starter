@@ -1,4 +1,78 @@
-<div class="text-block">
-    <h2>{{ component.title }}</h2>
-    <p>{{ component.entry }}</p>
+{# Section Content with Image #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content_with_image[0] %}
+
+{% set accent = component.accent %}
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set sub_title = component.sub_title %}
+{% set image = component.image.url %}
+{% set link = component.link %}
+
+<div id="section-component-content-with-image-{{ loop.index }}" class="overflow-hidden section-component-content-with-image">
+	<div class="mx-auto section-component-content-with-image__container">
+		<div class="flex flex-col gap-12 lg:flex-row-reverse lg:items-center lg:gap-0">
+            {# featured Image #}
+			<div class="relative flex-none group lg:ml-16 lg:w-1/2 xl:ml-28">
+               
+                <figure class="relative rounded section-component-content-with-image__figure">
+                    {{ images.render_image({
+                        src: image,
+                        alt: title,
+                        class: 'relative mx-auto section-component-content-with-image__src',
+                    }) }}
+                </figure>
+			</div>
+
+            {# featured Entry #}
+			<div class="space-y-10 border lg:w-1/2 section-component-content-with-image__entry">
+				<!-- Heading -->
+				<div class="section-entry">
+					
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        class: 'section-entry__accent',
+                    }) }}
+
+                    <hgroup class="space-y-4 hgroup section-entry__headings">
+                        {{ headings.render_heading_two({
+                            title: title,
+                        }) }}
+                        {% if sub_title %}
+                            {{ headings.render_heading_three({
+                                title: sub_title,
+                            }) }}
+                        {% endif %}
+                    </hgroup>
+					
+				</div>
+				
+                {# Entry content #}
+                {% embed "/templates/app/layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                    
+                {% endembed %}
+
+                {# call to action #}
+                {% if link %}
+                    <div class="solution-hero__cta inview-item">
+                        {{ buttons.render_button_link({
+                            text: link.title,
+                            size: 'large',
+                            link: link.url,
+                        })}}
+                    </div>
+                {% endif %}
+
+				
+			</div>
+		</div>
+	</div>
 </div>
