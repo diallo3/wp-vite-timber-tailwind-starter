@@ -415,7 +415,39 @@
                     "name": "section_featured_testimonials",
                     "label": "Section Featured Testimonials",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_6696cce4d56c1",
+                            "label": "testimonials",
+                            "name": "testimonials",
+                            "aria-label": "",
+                            "type": "component_field",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "hide_field": "",
+                            "hide_label": "",
+                            "hide_instructions": "",
+                            "hide_required": "",
+                            "field_group_key": "group_666f8b7f70131",
+                            "instruction_placement": "",
+                            "acfe_permissions": "",
+                            "repeatable": false,
+                            "min": 0,
+                            "max": 0,
+                            "rows_per_page": 20,
+                            "layout": "block",
+                            "button_label": "Add Row",
+                            "collapsed": "",
+                            "appearances": [],
+                            "sub_fields": []
+                        }
+                    ],
                     "min": "",
                     "max": "",
                     "acfe_flexible_category": [
@@ -773,6 +805,16 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "all"
+            },
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "testimonial"
+            },
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "team-member"
             }
         ]
     ],
@@ -807,5 +849,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721101835
+    "modified": 1721158918
 }

@@ -170,6 +170,22 @@
             "acfe_wysiwyg_toolbar_buttons": []
         },
         {
+            "key": "field_666651277cd0d",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
             "key": "field_6658e920b75e9",
             "label": "List",
             "name": "list",
@@ -188,7 +204,7 @@
             "pagination": 0,
             "min": 0,
             "max": 0,
-            "collapsed": "",
+            "collapsed": "field_6658e920bc53a",
             "button_label": "Add List Item",
             "rows_per_page": 20,
             "sub_fields": [
@@ -212,53 +228,8 @@
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_6658e920b75e9"
-                },
-                {
-                    "key": "field_666651657cd0e",
-                    "label": "Image",
-                    "name": "image",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "uploader": "",
-                    "acfe_thumbnail": 0,
-                    "return_format": "array",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "preview_size": "medium",
-                    "library": "all",
-                    "parent_repeater": "field_6658e920b75e9",
-                    "upload_folder": ""
                 }
             ]
-        },
-        {
-            "key": "field_666651277cd0d",
-            "label": "Link",
-            "name": "link",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
         }
     ],
     "location": [],
@@ -289,5 +260,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721091404
+    "modified": 1721148745
 }

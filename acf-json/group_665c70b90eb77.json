@@ -37,7 +37,7 @@
                 "id": ""
             },
             "default_value": "",
-            "acfe_wysiwyg_height": 100,
+            "acfe_wysiwyg_height": 50,
             "acfe_wysiwyg_max_height": "",
             "acfe_wysiwyg_valid_elements": "",
             "acfe_wysiwyg_custom_style": "",
@@ -73,11 +73,10 @@
             },
             "choices": {
                 "recent": "Most Recent",
-                "popular": "Most Popular",
                 "recommended": "Recommended",
                 "category": "By Category"
             },
-            "default_value": false,
+            "default_value": "recommended",
             "return_format": "value",
             "multiple": 0,
             "max": "",
@@ -171,14 +170,16 @@
                 "taxonomy"
             ],
             "return_format": "object",
-            "acfe_add_post": 0,
-            "acfe_edit_post": 0,
+            "acfe_add_post": 1,
+            "acfe_edit_post": 1,
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
             },
             "min": "",
             "max": "",
-            "elements": "",
+            "elements": [
+                "featured_image"
+            ],
             "bidirectional": 0,
             "bidirectional_target": []
         },
@@ -213,6 +214,7 @@
     "description": "",
     "show_in_rest": 0,
     "acfe_autosync": [
+        "php",
         "json"
     ],
     "acfe_form": 0,
@@ -233,5 +235,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721091233
+    "modified": 1721181290
 }

@@ -1,4 +1,20 @@
-<div class="text-block">
-    <h2>{{ component.title }}</h2>
-    <p>{{ component.entry }}</p>
+{# Section Content with Icons #}
+{% set component = component.content_with_icons[0] %}
+
+<div id="section-content_with_icons-{{ loop.index }}" class="section-component section-component-content_with_icons">
+    <dl class="grid grid-cols-1 gap-16 lg:grid lg:grid-cols-3 section-component-content_with_icon inview-container">
+        {% for item in component.features %}
+        <div class="inview-item content_with_icon__content">
+            <dt class="flex items-center space-x-8 lg:items-start lg:flex-col lg:space-x-0 content_with_icon__title">
+                <div class="flex items-center justify-center size-10">
+                    {{ item.icon }}
+                </div>
+                <p class="font-semibold leading-8 tracking-tight lg:mt-6 fluid-text-lg">{{ item.title }}</p>
+            </dt>
+            <dd class="pl-[4.25rem] mt-8 text-xl leading-7 lg:text-base lg:pl-0 content_with_icon__entry">
+                {{ item.entry }}
+            </dd>
+        </div>
+        {% endfor %}
+    </dl>
 </div>

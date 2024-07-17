@@ -18,7 +18,7 @@
 	<div class="mx-auto section-component-content-with-image__container">
 		<div class="flex flex-col gap-12 lg:flex-row-reverse lg:items-center lg:gap-0">
             {# featured Image #}
-			<div class="relative flex-none group lg:ml-16 lg:w-1/2 xl:ml-28">
+			<div class="relative flex-none group lg:ml-16 lg:w-1/2 xl:ml-16">
                
                 <figure class="relative rounded section-component-content-with-image__figure">
                     {{ images.render_image({
@@ -30,16 +30,16 @@
 			</div>
 
             {# featured Entry #}
-			<div class="space-y-10 border lg:w-1/2 section-component-content-with-image__entry">
+			<div class="space-y-10 lg:w-1/2 section-component-content-with-image__entry">
 				<!-- Heading -->
-				<div class="section-entry">
+				<div class="space-y-4 section-entry">
 					
                     {{ badges.render_accent_badge({
                         title: accent,
                         class: 'section-entry__accent',
                     }) }}
 
-                    <hgroup class="space-y-4 hgroup section-entry__headings">
+                    <hgroup class="space-y-3 hgroup section-entry__headings">
                         {{ headings.render_heading_two({
                             title: title,
                         }) }}

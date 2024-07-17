@@ -135,6 +135,26 @@
             "append": ""
         },
         {
+            "key": "field_6696b65a771cd",
+            "label": "Sub Title",
+            "name": "sub_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6658e58402d8b",
             "label": "Entry",
             "name": "entry",
@@ -286,5 +306,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721091466
+    "modified": 1721156186
 }

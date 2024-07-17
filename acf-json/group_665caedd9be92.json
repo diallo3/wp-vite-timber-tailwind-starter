@@ -58,12 +58,12 @@
                 "id": ""
             },
             "default_value": "",
-            "acfe_wysiwyg_height": 100,
+            "acfe_wysiwyg_min_height": 100,
             "acfe_wysiwyg_max_height": "",
             "acfe_wysiwyg_valid_elements": "",
             "acfe_wysiwyg_custom_style": "",
             "acfe_wysiwyg_disable_wp_style": 0,
-            "acfe_wysiwyg_autoresize": 0,
+            "acfe_wysiwyg_autoresize": 1,
             "acfe_wysiwyg_disable_resize": 0,
             "acfe_wysiwyg_remove_path": 0,
             "acfe_wysiwyg_menubar": 0,
@@ -75,7 +75,7 @@
             "media_upload": 1,
             "delay": 0,
             "acfe_wysiwyg_auto_init": 0,
-            "acfe_wysiwyg_min_height": 300,
+            "acfe_wysiwyg_height": 300,
             "acfe_wysiwyg_toolbar_buttons": []
         },
         {
@@ -189,5 +189,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721090960
+    "modified": 1721163990
 }

@@ -26,11 +26,11 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_6658c94083738",
-                    "label": "Icon",
-                    "name": "icon",
+                    "key": "field_6696926c40e52",
+                    "label": "(Column 7\/12)",
+                    "name": "",
                     "aria-label": "",
-                    "type": "acfe_code_editor",
+                    "type": "acfe_column",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -39,17 +39,13 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "",
-                    "mode": "text\/html",
-                    "lines": 1,
-                    "indent_unit": 4,
-                    "maxlength": "",
-                    "rows": 2,
-                    "max_rows": "",
-                    "return_entities": 0,
-                    "parent_repeater": "field_6658c78883735",
-                    "return_format": []
+                    "columns": "7\/12",
+                    "endpoint": 0,
+                    "border": "",
+                    "border_endpoint": [
+                        "endpoint"
+                    ],
+                    "parent_repeater": "field_6658c78883735"
                 },
                 {
                     "key": "field_6658c7d683736",
@@ -107,6 +103,54 @@
                     "acfe_wysiwyg_min_height": 300,
                     "acfe_wysiwyg_toolbar_buttons": [],
                     "parent_repeater": "field_6658c78883735"
+                },
+                {
+                    "key": "field_6696928840e53",
+                    "label": "(Column 5\/12)",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "acfe_column",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "columns": "5\/12",
+                    "endpoint": 0,
+                    "border": "",
+                    "border_endpoint": [
+                        "endpoint"
+                    ],
+                    "parent_repeater": "field_6658c78883735"
+                },
+                {
+                    "key": "field_6658c94083738",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "acfe_code_editor",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "mode": "text\/html",
+                    "lines": 1,
+                    "indent_unit": 4,
+                    "maxlength": "",
+                    "rows": 2,
+                    "max_rows": "",
+                    "return_entities": 0,
+                    "parent_repeater": "field_6658c78883735",
+                    "return_format": []
                 }
             ]
         }
@@ -142,5 +186,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721091552
+    "modified": 1721143967
 }

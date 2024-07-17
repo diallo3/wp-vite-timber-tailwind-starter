@@ -28,7 +28,7 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "preview_size": "medium"
+            "preview_size": "full"
         }
     ],
     "location": [],
@@ -63,5 +63,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721096435
+    "modified": 1721181723
 }

@@ -1,4 +1,46 @@
-<div class="text-block">
-    <h2>{{ component.title }}</h2>
-    <p>{{ component.entry }}</p>
+{# Section Featured Team Members #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.featured_team_members[0] %}
+
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set team_members = get_posts(component.team_members) %}
+
+<div id="section-component-featured-team-members-{{ loop.index }}" class="bg-white section-component-featured-team-members">
+	<div class="px-6 mx-auto lg:px-8 section-component-featured-team-members__content inview-container">
+		<div class="max-w-2xl mx-auto lg:mx-0 section-component-featured-team-members__header inview-item">
+			{{ headings.render_heading_two({
+                title: title,
+                color: 'text-black',
+                size: 'fluid-text-3xl',
+            })}}
+
+            <div class="section-component-featured-team-members__entry inview-item">
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+		</div>
+		<ul role="list" class="grid max-w-2xl grid-cols-1 mx-auto mt-20 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 section-component-featured-team-members__list">
+            {% for member in team_members %}
+			<li 
+                x-data="{ modalIsOpen: false }"
+                id="section-component-featured-team-member-{{ loop.index }}" class="section-component-featured-team-member inview-item">
+				{% set profile = member.meta('profile_image') %}
+                {% set title = member.title %}
+                {% set position = member.meta('position') %}
+                {% set bio = member.meta('bio') %}
+                {% set social = member.meta('social_link') %}
+                {% include "@Components/cards/teams/_component-card-team-default.twig" %}
+			</li>
+            {% endfor %}
+		</ul>
+	</div>
 </div>

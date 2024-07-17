@@ -3,6 +3,27 @@
     "title": "Testimonial Fields",
     "fields": [
         {
+            "key": "field_6696c5a2cd1c8",
+            "label": "(Column 6\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "6\/12",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
             "key": "field_666f409557d51",
             "label": "Quote",
             "name": "quote",
@@ -117,63 +138,6 @@
             "placeholder": "Company",
             "prepend": "",
             "append": ""
-        },
-        {
-            "key": "field_666f430721c3a",
-            "label": "(Column 6\/12)",
-            "name": "",
-            "aria-label": "",
-            "type": "acfe_column",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "columns": "6\/12",
-            "endpoint": 0,
-            "border": "",
-            "border_endpoint": [
-                "endpoint"
-            ]
-        },
-        {
-            "key": "field_667ca10511ae7",
-            "label": "Product Name",
-            "name": "product_name",
-            "aria-label": "",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "solution"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "return_format": "object",
-            "acfe_add_post": 0,
-            "acfe_edit_post": 0,
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "min": "",
-            "max": "",
-            "elements": "",
-            "bidirectional": 0,
-            "bidirectional_target": []
         }
     ],
     "location": [
@@ -212,5 +176,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721090960
+    "modified": 1721157035
 }
