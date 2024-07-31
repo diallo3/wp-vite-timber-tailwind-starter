@@ -1,4 +1,13 @@
-<div class="text-block">
-    <h2>{{ component.title }}</h2>
-    <p>{{ component.entry }}</p>
+{# Section Featured Image #}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% set component = component.featured_image[0] %}
+
+<div id="section-component-media-image-{{ loop.index }}" class="section-component section-component-media-image">
+    <div class="aspect-w-16 aspect-h-9">
+        {{ images.render_image({
+            src: component.image.url | towebp,
+            class: ['object-cover', 'w-full', 'h-full'],
+            alt: component.image.alt,
+        }) }}
+    </div>
 </div>

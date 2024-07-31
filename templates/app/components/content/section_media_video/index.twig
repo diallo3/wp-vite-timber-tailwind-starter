@@ -1,4 +1,8 @@
-<div class="text-block">
-    <h2>{{ component.title }}</h2>
-    <p>{{ component.entry }}</p>
+{# Section Media Video #}
+{% set component = component.featured_video[0] %}
+
+<div id="section-component-media-video-{{ loop.index }}" class="section-component section-component-media-video">
+    <div class="aspect-w-16 aspect-h-9">
+        {{ component.video }}
+    </div>
 </div>

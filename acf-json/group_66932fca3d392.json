@@ -3,37 +3,6 @@
     "title": "Page Content Fields",
     "fields": [
         {
-            "key": "field_6695b2c9feb22",
-            "label": "Page Hero",
-            "name": "page_hero",
-            "aria-label": "",
-            "type": "component_field",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "hide_field": "",
-            "hide_label": "",
-            "hide_instructions": "",
-            "hide_required": "",
-            "field_group_key": "group_658b32a3911fa",
-            "instruction_placement": "",
-            "acfe_permissions": "",
-            "repeatable": false,
-            "min": 0,
-            "max": 0,
-            "rows_per_page": 20,
-            "layout": "block",
-            "button_label": "Add Row",
-            "collapsed": "",
-            "appearances": [],
-            "sub_fields": []
-        },
-        {
             "key": "field_66932fcad3202",
             "label": "Page Content",
             "name": "page_content",
@@ -849,5 +818,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721158918
+    "modified": 1722439822
 }

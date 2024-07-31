@@ -62,8 +62,8 @@
                     entry: item.excerpt ?: item.content,
                     image: item.image,
                     link: item.link,
-                    image: item.image.src,
-                    clamp: 'clamp-3',
+                    image: item.thumbnail.src,
+                    clamp: 'line-clamp-3',
                 } %}
 			</li>
             {% endfor %}

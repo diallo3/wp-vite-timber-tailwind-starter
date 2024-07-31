@@ -9,9 +9,12 @@
     {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
 
     {% if template_exists(template_path) %}
-        <div class="">
-            {% include full_template_path with { 'layout': component } %}
-        </div>
+        {% embed "@Layouts/sections/_embed-section-full.twig" %}
+            {% block section_content %}
+                {% include full_template_path with { 'layout': component } %}
+            {% endblock %}
+        {% endembed %}
+            
     {% else %}
         <div class="unknown-block">
             <p>Unknown layout: {{ layout }}</p>

@@ -2,6 +2,9 @@
 
 use Timber\Timber;
 
+/**
+ * ACF Flexible Content
+ */
 function render_acf_flexible_content($post_id) {
     // Get the flexible content field
     $flexible_content = get_field('page_content', $post_id);
