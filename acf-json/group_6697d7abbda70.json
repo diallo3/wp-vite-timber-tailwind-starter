@@ -1,9 +1,9 @@
 {
-    "key": "group_6695d7f13c072",
-    "title": "Component Image",
+    "key": "group_6697d7abbda70",
+    "title": "Component Contact with Form",
     "fields": [
         {
-            "key": "field_66a5314e250f5",
+            "key": "field_66a52d6f5f8f5",
             "label": "Section Options",
             "name": "section_options",
             "aria-label": "",
@@ -17,12 +17,12 @@
                 "id": ""
             },
             "choices": {
-                "accent": "Accent",
                 "title": "Title",
-                "caption": "Caption",
-                "link": "Link"
+                "entry": "Entry"
             },
-            "default_value": [],
+            "default_value": [
+                "title"
+            ],
             "return_format": "array",
             "min": "",
             "max": "",
@@ -33,35 +33,7 @@
             "custom_choice_button_text": "Add new choice"
         },
         {
-            "key": "field_66a531bd250f6",
-            "label": "Accent",
-            "name": "accent",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66a5314e250f5",
-                        "operator": "==",
-                        "value": "accent"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_66a530df250f2",
+            "key": "field_669800ff9dc88",
             "label": "Title",
             "name": "title",
             "aria-label": "",
@@ -71,7 +43,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_66a5314e250f5",
+                        "field": "field_66a52d6f5f8f5",
                         "operator": "==",
                         "value": "title"
                     }
@@ -84,52 +56,24 @@
             },
             "default_value": "",
             "maxlength": "",
-            "placeholder": "",
+            "placeholder": "Form Title",
             "prepend": "",
             "append": ""
         },
         {
-            "key": "field_6695d7f19d19c",
-            "label": "Image",
-            "name": "image",
+            "key": "field_6697d7ac1fa11",
+            "label": "Entry",
+            "name": "entry",
             "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "uploader": "",
-            "return_format": "array",
-            "library": "all",
-            "upload_folder": "",
-            "acfe_thumbnail": 0,
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "full"
-        },
-        {
-            "key": "field_66a530f5250f3",
-            "label": "Caption",
-            "name": "caption",
-            "aria-label": "",
-            "type": "text",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_66a5314e250f5",
+                        "field": "field_66a52d6f5f8f5",
                         "operator": "==",
-                        "value": "caption"
+                        "value": "entry"
                     }
                 ]
             ],
@@ -139,34 +83,31 @@
                 "id": ""
             },
             "default_value": "",
+            "acfe_textarea_code": 0,
             "maxlength": "",
-            "placeholder": "Image Caption",
-            "prepend": "",
-            "append": ""
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": ""
         },
         {
-            "key": "field_66a53132250f4",
-            "label": "Link",
-            "name": "link",
+            "key": "field_6697da0113540",
+            "label": "Form ID",
+            "name": "form_id",
             "aria-label": "",
-            "type": "link",
+            "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66a5314e250f5",
-                        "operator": "==",
-                        "value": "link"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "return_format": "url"
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [],
@@ -180,7 +121,6 @@
     "description": "",
     "show_in_rest": 0,
     "acfe_autosync": [
-        "php",
         "json"
     ],
     "acfe_form": 0,

@@ -48,3 +48,24 @@ function my_acf_json_save_point($path) {
 if (function_exists('acf_add_options_page')) {
 	acf_add_options_page();
 }
+
+
+/**
+ * ACF Render Choice
+ */
+add_action('acfe/render_choice/name=section_choices', 'my_acfe_render_choice', 10, 4);
+function my_acfe_render_choice($input, $value, $label, $field){
+    
+    ?>
+    <div class="section-choice">
+        <div>
+            <span class="inline-flex"><?php echo $label; ?></span>
+        </div>
+
+        <div>
+            <?php echo $input; ?>
+        </div>
+    </div>
+    <?php
+
+}

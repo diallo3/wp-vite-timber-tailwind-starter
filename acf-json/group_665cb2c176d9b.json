@@ -3,6 +3,66 @@
     "title": "Component Team Members",
     "fields": [
         {
+            "key": "field_66a53d8bcac59",
+            "label": "Section Options",
+            "name": "section_options",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
+            },
+            "default_value": [
+                "title"
+            ],
+            "return_format": "array",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_66a53dc9cac5a",
+            "label": "Accent",
+            "name": "accent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a53d8bcac59",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Accent",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_665cb2c1cfbf5",
             "label": "Title",
             "name": "title",
@@ -10,7 +70,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a53d8bcac59",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -30,7 +98,15 @@
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a53d8bcac59",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -90,6 +166,30 @@
             ],
             "bidirectional": 0,
             "bidirectional_target": []
+        },
+        {
+            "key": "field_66a53e03cac5b",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a53d8bcac59",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [],
@@ -121,5 +221,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721091387
+    "modified": 1722996471
 }

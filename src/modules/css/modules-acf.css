@@ -1,0 +1,6 @@
+/* section choices */
+.acf-checkbox-list {
+    .section-choice {
+        @apply flex flex-col items-center px-2 space-y-2 border rounded border-gray-300 min-w-20;
+    }
+}

@@ -3,6 +3,208 @@
     "title": "Component Testimonials",
     "fields": [
         {
+            "key": "field_66a905a8274b5",
+            "label": "Section Options",
+            "name": "section_options",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
+            },
+            "default_value": [
+                "title"
+            ],
+            "return_format": "value",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_66a9062c274b8",
+            "label": "(Column Auto)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a905a8274b5",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "auto",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_66a90614274b7",
+            "label": "Accent",
+            "name": "accent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a905a8274b5",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66a90644274b9",
+            "label": "(Column Fill)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "fill",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_666f8b7fb4202",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a905a8274b5",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "What are clients say",
+            "maxlength": "",
+            "placeholder": "Title",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66a9065a274ba",
+            "label": "(Column Endpoint)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 1,
+            "border_endpoint": [
+                "endpoint"
+            ],
+            "columns": "6\/12",
+            "border": ""
+        },
+        {
+            "key": "field_66a905f5274b6",
+            "label": "Entry",
+            "name": "entry",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a905a8274b5",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "acfe_wysiwyg_height": 100,
+            "acfe_wysiwyg_max_height": "",
+            "acfe_wysiwyg_valid_elements": "",
+            "acfe_wysiwyg_custom_style": "",
+            "acfe_wysiwyg_disable_wp_style": 0,
+            "acfe_wysiwyg_autoresize": 0,
+            "acfe_wysiwyg_disable_resize": 0,
+            "acfe_wysiwyg_remove_path": 0,
+            "acfe_wysiwyg_menubar": 0,
+            "acfe_wysiwyg_transparent": 0,
+            "acfe_wysiwyg_merge_toolbar": 0,
+            "acfe_wysiwyg_custom_toolbar": 0,
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "acfe_wysiwyg_auto_init": 0,
+            "acfe_wysiwyg_min_height": 300,
+            "acfe_wysiwyg_toolbar_buttons": []
+        },
+        {
             "key": "field_666f8c88b4203",
             "label": "List Type",
             "name": "list_type",
@@ -22,26 +224,6 @@
             "ui_off_text": "All Testimonials",
             "ui": 1,
             "style": ""
-        },
-        {
-            "key": "field_666f8b7fb4202",
-            "label": "Title",
-            "name": "title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "What are clients say",
-            "maxlength": "",
-            "placeholder": "Title",
-            "prepend": "",
-            "append": ""
         },
         {
             "key": "field_666f8e30b4204",
@@ -86,6 +268,30 @@
             "elements": "",
             "bidirectional": 0,
             "bidirectional_target": []
+        },
+        {
+            "key": "field_66a90599274b4",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a905a8274b5",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [],
@@ -117,5 +323,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721158778
+    "modified": 1722996471
 }

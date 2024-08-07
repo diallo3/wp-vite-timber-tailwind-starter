@@ -24,9 +24,6 @@
 
 use Timber\Timber;
 
-// Ensure the ACFContext class is available
-require_once get_template_directory() . '/lib/classes/ACFContext.php';
-
 // Define the ACF Flexible Content field name
 $field_name = 'page_content';
 

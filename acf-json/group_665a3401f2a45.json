@@ -21,7 +21,8 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "ui": 1,
-            "style": "small_rounded"
+            "style": "small_rounded",
+            "repeatable": true
         }
     ],
     "location": [
@@ -60,5 +61,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1721060778
+    "modified": 1722996471
 }

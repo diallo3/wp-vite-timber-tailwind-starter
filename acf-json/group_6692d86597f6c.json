@@ -34,7 +34,8 @@
             "layout": "horizontal",
             "toggle": 1,
             "save_custom": 0,
-            "custom_choice_button_text": "Add new choice"
+            "custom_choice_button_text": "Add new choice",
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c407",
@@ -55,7 +56,8 @@
             "border": "",
             "border_endpoint": [
                 "endpoint"
-            ]
+            ],
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c40f",
@@ -83,7 +85,8 @@
             "maxlength": "",
             "placeholder": "Title Accent",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c417",
@@ -111,7 +114,8 @@
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c426",
@@ -139,7 +143,8 @@
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c432",
@@ -182,7 +187,8 @@
             "delay": 1,
             "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_min_height": 300,
-            "acfe_wysiwyg_toolbar_buttons": []
+            "acfe_wysiwyg_toolbar_buttons": [],
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c43b",
@@ -214,6 +220,7 @@
             "collapsed": "",
             "button_label": "Add CTA",
             "rows_per_page": 20,
+            "repeatable": true,
             "sub_fields": [
                 {
                     "key": "field_6692d865a6aea",
@@ -230,7 +237,8 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "parent_repeater": "field_6692d8659c43b"
+                    "parent_repeater": "field_6692d8659c43b",
+                    "repeatable": true
                 }
             ]
         },
@@ -253,7 +261,8 @@
             "border": "",
             "border_endpoint": [
                 "endpoint"
-            ]
+            ],
+            "repeatable": true
         },
         {
             "key": "field_6692d8659c44a",
@@ -289,7 +298,8 @@
             "mime_types": "",
             "preview_size": "large",
             "library": "all",
-            "upload_folder": ""
+            "upload_folder": "",
+            "repeatable": true
         }
     ],
     "location": [
@@ -311,11 +321,23 @@
     "description": "",
     "show_in_rest": 1,
     "acfe_autosync": [
+        "php",
         "json"
     ],
     "acfe_form": 0,
     "acfe_display_title": "Hero",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1720913981
+    "is_acf_component": 0,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": ""
+    },
+    "modified": 1722996471
 }

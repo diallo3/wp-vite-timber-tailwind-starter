@@ -1,0 +1,652 @@
+{
+    "key": "group_66987552a6ada",
+    "title": "Component Posts Types",
+    "fields": [
+        {
+            "key": "field_66a5360496f5c",
+            "label": "(Column 6\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "6\/12",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_66a5357e96f5b",
+            "label": "Section Options",
+            "name": "section_options",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
+            },
+            "default_value": [
+                "title"
+            ],
+            "return_format": "array",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_66a5361696f5d",
+            "label": "(Column 4\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "4\/12",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_669890a5b2699",
+            "label": "Service Type",
+            "name": "service_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "modalities": "Modalities",
+                "direct": "Direct",
+                "wellness": "Wellness",
+                "treatments": "Treatments",
+                "approaches": "Approaches",
+                "offerings": "Offerings",
+                "trainings": "Trainings"
+            },
+            "default_value": "modalities",
+            "return_format": "array",
+            "multiple": 0,
+            "max": "",
+            "allow_custom": 0,
+            "search_placeholder": "Select Post Type",
+            "prepend": "",
+            "append": "",
+            "allow_null": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "min": ""
+        },
+        {
+            "key": "field_66a538f9f5b90",
+            "label": "(Column 2\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "2\/12",
+            "endpoint": 0,
+            "border": "",
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_66a53865f5b8f",
+            "label": "Limit Content",
+            "name": "limit_content",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "style": "rounded",
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_66a5363c96f5e",
+            "label": "(Column Endpoint)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 1,
+            "border_endpoint": "",
+            "columns": "6\/12",
+            "border": ""
+        },
+        {
+            "key": "field_66a536936168e",
+            "label": "Accent",
+            "name": "accent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5357e96f5b",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Accent",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66987552a9a45",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5357e96f5b",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Featured Title",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66987552a9a4d",
+            "label": "Entry",
+            "name": "entry",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5357e96f5b",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "acfe_wysiwyg_height": 50,
+            "acfe_wysiwyg_max_height": "",
+            "acfe_wysiwyg_valid_elements": "",
+            "acfe_wysiwyg_custom_style": "",
+            "acfe_wysiwyg_disable_wp_style": 0,
+            "acfe_wysiwyg_autoresize": 0,
+            "acfe_wysiwyg_disable_resize": 1,
+            "acfe_wysiwyg_remove_path": 0,
+            "acfe_wysiwyg_menubar": 0,
+            "acfe_wysiwyg_transparent": 0,
+            "acfe_wysiwyg_merge_toolbar": 0,
+            "acfe_wysiwyg_custom_toolbar": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0,
+            "acfe_wysiwyg_auto_init": 0,
+            "acfe_wysiwyg_min_height": 300,
+            "acfe_wysiwyg_toolbar_buttons": []
+        },
+        {
+            "key": "field_66a6500d538f6",
+            "label": "Modality Types",
+            "name": "modality_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "modalities"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "modality"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 0,
+            "acfe_edit_post": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": [
+                "featured_image"
+            ],
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_66987e08d4e8b",
+            "label": "Direct Types",
+            "name": "direct_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "direct"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "modality",
+                "approach"
+            ],
+            "post_status": "",
+            "taxonomy": [
+                "modality-type:direct"
+            ],
+            "filters": [
+                "search",
+                "post_type"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 1,
+            "acfe_edit_post": 1,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": [
+                "featured_image"
+            ],
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_669891ded6691",
+            "label": "Wellness Types",
+            "name": "wellness_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "wellness"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "modality",
+                "approach"
+            ],
+            "post_status": "",
+            "taxonomy": [
+                "modality-type:wellness"
+            ],
+            "filters": [
+                "search",
+                "post_type"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 1,
+            "acfe_edit_post": 1,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": [
+                "featured_image"
+            ],
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6698b60cd8908",
+            "label": "Treatment Types",
+            "name": "treatment_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "treatments"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "treatment"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 0,
+            "acfe_edit_post": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6698b68dd8909",
+            "label": "Approach Types",
+            "name": "approach_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "approaches"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "approach"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 0,
+            "acfe_edit_post": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_66a065cfc1ffe",
+            "label": "Offering Types",
+            "name": "offering_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "offerings"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "offering"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 0,
+            "acfe_edit_post": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": [
+                "featured_image"
+            ],
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_66a108755065e",
+            "label": "Training Types",
+            "name": "training_types",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_669890a5b2699",
+                        "operator": "==",
+                        "value": "trainings"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "training"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "acfe_add_post": 0,
+            "acfe_edit_post": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "min": "",
+            "max": "",
+            "elements": [
+                "featured_image"
+            ],
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_66a536dd6168f",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5357e96f5b",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_autosync": [
+        "php",
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "is_acf_component": 1,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": [
+            "hide-outer-boundary",
+            "hide-outer-label"
+        ]
+    },
+    "modified": 1722996470
+}

@@ -3,11 +3,11 @@
     "title": "Component Posts",
     "fields": [
         {
-            "key": "field_665c70b91e6ac",
-            "label": "Title",
-            "name": "title",
+            "key": "field_66a534898b58a",
+            "label": "Section Options",
+            "name": "section_options",
             "aria-label": "",
-            "type": "text",
+            "type": "checkbox",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,9 +16,75 @@
                 "class": "",
                 "id": ""
             },
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
+            },
+            "default_value": [],
+            "return_format": "value",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_66a534b18b58b",
+            "label": "Accent",
+            "name": "accent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a534898b58a",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "maxlength": "",
-            "placeholder": "Featured Title",
+            "placeholder": "Accent",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_665c70b91e6ac",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a534898b58a",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Title",
             "prepend": "",
             "append": ""
         },
@@ -30,7 +96,15 @@
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a534898b58a",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -191,7 +265,15 @@
             "type": "acfe_advanced_link",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a534898b58a",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -235,5 +317,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721181290
+    "modified": 1722996470
 }

@@ -1,6 +1,6 @@
 {
     "key": "group_658b32a3911fa",
-    "title": "Component Hero",
+    "title": "Component Header Complex",
     "fields": [
         {
             "key": "field_667c879c3e2da",
@@ -322,5 +322,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721088164
+    "modified": 1722996470
 }

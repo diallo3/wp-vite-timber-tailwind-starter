@@ -22,12 +22,18 @@ class WPVite {
 	public function init() {
 		$viteIsRunning = $this->checkServer();
 		add_action('wp_enqueue_scripts', function () use ($viteIsRunning) {
+            
 			if ($viteIsRunning === true) {
 				$this->viteDevAssets();
 			} else {
 				$this->viteBuiltAssets();
 			}
 		});
+
+        // Initialize editor styles
+        add_action('admin_init', function () {
+            $this->enqueueEditorStyles();
+        });
 	}
 
 
@@ -73,6 +79,7 @@ class WPVite {
 		$filelist = [
 			'css' => [],
 			'js' => [],
+            'editor_css' => [],
 		];
 
 		if (is_array($manifest)) {
@@ -131,4 +138,15 @@ class WPVite {
 			wp_enqueue_script($this->wpEnqueueId . '-script-' . $i, $this->distUri . '/' . $file, $this->jsDeps, '', true);
 		}
 	}
+
+    public function enqueueEditorStyles() {
+        $filelist = $this->getProductionAssets();
+        $i = 0;
+        foreach ($filelist['editor_css'] as $file) {
+            $i++;
+            add_editor_style($this->distUri . '/' . $file);
+        }
+    }
 }
+
+

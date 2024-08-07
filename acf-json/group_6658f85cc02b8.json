@@ -3,11 +3,11 @@
     "title": "Component Entry List",
     "fields": [
         {
-            "key": "field_6658f85cc2b69",
-            "label": "(Column Auto)",
-            "name": "",
+            "key": "field_66a5302b032a4",
+            "label": "Section Options",
+            "name": "section_options",
             "aria-label": "",
-            "type": "acfe_column",
+            "type": "checkbox",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,54 +16,23 @@
                 "class": "",
                 "id": ""
             },
-            "columns": "auto",
-            "endpoint": 0,
-            "border": "",
-            "border_endpoint": [
-                "endpoint"
-            ]
-        },
-        {
-            "key": "field_6658f85cc2b72",
-            "label": "Add Accent",
-            "name": "add_accent",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
             },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1,
-            "style": "small"
-        },
-        {
-            "key": "field_6658f85cc2b78",
-            "label": "(Column Fill)",
-            "name": "",
-            "aria-label": "",
-            "type": "acfe_column",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "columns": "fill",
-            "endpoint": 0,
-            "border": "",
-            "border_endpoint": [
-                "endpoint"
-            ]
+            "default_value": [
+                "title"
+            ],
+            "return_format": "array",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
         },
         {
             "key": "field_6658f85cc2b7e",
@@ -76,9 +45,9 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_6658f85cc2b72",
+                        "field": "field_66a5302b032a4",
                         "operator": "==",
-                        "value": "1"
+                        "value": "accent"
                     }
                 ]
             ],
@@ -94,48 +63,6 @@
             "append": ""
         },
         {
-            "key": "field_6658f85cc2b85",
-            "label": "(Column Endpoint)",
-            "name": "",
-            "aria-label": "",
-            "type": "acfe_column",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "endpoint": 1,
-            "border_endpoint": [
-                "endpoint"
-            ],
-            "columns": "6\/12",
-            "border": ""
-        },
-        {
-            "key": "field_669697671c76e",
-            "label": "(Column 6\/12)",
-            "name": "",
-            "aria-label": "",
-            "type": "acfe_column",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "columns": "6\/12",
-            "endpoint": 0,
-            "border": "",
-            "border_endpoint": [
-                "endpoint"
-            ]
-        },
-        {
             "key": "field_6658f85cc2b8b",
             "label": "Title",
             "name": "title",
@@ -143,7 +70,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5302b032a4",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -163,7 +98,15 @@
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5302b032a4",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -189,27 +132,6 @@
             "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_height": 300,
             "acfe_wysiwyg_toolbar_buttons": []
-        },
-        {
-            "key": "field_669697791c76f",
-            "label": "(Column 6\/12)",
-            "name": "",
-            "aria-label": "",
-            "type": "acfe_column",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "columns": "6\/12",
-            "endpoint": 0,
-            "border": "",
-            "border_endpoint": [
-                "endpoint"
-            ]
         },
         {
             "key": "field_6658f85cc2b98",
@@ -256,6 +178,30 @@
                     "parent_repeater": "field_6658f85cc2b98"
                 }
             ]
+        },
+        {
+            "key": "field_66a5300c032a3",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66a5302b032a4",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [],
@@ -269,6 +215,7 @@
     "description": "",
     "show_in_rest": 0,
     "acfe_autosync": [
+        "php",
         "json"
     ],
     "acfe_form": 0,
@@ -284,7 +231,10 @@
         "min": "",
         "max": "",
         "button_label": "",
-        "appearances": ""
+        "appearances": [
+            "hide-outer-boundary",
+            "hide-outer-label"
+        ]
     },
-    "modified": 1721145296
+    "modified": 1722996470
 }

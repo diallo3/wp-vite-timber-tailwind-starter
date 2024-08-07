@@ -3,6 +3,66 @@
     "title": "Component Three Column Simple",
     "fields": [
         {
+            "key": "field_66983fd7ae954",
+            "label": "Section Options",
+            "name": "section_options",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "accent": "Accent",
+                "title": "Title",
+                "entry": "Entry",
+                "link": "Link"
+            },
+            "default_value": [
+                "title"
+            ],
+            "return_format": "array",
+            "min": "",
+            "max": "",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 1,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_66983fb9ae953",
+            "label": "Accent",
+            "name": "accent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66983fd7ae954",
+                        "operator": "==",
+                        "value": "accent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6695d8fbe0fed",
             "label": "Title",
             "name": "title",
@@ -10,7 +70,15 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66983fd7ae954",
+                        "operator": "==",
+                        "value": "title"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -30,14 +98,21 @@
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66983fd7ae954",
+                        "operator": "==",
+                        "value": "entry"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
-            "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_height": 100,
             "acfe_wysiwyg_max_height": "",
             "acfe_wysiwyg_valid_elements": "",
@@ -54,6 +129,7 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0,
+            "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_min_height": 300,
             "acfe_wysiwyg_toolbar_buttons": []
         },
@@ -71,13 +147,13 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_repeater_stylised_button": 0,
-            "layout": "table",
+            "acfe_repeater_stylised_button": 1,
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 0,
             "collapsed": "",
-            "button_label": "Add Row",
+            "button_label": "Add item",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -106,7 +182,7 @@
                     "label": "Entry",
                     "name": "entry",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -116,28 +192,25 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "acfe_textarea_code": 0,
-                    "maxlength": "",
-                    "rows": 4,
-                    "placeholder": "",
-                    "new_lines": "",
-                    "parent_repeater": "field_6695d9fce0fef"
-                },
-                {
-                    "key": "field_6695da47e0ff2",
-                    "label": "Link",
-                    "name": "link",
-                    "aria-label": "",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
+                    "acfe_wysiwyg_height": 100,
+                    "acfe_wysiwyg_max_height": "",
+                    "acfe_wysiwyg_valid_elements": "",
+                    "acfe_wysiwyg_custom_style": "",
+                    "acfe_wysiwyg_disable_wp_style": 0,
+                    "acfe_wysiwyg_autoresize": 0,
+                    "acfe_wysiwyg_disable_resize": 0,
+                    "acfe_wysiwyg_remove_path": 0,
+                    "acfe_wysiwyg_menubar": 0,
+                    "acfe_wysiwyg_transparent": 0,
+                    "acfe_wysiwyg_merge_toolbar": 0,
+                    "acfe_wysiwyg_custom_toolbar": 0,
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "acfe_wysiwyg_auto_init": 0,
+                    "acfe_wysiwyg_min_height": 300,
+                    "acfe_wysiwyg_toolbar_buttons": [],
                     "parent_repeater": "field_6695d9fce0fef"
                 }
             ]
@@ -191,5 +264,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1721097104
+    "modified": 1722996471
 }
