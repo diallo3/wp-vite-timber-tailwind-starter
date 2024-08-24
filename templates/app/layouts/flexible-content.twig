@@ -4,16 +4,21 @@
 
     <script>console.log({{ component | json_encode | raw }})</script>
 
-
     {% set template_path = 'components/content/' ~ name ~ '/index.twig' %}
     {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
 
     {% if template_exists(template_path) %}
-        {% embed "@Layouts/sections/_embed-section-full.twig" %}
-            {% block section_content %}
-                {% include full_template_path with { 'layout': component } %}
-            {% endblock %}
-        {% endembed %}
+        {% if loop.first %}
+            {% include full_template_path with { 'layout': component } %}
+        {% else %}
+            
+            {% embed "@Layouts/sections/_embed-section-full.twig" %}
+                {% block section_content %}
+                    {% include full_template_path with { 'layout': component } %}
+                {% endblock %}
+            {% endembed %}
+
+        {% endif %}
             
     {% else %}
         <div class="unknown-block">

@@ -5,12 +5,18 @@
         font: font | default('font-sans'),
         size: size | default('fluid-text-6xl'),
         weight: weight | default('font-semibold'),
-        case: case
+        case: case,
     } | merge(options)  %}
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight  %}
 
-    <h1 class="{{ headingOptions }}">{{ options.title }}</h1>
+    {% if is_preview %}
+        <div class="{{ headingOptions }} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h1 class="{{ headingOptions }} font-bold">{{ options.title }}</h1>
+    {% endif %}
+
+    
 {% endmacro %}
 
 {# Heading One #}
@@ -22,12 +28,18 @@
         font: font | default('font-sans'),
         size: size | default('fluid-text-5xl'),
         weight: weight | default('font-semibold'),
-        case: case
+        case: case,
+        preview: ''
     } | merge(options)  %}
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
 
-    <h1 class="{{ headingOptions }} font-bold">{{ options.title }}</h1>
+    {% if options.preview %}
+        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h1 class="{{headingOptions}} font-bold">{{ options.title }}</h1>
+    {% endif %}
+
 {% endmacro %}
 
 {# Heading Two #}
@@ -39,13 +51,17 @@
         font: font | default('font-sans'),
         size: size ?? 'fluid-text-xl/snug',
         weight: weight | default('font-semibold'),
-        case: case
+        case: case,
+        preview: ''
     } | merge(options)  %}
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
 
-
-    <h2 class="{{ headingOptions }} font-bold">{{ options.title }}</h2>
+    {% if options.preview %}
+        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h2 class="{{headingOptions}} font-bold">{{ options.title }}</h2>
+    {% endif %}
     
 {% endmacro %}
 
@@ -63,7 +79,12 @@
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
 
-    <h3 class="{{ headingOptions }} font-semibold ">{{ options.title }}</h3>
+    {% if options.preview %}
+        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h3 class="{{headingOptions}} font-bold">{{ options.title }}</h3>
+    {% endif %}
+
 {% endmacro %}
 
 {# Heading four #}
@@ -80,7 +101,12 @@
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
 
-    <h4 class="{{ headingOptions }} font-bold">{{ options.title }}</h4>
+    {% if options.preview %}
+        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h4 class="{{headingOptions}} font-bold">{{ options.title }}</h4>
+    {% endif %}
+
 {% endmacro %}
 
 {% macro render_heading_five(options=[]) %}
@@ -96,5 +122,10 @@
 
     {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
 
-    <h4 class="{{ headingOptions }} font-bold">{{ options.title }}</h4>
+    {% if options.preview %}
+        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
+    {% else %}
+        <h5 class="{{headingOptions}} font-bold">{{ options.title }}</h5>
+    {% endif %}
+
 {% endmacro %}

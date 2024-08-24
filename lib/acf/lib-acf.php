@@ -62,9 +62,13 @@ function my_acfe_render_choice($input, $value, $label, $field){
             <span class="inline-flex"><?php echo $label; ?></span>
         </div>
 
-        <div>
+        <div class="relative inline-flex items-center gap-3 group">
             <?php echo $input; ?>
+            <span class="form-switch"></span>
         </div>
+
+
+        
     </div>
     <?php
 

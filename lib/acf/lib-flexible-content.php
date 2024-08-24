@@ -59,14 +59,16 @@ function render_acf_flexible_thumbnail($thumbnail, $field, $layout) {
  * Layout Render Template.
  */
 
- add_filter('acfe/flexible/render/template', 'render_acfe_flexible_template', 10, 4);
+ add_filter('acfe/flexible/render/template', 'render_acfe_flexible_template', 50, 4);
  function render_acfe_flexible_template($template, $field, $layout, $is_preview) {
      // Define the context object
  
      $context = Timber::context();
      // Check if preview mode
      if ($is_preview) {
-
+        wp_dequeue_style( 'global-styles' );
+        wp_dequeue_style( 'wp-block-library' );
+        wp_dequeue_style( 'wp-block-library-theme' );
         // Get the component fields
         $page_content = get_field('page_content')[0];
         $context['component'] = $page_content;
@@ -98,14 +100,14 @@ function render_acf_flexible_thumbnail($thumbnail, $field, $layout) {
  * Layout Render Template Style.
  */
 
-add_action('acfe/flexible/enqueue/name=page_content', 'render_acf_flexible_enqueue', 10, 2);
+add_action('acfe/flexible/enqueue/name=page_content', 'render_acf_flexible_enqueue', 20, 10);
 function render_acf_flexible_enqueue($field, $is_preview){
     if ($is_preview) {
         // Get the main CSS file from the Vite manifest
         $css_file = get_main_vite_css_file();
         
         if ($css_file) {
-            wp_enqueue_style('page_content', $css_file);
+            wp_enqueue_style('page_content', $css_file, [], null);
         }
     }
 }

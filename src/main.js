@@ -23,7 +23,7 @@ import.meta.glob([
 // component imports
 document.addEventListener('DOMContentLoaded', function() {
     initializeAlpine();
-    initializeSwup();
-    generalInView();
+    // initializeSwup();
+    // generalInView();
     initializeHeadroom();
 });

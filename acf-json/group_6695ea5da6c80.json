@@ -26,7 +26,7 @@
     "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "show_in_rest": 0,
     "acfe_autosync": [
@@ -51,5 +51,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1722996469
+    "modified": 1724431895
 }

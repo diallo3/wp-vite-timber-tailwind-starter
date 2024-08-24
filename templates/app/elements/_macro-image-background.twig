@@ -1,4 +1,4 @@
-{% macro backgroundHeaderImage(src, theme) %}
+{% macro render_background_image(src, theme) %}
     {% set backgroundImg = theme.link ~ '/public/img/img-bck-header-default.jpg' %}
     {% set src = src ? src : backgroundImg | towebp %}
 
