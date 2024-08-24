@@ -1,0 +1,28 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% if has_accent or has_title %}
+    <!-- Heading -->
+    <div class="space-y-4 section-entry">
+        
+        {% if has_accent and accent %}
+            {{ badges.render_accent_badge({
+                title: accent,
+                class: 'section-entry__accent',
+            }) }}
+        {% endif %}
+
+        {% if has_title and title %}
+            <hgroup class="space-y-3 hgroup section-entry__headings">
+                {{ headings.render_heading_two({
+                    title: title,
+                    size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                    preview: is_preview
+                }) }}
+            </hgroup>
+        {% endif %}
+    </div>
+{% endif %}

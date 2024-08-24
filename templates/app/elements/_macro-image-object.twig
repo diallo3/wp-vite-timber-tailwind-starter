@@ -1,0 +1,11 @@
+{% macro render_image(options={}) %}
+    {% set options = {
+        src: src | default('https://via.placeholder.com/150'),
+        class: class,
+        fit: fit | default('object-cover w-full h-full'),
+        alt: alt | default('Image alt text'),
+    } | merge(options) %}
+
+    {# Image #}
+    <img src="{{ options.src }}" class="{{ options.fit }} {{ options.class|join(' ') }}" alt="{{ options.alt }}" loading="lazy">
+{% endmacro %}

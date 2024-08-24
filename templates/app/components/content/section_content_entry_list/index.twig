@@ -1,0 +1,56 @@
+
+{# Section Content Entry List #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content_entry_list[0] %}
+
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set list = component.list %}
+
+<div id="section-component-content-entry-list-{{ loop.index }}" class="grid items-center grid-cols-1 gap-4 space-y-8 lg:grid lg:grid-cols-2 section-component-content-entry-list lg:space-y-0">
+
+            <div class="space-y-6 section-st__header inview-item section-component-content-entry-list__entry">
+                
+                {# title #}
+                <div class="section-component-content-entry-list__title">
+                    {{ badges.render_accent_badge({
+                        title: title,
+                        class: 'section-entry__accent',
+                    })}}
+
+                    {{ headings.render_heading_two({
+                        title: title,
+                    })}}
+                </div>
+                
+                {# Entry content #}
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+
+            {# List #}
+            <div class="section-component-content-entry-list__items">
+                <ul class="space-y-4 section-component-content-entry-list__list">
+                
+                    {# list items #}
+                    {% for item in list %}
+                        <li class="flex items-center space-x-4 text-base lg:text-lg inview-item section-featured-list__item">
+                            <span class="text-dodger-blue-700">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 11.917L9.724 16.5L19 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="inline-block"> {{ item.item }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>

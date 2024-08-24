@@ -1,0 +1,69 @@
+{# Section Call to Action #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.header_simple[0] %}
+
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_entry = sections.entry %}
+{% set has_ctas = sections.ctas %}
+
+{# fields #}
+{% set accent = component.accent %}
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set ctas = component.call_to_actions %}
+
+<div id="section-component-header-simple-{{ loop.index }}" class="section-component-header-simple {{ is_preview ? 'px-8 py-4' }}">
+
+	<div class="mx-auto">  
+		<div class="max-w-3xl mx-auto space-y-6 lg:mx-0">
+			<div class="space-y-4">
+                
+                {% if has_accent and accent %}
+                    {{ badges.render_accent_badge({
+                        title: accent
+                    })}}
+                {% endif %}
+
+                {% if has_title and title %}
+                    <hgroup class="section-component-header-simple__headings">
+                        {{ headings.render_heading_one({
+                            title: title,
+                            size: 'sm:text-6xl',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                {% endif %}
+            </div>
+
+            {% if has_entry and entry %}
+                {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+            {% endif %}
+
+            {% if has_ctas and ctas %}
+                <div class="flex items-center lg:pt-8 gap-x-4 lg:mt-0 lg:flex-shrink-0 inview-item section-component-call_to_action__cta">
+                    {% for cta in ctas %}
+                    {{ buttons.render_button_link({
+                        text: cta.link.title,
+                        link: cta.link.url,
+                        style: cta.style.value,
+                        size: 'large'
+                    }) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+		</div>
+	</div>
+</div>

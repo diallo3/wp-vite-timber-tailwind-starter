@@ -1,0 +1,816 @@
+{
+    "key": "group_5ca6c41410a27",
+    "title": "Theme Options Fields",
+    "fields": [
+        {
+            "key": "field_5cab947300767",
+            "label": "General",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0,
+            "repeatable": true,
+            "no_preference": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_5cbbaed6fcfc4",
+            "label": "Company Summary",
+            "name": "company_summary",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": "",
+            "repeatable": true,
+            "acfe_textarea_code": 0
+        },
+        {
+            "key": "field_5cab9cf75af63",
+            "label": "Address",
+            "name": "address",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "repeatable": true,
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large",
+            "sub_fields": [
+                {
+                    "key": "field_5cab9d065af64",
+                    "label": "Street Address",
+                    "name": "street_address",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Street Address",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_5cab9f885af66",
+                    "label": "Street Address 2",
+                    "name": "street_address_2",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Street Address 2",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_5cab9fa85af67",
+                    "label": "City",
+                    "name": "city",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "City",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_5cab9fb95af68",
+                    "label": "State \/ Province \/ Region",
+                    "name": "state_province_region",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "State \/ Province \/ Region",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_5caba0135af69",
+                    "label": "Postal \/ Zip Code",
+                    "name": "postal_zip_code",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Postal \/ Zip Code",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_5caba093b76f0",
+                    "label": "Country",
+                    "name": "country",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Country",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "repeatable": true
+                }
+            ]
+        },
+        {
+            "key": "field_5cb36016df542",
+            "label": "Phone",
+            "name": "phone",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_repeater_stylised_button": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Phone",
+            "rows_per_page": 20,
+            "repeatable": true,
+            "sub_fields": [
+                {
+                    "key": "field_65b988f730c58",
+                    "label": "Type",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_5cb36016df542",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_65b9890f30c59",
+                    "label": "Phone Number",
+                    "name": "phone_number",
+                    "aria-label": "",
+                    "type": "acfe_phone_number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "countries": [
+                        "us"
+                    ],
+                    "preferred_countries": "",
+                    "default_country": "us",
+                    "geolocation": 0,
+                    "native": 0,
+                    "national": 0,
+                    "dropdown": 0,
+                    "dial_code": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "return_format": "array",
+                    "geolocation_token": "",
+                    "parent_repeater": "field_5cb36016df542"
+                }
+            ]
+        },
+        {
+            "key": "field_5cb368e712225",
+            "label": "Email",
+            "name": "email",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_repeater_stylised_button": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Email",
+            "rows_per_page": 20,
+            "repeatable": true,
+            "sub_fields": [
+                {
+                    "key": "field_65b99049d09f7",
+                    "label": "Type",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Email Type",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_5cb368e712225",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_65b99247d09f8",
+                    "label": "Email Address",
+                    "name": "email_address",
+                    "aria-label": "",
+                    "type": "email",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Email Address",
+                    "prepend": "@",
+                    "append": "",
+                    "parent_repeater": "field_5cb368e712225",
+                    "repeatable": true
+                }
+            ]
+        },
+        {
+            "key": "field_65b99fd475e72",
+            "label": "Hours of Operation",
+            "name": "hours",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_repeater_stylised_button": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Hours",
+            "rows_per_page": 20,
+            "repeatable": true,
+            "sub_fields": [
+                {
+                    "key": "field_65b99ffe75e73",
+                    "label": "Day",
+                    "name": "day",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_65b99fd475e72",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_65b9a02675e74",
+                    "label": "Open",
+                    "name": "open",
+                    "aria-label": "",
+                    "type": "time_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "g:i a",
+                    "return_format": "g:i a",
+                    "placeholder": "Time",
+                    "min_time": "",
+                    "max_time": "",
+                    "min_hour": "",
+                    "max_hour": "",
+                    "min_min": "",
+                    "max_min": "",
+                    "min_sec": "",
+                    "max_sec": "",
+                    "parent_repeater": "field_65b99fd475e72",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_65b9a05475e75",
+                    "label": "Close",
+                    "name": "close",
+                    "aria-label": "",
+                    "type": "time_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "g:i a",
+                    "return_format": "g:i a",
+                    "placeholder": "Time",
+                    "min_time": "",
+                    "max_time": "",
+                    "min_hour": "",
+                    "max_hour": "",
+                    "min_min": "",
+                    "max_min": "",
+                    "min_sec": "",
+                    "max_sec": "",
+                    "parent_repeater": "field_65b99fd475e72",
+                    "repeatable": true
+                }
+            ]
+        },
+        {
+            "key": "field_65941855b22f9",
+            "label": "Call to Action",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0,
+            "no_preference": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_659418eab22fa",
+            "label": "General Call to Action",
+            "name": "general_call_to_action",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large",
+            "repeatable": true,
+            "sub_fields": [
+                {
+                    "key": "field_65941909b22fb",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "CTA Title",
+                    "prepend": "",
+                    "append": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_65941938b22fc",
+                    "label": "Entry",
+                    "name": "entry",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "acfe_textarea_code": 0,
+                    "maxlength": "",
+                    "rows": 3,
+                    "placeholder": "CTA Entry",
+                    "new_lines": "",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_6594198ab22fd",
+                    "label": "Link",
+                    "name": "link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "repeatable": true
+                },
+                {
+                    "key": "field_66614d6e12cef",
+                    "label": "Image",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "uploader": "",
+                    "acfe_thumbnail": 0,
+                    "return_format": "array",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "large",
+                    "library": "all",
+                    "upload_folder": ""
+                },
+                {
+                    "key": "field_66636cac09e95",
+                    "label": "Hubspot Form Title",
+                    "name": "hubspot_form_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Hubspot Form Title",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_6661c7c9f1916",
+                    "label": "Hubspot Form ID",
+                    "name": "hubspot_form_id",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Hubsot Form ID",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5cb36cdfdf0cb",
+            "label": "Tracking",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0,
+            "repeatable": true,
+            "no_preference": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_5cb36d1fdf0cc",
+            "label": "Tracking",
+            "name": "tracking",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "repeatable": true,
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large",
+            "sub_fields": [
+                {
+                    "key": "field_5cb36d66df0cd",
+                    "label": "Tracking Codes",
+                    "name": "tracking_codes",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_repeater_stylised_button": 0,
+                    "layout": "row",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "field_5cb36da8df0ce",
+                    "button_label": "Add Tracking Code",
+                    "rows_per_page": 20,
+                    "repeatable": true,
+                    "sub_fields": [
+                        {
+                            "key": "field_5cb36da8df0ce",
+                            "label": "Name",
+                            "name": "name",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Tracking Name",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "repeatable": true,
+                            "parent_repeater": "field_5cb36d66df0cd"
+                        },
+                        {
+                            "key": "field_5cb36dd2df0cf",
+                            "label": "Script",
+                            "name": "script",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Place code here",
+                            "maxlength": "",
+                            "rows": 4,
+                            "new_lines": "",
+                            "repeatable": true,
+                            "parent_repeater": "field_5cb36d66df0cd",
+                            "acfe_textarea_code": 0
+                        },
+                        {
+                            "key": "field_65d4d64a024e2",
+                            "label": "In Header",
+                            "name": "in_header",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Set to yes if code needs to be in header, else it will be inserted in the footer",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1,
+                            "style": "",
+                            "parent_repeater": "field_5cb36d66df0cd",
+                            "repeatable": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_669194dc82d3e",
+            "label": "Has Post Type Archive",
+            "name": "has_post_type_archive",
+            "aria-label": "",
+            "type": "acfe_post_types",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": "",
+            "field_type": "select",
+            "min": "",
+            "max": "",
+            "default_value": [],
+            "return_format": "object",
+            "allow_null": 0,
+            "multiple": 1,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "allow_custom": 0,
+            "choices": [],
+            "search_placeholder": "",
+            "layout": "",
+            "toggle": 0,
+            "other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "Theme Options",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1720816937
+}

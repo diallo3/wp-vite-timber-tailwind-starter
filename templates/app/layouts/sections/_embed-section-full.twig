@@ -1,0 +1,16 @@
+
+{% set section_classes = [
+    padding_inline ?: 'px-8 sm:px-20 lg:px-8',
+    padding_block ?: '',
+    inview == 'false' ? '' : 'inview-container',
+    class ?? ''
+]|join(' ') %}
+
+<section 
+    id="{{ id }}" class="relative {{ section_classes }}" {{ data }}>
+    <div class="px-0 mx-auto {{ max_width ?? 'max-w-screen-2xl' }}">
+        {% block section_content %}
+            <p>Section Content</p>
+        {% endblock %}
+    </div>
+</section>

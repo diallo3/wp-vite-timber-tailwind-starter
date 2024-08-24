@@ -1,0 +1,26 @@
+{% macro render_accent_badge(options=[]) %}
+
+    {% set options = {
+        title: title | default('Badge'),
+    } | merge(options)  %}
+
+    {# accent bagdge #}
+    <span class="block text-base lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] text-dodger-blue-600 uppercase">
+        {{ options.title }}
+    </span>
+{% endmacro %}
+
+{% macro render_contained_badge(options=[]) %}
+
+    {% set options = {
+        title: title | default('Badge'),
+        color: color | default('dodger-blue'),
+        size: size | default('text-sm'),
+    } | merge(options)  %}
+
+    {# contained bagdge #}
+    <span class="{{ options.size }} inline-flex items-center px-2.5 py-0.5 rounded-full  font-medium bg-{{ options.color }}-950 text-{{ options.color }}-600 capitalize">
+        {{ options.title }}
+    </span>
+    
+{% endmacro %}

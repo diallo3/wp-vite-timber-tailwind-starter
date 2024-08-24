@@ -1,0 +1,49 @@
+{# Section Call to Action #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.call_to_action[0] %}
+
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set accent = component.accent %}
+{% set link = component.link %}
+
+
+<div id="section-component-call_to_action-{{ loop.index }}" class="relative overflow-hidden isolate section-component-call_to_action inview-container">
+    <div class="px-6 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+            
+            <div class="space-y-4">
+                {% if accent %}
+                    <div class="inview-item">
+                        {{ badges.render_accent_badge({
+                            title: accent,
+                        })}}
+                    </div>
+                {% endif %}
+
+                <div class="inview-item">
+                    {{ headings.render_heading_two({
+                        title: title,
+                        size: 'text-3xl sm:fluid-text-4xl',
+                    }) }}
+                </div>
+            </div>
+            <div class="max-w-xl mx-auto mt-6 text-lg leading-8 inview-item">
+                {{ entry }}
+            </div>
+            <div class="flex items-center justify-center mt-10 gap-x-6 inview-item">
+                {{ buttons.render_button_link({
+                    text: link.title,
+                    link: link.url,
+                    type: 'solid',
+                    size: 'large'
+                }) }}
+            </div>
+        </div>
+    </div>
+</div>

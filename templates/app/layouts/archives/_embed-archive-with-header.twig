@@ -1,0 +1,40 @@
+<div class="content-wrapper inview-container">
+    
+    <div class="">
+        {# archive hero #}
+        {% embed "@Layouts/sections/_embed-section-full.twig" with {
+                inview: 'false',
+                padding_block: 'py-0',
+            } %}
+                {% block section_content %}
+
+                   {% include "@Layouts/archives/partials/_partial-archive-header-default.twig" with {
+                        accent: archive_fields.accent,
+                        title: archive_fields.title,
+                        subtitle: archive_fields.sub_title,
+                        entry: archive_fields.entry,
+                        ctas: archive_fields.call_to_actions
+                   } %}
+                {% endblock %}
+        {% endembed %}
+        
+
+        <div class="archive-body inview-content">
+            {% block archive_content %}
+                <p>Archive Content</p>
+            {% endblock %}
+        </div>
+
+        {% embed "@Layouts/sections/_embed-section-full.twig" with {
+                inview: 'false',
+                padding_block: 'pb-8 sm:pb-12 lg:pb-20 pt-0',
+            } %}
+            {% block section_content %}
+                <div class="archive-pagination">
+                    {% include '@Layouts/archives/partials/_partial-pagination-default.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+        
+    </div>
+</div>

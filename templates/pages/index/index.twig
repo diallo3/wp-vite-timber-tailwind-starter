@@ -1,13 +1,35 @@
-{% extends "layouts/base.twig" %}
+{% extends "@Layouts/base.twig" %}
 
 {% block content %}
-	<div class="bg-red-950">
-        {# <h2>{{ foo }}</h2>
-        <p>{{ qux }}</p> #}
-        {% for post in posts %}
-            {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-        {% endfor %}
-        
-        {% include 'components/pagination/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-    </div>
+
+    {% embed "@Layouts/archives/_embed-archive-with-header.twig" %}
+    
+
+        {% block archive_content %}
+            {% embed "@Layouts/sections/_embed-section-full.twig" with {
+                inview: 'false',
+            } %}
+                {% block section_content %}
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts">
+                        {% for post in posts %}
+                            <div id="article-{{ post.id }}" class="artice-posts__item artice-posts__item-{{ loop.index }}">
+                                {% include "/templates/app/components/cards/_component-card-simple.twig" with {
+                                    id: post.id,
+                                    title: post.title,
+                                    link: post.link,
+                                    image: post.thumbnail.src,
+                                    entry: post.excerpt,
+                                    clamp: 'line-clamp-3',
+                                } %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+                    
+                {% endblock %}
+                
+            {% endembed %}
+    
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

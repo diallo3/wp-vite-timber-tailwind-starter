@@ -1,0 +1,56 @@
+{# Section Content with Icons #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content_with_icons[0] %}
+
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_entry = sections.entry %}
+{% set has_ctas = sections.ctas %}
+
+{#  #}
+{% set accent = component.accent %}
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set features = component.features %}
+{% set ctas = component.call_to_actions %}
+
+<div id="section-content_with_icons-{{ loop.index }}" class="section-component section-component-content_with_icons {{ is_preview ? 'px-8 py-4' }}">
+
+    <div class="space-y-6 section-component-content_with_icons__content">
+        {# Component Header #}
+        {% include "@Components/content/section_content_with_icons/partials/_partial-section-header.twig" %}
+
+        {% if features %}
+            <dl class="grid grid-cols-1 gap-8 lg:grid lg:grid-cols-3 section-component-content_with_icon inview-container">
+                {% for item in features %}
+                    {% set icon = item.icon %}
+                    {% set entry = item.entry  %}
+                   {% include "@Components/content/section_content_with_icons/partials/_partial-section-icon-entry.twig" %}
+                {% endfor %}
+            </dl>
+        {% endif %}
+
+        {% if has_ctas and ctas %}
+            <div class="py-6 section-component-content_with_icons__ctas">
+                <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                    {% for cta in ctas %}
+                        <li class="entry-ctas__item">
+                            {{ buttons.render_button_link({
+                                text: cta.link.title,
+                                link: cta.link.url,
+                                style: cta.style,
+                            }) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>

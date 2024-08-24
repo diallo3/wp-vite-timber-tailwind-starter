@@ -1,10 +1,9 @@
-{% extends "layouts/base.twig" %}
+{% extends "@Layouts/base.twig" %}
 
 {% block content %}
 
+    {% block page_content %}
+        {% include "@Layouts/flexible-content.twig" with { 'flexible_content': flexible_content }  %}
+     {% endblock %}
 
-<div class="container mx-auto">
-{{post.content}}
-</div>
-			
 {% endblock %}
