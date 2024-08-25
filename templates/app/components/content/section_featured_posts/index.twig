@@ -5,53 +5,37 @@
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-button.twig" as buttons %}
 
-
 {% set component = component.featured_posts[0] %}
 
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_entry = sections.entry %}
+{% set has_ctas = sections.ctas %}
+
+{# fields #}
+{% set accent = component.accent %}
 {% set title = component.title %}
 {% set entry = component.entry %}
-{% set type_of_posts = component.type_of_posts %}
-{% set link = component.link %}
-{# {% set posts = get_posts(component.recommended) %} #}
+{% set ctas = component.call_to_actions %}
+{% set posts = get_posts(component.posts) %}
 
-{% if type_of_posts == 'category' %}
-    {% set posts = get_posts({
-        'post_type': 'post',
-        'posts_per_page': 3,
-        'orderby': 'date',
-        'cat': component.post_category,
-        'order': 'DESC',
-    }) %}
-{% elseif type_of_posts == 'recommmened' %}
-    {% set posts = get_posts(component.recommended) %}
-{% else %}
-    {% set posts = get_posts({
-        'post_type': 'post',
-        'posts_per_page': 3,
-        'ignore_sticky_posts': 1
-    }) %}
-{% endif %}
+<div id="section-component-featured-posts-{{ loop.index }}" class="section-component-featured-posts {{ is_preview ? 'px-8 py-4' }}">
+	<div class="mx-auto space-y-6 section-component-featured-posts__content inview-container">
+		<div class="space-y-4 lg:mx-0 section-component-featured-posts__header inview-item">
 
-
-
-<div id="section-component-featured-posts-{{ loop.index }}" class="bg-white section-component-featured-posts ">
-	<div class="px-6 mx-auto lg:px-8 section-component-featured-posts__content inview-container">
-		<div class="max-w-5xl mx-auto lg:mx-0 section-component-featured-posts__header inview-item">
-			{{ headings.render_heading_two({
-                title: title,
-                color: 'text-black',
-                size: 'fluid-text-3xl',
-            })}}
-
-            <div class="section-component-featured-posts__entry inview-item">
+            {% include "@Components/content/section_featured_posts/partials/_partial-section-header.twig" %}
+			
+            <div class="section-component-featured-posts__entry inview-item lg:max-w-5xl">
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
-                        {{ entry }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum fugiat voluptatem veritatis perspiciatis ipsa quae harum. Aliquid, sequi repudiandae. Facere aliquid tenetur laboriosam tempore eveniet dicta non nisi reiciendis.
+                        {{ entry }}
                     {% endblock %}
                 {% endembed %}
             </div>
 		</div>
-		<ul role="list" class="grid max-w-2xl grid-cols-1 mx-auto mt-20 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 section-component-featured-posts__list">
+		<ul role="list" class="grid max-w-2xl grid-cols-1 mx-auto gap-x-4 gap-y-8 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 section-component-featured-posts__list">
             {% for item in posts %}
 			<li 
                 id="section-component-featured-team-member-{{ loop.index }}" class="section-component-featured-team-member inview-item">
@@ -70,13 +54,10 @@
 		</ul>
 
         {# cte #}
-        <div class="flex justify-center mt-12 section-component-featured-posts__cta">
-            {{ buttons.render_button_link({
-                text: link.title,
-                type: 'simple',
-                size: 'large',
-                link: link.url,
-            }) }}
-        </div>
+        {% if has_ctas and ctas %}
+            <div class="flex justify-center mt-8 section-component-featured-posts__cta">
+                {% include "@Components/content/section_featured_posts/partials/_partial-section-ctas.twig" %}
+            </div>
+        {% endif %}
 	</div>
 </div>

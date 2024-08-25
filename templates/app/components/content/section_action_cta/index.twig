@@ -7,43 +7,41 @@
 
 {% set component = component.call_to_action[0] %}
 
+{# {% set ctas = component.call_to_actions %} #}
+
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_entry = sections.entry %}
+{% set has_ctas = sections.ctas %}
+
+{# fields #}
+{% set accent = component.accent %}
 {% set title = component.title %}
 {% set entry = component.entry %}
-{% set accent = component.accent %}
-{% set link = component.link %}
+{% set ctas = component.ctas %}
 
 
-<div id="section-component-call_to_action-{{ loop.index }}" class="relative overflow-hidden isolate section-component-call_to_action inview-container">
-    <div class="px-6 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto text-center">
-            
-            <div class="space-y-4">
-                {% if accent %}
-                    <div class="inview-item">
-                        {{ badges.render_accent_badge({
-                            title: accent,
-                        })}}
-                    </div>
-                {% endif %}
 
-                <div class="inview-item">
-                    {{ headings.render_heading_two({
-                        title: title,
-                        size: 'text-3xl sm:fluid-text-4xl',
-                    }) }}
-                </div>
+<div id="section-component-call_to_action-{{ loop.index }}" class="relative overflow-hidden isolate section-component-call_to_action inview-container {{ is_preview ? 'px-8 py-4'}}">
+    <div class="px-10 py-12 border rounded-lg section-component-call_to_action__content">
+        
+        {% include "@Components/content/section_action_cta/partials/_partial-section-header.twig" %}
+        
+        <div class="flex justify-between">
+            <div class="max-w-3xl inview-item section-component-call_to_action__entry">
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
             </div>
-            <div class="max-w-xl mx-auto mt-6 text-lg leading-8 inview-item">
-                {{ entry }}
-            </div>
-            <div class="flex items-center justify-center mt-10 gap-x-6 inview-item">
-                {{ buttons.render_button_link({
-                    text: link.title,
-                    link: link.url,
-                    type: 'solid',
-                    size: 'large'
-                }) }}
+
+            <div class="section-component-call_to_action__ctas">
+                {% include "@Components/content/section_action_cta/partials/_partial-section-ctas.twig" %}
             </div>
         </div>
+        
     </div>
 </div>

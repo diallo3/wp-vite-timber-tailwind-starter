@@ -650,6 +650,60 @@
                     "acfe_layout_col": "auto",
                     "acfe_layout_allowed_col": false
                 },
+                "layout_66ca44756840d": {
+                    "key": "layout_66ca44756840d",
+                    "name": "section_featured_logos",
+                    "label": "Section Featured Logos",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66ca45165b09e",
+                            "label": "Featured Logos",
+                            "name": "featured_logos",
+                            "aria-label": "",
+                            "type": "component_field",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "hide_field": "",
+                            "hide_label": "",
+                            "hide_instructions": "",
+                            "hide_required": "",
+                            "field_group_key": "group_6695e48918cea",
+                            "instruction_placement": "",
+                            "acfe_permissions": "",
+                            "button_label": "Add Row",
+                            "appearances": "",
+                            "repeatable": false,
+                            "min": 0,
+                            "max": 0,
+                            "rows_per_page": 20,
+                            "layout": "block",
+                            "collapsed": "",
+                            "sub_fields": []
+                        }
+                    ],
+                    "min": "",
+                    "max": "",
+                    "acfe_flexible_category": [
+                        "Features"
+                    ],
+                    "acfe_flexible_render_template": "",
+                    "acfe_flexible_render_style": "",
+                    "acfe_flexible_render_script": "",
+                    "acfe_flexible_settings": "",
+                    "acfe_flexible_settings_size": "medium",
+                    "acfe_flexible_thumbnail": "",
+                    "acfe_layout_locations": [],
+                    "acfe_flexible_modal_edit_size": false,
+                    "acfe_layout_col": "auto",
+                    "acfe_layout_allowed_col": false
+                },
                 "layout_6695df28dc5d6": {
                     "key": "layout_6695df28dc5d6",
                     "name": "section_media_image",
@@ -765,7 +819,7 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_6695ed8ac8f23",
+                            "key": "field_66ca92b2f0cd7",
                             "label": "Call to Action",
                             "name": "call_to_action",
                             "aria-label": "",
@@ -782,7 +836,7 @@
                             "hide_label": "",
                             "hide_instructions": "",
                             "hide_required": "",
-                            "field_group_key": "group_6655ffc04d296",
+                            "field_group_key": "group_669821589b022",
                             "instruction_placement": "",
                             "acfe_permissions": "",
                             "repeatable": false,
@@ -863,5 +917,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1724458307
+    "modified": 1724551896
 }

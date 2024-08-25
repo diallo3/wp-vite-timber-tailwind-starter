@@ -1,0 +1,76 @@
+{# Section Featured Logos #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.featured_logos[0] %}
+
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_ctas = sections.ctas %}
+
+{# fields #}
+{% set accent = component.accent %}
+{% set title = component.title %}
+{% set logo_sets = component.logo_sets %}
+{% set ctas = component.call_to_actions %}
+
+<div id="section-component-featured-logos-{{ loop.index }}" class="section-component-featured-logos {{ is_preview ? 'px-8 py-4' }}">
+    <div class="grid mx-auto overflow-clip section-component-featured-logos__content inview-container place-content-center">
+
+    <div class="space-y-4 text-center lg:mx-0 section-component-featured-logos__header inview-item">
+        {% if has_accent and accent %}
+            {{ badges.render_accent_badge({
+                title: accent
+            })}}
+        {% endif %}
+
+        {% if has_title and title %}
+            <hgroup class="section-component-featured-logos__headings">
+                {{ headings.render_heading_one({
+                    title: title,
+                    size: 'sm:text-5xl',
+                    preview: is_preview
+                }) }}
+            </hgroup>
+        {% endif %}
+    </div>
+
+    {% for logo_set in logo_sets %}
+        <div 
+            x-data="scrollerComponent"
+            xinit="init"
+            class="mx-auto max-w-screen-2xl">
+            {% set direction = logo_set.direction %}
+            <div 
+                x-ref="scroller"
+                class="scroller" data-direction="{{ direction ? 'right' }}" data-speed="fast">
+                <ul 
+                    x-ref="scrollerInner"
+                    class="px-0 m-0 list-none scroller__inner">
+                    {% for logo in logo_set.logos %}
+                        <li class="flex items-center w-full px-4 border border-gray-100 rounded opacity-90 max-w-72 saturate-0">
+                            <img src="{{ logo.url }}" alt="{{ logo.title }}" class="max-w-full scroller__item">
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+
+    
+    </div>
+
+    {# cte #}
+    {% if has_ctas and ctas %}
+        <div class="flex justify-center mt-8 section-component-featured-logos__cta">
+            {% include "@Components/content/section_featured_logos/partials/_partial-section-ctas.twig" %}
+        </div>
+    {% endif %}
+
+</div>
+
