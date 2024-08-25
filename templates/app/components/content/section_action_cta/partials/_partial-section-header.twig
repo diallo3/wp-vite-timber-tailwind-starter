@@ -1,0 +1,23 @@
+{# section Component CTA Header  #}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+
+<div class="max-w-3xl space-y-4">
+    {% if has_accent and accent %}
+        <div class="inview-item">
+            {{ badges.render_accent_badge({
+                title: accent,
+            })}}
+        </div>
+    {% endif %}
+
+    {% if has_title and title %}
+        <div class="inview-item text-pretty">
+            {{ headings.render_heading_two({
+                title: title,
+                size: 'text-3xl sm:fluid-text-4xl',
+                preview: is_preview
+            }) }}
+        </div>
+    {% endif %}
+</div>

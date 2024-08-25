@@ -9,6 +9,15 @@
         }
     }
 
+    @media (min-width: 850px) {
+        #postbox-container-1 {
+        position: fixed;
+        top: 100px;
+        z-index: 999999;
+        right: 320px;
+        }
+    }
+
     p {
         font-size: inherit;
     }

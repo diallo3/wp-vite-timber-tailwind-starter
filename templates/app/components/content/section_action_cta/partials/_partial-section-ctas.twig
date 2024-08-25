@@ -1,0 +1,18 @@
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% if has_ctas and ctas %}
+    <div class="py-6 lg:py-0 section-component-content-with-image__ctas">
+        <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+            {% for cta in ctas %}
+                <li class="entry-ctas__item">
+                    {{ buttons.render_button_link({
+                        text: cta.link.title,
+                        link: cta.link.url,
+                        size: 'large',
+                        style: cta.style,
+                    }) }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
