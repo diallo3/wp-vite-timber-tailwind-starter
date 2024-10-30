@@ -37,6 +37,10 @@
             },
             "layout": "block",
             "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large",
             "sub_fields": [
                 {
                     "key": "field_66c932cc9d811",
@@ -206,11 +210,7 @@
                     "ui": 1,
                     "style": "small_rounded"
                 }
-            ],
-            "acfe_group_modal": 0,
-            "acfe_group_modal_close": 0,
-            "acfe_group_modal_button": "",
-            "acfe_group_modal_size": "large"
+            ]
         },
         {
             "key": "field_66c933ee98623",
@@ -398,15 +398,7 @@
             "type": "relationship",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_665c89feeb3ea",
-                        "operator": "==",
-                        "value": "recommended"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -414,7 +406,7 @@
             },
             "post_type": [
                 "post",
-                "solution"
+                "customer-story"
             ],
             "post_status": [
                 "publish"
@@ -433,6 +425,7 @@
             },
             "min": "",
             "max": "",
+            "allow_in_bindings": 1,
             "elements": [
                 "featured_image"
             ],
@@ -467,7 +460,7 @@
             "min": 0,
             "max": 0,
             "collapsed": "",
-            "button_label": "Add Row",
+            "button_label": "Add CTA",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -527,6 +520,41 @@
                     "ajax": 0,
                     "min": "",
                     "parent_repeater": "field_66c9353498626"
+                },
+                {
+                    "key": "field_670e57a59a45c",
+                    "label": "Size",
+                    "name": "size",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "default": "Default",
+                        "small": "Small",
+                        "large": "Large"
+                    },
+                    "default_value": "default",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "max": "",
+                    "allow_custom": 0,
+                    "search_placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "min": "",
+                    "parent_repeater": "field_66c9353498626"
                 }
             ]
         },
@@ -548,6 +576,32 @@
             "endpoint": 0,
             "no_preference": 0,
             "selected": 0
+        },
+        {
+            "key": "field_670d7c8d028e4",
+            "label": "Options",
+            "name": "options",
+            "aria-label": "",
+            "type": "component_field",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "field_group_key": "group_670c46d117551",
+            "allow_in_bindings": 0,
+            "repeatable": false,
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "layout": "block",
+            "button_label": "Add Row",
+            "collapsed": "",
+            "appearances": [],
+            "sub_fields": []
         }
     ],
     "location": [],
@@ -582,5 +636,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1724531651
+    "modified": 1730253344
 }

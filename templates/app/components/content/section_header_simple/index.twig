@@ -1,45 +1,54 @@
-{# Section Call to Action #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
+{# Section #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-header-simple',
+    section_class_name: 'section-component-header-simple',
+} %}
 
-{% set component = component.header_simple[0] %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-{# field check #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_entry = sections.entry %}
-{% set has_ctas = sections.ctas %}
+        {% set header_type = component.header_type %}
+        {% set user_story = header_type is same as 'customer_story' %}
+        {% set logo = component.logo %}
 
-{# fields #}
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set ctas = component.call_to_actions %}
+        {% set accent = accent ? accent : fn('get_the_title') %}
 
-<div id="section-component-header-simple-{{ loop.index }}" class="section-component-header-simple {{ is_preview ? 'px-8 py-4' }}">
-
-	<div class="mx-auto">  
-		<div class="max-w-3xl mx-auto space-y-6 lg:mx-0">
+        {% set heading_size_options = {
+            'default': fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl',
+            'post': 'text-4xl lg:fluid-text-6xl',
+            'user_story': 'text-4xl sm:fluid-text-5xl',
+        }[header_type] | default(fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl') %}
+        
+    
+        <div class="max-w-5xl pb-4 mx-auto space-y-6 lg:mx-0">
 			<div class="space-y-4">
                 
-                {% if has_accent and accent %}
+                <div class="dark:text-cyan-400">
                     {{ badges.render_accent_badge({
-                        title: accent
+                        title: accent,
+                        color: 'text-blue-600 dark:text-cyan-400'
                     })}}
-                {% endif %}
+                </div>
+                
 
                 {% if has_title and title %}
-                    <hgroup class="section-component-header-simple__headings">
-                        {{ headings.render_heading_one({
+                    <hgroup class="font-bold tracking-tighter section-component-header-simple__headings text-balance">
+                        {{ headings.render_heading_three({
                             title: title,
-                            size: 'sm:text-6xl',
+                            color: 'text-gray-800 dark:text-white',
+                            size: heading_size_options,
+                            weight: 'font-bold',
                             preview: is_preview
                         }) }}
                     </hgroup>
+                {% endif %}
+
+                {% if user_story and  logo %}
+                    <figure class=""><img src="{{ logo.url }}" alt=""></figure>
                 {% endif %}
             </div>
 
@@ -52,18 +61,34 @@
             {% endif %}
 
             {% if has_ctas and ctas %}
-                <div class="flex items-center lg:pt-8 gap-x-4 lg:mt-0 lg:flex-shrink-0 inview-item section-component-call_to_action__cta">
+                <div class="flex items-center lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:flex-shrink-0 inview-item section-component-call_to_action__cta">
                     {% for cta in ctas %}
-                    {{ buttons.render_button_link({
-                        text: cta.link.title,
-                        link: cta.link.url,
-                        style: cta.style.value,
-                        size: 'large'
-                    }) }}
+
+                        {% if cta.style.value is same as 'link'  %}
+                            {{ buttons.render_cta_link({
+                                label: cta.link.title,
+                                link: cta.link.url,
+                                color: 'text-gray-900 dark:text-white',
+                                border: 'text-blue-600 dark:text-cyan-400',
+                                size: 'fluid-text-base',
+                                padding: 'px-6 py-4',
+                                target: '_self',
+                            }) }}
+                            
+                        {% else %}
+                                
+                            {{ buttons.render_button_link({
+                                text: cta.link.title,
+                                link: cta.link.url,
+                                style: cta.style.value,
+                                size: 'large',
+                            }) }}
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
 
 		</div>
-	</div>
-</div>
+    {% endblock %}
+    
+{% endembed %}

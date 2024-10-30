@@ -7,7 +7,7 @@
 
         
 <div id="card-team-mamber-{{ id }}" class="card-team-member-default">
-    <figure class="aspect-[3/2] rounded-lg overflow-hidden bg-gray-400 border-2  ">
+    <figure class="aspect-[3/2] rounded-lg overflow-hidden bg-gray-400 ">
         {{ images.render_image({
             src: profile.url ?: theme.link ~ '/dist/icons/defaults/icon-temp-image.svg',
             alt: profile.alt,
@@ -20,27 +20,42 @@
         <div class="flex-grow card-team-member-default__header">
             {{ headings.render_heading_three({
                 title: title,
-                size: 'fluid-text-base',
+                size: 'fluid-text-lg/2xl',
+                color: 'text-gray-900 dark:text-white',
             }) }}
-            <p class="text-base leading-7 textblue-500">{{ position }}</p>
+            <p class="text-sm font-semibold leading-7 text-blue-500 dark:text-gray-400">{{ position }}</p>
         </div>
 
-        {% if social %}
+        
             <div class="flex-shrink">
-                <a href="{{ social }}" class="block py-1 text-dodger-blue-900 hover:text-white" target="_blank">
+                <a href="{{ social }}" class="block pb-1 transition-colors duration-200 ease-linear text-white/30 hover:text-white" target="_blank">
                     <span class="sr-only">LinkedIn for {{ title }}</span>
-                    {{ icons.icon('linkedin', 'size-5') }}
+                    {{ icons.icon({
+                        path: 'social',
+                        name: 'linkedin',
+                        classes: 'size-5',
+                    }) }}
                 </a>
             </div>
-        {% endif %}
+        {% if social %}{% endif %}
     </div>
 
 
-    <div class="flex justify-between px-1 py-2 card-team-member-default__cta">
-        <button @click="modalIsOpen = true" type="button" class="relative after:absolute after:bg-gray-200 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:translate-y-1 after:opacity-0 hover:after:translate-y-0 hover:after:opacity-100 after:transition after:ease-in-out after:duration-20 hover:text-dodger-blue-500" aria-label="{{ title }}">Full Bio</button>
+    <div class="flex justify-between px-1 card-team-member-default__cta">
+        {# <button  type="button" class="relativetext-sm link-fx-1" aria-label="{{ title }}">Full Bio</button> #}
+
+        {{ buttons.render_cta_link({
+            label: 'View Profile',
+            trigger: "modalIsOpen = true",
+            color: 'text-gray-900 dark:text-white',
+            style: 'link',
+            size: 'text-xs',
+        }) }}
     </div>
     
-    {% embed "@Layouts/modals/_embed-modal-default.twig" %}
+    {% embed "@Layouts/modals/_embed-modal-default.twig" with {
+        theme: theme
+    } %}
             {% block modal_content %}
                 {% include "@Components/cards/teams/partials/_partial-modal-content-team-default.twig" %}
             {% endblock %}

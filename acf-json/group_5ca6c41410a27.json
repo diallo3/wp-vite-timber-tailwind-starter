@@ -23,6 +23,27 @@
             "selected": 0
         },
         {
+            "key": "field_671a5904ad747",
+            "label": "Company Title",
+            "name": "company_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "Company Title",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_5cbbaed6fcfc4",
             "label": "Company Summary",
             "name": "company_summary",
@@ -37,12 +58,12 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "acfe_textarea_code": 0,
             "maxlength": "",
-            "rows": 4,
-            "new_lines": "",
-            "repeatable": true,
-            "acfe_textarea_code": 0
+            "allow_in_bindings": 1,
+            "rows": 3,
+            "placeholder": "Company Summary",
+            "new_lines": ""
         },
         {
             "key": "field_5cab9cf75af63",
@@ -268,7 +289,8 @@
                     "placeholder": "",
                     "return_format": "array",
                     "geolocation_token": "",
-                    "parent_repeater": "field_5cb36016df542"
+                    "parent_repeater": "field_5cb36016df542",
+                    "repeatable": true
                 }
             ]
         },
@@ -462,7 +484,8 @@
             "placement": "left",
             "endpoint": 0,
             "no_preference": 0,
-            "selected": 0
+            "selected": 0,
+            "repeatable": true
         },
         {
             "key": "field_659418eab22fa",
@@ -572,7 +595,8 @@
                     "mime_types": "",
                     "preview_size": "large",
                     "library": "all",
-                    "upload_folder": ""
+                    "upload_folder": "",
+                    "repeatable": true
                 },
                 {
                     "key": "field_66636cac09e95",
@@ -592,7 +616,8 @@
                     "maxlength": "",
                     "placeholder": "Hubspot Form Title",
                     "prepend": "",
-                    "append": ""
+                    "append": "",
+                    "repeatable": true
                 },
                 {
                     "key": "field_6661c7c9f1916",
@@ -612,7 +637,8 @@
                     "maxlength": "",
                     "placeholder": "Hubsot Form ID",
                     "prepend": "",
-                    "append": ""
+                    "append": "",
+                    "repeatable": true
                 }
             ]
         },
@@ -784,7 +810,8 @@
             "search_placeholder": "",
             "layout": "",
             "toggle": 0,
-            "other_choice": 0
+            "other_choice": 0,
+            "repeatable": true
         }
     ],
     "location": [
@@ -812,5 +839,16 @@
     "acfe_display_title": "Theme Options",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1720816937
+    "is_acf_component": 0,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": ""
+    },
+    "modified": 1730253346
 }

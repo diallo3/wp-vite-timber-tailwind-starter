@@ -1,0 +1,51 @@
+{# Section Call to Action #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content[0] %}
+
+{# field check #}
+{% set sections = component.sections %}
+{% set has_accent = sections.accent %}
+{% set has_title = sections.title %}
+{% set has_entry = sections.entry %}
+{% set has_ctas = sections.ctas %}
+
+{# fields #}
+{% set accent = component.accent %}
+{% set title = component.title %}
+{% set entry = component.entry %}
+{% set ctas = component.call_to_actions %}
+
+{% set options = component.options[0] %}
+{% set section = options.section %}
+{% set theme = section.theme %}
+
+{# Define theme options based on preview mode or frontend #}
+{% set theme_options = is_preview
+    ? { 'default': 'bg-gray-100', 'light': 'bg-gray-200', 'dark': 'bg-blue-950 dark' }[theme] | default('bg-gray-100')
+    : { 'default': '', 'light': '', 'dark': '' }[theme] | default('') 
+%}
+
+{# Define and merge section classes #}
+{% set section_classes = [
+    section_class_name,
+    theme_options
+] %}
+
+{# Add padding classes if in preview mode #}
+{% if is_preview %}
+    {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
+{% endif %}
+
+<div id="{{ section_id_name }}-{{ loop.index }}" class="{{ section_classes|join(' ') }}">
+
+	<div class="container mx-auto max-w-screen-2xl"> 
+        {# content #}
+
+        {% block component_content %}{% endblock %}
+    </div>
+</div>

@@ -6,21 +6,29 @@
 
 <article
     id="{{ id }}"
-    class="relative pb-12 overflow-hidden bg-white border border-gray-200 rounded-lg shadow text-pretty size-full card-simple">
-        <figure class="aspect-[16/9] card-simple__featured">
+    class="relative pt-8 pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow text-pretty size-full card-simple">
+        <figure class="aspect-[16/9] card-simple__featured hidden">
             {{ images.render_image({
                 src: image ? image | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg'
             })}}
         </figure>
     <div class="flex flex-col gap-2 p-5 pb-2.5 card-simple__body">
         <div class="card-simple__header lg:min-h-12">
-            <a href="{{ link }}" class="block ">
-               {{ headings.render_heading_three({
-                    title: title,
-                    size: 'text-lg md:text-xl lg:text-2xl',
-                    preview: is_preview
-               })}}
-            </a>
+            <hgroup class="block space-y-2 text-balance ">
+                {{ badges.render_accent_badge({
+                    title: accent,
+                    color: 'text-blue-600 dark:text-cyan-400'
+                })}}
+
+                <div class="pe-8">
+                    {{ headings.render_heading_three({
+                        title: title,
+                        size: 'text-lg md:text-xl lg:text-2xl/7 line-clamp-2 tracking-tight',
+                        weight: 'font-bold',
+                        preview: is_preview
+                })}}
+               </div>
+            </hgroup>
         </div>
         <div class="prose-sm prose card-simple__entry prose-p:leading-5 {{ clamp }}">
             {{ entry ? entry }}

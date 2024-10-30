@@ -12,11 +12,12 @@
                 {{ headings.render_heading_three({
                     title: title,
                     size: 'fluid-text-2xl',
+                    color: 'dark:text-white',
                 }) }}
-                <p class="text-base leading-7 text-dodger-blue-500">{{ position }}</p>
+                <p class="text-base leading-7 text-blue-500 dark:text-gray-400">{{ position }}</p>
             </div>
 
-            <div class="prose entry member-bio__bio">
+            <div class="prose entry member-bio__bio dark:prose-invert">
                 {{ bio }}
             </div>
         </div>

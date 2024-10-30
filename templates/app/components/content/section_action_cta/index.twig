@@ -1,47 +1,65 @@
 {# Section Call to Action #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-call_to_action',
+    section_class_name: 'section-component-call_to_action',
+} %}
 
-{% set component = component.call_to_action[0] %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-{# {% set ctas = component.call_to_actions %} #}
-
-{# field check #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_entry = sections.entry %}
-{% set has_ctas = sections.ctas %}
-
-{# fields #}
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set ctas = component.ctas %}
-
-
-
-<div id="section-component-call_to_action-{{ loop.index }}" class="relative overflow-hidden isolate section-component-call_to_action inview-container {{ is_preview ? 'px-8 py-4'}}">
-    <div class="px-10 py-12 border rounded-lg section-component-call_to_action__content">
+        <div class="px-10 py-12 space-y-4 border rounded-lg section-component-call_to_action__content">
         
-        {% include "@Components/content/section_action_cta/partials/_partial-section-header.twig" %}
-        
-        <div class="flex justify-between">
-            <div class="max-w-3xl inview-item section-component-call_to_action__entry">
-                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                    {% block prose_content %}
-                        {{ entry }}
-                    {% endblock %}
-                {% endembed %}
-            </div>
+            {% if has_accent and accent %}
+                <div class="inview-item">
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                    })}}
+                </div>
+            {% endif %}
 
-            <div class="section-component-call_to_action__ctas">
-                {% include "@Components/content/section_action_cta/partials/_partial-section-ctas.twig" %}
+            {% if has_title and title %}
+                <div class="inview-item text-pretty dark:text-white">
+                    {{ headings.render_heading_two({
+                        title: title,
+                        size: 'text-3xl sm:fluid-text-4xl',
+                        preview: is_preview
+                    }) }}
+                </div>
+            {% endif %}
+            
+            <div class="flex justify-between">
+                <div class="max-w-3xl inview-item section-component-call_to_action__entry">
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                        {% block prose_content %}
+                            {{ entry }}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+
+                <div class="section-component-call_to_action__ctas">
+                    {% if has_ctas and ctas %}
+                        <div class="py-6 lg:py-0 section-component-content-with-image__ctas">
+                            <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                                {% for cta in ctas %}
+                                    <li class="entry-ctas__item">
+                                        {{ buttons.render_button_link({
+                                            text: cta.link.title,
+                                            link: cta.link.url,
+                                            size: 'large',
+                                            style: cta.style,
+                                        }) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
+            
         </div>
-        
-    </div>
-</div>
+    {% endblock %}
+{% endembed %}

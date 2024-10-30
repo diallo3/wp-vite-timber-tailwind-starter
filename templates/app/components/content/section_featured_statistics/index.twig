@@ -1,21 +1,23 @@
-{# Section Content Key List #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-featured-statistics',
+    section_class_name: 'section-featured-statistics',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-{% set component = component.featured_statistics[0] %}
+        <script>console.log({{ component | json_encode | raw }})</script>
 
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set sub_title = component.sub_title %}
-{% set entry = component.entry %}
-{% set stats = component.stats %}
+        {% set accent = component.accent %}
+        {% set title = component.title %}
+        {% set sub_title = component.sub_title %}
+        {% set entry = component.entry %}
+        {% set stats = component.stats %}
 
-<div id="section-featured-statistics-{{ loop.index }}" class="section-featured-statistics">
-	<div class="px-6 mx-auto lg:px-8 section-featured-statistics__container inview-container">
-		<div class="max-w-2xl mx-auto lg:max-w-none">
+        <div class="max-w-2xl mx-auto lg:max-w-none">
 			<div class="text-center section-featured-statistics__header">
                 {% if accent %}
                     {{ badges.render_accent_badge({
@@ -45,16 +47,20 @@
                 {% endif %}
 				
 			</div>
-			<dl class="mt-8 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4 section-featured-statistics__items">
-                {% for item in stats %}
-				<div id="stat-list-{{ loop.index }}" class="flex flex-col p-8 bg-gray-400/5 inview-item">
-					<dt class="text-sm font-semibold leading-6 text-gray-600">{{ item.entry }}</dt>
-					<dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">{{ item.stat }}{{ item.caret }}</dd>
-				</div>
-                {% endfor %}
-			</dl>
+
+            <div class="px-6 mx-auto max-w-7xl lg:px-8">
+                <dl class="grid grid-cols-1 text-center gap-x-8 gap-y-16 lg:grid-cols-3 section-featured-statistics__items">
+                    {% for item in stats %}
+                        <div id="stat-list-{{ loop.index }}" class="flex flex-col p-8 inview-item">
+                            <dt class="mx-auto text-base leading-7 text-center text-gray-600 lg:max-w-44">{{ item.entry }}</dt>
+                            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ item.stat }}{{ item.caret }}</dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+            </div>
 		</div>
-	</div>
-</div>
+
+    {% endblock %}
+{% endembed %}
 
 

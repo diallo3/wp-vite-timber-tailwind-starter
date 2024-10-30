@@ -1,0 +1,116 @@
+{# Section CContact Form #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-call_to_action',
+    section_class_name: 'section-component-call_to_action',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        <script>console.log({{ component | json_encode | raw }})</script>
+
+        {% set title = component.title %}
+        {% set entry = component.entry %}
+
+        {% set form_type = component.form_type %}
+
+        {# form attributes #}
+        {% set form_title = component.form_title %}
+
+        {% set has_shortcode = form_type is same as "shortcode" %}
+        {% set has_acf_form = form_type is same as "frontend_form" %}
+        {% set has_hubspot = form_type is same as "hubspot" %}
+        {% set has_other = form_type is same as "other" %}
+
+        {# forms output #}
+        {% set form_shortcode = component.shortcode %}
+        {% set form_acf_form = component.acf_form %}
+        {% set form_hubspot = component.hubspot %}
+        {% set form_other = component.other %}
+
+        <div class="py-8 mx-auto space-y-6 max-w-7xl lg:mx-0">
+            <div class="relative overflow-hidden bg-blue-900 border rounded-lg isolate dark">
+                <div class="grid grid-cols-1 mx-auto max-w-7xl lg:grid-cols-2">
+                    <div class="relative px-6 pt-4 pb-6 sm:pt-8 lg:static lg:px-8 lg:py-16">
+                        <div class="max-w-2xl mx-auto space-y-4 lg:max-w-md text-gray-50 dark">
+                            
+                            {# contact info #}
+                            {{ headings.render_heading_three({
+                                title: title,
+                                size: 'fluid-text-2xl lg:fluid-text-4xl',
+                                weight: 'font-bold',
+                                color: 'text-white',
+                                preview: is_preview
+                            }) }}
+
+                            <div class="prose-sm prose text-gray-100 prose-p:text-gray-50 first:prose-p:text-lg prose-headings:text-cyan-400 prose-headings:my-2 text-pretty marker:text-gray-100">
+                                {{ entry }}
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                    <div class="px-6 py-16 bg-white lg:px-8 xl:px-12">
+                        {# form #}
+                        <div class="space-y-4 form-container">
+                            {{ headings.render_heading_three({
+                                title: form_title,
+                                size: 'fluid-text-sm/snug',
+                                color: 'text-gray-600',
+                                preview: is_preview
+                            }) }}
+                            
+                            {% if has_shortcode %}
+                                {# filter shortcode #}
+                                {% apply shortcodes %}
+                                   [{{ form_shortcode }}]
+                                {% endapply %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% if is_preview %}
+            <script>
+                function disableFormInAcfPreview() {
+                    if (document.body.classList.contains('wp-admin')) {
+                        
+                        document.querySelectorAll('.acfe-fc-preview .form-container').forEach(function(form) {
+                            
+                            form.querySelectorAll('input, textarea, button, select, checkbox, radio').forEach(function(element) {
+                                element.disabled = true;
+                                element.setAttribute('readonly', 'readonly');
+                            });
+
+                            const submitButton = form.querySelector('input[type="submit"], button[type="submit"]');
+                            if (submitButton) {
+                                submitButton.disabled = true;
+                            }
+                        });
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    
+                    disableFormInAcfPreview(); // Initial call
+
+                    // Set up a MutationObserver to handle updates in the ACF preview area
+                    const previewArea = document.querySelector('._preview');
+                    if (previewArea) {
+                        const observer = new MutationObserver(disableFormInAcfPreview);
+                        observer.observe(previewArea, { childList: true, subtree: true });
+                    }
+                });
+            </script>
+        {% endif %}
+
+    {% endblock %}
+{% endembed %}
+
