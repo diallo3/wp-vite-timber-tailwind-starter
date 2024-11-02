@@ -1,73 +1,66 @@
-{# Section Call to Action #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
-{% import "@Elements/_macro-image-background.twig" as backgrounds %}
+{# Section Heade Complex Form #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-header-simple',
+    section_class_name: 'section-component-header-simple',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-{% set component = component.content[0] %}
+        <script>console.log({{ component | json_encode | raw }})</script>
 
-{# field check #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_entry = sections.entry %}
-{% set has_ctas = sections.ctas %}
+        {% set title = component.title %}
+        {% set entry = component.entry %}
+        
+        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-screen-2xl lg:pt-8 xl:pb-20">
+            <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
+                <div class="space-y-4 section-component-header-simple__header text-balance">
+                    {{ badges.render_accent_badge({
+                        title: accent ?: post.title,
+                        color: 'text-white'
+                    })}}
+        
+                    <hgroup class="section-component-header-simple__title">
+                        {{ headings.render_heading_one({
+                            title: title,
+                            size: 'text-6xl md:text-7xl lg:fluid-text-7xl',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                </div>
 
-{# fields #}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set accent = component.accent %}
-{% set image = component.image.url %}
-{% set ctas = component.call_to_actions %}
+                <div class="max-w-3xl">
+                    {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
+                        class: 'prose-invert'
+                    } %}
+                        {% block prose_content %}
+                            {{ entry }}
+                        {% endblock %}
+                        
+                    {% endembed %}
+                </div>
 
-<div id="section-component-header-simple-{{ loop.index }}" class="bg-no-repeat flex flex-col px-4 md:px-8 justify-end items-start bg-cover section-component-header-simple {{ is_preview ? '' : '' }} overflow-hidden relative py-8 lazyload" {{ backgrounds.render_background_image(image | towebp, theme)}}>
-    <div class="absolute inset-0 bg-black/20"></div>
-	<div class="relative w-full py-8 pt-24 mx-auto text-white max-w-screen-2xl lg:pt-8 xl:pb-20">
-		<div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
-			<div class="space-y-4 section-component-header-simple__header text-balance">
-                {{ badges.render_accent_badge({
-                    title: accent ?: post.title,
-                    color: 'text-white'
-                })}}
-    
-                <hgroup class="section-component-header-simple__title">
-                    {{ headings.render_heading_one({
-                        title: title,
-                        size: 'text-6xl md:text-7xl lg:fluid-text-7xl',
-                        preview: is_preview
-                    }) }}
-                </hgroup>
+                {% if ctas %}
+                    <ul class="gap-4 section-component-header-simple__ctas lg:flex lg:items-center lg:pt-8">
+                        {% for cta in ctas %}
+                            <li class="section-component-header-simple__cta-item">
+                                {{ buttons.render_button_link({
+                                    text: cta.link.title,
+                                    link: cta.link.url,
+                                    style: 'white',
+                                    size: 'large'
+                                }) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
             </div>
+        </div>
 
-            <div class="max-w-3xl">
-                {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                    class: 'prose-invert'
-                } %}
-                    {% block prose_content %}
-                        {{ entry }}
-                    {% endblock %}
-                    
-                {% endembed %}
-            </div>
-
-            {% if ctas %}
-                <ul class="gap-4 section-component-header-simple__ctas lg:flex lg:items-center lg:pt-8">
-                    {% for cta in ctas %}
-                        <li class="section-component-header-simple__cta-item">
-                            {{ buttons.render_button_link({
-                                text: cta.link.title,
-                                link: cta.link.url,
-                                style: 'white',
-                                size: 'large'
-                            }) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
-		</div>
-	</div>
-
-</div>
+   
+    {% endblock %}
+{% endembed %}

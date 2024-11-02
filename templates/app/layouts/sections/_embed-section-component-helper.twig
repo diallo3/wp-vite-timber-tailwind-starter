@@ -3,6 +3,7 @@
 {% import "@Elements/_macro-heading.twig" as headings %}
 {% import "@Elements/_macro-badge.twig" as badges %}
 {% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-image-background.twig" as backgrounds %}
 {% import "@Elements/_macro-button.twig" as buttons %}
 
 {% set component = component.content[0] %}
@@ -20,6 +21,25 @@
 {% set entry = component.entry %}
 {% set ctas = component.call_to_actions %}
 
+{# background image #}
+{% set if_image_type = component.image_type %}
+{% set background_image = component.image %}
+
+
+{# Define and merge section classes #}
+{% set section_classes = [
+    section_class_name,
+    'relative',
+    'bg-gray-100',
+    'text-gray-800',
+    'dark:text-white',
+] %}
+
+{# Add padding classes if in preview mode #}
+{% if is_preview %}
+    {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
+{% endif %}
+
 {% set options = component.options[0] %}
 {% set section = options.section %}
 {% set theme = section.theme %}
@@ -33,7 +53,8 @@
 {# Define and merge section classes #}
 {% set section_classes = [
     section_class_name,
-    theme_options
+    theme_options,
+    'relative',
 ] %}
 
 {# Add padding classes if in preview mode #}
@@ -41,11 +62,14 @@
     {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
 {% endif %}
 
-<div id="{{ section_id_name }}-{{ loop.index }}" class="{{ section_classes|join(' ') }}">
-
-	<div class="container mx-auto max-w-screen-2xl"> 
+{% if if_image_type and background_image %}
+    <section id="{{ section_id_name ~ '-' ~ loop.index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image)}}>
+{% else %}
+    <section id="{{ section_id_name }}-{{ loop.index }}" class="{{ section_classes|join(' ') }}">
+{% endif %}
+    <div class="container mx-auto max-w-screen-2xl"> 
         {# content #}
 
         {% block component_content %}{% endblock %}
     </div>
-</div>
+</section>

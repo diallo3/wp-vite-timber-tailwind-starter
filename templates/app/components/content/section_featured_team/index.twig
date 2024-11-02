@@ -64,7 +64,7 @@
                     {% for cta in ctas %}
 
                         {% if cta.style.value is same as 'link'  %}
-                            {{ buttons.render_cta_link({
+                            {{ buttons.render_button_link({
                                 label: cta.link.title,
                                 link: cta.link.url,
                                 color: 'text-gray-900 dark:text-white',

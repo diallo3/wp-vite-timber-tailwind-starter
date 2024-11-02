@@ -476,15 +476,7 @@
             "type": "acfe_column",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66bf888415d7a",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -494,6 +486,7 @@
             "border_endpoint": [
                 "endpoint"
             ],
+            "allow_in_bindings": 1,
             "columns": "6\/12",
             "border": ""
         },
@@ -508,7 +501,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_66bf888415d7a",
+                        "field": "field_66bf87f63fec4",
                         "operator": "==",
                         "value": "1"
                     }
@@ -522,6 +515,7 @@
             "columns": "fill",
             "endpoint": 0,
             "border": "",
+            "allow_in_bindings": 1,
             "border_endpoint": [
                 "endpoint"
             ]
@@ -754,6 +748,66 @@
             "preview_size": "full"
         },
         {
+            "key": "field_67266b4ba15ba",
+            "label": "Image Type",
+            "name": "image_type",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Choose is the image is a background image or in the  content",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66bf88f415d7b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Image",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Background",
+            "ui_off_text": "Content",
+            "ui": 1,
+            "style": "rounded"
+        },
+        {
+            "key": "field_672662e3755d4",
+            "label": "(Column Endpoint)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66bf88f415d7b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 1,
+            "border_endpoint": [
+                "endpoint"
+            ],
+            "allow_in_bindings": 1,
+            "columns": "6\/12",
+            "border": ""
+        },
+        {
             "key": "field_670d6cf7c8fdb",
             "label": "Options",
             "name": "",
@@ -797,6 +851,27 @@
             "collapsed": "",
             "appearances": [],
             "sub_fields": []
+        },
+        {
+            "key": "field_672662f0755d5",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [],
@@ -831,5 +906,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730253343
+    "modified": 1730580892
 }

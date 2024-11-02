@@ -44,13 +44,7 @@
     <div class="flex justify-between px-1 card-team-member-default__cta">
         {# <button  type="button" class="relativetext-sm link-fx-1" aria-label="{{ title }}">Full Bio</button> #}
 
-        {{ buttons.render_cta_link({
-            label: 'View Profile',
-            trigger: "modalIsOpen = true",
-            color: 'text-gray-900 dark:text-white',
-            style: 'link',
-            size: 'text-xs',
-        }) }}
+        
     </div>
     
     {% embed "@Layouts/modals/_embed-modal-default.twig" with {
