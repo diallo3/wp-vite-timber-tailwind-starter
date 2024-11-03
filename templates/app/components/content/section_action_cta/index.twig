@@ -11,10 +11,16 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        <div class="px-10 py-12 space-y-4 border rounded-lg section-component-call_to_action__content">
+        {% set background_image = component.image %}
+        {% set classes = [
+            background_image ? 'bg-center bg-no-repeat bg-cover bg-gray-900 dark before:absolute before:inset-0 before:bg-black/35',
+            'relative border rounded-lg px-10 py-16 space-y-4 section-component-call_to_action__content overflow-hidden *:relative',
+        ] %}
+
+        <article class="{{ classes | join (' ')  }}" style="background-image: url('{{ get_image(background_image).src | towebp }}')">
         
             {% if has_accent and accent %}
-                <div class="inview-item">
+                <div class="inview-item dark:text-white">
                     {{ badges.render_accent_badge({
                         title: accent,
                     })}}
@@ -25,7 +31,7 @@
                 <div class="inview-item text-pretty dark:text-white">
                     {{ headings.render_heading_two({
                         title: title,
-                        size: 'text-3xl sm:fluid-text-4xl',
+                        size: 'text-3xl sm:fluid-text-5xl',
                         preview: is_preview
                     }) }}
                 </div>
@@ -33,7 +39,9 @@
             
             <div class="flex justify-between">
                 <div class="max-w-3xl inview-item section-component-call_to_action__entry">
-                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" with {
+                        class: 'lg:fluid-text-lg',
+                    } %}
                         {% block prose_content %}
                             {{ entry }}
                         {% endblock %}
@@ -60,6 +68,6 @@
                 </div>
             </div>
             
-        </div>
+        </article>
     {% endblock %}
 {% endembed %}

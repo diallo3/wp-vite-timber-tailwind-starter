@@ -577,20 +577,22 @@
                     },
                     "choices": {
                         "solid": "Solid",
-                        "outline": "Outline"
+                        "outline": "Outline",
+                        "link": "Link"
                     },
                     "default_value": "solid",
                     "return_format": "value",
                     "multiple": 0,
                     "max": "",
-                    "allow_custom": 0,
-                    "placeholder": "",
-                    "search_placeholder": "",
                     "prepend": "",
                     "append": "",
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
+                    "placeholder": "",
+                    "allow_custom": 0,
+                    "search_placeholder": "",
                     "min": "",
                     "parent_repeater": "field_66ca430c9c846"
                 },
@@ -712,5 +714,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730253344
+    "modified": 1730648256
 }

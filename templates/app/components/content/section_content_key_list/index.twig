@@ -1,77 +1,74 @@
 {# Section Content Key List #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-content-key-list',
+    section_class_name: 'section-component-content-key-list',
+} %}
 
-{% set component = component.content[0] %}
+    {% block component_content %}
 
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set list = component.list %}
-{% set link = component.link %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-<div id="section-component-content-key-list-{{ loop.index }}" class="section-component section-component-content-key-list">
-    {# content #}
+        {% set key_list = component.list %}
+
+        <script>console.log({{ component.list | json_encode | raw }})</script>
+
         
-    <div class="relative mx-auto space-y-12 section-component-content-key-list__content inview-container">
-        {# title #}
-        <div class="text-center section-component-content-key-list__header inview-item">
-            {{ badges.render_accent_badge({
-                title: title,
-                class: 'section-entry__accent',
-            })}}
-            
+        <div class="relative mx-auto space-y-4 section-component-content-key-list__content inview-container">
             {# title #}
-            <hgroup class="section-component-content-key-list__title">
-                {{ headings.render_heading_three({
+            <div class="text-center section-component-content-key-list__header inview-item">
+                {{ badges.render_accent_badge({
                     title: title,
-                    size: 'fluid-text-4xl',
+                    class: 'section-entry__accent',
                 })}}
-            </hgroup>
-        </div>
-
-        {# entry #}
-        <div class="max-w-4xl mx-auto space-y-8 text-center section-component-content-key-list__entry inview-item">
-            {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                {% block prose_content %}
-                    {{ entry }}
-                {% endblock %}
-            {% endembed %}
-        </div>
-
-
-        {# list items #}
-        <div class="mx-auto mt-16 section-component-content-key-list__items">
-            <dl class="flex flex-wrap items-center lg:justify-center">
-                {% for list in list %}
-                <dd id="key-list-{{ loop.index }}" class="flex items-center pb-2 space-x-4 section-component-content-key-list__item lg:pb-4 inview-item md:w-1/2 lg:w-1/4">
-                    <span class="inline-flex flex-grow-0 text-lg font-medium">{{ list.item }}</span>
-                </dd>
-                {% endfor %}
-            </dl>
-        </div>
-        
-
-        {% if link %}
-            {# cta #}
-            <div class="relative flex justify-center section-component-content-key-list__cta">
-                {{ buttons.render_button_link({
-                    text: link.title,
-                    link: link.url,
-                    size: 'large',
-                })}}
+                
+                {# title #}
+                <hgroup class="section-component-content-key-list__title">
+                    {{ headings.render_heading_three({
+                        title: title,
+                        size: 'fluid-text-4xl',
+                    })}}
+                </hgroup>
             </div>
-        {% endif %}
 
-    </div>
-</div>
+            {# entry #}
+            <div class="max-w-4xl mx-auto space-y-8 text-center section-component-content-key-list__entry inview-item">
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
 
+            {# list items #}
+            <div class="pt-2 mx-auto max-w-screen-2xl section-component-content-key-list__items">
+                <ul class="flex flex-wrap items-center gap-4 lg:justify-center">
+                    {% for list in key_list %}
+                    <li id="key-list-{{ loop.index }}" class="flex items-center pb-2 space-x-4 lg:text-center section-component-content-key-list__item lg:pb-4 inview-item md:w-1/2 lg:w-1/4">
+                        <span class="inline-flex flex-grow-0 text-lg text-gray-600">{{ list.item }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
+            {% if has_ctas and ctas %}
+                <div class="flex items-center justify-center gap-4 pt-8">
+                    {% for cta in ctas %}
+                        {{ buttons.render_button_link({
+                            text: cta.link.title,
+                            link: cta.link.url,
+                            size: cta.size,
+                            style: cta.style.value,
+                        }) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
 
+            
 
-
-
-
+        </div>
+    {% endblock %}
+{% endembed %}

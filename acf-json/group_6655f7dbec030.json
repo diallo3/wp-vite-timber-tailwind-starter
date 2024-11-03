@@ -342,19 +342,27 @@
         },
         {
             "key": "field_670d5976bc29a",
-            "label": "(Column Fill)",
+            "label": "(Column 6\/12)",
             "name": "",
             "aria-label": "",
             "type": "acfe_column",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66c921ff90002",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "columns": "fill",
+            "columns": "6\/12",
             "endpoint": 0,
             "border": "",
             "allow_in_bindings": 0,
@@ -406,8 +414,30 @@
             "acfe_wysiwyg_toolbar_buttons": []
         },
         {
+            "key": "field_67278b2a4a18b",
+            "label": "Content Reverse",
+            "name": "content_reverse",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Reverse Content Direction",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1,
+            "style": "small"
+        },
+        {
             "key": "field_6655fa8116f1f",
-            "label": "(Column 5\/12)",
+            "label": "(Column Fill)",
             "name": "",
             "aria-label": "",
             "type": "acfe_column",
@@ -416,7 +446,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_66c922ca25f94",
+                        "field": "field_66c921ff8fffe",
                         "operator": "==",
                         "value": "1"
                     }
@@ -427,9 +457,10 @@
                 "class": "",
                 "id": ""
             },
-            "columns": "5\/12",
+            "columns": "fill",
             "endpoint": 0,
             "border": "",
+            "allow_in_bindings": 1,
             "border_endpoint": [
                 "endpoint"
             ]
@@ -563,20 +594,22 @@
                     },
                     "choices": {
                         "solid": "Solid",
-                        "outline": "Outline"
+                        "outline": "Outline",
+                        "link": "Link"
                     },
                     "default_value": "solid",
                     "return_format": "value",
                     "multiple": 0,
                     "max": "",
-                    "allow_custom": 0,
-                    "placeholder": "",
-                    "search_placeholder": "",
                     "prepend": "",
                     "append": "",
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
+                    "placeholder": "",
+                    "allow_custom": 0,
+                    "search_placeholder": "",
                     "min": "",
                     "parent_repeater": "field_66c9239102c96"
                 },
@@ -695,5 +728,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730253342
+    "modified": 1730645030
 }

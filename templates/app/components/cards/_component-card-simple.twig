@@ -6,8 +6,8 @@
 
 <article
     id="{{ id }}"
-    class="relative pt-8 pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow text-pretty size-full card-simple">
-        <figure class="aspect-[16/9] card-simple__featured hidden">
+    class="relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow text-pretty size-full card-simple">
+        <figure class="aspect-[16/7] card-simple__featured">
             {{ images.render_image({
                 src: image ? image | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg'
             })}}
@@ -35,6 +35,11 @@
         </div>
     </div>
     <div class="absolute inset-x-0 bottom-0 w-full p-5 card-simple__footer">
-        <a href="{{ link }}" class="">Read More</a>
+        {{ buttons.render_button_link({
+            text: 'Read More',
+            link: link,
+            style: 'outline',
+            size: 'small',
+        }) }}
     </div>
 </article>

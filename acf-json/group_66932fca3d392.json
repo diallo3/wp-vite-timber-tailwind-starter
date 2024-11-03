@@ -1312,13 +1312,6 @@
                 "operator": "!=",
                 "value": "posts_page"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "all"
-            }
         ]
     ],
     "menu_order": 0,
@@ -1352,5 +1345,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1730569525
+    "modified": 1730655964
 }
