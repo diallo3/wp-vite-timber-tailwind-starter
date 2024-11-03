@@ -7,6 +7,7 @@ if (import.meta.hot) {
 }
 
 // import JS files if applicable
+import 'iconify-icon';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeSwup } from './modules/js/module-swup';
 import { generalInView } from './modules/js/module-motionOne';

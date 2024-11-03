@@ -75,3 +75,16 @@ function post_type_archives($args, $post_type) {
     
     return $args;
 }
+
+// Enqueue Iconify script for admin
+function enqueue_iconify_for_admin() {
+    
+    wp_enqueue_script(
+        'iconify', 
+        'https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js', 
+        [], 
+        null, 
+        true // Load in footer
+    );
+}
+add_action('admin_enqueue_scripts', 'enqueue_iconify_for_admin');
