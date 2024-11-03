@@ -415,7 +415,15 @@
             "type": "repeater",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66bfb9f9b495a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -441,7 +449,7 @@
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_66c8bee9c5b65",
+                                "field": "field_66bfb9f9b4954",
                                 "operator": "==",
                                 "value": "1"
                             }
@@ -608,5 +616,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730253345
+    "modified": 1730606503
 }

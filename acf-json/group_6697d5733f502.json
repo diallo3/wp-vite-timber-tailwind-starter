@@ -273,7 +273,7 @@
             "choices": {
                 "page": "Page",
                 "post": "Post",
-                "customer_story": "Customer  Story"
+                "solution": "Solution"
             },
             "default_value": "page : Page",
             "return_format": "value",
@@ -674,5 +674,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730568904
+    "modified": 1730604776
 }

@@ -1,8 +1,67 @@
 {# Section Media Video #}
-{% set component = component.content[0] %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-media-video',
+    section_class_name: 'section-component-media-video',
+} %}
 
-<div id="section-component-media-video-{{ loop.index }}" class="section-component section-component-media-video">
-    <div class="aspect-w-16 aspect-h-9">
-        {{ component.video }}
-    </div>
-</div>
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+
+        <div class="flex flex-col justify-center gap-4 lg:flex-row lg:gap-8">
+            <div class="w-full space-y-4 text-center section-component-media-video__header">
+                <div class="space-y-2">
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        color: 'text-white'
+                    })}}
+                    <hgroup class="section-component-header-simple__title text-balance">
+                        {{ headings.render_heading_one({
+                            title: title,
+                            size: 'text-4xl md:text-5xl lg:fluid-text-5xl',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+
+                    {% if has_entry and entry %}
+                        <div class="max-w-4xl mx-auto">
+                            {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
+                                {% block prose_content %}
+                                    {{ entry }}
+                                {% endblock %}
+                            {% endembed %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="aspect-w-16 aspect-h-9 section-component-media-video__content">
+                    {{ component.video }}
+                </div>
+
+                {% if ctas %}
+                    <div class="flex justify-center w-full py-6 section-component-media-video__ctas">
+                        <ul class="flex flex-col w-auto lg:flex-row lg:space-x-3 entry-ctas">
+                            {% for cta in ctas %}
+                                <script>console.log({{ cta | json_encode | raw }})</script>
+                                <li class="entry-ctas__item">
+                                    {{ buttons.render_button_link({
+                                        text: cta.link.title,
+                                        link: cta.link.url,
+                                        size: cta.size,
+                                        style: cta.style,
+                                    }) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+                    
+    {% endblock %}
+{% endembed %}
