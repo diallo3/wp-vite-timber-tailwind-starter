@@ -1,6 +1,6 @@
-{% macro render_background_image(src, theme) %}
+{% macro render_background_image(img, theme) %}
     {% set backgroundImg = theme.link ~ '/public/img/img-bck-header-default.jpg' %}
-    {% set src = src ? src : backgroundImg | towebp %}
+    {% set image = img ? img : backgroundImg | towebp %}
 
-    {{ 'style="background-image: url(' ~ src ~ ')"' }}
+    {{ 'style="background-image: url(' ~ get_image(image).src ~ ')"' }}
 {% endmacro %}

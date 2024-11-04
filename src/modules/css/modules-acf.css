@@ -1,8 +1,31 @@
-/* section choices */
-ul.acf-radio-list, ul.acf-checkbox-list {
+/* section choice ul.acf-radio-list */
+
+ul.acf-checkbox-list, ul.acf-radio-list {
+    &:focus-within {
+        @apply outline-none border-none;
+    }
+}
+
+/* section choice ul.acf-checklist */
+ul.acf-checkbox-list {
     @apply !border-0 !space-x-2;
     li {
         @apply !mr-0;
+    }
+
+    .check-entry-choice {
+        input[type="checkbox"]:checked {
+            @apply bg-white border-wordpress-blue/50;
+           
+        }
+        &:has(input[type="checkbox"]:checked) {
+            @apply bg-wordpress-blue/5 border-wordpress-blue;
+            strong {
+                @apply text-wordpress-blue;
+            }
+        }
+
+        
     }
 }
 
@@ -29,7 +52,6 @@ ul.acf-radio-list, ul.acf-checkbox-list {
 
     
 }
-
 
 .component-section-options {
     
@@ -60,5 +82,38 @@ ul.acf-radio-list, ul.acf-checkbox-list {
             }
         }
     }
+}
+
+.acf-radio-list {
+    @apply divide-x divide-wordpress-blue/30;
+    :focus {
+        @apply outline-none border-wordpress-blue/50;
+    }
+    .acf-hl {
+        @apply flex items-center !space-x-0 outline-none focus-within:ring-0;
+    }
+    input[type="radio"] {
+        @apply h-px overflow-hidden absolute whitespace-nowrap w-px;
+        clip: rect(0 0 0 0);
+        clip-path: inset(100%);
+    }
+    li {
+        @apply border-y border-wordpress-blue/30 !m-0 text-center relative;
+        &:first-child {
+            @apply rounded-tl rounded-bl border-l;
+        }
+        &:last-child {
+            @apply rounded-tr rounded-br !border-r;
+        }
+        span {
+            @apply block px-4 py-5 text-sm font-medium text-wordpress-blue cursor-pointer ;
+        }
+        &:has(input[type="radio"]:checked) {
+            @apply bg-wordpress-blue/10;
+            span {
+                @apply text-wordpress-blue;
+            }
+        }
+    } 
 }
 

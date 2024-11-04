@@ -1,76 +1,80 @@
-{# Section Featured Logos #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
+{# Section Content with Image #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-content-with-image',
+    section_class_name: 'section-component-content-with-image',
+} %}
 
-{% set component = component.featured_logos[0] %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
 
-{# field check #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_ctas = sections.ctas %}
+        {% set logo_sets = component.logo_sets %}
 
-{# fields #}
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set logo_sets = component.logo_sets %}
-{% set ctas = component.call_to_actions %}
+        <div class="grid mx-auto overflow-clip section-component-featured-logos__content inview-container place-content-center">
 
-<div id="section-component-featured-logos-{{ loop.index }}" class="section-component-featured-logos {{ is_preview ? 'px-8 py-4' }}">
-    <div class="grid mx-auto overflow-clip section-component-featured-logos__content inview-container place-content-center">
+            
+            <div class="space-y-4 text-center lg:mx-0 section-component-featured-logos__header inview-item">
+                {% if has_accent and accent %}
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        color: 'text-blue-500 dark:text-cyan-400'
+                    })}}
+                {% endif %}
 
-    <div class="space-y-4 text-center lg:mx-0 section-component-featured-logos__header inview-item">
-        {% if has_accent and accent %}
-            {{ badges.render_accent_badge({
-                title: accent
-            })}}
-        {% endif %}
+                {% if has_title and title %}
+                    <hgroup class="section-component-featured-logos__headings">
+                        {{ headings.render_heading_three({
+                            title: title,
+                            size: 'text-4xl sm:text-5xl tracking-tight',
+                            color: 'text-gray-800 dark:text-white',
+                            weight: 'font-bold',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                {% endif %}
 
-        {% if has_title and title %}
-            <hgroup class="section-component-featured-logos__headings">
-                {{ headings.render_heading_one({
-                    title: title,
-                    size: 'sm:text-5xl',
-                    preview: is_preview
-                }) }}
-            </hgroup>
-        {% endif %}
-    </div>
-
-    {% for logo_set in logo_sets %}
-        <div 
-            x-data="scrollerComponent"
-            xinit="init"
-            class="mx-auto max-w-screen-2xl">
-            {% set direction = logo_set.direction %}
-            <div 
-                x-ref="scroller"
-                class="scroller" data-direction="{{ direction ? 'right' }}" data-speed="fast">
-                <ul 
-                    x-ref="scrollerInner"
-                    class="px-0 m-0 list-none scroller__inner">
-                    {% for logo in logo_set.logos %}
-                        <li class="flex items-center w-full px-4 border border-gray-100 rounded opacity-90 max-w-72 saturate-0">
-                            <img src="{{ logo.url }}" alt="{{ logo.title }}" class="max-w-full scroller__item">
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% if has_entry and entry %}
+                    <div class="mx-auto prose text-gray-500 lg:fluid-text-base/7 section-component-featured-logos__entry dark:prose-invert">
+                        {{ entry }}
+                    </div>
+                {% endif %}
             </div>
+
+            {% for logo_set in logo_sets %}
+                <div 
+                    x-data="scrollerComponent"
+                    xinit="init"
+                    class="mx-auto mt-2 max-w-screen-2xl">
+                    {% set direction = logo_set.direction %}
+                    <div 
+                        x-ref="scroller"
+                        class="scroller" data-direction="{{ direction ? 'right' }}" data-speed="slow">
+                        <ul 
+                            x-ref="scrollerInner"
+                            class="px-0 m-0 list-none scroller__inner">
+                            {% for logo in logo_set.logos %}
+                                <li class="flex items-center w-full px-4 bg-white border border-blue-200 rounded opacity-90 max-w-72 dark:border-transparent dark:invert-100">
+                                    <img src="{{ logo.url }}" alt="{{ logo.title }}" class="max-w-full scroller__item saturate-[.40]">
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+
         </div>
-    {% endfor %}
 
-    
-    </div>
+        {# ctas #}
+        {% if has_ctas and ctas %}
+            <div class="flex justify-center mt-8 section-component-featured-logos__cta">
+                {% include "@Components/content/section_featured_logos/partials/_partial-section-ctas.twig" %}
+            </div>
+        {% endif %}
 
-    {# cte #}
-    {% if has_ctas and ctas %}
-        <div class="flex justify-center mt-8 section-component-featured-logos__cta">
-            {% include "@Components/content/section_featured_logos/partials/_partial-section-ctas.twig" %}
-        </div>
-    {% endif %}
 
-</div>
+    {% endblock %}
+{% endembed %}
 

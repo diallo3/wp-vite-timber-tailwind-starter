@@ -16,10 +16,11 @@
         {% endif %}
 
         {% if has_title and title %}
-            <hgroup class="space-y-3 hgroup section-entry__headings">
+            <hgroup class="space-y-3 hgroup section-entry__headings text-pretty">
                 {{ headings.render_heading_two({
                     title: title,
                     size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                    color: 'text-gray-800 dark:text-white',
                     preview: is_preview
                 }) }}
             </hgroup>

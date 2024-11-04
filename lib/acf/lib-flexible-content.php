@@ -33,20 +33,24 @@ function render_acf_flexible_content($post_id) {
 add_filter('acfe/flexible/thumbnail', 'render_acf_flexible_thumbnail', 10, 4);
 
 function render_acf_flexible_thumbnail($thumbnail, $field, $layout) {
-    // Define the path to your thumbnails
-    $thumbnail_path = get_template_directory_uri() . '/lib/acf/images/layout-thumbnails/';
+    // Define the path to your thumbnails for the URL
+    $thumbnail_url_path = get_template_directory_uri() . '/lib/acf/images/layout-thumbnails/';
+    
+    // Define the server path to your thumbnails for file_exists check
+    $thumbnail_file_path = get_template_directory() . '/lib/acf/images/layout-thumbnails/';
     
     // Define the default thumbnail URL
-    $default_thumbnail_url = $thumbnail_path . 'default-thumbnail.png';
+    $default_thumbnail_url = $thumbnail_url_path . 'default-thumbnail.png';
     
     // Construct the thumbnail file name based on the layout name
-    $thumbnail_name = $layout['name'] . '.png';
+    $thumbnail_name = $layout['name'] . '.svg';
     
-    // Set the thumbnail URL
-    $thumbnail_url = $thumbnail_path . $thumbnail_name;
+    // Construct both the URL and the file path
+    $thumbnail_url = $thumbnail_url_path . $thumbnail_name;
+    $thumbnail_file = $thumbnail_file_path . $thumbnail_name;
     
-    // Check if the thumbnail file exists
-    if (file_exists(get_template_directory() . $thumbnail_path . $thumbnail_name)) {
+    // Check if the thumbnail file exists on the server
+    if (file_exists($thumbnail_file)) {
         return $thumbnail_url;
     }
     

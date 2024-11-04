@@ -6,7 +6,7 @@
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-button.twig" as buttons %}
 
-{% set component = component.testimonials[0] %}
+{% set component = component.content[0] %}
 
 {% set title = component.title %}
 {% set testimonials = get_posts(component.testimonials) %}
