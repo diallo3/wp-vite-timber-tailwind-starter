@@ -1,6 +1,6 @@
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-how_it_works',
-    section_class_name: 'section-component-how_it_works',
+    section_id_name: 'section-component-how-it-works',
+    section_class_name: 'section-component-how-it-works',
 } %}
 
     {% block component_content %}
@@ -10,6 +10,189 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        
+        {% set steps = component.steps %}
+
+        <div class="space-y-6 inview-item section-component-how-it-works__content">
+            {# title #}
+            <header class="space-y-4 section-component-how-it-works__header lg:pt-10">
+                {% if has_accent and accent %}
+                    <div class="inview-item">
+                        {{ badges.render_accent_badge({
+                            title: accent,
+                        })}}
+                    </div>
+                {% endif %}
+
+                {% if has_title and title %}
+                    <div class="tracking-tight inview-item text-pretty dark:text-white section-component-how-it-works__title">
+                        {{ headings.render_heading_two({
+                            title: title,
+                            size: 'text-3xl sm:fluid-text-4xl',
+                            weight: 'font-bold',
+                            preview: is_preview
+                        }) }}
+                    </div>
+                {% endif %}
+            </header>
+            
+            {# Entry content #}
+            {% if has_entry and entry %}
+                <div class="section-component-how-it-works__entry lg:max-w-4xl">
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                        {% block prose_content %}
+                            {{ entry }}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+            {% endif %}
+
+            {# step list #}
+            <ol id="featured-step-list" class="mt-8 hiw-list section-component-how-it-works__list step-list inview-container">
+                {% for key, item in steps %}
+                    {% set image = item.image %}
+                    {% set accent = item.accent %}
+                    {% set title = item.title %}
+                    {% set entry = item.entry %}
+                    {% set ctas = item.call_to_actions %}
+                    <li id="step-{{ loop.index }}" class="hiw-list__item step-list__item inview-item">
+
+                        {% include "@Components/content/section_feature_how_it_works/partials/_partial-step-content.twig" %}
+                        
+                    </li>
+                {% endfor %}
+            </ol>
+
+            {% if has_ctas and ctas %}
+                <div class="flex items-center justify-center gap-4 pt-8 section-component-how-it-works__ctas">
+                    {% for cta in ctas %}
+                        {{ buttons.render_button_link({
+                            text: cta.link.title,
+                            link: cta.link.url,
+                            size: cta.size,
+                            style: cta.style.value,
+                        }) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+
+    {% block component_styles %}
+        <style>
+           /* --------------------------------
+
+            File#: _1_how-it-works
+            Title: How It Works
+            Descr: A list of steps showing how a product works
+            Usage: codyhouse.co/license
+
+            -------------------------------- */
+            :root {
+                --hiw-counter-size: 2rem;
+                --hiw-counter-font-size: 1rem;
+                --hiw-line-stroke-width: 2px;
+                --hiw-line-border-radius: 1em;
+                --hiw-items-gap-x: 1.25rem;
+                /* gap between counter and content */
+                --hiw-items-gap-y: 5.25rem;
+                /* gap between list items */
+            }
+            @media (min-width: 64rem) {
+                :root {
+                    --hiw-counter-size: 3rem;
+                    --hiw-counter-font-size: 1.25rem;
+                    --hiw-items-gap-x: 2rem;
+                    --hiw-items-gap-y: 8.25rem;
+                }
+            }
+
+            .hiw-list {
+                counter-reset: hiw-list-items;
+            }
+
+            .hiw-list__item {
+                position: relative;
+                counter-increment: hiw-list-items;
+            }
+            .hiw-list__item:not(:last-child) {
+                padding-bottom: calc(var(--hiw-items-gap-y)/2);
+                margin-bottom: calc(var(--hiw-items-gap-y)/2);
+            }
+            .hiw-list__item::before, .hiw-list__item::after {
+                /* dashed line */
+                content: "";
+                position: absolute;
+                width: calc(50% - var(--hiw-counter-size)/2 + var(--hiw-line-stroke-width)/2);
+            }
+            .hiw-list__item::before {
+                top: calc(var(--hiw-counter-size) + var(--hiw-line-stroke-width));
+                height: calc(100% - var(--hiw-counter-size) - var(--hiw-line-stroke-width));
+                border-bottom: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+            }
+            .hiw-list__item::after {
+                top: calc(100% - var(--hiw-line-stroke-width));
+                height: calc(var(--hiw-items-gap-y)/2);
+                border-top: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+            }
+            .hiw-list__item:nth-child(2n+1) {
+                padding-right: calc(var(--hiw-counter-size)/2);
+            }
+            .hiw-list__item:nth-child(2n+1)::before {
+                left: calc(var(--hiw-counter-size)/2 - var(--hiw-line-stroke-width)/2);
+                border-left: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+                border-bottom-left-radius: var(--hiw-line-border-radius);
+            }
+            .hiw-list__item:nth-child(2n+1)::after {
+                left: 50%;
+                border-top-right-radius: var(--hiw-line-border-radius);
+                border-right: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+            }
+            .hiw-list__item:nth-child(2n) {
+                padding-left: calc(var(--hiw-counter-size)/2);
+            }
+            .hiw-list__item:nth-child(2n) .hiw-list__item-inner {
+                flex-direction: row-reverse;
+            }
+            .hiw-list__item:nth-child(2n)::before {
+                border-right: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+                right: calc(var(--hiw-counter-size)/2 - var(--hiw-line-stroke-width)/2);
+                border-bottom-right-radius: var(--hiw-line-border-radius);
+            }
+            .hiw-list__item:nth-child(2n)::after {
+                right: 50%;
+                border-top-left-radius: var(--hiw-line-border-radius);
+                border-left: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+            }
+            .hiw-list__item:last-child::before, .hiw-list__item:last-child::after {
+                display: none;
+            }
+
+            .hiw-list__item-inner {
+                display: flex;
+                gap: var(--hiw-items-gap-x);
+            }
+
+            .hiw-list__counter {
+                width: var(--hiw-counter-size);
+                height: var(--hiw-counter-size);
+                border-radius: 50%;
+                flex-shrink: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: var(--hiw-line-stroke-width) solid hsla(245 58% 51% / 0.25);
+                @apply text-indigo-700;
+                font-size: var(--hiw-counter-font-size);
+            }
+            .hiw-list__counter::before {
+                content: counter(hiw-list-items);
+            }
+
+            @media (min-width: 64rem) {
+                .hiw-list__item:nth-child(2n) .hiw-list__content {
+                    flex-direction: row-reverse;
+                }
+            }
+        </style>
     {% endblock %}
 {% endembed %}

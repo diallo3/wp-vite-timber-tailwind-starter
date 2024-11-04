@@ -55,7 +55,7 @@
             </div>
 
             {% if has_ctas and ctas %}
-                <div class="flex items-center justify-center gap-4 pt-8">
+                <div class="flex items-center justify-center gap-4 pt-8 section-component-content-key-list__ctas">
                     {% for cta in ctas %}
                         {{ buttons.render_button_link({
                             text: cta.link.title,

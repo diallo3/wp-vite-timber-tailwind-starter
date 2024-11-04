@@ -6,10 +6,26 @@ ul.acf-checkbox-list, ul.acf-radio-list {
     }
 }
 
+/* section choice ul.acf-checklist */
 ul.acf-checkbox-list {
     @apply !border-0 !space-x-2;
     li {
         @apply !mr-0;
+    }
+
+    .check-entry-choice {
+        input[type="checkbox"]:checked {
+            @apply bg-white border-wordpress-blue/50;
+           
+        }
+        &:has(input[type="checkbox"]:checked) {
+            @apply bg-wordpress-blue/5 border-wordpress-blue;
+            strong {
+                @apply text-wordpress-blue;
+            }
+        }
+
+        
     }
 }
 
