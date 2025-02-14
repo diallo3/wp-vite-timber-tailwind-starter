@@ -1,0 +1,73 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+
+<div class="hiw-list__item-inner">
+    {# counter #}
+    <div class="hiw-list__counter" aria-hidden="true"></div>
+
+    {# content #}
+    <div class="grow step-list__item-content">
+        <div class="gap-5 lg:flex hiw-list__content lg:gap-8 lg:items-center lg:justify-stretch">
+            {% if image %}
+                <figure class="w-full lg:w-1/2 aspect-[16/9] rounded-lg overflow-hidden step-list__item-image ring-4 ring-celery-300 mb-4 md:mb-6">
+                    {{ images.render_image({
+                        src: image ? image.url | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg',
+                        alt: item.title,
+                        width: image.width,
+                        height: image.height
+                    })}}
+                </figure>
+            {% endif %}
+
+            <div class="w-full lg:w-1/2">
+                <div class="{{  loop.index is divisible by(2)  ? 'lg:pl-20' : 'lg:pl-8 lg:pr-10' }} space-y-2 ">
+                    <div class="space-y-4 step-list__item-title">
+                        
+                        {% if accent %}
+                            {{ badges.render_accent_badge({
+                                title: accent,
+                            })}}
+                        {% endif %}
+                        
+                        {{ headings.render_heading_three({
+                            title: title,
+                            size: 'text-lg sm:text-xl md:fluid-text-2xl lg:fluid-text-3xl',
+                            preview: is_preview
+                        })}}
+                    </div>
+                    {% if entry %}
+                        <div class="px-1 lg:max-w-lg">
+                            {% embed "/templates/app/layouts/prose/_embed-prose-section.twig" %}
+                                {% block prose_content %}
+                                    {{ entry }}
+                                {% endblock %}
+                            {% endembed %}
+                        </div>
+                    {% endif %}
+
+                    {% if ctas %}
+                        <ul class="flex flex-col entry-ctas lg:pt-8">
+                            {% for cta in ctas %}
+                                <li class="entry-ctas__item">
+                                    {{ buttons.render_button_link({
+                                        text: cta.link.title,
+                                        link: cta.link.url,
+                                        style: cta.style.value,
+                                        size: cta.size,
+                                    }) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {# end content #}
+</div>

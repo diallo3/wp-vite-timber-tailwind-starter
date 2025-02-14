@@ -1,0 +1,17 @@
+{# Section Action Button #}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content[0] %}
+
+{% set button = component.button_link %}
+
+<div id="section-component-action-button-{{ loop.index }}" class="section-component section-component-action-button">
+    <div class="flex items-center justify-center">
+        {{ buttons.render_button_link({
+            text: button.title,
+            link: button.link,
+            size: 'large',
+        }) }}
+    </div>
+</div>
+

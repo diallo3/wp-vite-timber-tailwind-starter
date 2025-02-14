@@ -1,0 +1,50 @@
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-call_to_action',
+    section_class_name: 'section-component-call_to_action',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set logo = component.logo %}
+        {% set details = component.details %}
+        {% set entry = component.entry %}
+
+        <div class="pt-12 pb-8 sm:pb-16 lg:pb-32">
+                <div class="flex flex-col gap-8 lg:flex-row">
+                    <div class="px-2 py-4 border-r lg:w-96">
+                        
+                        <div class="sticky space-y-8 top-24">
+                            {% if logo %}
+                                <figure class="">
+                                    <img class="w-full max-w-full" src="{{ get_image(logo).src }}" alt="">
+                                </figure>
+                            {% endif %}
+                            
+                            <dl class="px-6 space-y-6 font-medium text-gray-600">
+                                <dt class="sr-only">
+                                    {# {{ logo.label }} #}
+                                </dt>
+                                {% for item in details %}
+                                    <dd class="flex flex-col *:block">
+                                        <span class="text-sm font-semibold text-blue-600 uppercase">{{ item.label }}</span>
+                                        <span class="text-base">{{ item.value }}</span>
+                                    </dd>
+                                {% endfor %}
+                                
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="lg:w-full">
+                        <div class="prose sm:prose-lg lg:prose-xl first:prose-p:fluid-text-base">
+                            {{ entry }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+{% endembed %}

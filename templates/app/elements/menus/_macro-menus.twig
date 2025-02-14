@@ -1,0 +1,198 @@
+
+
+{# mega menu #}
+{% macro render_mega_menu(menu, options={}) %}
+
+    {% set options = {
+        level: 0,
+        classes: [],
+    } | merge(options) %}
+
+    {% if menu %}
+   
+        <menu class="lg:flex items-center justify-between space-x-2 hidden {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
+            {% for item in menu %}
+                <li
+                    x-data="{ 
+                        open: false 
+                    }"
+                    @mouseenter="open = true"
+                    @mouseleave="open = false"
+                    class="{{ item.classes | join(' ') }} group cursor-pointer relative">
+                    <a href="{{ item.link }}" class="block py-6 px-2.5" target="{{ item.target }}">{{ item.title }}</a>
+
+                    {# item children #}
+                    {% if item.children %}
+                       <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200 transform"
+                            x-transition:enter-start="opacity-0 -translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-out duration-200"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            x-cloak
+                            @focusout="await $nextTick();!$el.contains($focus.focused()) && (open = false)"
+                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
+                            data-level="{{ options.level + 1 }}"
+                        >
+                            {% if item.meta('mega_menu_item') %} 
+                                {# {{ item.meta('mega_menu_item') }} #}
+                            {% else %}
+                                 {{ _self.render_menu(item.children) }}
+                            {% endif %}
+                           
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </menu>
+    {% endif %}
+{% endmacro %}
+
+{# accordion menu navigation #}
+{% macro render_accordion_menu(menu, options={}) %}
+   
+   {% set options = {
+        name: '',
+        level: 0,
+        classes: [],
+    } | merge(options) %}
+
+    {% if menu %}
+        <menu class="w-full" data-level="{{ options.level }}">
+            {% for item in menu %}
+                {% if item.children %}
+                    <li 
+                        x-data="{ expanded: false,}" 
+                        role="region" 
+                        :class="{ 'bg-gray-100': expanded }"
+                        class="{{ item.classes|join(' ') }} mobile-menu_item px-8">
+                        
+                        {# button #}
+                        {% include "@Elements/menus/partials/_partial-menu-button-accordion.twig" %}
+                        
+                        <div x-show="expanded" x-collapse>
+                            <ul class="pb-4 nav-children" data-level="{{ options.level + 1 }}">
+                                <li class="nav-children__title">
+                                    <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title }}">{{ item.title }}</a>
+                                </li>
+                                {% for child in item.children %}
+                                    <li class="{{ item.classes|join(' ') }} nav-children__item">
+                                        <a 
+                                            href="{{ child.url }}"
+                                            class="{{ child.children ? 'uppercase text-sm' }} block py-2 text-gray-500 hover:text-blue-70">
+                                            {{ child.title }}
+                                        </a>
+                                        {% if child.children %}
+                                            <ul class="pt-2 pb-6 space-y-4 text-sm nav-children">
+                                                {% for subchild in child.children %}
+                                                    <li class="">
+                                                        <a href="{{ subchild.link }}" class="text-blue-50/70">{{ subchild.title }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="{{ item.classes|join(' ') }} mobile-menu_item">
+                        <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title }}">{{ item.title }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </menu>
+    {% endif %}
+{% endmacro %}
+
+{# menu buttons nvigation #}
+{% macro render_buttons_menu(menu, options={}) %}
+    {% import "@Elements/_macro-button.twig" as buttons %}
+    
+    {% set options = {
+        name: '',
+        classes: [],
+        button_options: {}
+    } | merge(options) %}
+
+    {% if menu %}
+         <ul class="menu {{ classes|join(' ') }} flex space-x-2">
+            {% for item in menu %}
+            
+                {% set item_button_options = options.button_options | merge({
+                    style: loop.first ? 'outline' : 'solid'
+                }) | merge(item.button_options | default({})) %}
+                
+                <li class="{{ item.classes | join(' ') }} btn-{{ loop.index }}">
+                    
+                    {{ buttons.render_button_link({
+                        text: item.title,
+                        link: item.link,
+                    } | merge(item_button_options )) }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{# social  #}
+{% macro render_social_menu(menu, options={}) %}
+    {% import "@Elements/_macro-icon.twig" as icons %}
+
+    {% set options = {
+        name: '',
+        classes: [],
+        link_classes: [],
+        icon_classes: []
+    } | merge(options) %}
+
+    {% if menu %}
+        <div class="menu {{ options.classes|join(' ') }} {{ options.name }}">
+            {% for item in menu %}
+                <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition duration-150 ease-in-out" title="{{ item.title }}" target="_blank">
+                    {{ icons.icon({
+                        path: 'social',
+                        name: item.title|lower,
+                        classes: options.icon_classes|join(' ')
+                    })}}
+                    <span class="sr-only">{{ item.title }}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+{% endmacro %}
+
+{# basic menu #}
+{% macro render_menu(menu, options={}) %}
+
+    {#  #}
+    {% set options = {
+        level: 0,
+        classes: [],
+        link_classes: [],
+        child_classes: [],
+        child_link_classes: [],
+    } | merge(options) %}
+
+    {% if menu %}
+        <menu class="menu {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
+            {% for item in menu %}
+                <li class="{{ item.classes|join(' ') }}">
+                    <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition-colors duration-150 ease-in-out">{{ item.title }}</a>
+                    {% if item.children %}
+                        {{ _self.render_menu(item.children, {
+                            level: options.level + 1,
+                            classes: options.child_classes|join(' '),
+                            link_classes: options.child_link_classes,
+                        }) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </menu>
+    {% endif %}
+{% endmacro %}

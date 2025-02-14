@@ -1,0 +1,80 @@
+{% import "@Elements/menus/_macro-menus.twig" as menus %}
+{% import "@Elements/_macro-icon.twig" as icons %}
+
+<header x-data="{ mobileNavOpen: false,  scrolledFromTop: false  }" 
+        id="site-header" 
+         x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
+        @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+        :class="{ 'border-b shadow' : scrolledFromTop }"
+        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header"
+>
+    <!-- Main Header Content -->
+    <div id="headerBrand" class="container flex items-center justify-between mx-auto text-center xl:max-w-screen-2xl site-header__left">
+        <!-- Left Section -->
+        <div
+            class="flex items-center">
+            <!-- Logo -->
+            <a href="{{ site.url }}" class="block space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
+                <span class="inline-flex size-10">{{ site_logo }}</span>
+                <span class="sr-only">{{ site.title }}</span>
+            </a>
+            <!-- END Logo -->
+        </div>
+        
+
+        {# center navigation #}
+        <div id="headerNavigation" class="site-header__center">
+            {{ menus.render_mega_menu(menu.header_nav.get_items, {
+                level: 0,
+                classes: 'test-class',
+                })
+            }}
+        </div>
+
+        {# right actions #}
+        <div id="headerActions" class="flex items-center justify-between space-x-4 header-actions site-header__right">
+
+            <div class="hidden site-header__ctas lg:flex">
+                {{ menus.render_buttons_menu(menu.header_buttons.get_items) }}
+            </div> 
+
+            <!-- Open Mobile Navigation lg:hidden  -->
+            <div class="header-actions__mobile-menu">
+                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
+                    {{ icons.icon({
+                        path: 'controls',
+                        name: 'bars-3',
+                        classes: 'w-6 h-6',
+                    }) }}
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+            <!-- END Open Mobile Navigation -->
+        </div>
+        <!-- END Right Section -->
+    </div>
+    <!-- END Main Header Content -->
+
+    {% embed '@Layouts/slideovers/_component-slideover.twig' with {
+            name: 'site-header__mobile-nav',
+            trigger: 'mobileNavOpen',
+            slideTitle: 'Navigation',
+        }
+    %}
+        {% block slideContent %}
+            {% import "@Elements/menus/_macro-menus.twig" as menus %}
+            <nav class="flex flex-col items-start justify-between flex-1 space-y-4">
+
+                 {{ menus.render_accordion_menu(menu.header_nav.get_items, {
+                    level: 0,
+                    classes: 'grid grid-cols-4 gap-8 mt-16 xl:mt-0',
+                    link_classes: 'text-base font-semibold leading-6 text-gray-300 hover:text-white',
+                    child_classes: 'text-sm leading-6 text-gray-300 mt-4 space-y-2',
+                    child_link_classes: 'hover:text-white',
+                
+                }) }}
+    
+            </nav>
+        {% endblock %}
+    {% endembed  %}
+</header>

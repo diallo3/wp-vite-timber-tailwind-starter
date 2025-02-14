@@ -1,0 +1,92 @@
+{# Section Featured Team Members #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-featured-team-members',
+    section_class_name: 'section-component-featured-team-members',
+} %}
+
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set team_members = get_posts(component.team_members) %}
+
+         <div class="space-y-6 ">
+            <div class="mx-auto space-y-2 text-center lg:max-w-7xl section-component-header-simple__header text-balance">
+                {% if has_accent and accent %}
+                    <div class="dark:text-cyan-400">
+                        {{ badges.render_accent_badge({
+                            title: accent
+                        })}}
+                    </div>
+                {% endif %}
+
+                {% if has_title and title %}
+                    <hgroup class="section-component-header-simple__title">
+                        {{ headings.render_heading_two({
+                            title: title,
+                            size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                            color: 'dark:text-white',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                {% endif %}
+            </div>
+
+            <div class="max-w-3xl mx-auto text-center section-component-header-simple__entry">
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+
+            <ul role="list" class="justify-center w-full lg:-ms-8 lg:translate-x-4 lg:flex lg:flex-wrap section-component-featured-team-members__list">
+                {% for member in team_members %}
+                <li 
+                    x-data="{ modalIsOpen: false }"
+                    id="section-component-featured-team-member-{{ loop.index }}" class="w-full p-4 section-component-featured-team-member inview-item md:w-1/2 lg:w-1/3 xl:w-1/4">
+                    {% set profile = member.meta('profile_image') %}
+                    {% set title = member.title %}
+                    {% set position = member.meta('position') %}
+                    {% set bio = member.meta('bio') %}
+                    {% set social = member.meta('social_link') %}
+                    {% include "@Components/cards/teams/_component-card-team-default.twig" %}
+                </li>
+                {% endfor %}
+            </ul>
+            
+            {% if has_ctas and ctas %}
+                <div class="flex items-center justify-center lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:flex-shrink-0 inview-item section-component-call_to_action__cta">
+                    {% for cta in ctas %}
+
+                        {% if cta.style.value is same as 'link'  %}
+                            {{ buttons.render_button_link({
+                                label: cta.link.title,
+                                link: cta.link.url,
+                                color: 'text-gray-900 dark:text-white',
+                                border: 'text-gray-900 dark:text-cyan-400',
+                                size: 'fluid-text-sm',
+                                padding: 'px-6 py-4',
+                                target: '_self',
+                            }) }}
+                            
+                        {% else %}
+                                
+                            {{ buttons.render_button_link({
+                                text: cta.link.title,
+                                link: cta.link.url,
+                                style: cta.style.value,
+                            }) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+        </div>
+
+    {% endblock %}
+{% endembed %}

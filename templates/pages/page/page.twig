@@ -1,0 +1,9 @@
+{% extends "@Layouts/base.twig" %}
+
+{% block content %}
+
+    {% block page_content %}
+        {% include "@Layouts/flexible-content.twig" with { 'flexible_content': flexible_content }  %}
+     {% endblock %}
+
+{% endblock %}

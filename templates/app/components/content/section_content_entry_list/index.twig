@@ -1,0 +1,94 @@
+
+{# Section Content Entry List #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-content-entry-list',
+    section_class_name: 'section-component-content-entry-list',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set list = component.list %}
+
+        <div class="items-start gap-4 space-y-8 lg:gap-8 xl:gap-12 lg:grid lg:grid-cols-5 ">
+            <div class="space-y-6 inview-item section-component-content-entry-list__entry lg:col-span-2">
+                
+                {# title #}
+                <div class="space-y-4 section-component-content-entry-list__title lg:pt-10">
+                    {% if has_accent and accent %}
+                        <div class="inview-item">
+                            {{ badges.render_accent_badge({
+                                title: accent,
+                            })}}
+                        </div>
+                    {% endif %}
+
+                    {% if has_title and title %}
+                        <div class="tracking-tight inview-item text-pretty dark:text-white">
+                            {{ headings.render_heading_two({
+                                title: title,
+                                size: 'text-3xl sm:fluid-text-4xl',
+                                weight: 'font-bold',
+                                preview: is_preview
+                            }) }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                {# Entry content #}
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ entry }}
+                    {% endblock %}
+                {% endembed %}
+
+                {% if has_ctas and ctas %}
+                    <div class="flex items-end gap-4">
+                        {% for cta in ctas %}
+                            {{ buttons.render_button_link({
+                                text: cta.link.title,
+                                link: cta.link.url,
+                                size: cta.size,
+                                style: cta.style.value,
+                            }) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {# List #}
+            <div class="section-component-content-entry-list__items lg:col-span-3">
+                <ul class="grid grid-cols-2 gap-4 lg:gap-8 section-component-content-entry-list__list">
+                
+                    {# list items #}
+                    {% for item in list %}
+                        <li class="flex flex-col space-y-2 text-base lg:text-lg inview-item section-featured-list__item">
+                            <div class="space-y-2">
+                                <span class="inline-flex text-gray-800 dark:text-dodger-blue-700 size-8 dark:text-white">
+                                    <iconify-icon
+                                        icon="{{ item.icon }}"
+                                        width="100%">
+                                    </iconify-icon>
+                                </span>
+                                {{ headings.render_heading_three({
+                                    title: item.title,
+                                    size: 'text-xl lg:text-2xl tracking-tight',
+                                    color: 'text-graay-500 dark:text-cyan-400',
+                                }) }}
+                            </div>
+
+                            <div class="prose prose-p:text-gray-600 dark:prose-invert lg:max-w-sm">
+                                <p>{{ item.entry }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+    
+{% endembed %}

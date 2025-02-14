@@ -1,0 +1,54 @@
+{% set options = component.content[0].options[0] %}
+{% set section = options.section %}
+{% set theme = section.theme ?? 'default' %}
+
+{% set theme_options = { 
+    'default': '', 
+    'light': 'light bg-white border-y-2 border-blue-100',
+    'dark': 'dark' 
+}[theme] | default('')  %}
+
+{% set padding_block = section.padding_block %}
+{% set max_width = section.content_width %}
+
+{# padding Y values #}
+{% set padding_block_options = {
+    'default': 'py-0',
+    'small': 'py-16',
+    'medium': 'py-24',
+    'large': 'py-32'
+}[padding_block] | default('py-0') %}
+
+{# padding X values #}
+{% set padding_inline = {
+    'default': 'px-8',
+    'small': 'px-4',
+    'medium': 'px-8',
+    'large': 'px-16'
+}[padding_inline] | default('px-8') %}
+
+{# Define and merge section classes #}  
+{% set section_classes = [
+    padding_inline ?: 'px-8 sm:px-20 lg:px-8',
+    padding_block_options ?: '',
+    inview == 'false' ? '' : 'inview-container',
+    class ?? '',
+    theme_options,
+] | join(' ') %}
+
+{# max width options #}
+{% set max_width_options = {
+    'default': 'max-w-screen-2xl',
+    'small': 'max-w-screen-md',
+    'medium': 'max-w-screen-lg',
+    'large': 'max-w-screen-xl',
+}[max_width] | default('max-w-screen-2xl') %}
+
+<section 
+    id="{{ id }}" class="relative {{ section_classes }}" {{ data }}>
+    <div class="px-2 mx-auto {{ max_width_options }}">
+        {% block section_content %}
+            <p>Section Content</p>
+        {% endblock %}
+    </div>
+</section>

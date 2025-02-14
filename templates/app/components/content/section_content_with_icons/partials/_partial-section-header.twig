@@ -1,0 +1,33 @@
+
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+
+<div class="space-y-4 section-component-header-simple__header text-balance">
+    {% if has_accent and accent %}
+        {{ badges.render_accent_badge({
+            title: accent,
+            color: 'text-gray-700 dark:text-cyan-400',
+        })}}
+    {% endif %}
+
+    {% if has_title and title %}
+        <hgroup class="section-component-header-simple__title">
+            {{ headings.render_heading_two({
+                title: title,
+                color: 'text-gray-800 dark:text-white',
+                size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                preview: is_preview
+            }) }}
+        </hgroup>
+    {% endif %}
+
+    {% if has_entry and entry %}
+        <div class="lg:max-w-6xl">
+            {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                {% block prose_content %}
+                    {{ entry }}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,42 @@
+
+{# Section Content Entry List #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set component = component.content[0] %}
+
+{% set title = component.title %}
+{% set testimonials = get_posts(component.testimonials) %}
+
+<div id="section-component-featured-testimonial-{{ loop.index }}" class="section-component-featured-testimonial">
+	<div class="px-4 mx-auto space-y-8 section-component-featured-testimonial__container lg:px-8 xl:max-w-screen-2xl inview-container">
+		<!-- Heading -->
+		<div class="text-center section-component-featured-testimonial__header inview-item">
+			
+			{{ headings.render_heading_two({
+                title: title,
+                color: 'text-black',
+                size: 'fluid-text-3xl',
+            })}}
+		</div>
+		<!-- END Heading -->
+
+		<!-- Feedback -->
+		<div class="grid grid-cols-1 gap-4 lg:grid-cols-3 section-component-featured-testimonial__list">
+            {% for testimonial in testimonials %}
+                {% set name = testimonial.meta('name') %}
+                {% set quote = testimonial.meta('quote') %}
+                {% set position = testimonial.meta('position') %}
+
+                <div id="testimonial-item-{{ loop.index }}" class="inview-item">
+                    {% include "@Components/cards/testimonials/_component-card-testimonial-boxed.twig" %}
+                </div>
+            {% endfor %}
+		</div>
+		<!-- END Feedback -->
+	</div>
+</div>
+<!-- END Testimonials Section: Boxed Multiple -->

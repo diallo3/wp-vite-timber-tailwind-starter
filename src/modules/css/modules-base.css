@@ -1,0 +1,29 @@
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    .admin-bar {
+        .site-header, .site-header__mobile-nav {
+            top: 32px;
+        }
+    }
+
+    /* @media (min-width: 850px) {
+        #postbox-container-1 {
+        position: fixed;
+        top: 100px;
+        z-index: 999999;
+        right: 320px;
+        }
+    } */
+
+    p {
+        font-size: inherit;
+    }
+
+    body.wp-admin .acfe-flexible-layout-thumbnail {
+        background-color: #fff;
+        background-size: contain;
+    }
+}

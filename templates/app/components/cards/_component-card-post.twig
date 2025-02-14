@@ -1,0 +1,58 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% set video_post = post.terms[1].slug is same as 'video' %}
+{% set video_url = post.meta('video_url')  %}
+{% set video_description = post.meta('video_description') %}
+{% set referral_link = post.meta('referral_link') %}
+
+
+<article 
+    id="post-{{ post.ID }}"
+    class="relative flex flex-col items-start h-full gap-4 overflow-hidden bg-white border rounded-md shadow card-post {{ post.type }}">
+    <div class="relative w-full">
+        {% if post.thumbnail %}
+            <a href="{{ video_post and referral_link ? referral_link : post.link }}" class="group" title="{{ post.title }}">
+            <figure class="aspect-[16/8] w-full bg-gray-200 card-post__featured border-b border-gray-100 relative">
+                {% if video_post %}
+                    <div class="absolute inset-0 flex items-center justify-center text-white bg-black/30">
+                        {{ icons.icon('youtube', 'w-12 h-12 group-hover:scale-110 transition-all duration-100 ease-linear') }}
+                    </div>
+                {% endif %}
+                {{ images.render_image({
+                    'src': post.thumbnail | towebp,
+                    'alt': post.slug,
+                }) }}
+            </figure>
+            </a>
+        {% endif %}
+    </div>
+    <div class="px-6 pb-12 card-post__body">
+       {#  #}
+        <div class="relative group">
+            <div class="card-post__title">
+                <h3 class="mt-3 text-lg font-semibold leading-6 tracking-tight text-gray-900 font-alexandria group-hover:text-gray-600">
+                    <a href="{{ referral_link ? referral_link : post.link }}" class="group" title="{{ post.title }}">
+                        <span class="absolute inset-0"></span>
+                        {{ post.title }}
+                    </a>
+                </h3>
+            </div>
+            {% if post.excerpt or video_description %}
+                {# excerpt #}
+                <div class="card-post__excerpt">
+                    <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-3">{{ video_post ? video_description : post.excerpt }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {# cta #}
+    <div class="absolute inset-x-0 bottom-0 px-6 pb-2 card-post__cta">
+        
+        
+    </div>
+</article>

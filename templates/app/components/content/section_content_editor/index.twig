@@ -1,0 +1,105 @@
+{# section WYSIWYG #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-content-entry',
+    section_class_name: 'section-component-content-entry',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set title_position = component.title_position %}
+        {% set title_on_side = title_position is same as 'side' %}
+
+        {% if title_on_side %}
+            <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
+                <div class="w-full space-y-2 lg:max-w-48 section-component-header-simple__header text-balance">
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        color: 'text-white'
+                    })}}
+
+                    <hgroup class="section-component-header-simple__title">
+                        {{ headings.render_heading_two({
+                            title: title,
+                            size: 'fluid-text-base font-semibold uppercase',
+                            color: 'text-blue-600 dark:text-cyan-400',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+
+                    {% if ctas %}
+                        <div class="py-6 mt-8 section-component-content-entry__ctas">
+                            <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                                {% for cta in ctas %}
+                                    <li class="entry-ctas__item">
+                                        
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    
+                </div>
+
+                <div class="flex-grow w-full">
+                
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                        {% block prose_content %}
+                            {{ component.entry }}
+                        {% endblock %}
+                    {% endembed %}
+
+                </div>
+            </div>
+        {% else %}
+            <div class="space-y-6 lg:max-w-7xl">
+                <div class="space-y-2 section-component-header-simple__header text-balance">
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        color: 'text-white'
+                    })}}
+
+                    <hgroup class="section-component-header-simple__title">
+                        {{ headings.render_heading_two({
+                            title: title,
+                            size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                </div>
+        
+                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                    {% block prose_content %}
+                        {{ component.entry }}
+                    {% endblock %}
+                {% endembed %}
+
+                {% if ctas %}
+                    <div class="py-6 section-component-content-entry__ctas">
+                        <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                            {% for cta in ctas %}
+                                <li class="entry-ctas__item">
+                                    {{ dump(cta.link) }}
+
+                                    {{ cta.link.url }}
+                                    {# {{ buttons.render_button_link({
+                                        text: cta.link ? cta.link.title : 'Default Text',
+                                        href: cta.link ? cta.link.url : '#',
+                                        style: cta.style ?? 'solid',
+                                    }) }} #}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        
+    {% endblock %}
+{% endembed %}

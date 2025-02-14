@@ -1,0 +1,58 @@
+{# Section Content with Image #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-content-with-image',
+    section_class_name: 'section-component-content-with-image',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set image = component.image.url %}
+        {% set content_reverse = component.content_reverse %}
+
+        <script>console.log({{ content_reverse | json_encode | raw }})</script>
+
+        <div class="mx-auto section-component-content-with-image__container">
+            <div class="flex flex-col gap-12 {{ content_reverse ? 'lg:flex-row' : 'lg:flex-row-reverse' }} lg:items-center lg:gap-0">
+
+                {% if image %}
+                    {# featured Image #}
+                    <div class="relative flex-none group lg:w-1/2 {{ content_reverse ? 'lg:mr-16  xl:mr-16' : 'lg:ml-16  xl:ml-16' }}">
+                    
+                        <figure class="relative overflow-hidden rounded section-component-content-with-image__figure">
+                            {{ images.render_image({
+                                src: image,
+                                alt: title,
+                                class: 'relative mx-auto section-component-content-with-image__src',
+                            }) }}
+                        </figure>
+                    </div>
+                {% endif %}
+
+                {# featured Entry #}
+                <div class="space-y-8 lg:w-1/2 section-component-content-with-image__entry">
+
+                    {% include "@Components/content/section_content_with_image/partials/_partial-section-header.twig" %}
+                    
+                    {% if has_entry and entry %}
+                        <div class="section-component-content-with-image__entry">
+                            {# Entry content #}
+                            {% embed "/templates/app/layouts/prose/_embed-prose-section.twig" %}
+                                {% block prose_content %}
+                                    {{ entry }}
+                                {% endblock %}
+                            {% endembed %}
+                        </div>
+                    {% endif %}
+
+                    {% include "@Components/content/section_content_with_image/partials/_partial-section-ctas.twig" %}
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}

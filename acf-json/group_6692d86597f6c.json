@@ -1,0 +1,103 @@
+{
+    "key": "group_6692d86597f6c",
+    "title": "Post Archive Options",
+    "fields": [
+        {
+            "key": "field_6721006fbdb17",
+            "label": "Content",
+            "name": "content",
+            "aria-label": "",
+            "type": "component_field",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "field_group_key": "group_6697d5733f502",
+            "allow_in_bindings": 0,
+            "repeatable": false,
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "layout": "block",
+            "button_label": "Add Row",
+            "collapsed": "",
+            "appearances": [],
+            "sub_fields": []
+        },
+        {
+            "key": "field_67216135b7961",
+            "label": "Related",
+            "name": "related",
+            "aria-label": "",
+            "type": "component_field",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "field_group_key": "group_665c70b90eb77",
+            "allow_in_bindings": 0,
+            "repeatable": false,
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "layout": "block",
+            "button_label": "Add Row",
+            "collapsed": "",
+            "appearances": [],
+            "sub_fields": []
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type_archive",
+                "operator": "==",
+                "value": "customer-story"
+            }
+        ],
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "posts_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "acfe_autosync": [
+        "php",
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "Hero",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "is_acf_component": 0,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": ""
+    },
+    "modified": 1730253345
+}

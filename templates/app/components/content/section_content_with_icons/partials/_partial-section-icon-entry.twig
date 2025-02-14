@@ -1,0 +1,15 @@
+ <div class="inview-item content_with_icon__content">
+    <dt class="flex items-center space-x-8 lg:items-start lg:flex-col lg:space-x-0 content_with_icon__title">
+        <div class="flex items-center justify-center text-gray-700 size-10 dark:text-white">
+             <iconify-icon
+                icon="{{ item.icon }}"
+                width="100%"
+            >
+            </iconify-icon>
+        </div>
+        <p class="font-semibold leading-8 tracking-tight lg:mt-2 fluid-text-lg dark:text-cyan-400">{{ title }}</p>
+    </dt>
+    <dd class="pl-[4.25rem] mt-2 lg:mt-4 max-w-sm text-base leading-7 lg:fluid-text-sm lg:pl-0 content_with_icon__entry text-gray-600 dark:text-white">
+        {{ entry }}
+    </dd>
+</div>

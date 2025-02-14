@@ -1,0 +1,133 @@
+{# Section Posts Carousel #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: 'section-component-posts_carousel',
+    section_class_name: 'section-component-posts_carousel',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        <script>console.log({{ component | json_encode | raw }})</script>
+
+        {% set entries = component.posts %}
+        {% set carousel = component.carousel_options %}
+        {% set breakpoints = carousel.breakpoints %}
+        {% set is_looping = carousel.loop ? 'true' : 'false' %}
+        {% set is_centered = carousel.centered ? 'true' : 'false' %}
+
+        {% set is_auto_playing = carousel.auto_play ? 'true' : 'false' %}
+        {% set delay = carousel.delay %}
+
+        <article class="pb-2 mx-auto space-y-4 overflow-clip section-component-posts-carousel__content inview-container place-content-center">
+            <div class="space-y-4 text-center lg:mx-0 section-component-posts-carousel__header inview-item">
+                {% if has_accent and accent %}
+                    {{ badges.render_accent_badge({
+                        title: accent,
+                        color: 'text-blue-500 dark:text-cyan-400'
+                    })}}
+                {% endif %}
+
+                {% if has_title and title %}
+                    <hgroup class="section-component-posts-carousel__headings">
+                        {{ headings.render_heading_one({
+                            title: title,
+                            size: 'sm:text-5xl',
+                            color: 'text-gray-900 dark:text-white',
+                            preview: is_preview
+                        }) }}
+                    </hgroup>
+                {% endif %}
+
+                {% if has_entry and entry %}
+                    <div class="mx-auto prose text-gray-600 lg:fluid-text-base/7 section-component-featured-logos__entry dark:prose-invert">
+                        {{ entry }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="">
+                <!-- Slider main container -->
+                {% if is_preview %}
+                    <div class="relative grid grid-flow-col-dense gap-8 -translate-x-1/2 auto-cols-max">
+                    
+                        {% for item in get_posts(entries) %}
+                            <div class="max-w-sm slide">
+                                {% if item.type == 'testimonial' %}
+                                    {{ item.title}}
+                                {% elseif item.type == 'customer-story' %}
+                                    {% set id = item.id %}
+                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
+                                    {% set link = item.link %}
+                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
+                                    {% set thumbnail = item.thumbnail %}
+
+                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                {% else %}
+                                    
+                                {% endif %}
+                                
+                            </div>
+                            {% endfor %}
+                    </div>
+                {% else %}
+                    <div 
+                        class="px-1 mt-8 swiper-posts-container section-component-posts-carousel__swiper-container"
+                        data-swiper='{
+                            "slidesPerView": 1,
+                            "spaceBetween": 10,
+                            "loop": {{ is_looping ? 'true' : 'false' }},
+                            "centeredSlides": {{ is_centered }},
+                            {% if is_auto_playing %}
+                            "autoplay": {
+                                "delay": {{ delay }},
+                                "disableOnInteraction": false
+                            },
+                            {% endif %}
+                            "breakpoints": {
+                                {% for item in breakpoints %}
+                                "{{ item.size }}": {
+                                    "slidesPerView": {{ item.slides }},
+                                    "spaceBetween": {{ item.spacing }}
+                                }{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                            },
+                            "pagination": {
+                                "el": ".swiper-pagination",
+                                "clickable": true
+                            }
+                        }'>
+                    <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            {% for item in get_posts(entries) %}
+                            <div class="swiper-slide">
+                                {% if item.type == 'testimonial' %}
+                                    {{ item.title}}
+                                {% elseif item.type == 'customer-story' %}
+                                    {% set id = item.id %}
+                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
+                                    {% set link = item.link %}
+                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
+                                    {% set thumbnail = item.thumbnail %}
+
+                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                {% else %}
+                                    
+                                {% endif %}
+                                
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                {% endif %}
+            </div>
+            <!-- If we need pagination -->
+            <div class="!bottom-auto swiper-pagination"></div>
+        </article>
+
+    {% endblock %}
+{% endembed %}
