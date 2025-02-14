@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
 @import './modules/css/modules-base.css' layer(base);
 @import './modules/css/modules-components.css' layer(components);
 @import './modules/css/modules-utilities.css';
