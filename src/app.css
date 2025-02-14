@@ -1,10 +1,30 @@
-@import "tailwindcss/base";
-@import "modules/css/modules-base.css";
+@import 'tailwindcss';
+@import './modules/css/modules-base.css' layer(base);
+@import './modules/css/modules-components.css' layer(components);
+@import './modules/css/modules-utilities.css';
 
-@import "tailwindcss/components";
-@import "modules/css/modules-components.css";
+@import './modules/css/module-headroom.css' layer(utilities);
 
-@import "tailwindcss/utilities";
-@import "modules/css/modules-utilities.css";
+@custom-variant dark (&:is(.dark *));
 
-@import "modules/css/module-headroom.css";
+@theme {
+  --color-wordpress-blue: #0d99d5;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

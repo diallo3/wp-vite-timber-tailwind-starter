@@ -12,11 +12,11 @@
 
 <article 
     id="post-{{ post.ID }}"
-    class="relative flex flex-col items-start h-full gap-4 overflow-hidden bg-white border rounded-md shadow card-post {{ post.type }}">
+    class="relative flex flex-col items-start h-full gap-4 overflow-hidden bg-white border rounded-md shadow-sm card-post {{ post.type }}">
     <div class="relative w-full">
         {% if post.thumbnail %}
             <a href="{{ video_post and referral_link ? referral_link : post.link }}" class="group" title="{{ post.title }}">
-            <figure class="aspect-[16/8] w-full bg-gray-200 card-post__featured border-b border-gray-100 relative">
+            <figure class="aspect-16/8 w-full bg-gray-200 card-post__featured border-b border-gray-100 relative">
                 {% if video_post %}
                     <div class="absolute inset-0 flex items-center justify-center text-white bg-black/30">
                         {{ icons.icon('youtube', 'w-12 h-12 group-hover:scale-110 transition-all duration-100 ease-linear') }}

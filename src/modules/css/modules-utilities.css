@@ -1,12 +1,27 @@
-@layer utilities {
-    /* SWUG Define a transition duration during page visits */
-    html.is-changing .transition-fade {
-        transition: opacity 0.25s;
-        opacity: 1;
-    }
+@utility is-changing {
+  /* SWUG Define a transition duration during page visits */
+  &html .transition-fade {
+    transition: opacity 0.25s;
+    opacity: 1;
+  }
+}
 
-    /* Define the styles for the unloaded pages */
-    html.is-animating .transition-fade {
-        opacity: 0;
-    }
+@utility transition-fade {
+  /* SWUG Define a transition duration during page visits */
+  html.is-changing & {
+    transition: opacity 0.25s;
+    opacity: 1;
+  }
+
+  /* Define the styles for the unloaded pages */
+  html.is-animating & {
+    opacity: 0;
+  }
+}
+
+@utility is-animating {
+  /* Define the styles for the unloaded pages */
+  &html .transition-fade {
+    opacity: 0;
+  }
 }

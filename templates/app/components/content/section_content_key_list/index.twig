@@ -44,11 +44,11 @@
             </div>
 
             {# list items #}
-            <div class="pt-2 mx-auto max-w-screen-2xl section-component-content-key-list__items">
+            <div class="pt-2 mx-auto max-w-(--breakpoint-2xl) section-component-content-key-list__items">
                 <ul class="flex flex-wrap items-center gap-4 lg:justify-center">
                     {% for list in key_list %}
                     <li id="key-list-{{ loop.index }}" class="flex items-center pb-2 space-x-4 lg:text-center section-component-content-key-list__item lg:pb-4 inview-item md:w-1/2 lg:w-1/4">
-                        <span class="inline-flex flex-grow-0 text-lg text-gray-600">{{ list.item }}</span>
+                        <span class="inline-flex grow-0 text-lg text-gray-600">{{ list.item }}</span>
                     </li>
                     {% endfor %}
                 </ul>

@@ -13,7 +13,7 @@
     <div class="grow step-list__item-content">
         <div class="gap-5 lg:flex hiw-list__content lg:gap-8 lg:items-center lg:justify-stretch">
             {% if image %}
-                <figure class="w-full lg:w-1/2 aspect-[16/9] rounded-lg overflow-hidden step-list__item-image ring-4 ring-celery-300 mb-4 md:mb-6">
+                <figure class="w-full lg:w-1/2 aspect-16/9 rounded-lg overflow-hidden step-list__item-image ring-4 ring-celery-300 mb-4 md:mb-6">
                     {{ images.render_image({
                         src: image ? image.url | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg',
                         alt: item.title,
