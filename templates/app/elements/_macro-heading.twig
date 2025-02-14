@@ -129,3 +129,81 @@
     {% endif %}
 
 {% endmacro %}
+
+
+{# Main Heading #}
+{% macro render_heading(level = 1, options = {}) %}
+    {# Validate heading level #}
+    {% set level = level|default(1)|abs|round %}
+    {% if level < 1 or level > 6 %}
+        {% set level = 1 %}
+    {% endif %}
+
+    {% set defaults = {
+        title: 'Heading ' ~ level,
+        color: color ?: currentColor,
+        font: font | default('font-sans'),
+        size: size | default(
+            level == 1 ? 'fluid-text-5xl' :
+            level == 2 ? 'fluid-text-xl/snug' :
+            level == 3 ? 'fluid-text-lg/snug' :
+            level == 4 ? 'fluid-text-xl' :
+            level == 5 ? 'fluid-text-lg' :
+            'fluid-text-base'
+        ),
+        weight: weight | default('font-semibold'),
+        case: case,
+        preview: '',
+        id: '',                    {# Add ID support #}
+        classes: '',               {# Additional classes #}
+        attributes: {}             {# Custom data attributes #}
+    } %}
+
+    {% set options = defaults | merge(options) %}
+    {% set headingOptions = [
+        options.color,
+        options.size,
+        options.case,
+        options.font,
+        options.weight,
+        'font-bold',
+        options.classes
+    ]|join(' ')|trim %}
+
+    {% set attributes = '' %}
+    {% for key, value in options.attributes %}
+        {% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value ~ '"' %}
+    {% endfor %}
+
+    {% if options.preview %}
+        <div 
+            class="{{ headingOptions }}"
+            {% if options.id %}id="{{ options.id }}"{% endif %}
+            {{ attributes|raw }}
+        >{{ options.title }}</div>
+    {% else %}
+        <h{{ level }} 
+            class="{{ headingOptions }}"
+            {% if options.id %}id="{{ options.id }}"{% endif %}
+            {{ attributes|raw }}
+        >{{ options.title }}</h{{ level }}>
+    {% endif %}
+{% endmacro %}
+
+{# Heading Usage 
+
+{{ render_heading(1, {  
+    title: 'Heading 1',
+    color: 'text-white',
+    font: 'font-sans',
+    size: 'fluid-text-5xl',
+    weight: 'font-semibold',
+    case: 'normal',
+    classes: 'text-white',
+    attributes: {
+        'data-test': 'heading-1'
+    }
+}) }}
+
+
+#}
