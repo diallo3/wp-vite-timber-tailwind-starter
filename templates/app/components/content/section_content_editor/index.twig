@@ -36,7 +36,11 @@
                             <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
                                 {% for cta in ctas %}
                                     <li class="entry-ctas__item">
-                                        
+                                        {{ buttons.render_button_link({
+                                            text: cta.link.title,
+                                            link: cta.link.url,
+                                            style: cta.style,
+                                        }) }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -84,14 +88,11 @@
                         <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
                             {% for cta in ctas %}
                                 <li class="entry-ctas__item">
-                                    {{ dump(cta.link) }}
-
-                                    {{ cta.link.url }}
-                                    {# {{ buttons.render_button_link({
-                                        text: cta.link ? cta.link.title : 'Default Text',
-                                        href: cta.link ? cta.link.url : '#',
-                                        style: cta.style ?? 'solid',
-                                    }) }} #}
+                                    {{ buttons.render_button_link({
+                                        text: cta.link.title,
+                                        link: cta.link.url,
+                                        style: cta.style,
+                                    }) }}
                                 </li>
                             {% endfor %}
                         </ul>

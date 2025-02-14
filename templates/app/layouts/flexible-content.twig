@@ -2,7 +2,7 @@
     {% set name = block.component_name  %}
     {% set component = block.component_data  %} 
 
-    <!-- <script>console.log({{ component | json_encode | raw }})</script> -->
+    <script>console.log({{ component | json_encode | raw }})</script>
 
     {% set template_path = 'components/content/' ~ name ~ '/index.twig' %}
     {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
