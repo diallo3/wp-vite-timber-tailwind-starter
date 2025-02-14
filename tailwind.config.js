@@ -16,19 +16,6 @@ module.exports = {
                 'wordpress-blue': '#0d99d5',
             },
         },
-    },
-    plugins: [
-        require('@tailwindcss/forms'), 
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/aspect-ratio'),
-        require('@tailwindcss/container-queries'),
-        require("tailwindcss-fluid-type")({
-            settings: {
-              // ...
-              prefix: "fluid-",
-            },
-        }),
-        addDynamicIconSelectors(),
-    ],
+    }
 }
 
