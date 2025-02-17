@@ -47,7 +47,7 @@
                 <div 
                     x-data="scrollerComponent"
                     xinit="init"
-                    class="mx-auto mt-2 max-w-screen-2xl">
+                    class="mx-auto mt-2 max-w-(--breakpoint-2xl)">
                     {% set direction = logo_set.direction %}
                     <div 
                         x-ref="scroller"
@@ -56,7 +56,7 @@
                             x-ref="scrollerInner"
                             class="px-0 m-0 list-none scroller__inner">
                             {% for logo in logo_set.logos %}
-                                <li class="flex items-center w-full px-4 bg-white border border-blue-200 rounded opacity-90 max-w-72 dark:border-transparent dark:invert-100">
+                                <li class="flex items-center w-full px-4 bg-white border border-blue-200 rounded-sm opacity-90 max-w-72 dark:border-transparent dark:invert-100">
                                     <img src="{{ logo.url }}" alt="{{ logo.title }}" class="max-w-full scroller__item saturate-[.40]">
                                 </li>
                             {% endfor %}

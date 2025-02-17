@@ -38,11 +38,11 @@
 
 {# max width options #}
 {% set max_width_options = {
-    'default': 'max-w-screen-2xl',
-    'small': 'max-w-screen-md',
-    'medium': 'max-w-screen-lg',
-    'large': 'max-w-screen-xl',
-}[max_width] | default('max-w-screen-2xl') %}
+    'default': 'max-w-(--breakpoint-2xl)',
+    'small': 'max-w-(--breakpoint-md)',
+    'medium': 'max-w-(--breakpoint-lg)',
+    'large': 'max-w-(--breakpoint-xl)',
+}[max_width] | default('max-w-(--breakpoint-2xl)') %}
 
 <section 
     id="{{ id }}" class="relative {{ section_classes }}" {{ data }}>

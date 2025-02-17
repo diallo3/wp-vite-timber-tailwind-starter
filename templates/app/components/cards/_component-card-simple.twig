@@ -6,8 +6,8 @@
 
 <article
     id="{{ id }}"
-    class="relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow text-pretty size-full card-simple">
-        <figure class="aspect-[16/7] card-simple__featured">
+    class="relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm text-pretty size-full card-simple">
+        <figure class="aspect-16/7 card-simple__featured">
             {{ images.render_image({
                 src: image ? image | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg'
             })}}

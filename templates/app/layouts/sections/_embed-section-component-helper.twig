@@ -67,7 +67,7 @@
 {% else %}
     <section id="{{ section_id_name }}-{{ loop.index }}" class="{{ section_classes|join(' ') }}">
 {% endif %}
-    <div class="container mx-auto max-w-screen-2xl"> 
+    <div class="container mx-auto max-w-(--breakpoint-2xl)"> 
         {# content #}
         {% block component_content %}{% endblock %}
 

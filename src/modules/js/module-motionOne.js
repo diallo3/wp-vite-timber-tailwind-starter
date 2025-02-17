@@ -11,7 +11,6 @@ const navHeader = () => {
         [navSections, {opacity: ['0', '1']}, { delay: stagger(0.1), duration: 0.5 }, { at: '-0.85'}]
     ]
     
-    timeline(navSequence);
 }
 
 
@@ -30,7 +29,6 @@ const generalInView = () => {
         ]
         
 
-        timeline(sectionSequence);
     });
 }
 

@@ -7,7 +7,7 @@
     <div class="relative w-full">
         {% if thumbnail %}
             <a href="{{ link }}" class="group" title="{{ title }}">
-                <figure class="relative w-full aspect-[16/8] flex items-center px-4 pt-8 bg-white card-post__featured max-w-64 saturate-0 group-hover:saturate-100 group-hover:scale-110 transition-all duration-200 ease-in-out">
+                <figure class="relative w-full aspect-16/8 flex items-center px-4 pt-8 bg-white card-post__featured max-w-64 saturate-0 group-hover:saturate-100 group-hover:scale-110 transition-all duration-200 ease-in-out">
                     {{ images.render_image({
                         'src': thumbnail.src | towebp,
                         'alt': thumbnail.slug,

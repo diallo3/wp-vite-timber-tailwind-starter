@@ -33,7 +33,7 @@
                             x-transition:leave-end="opacity-0"
                             x-cloak
                             @focusout="await $nextTick();!$el.contains($focus.focused()) && (open = false)"
-                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
+                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded-sm shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
                             data-level="{{ options.level + 1 }}"
                         >
                             {% if item.meta('mega_menu_item') %} 
