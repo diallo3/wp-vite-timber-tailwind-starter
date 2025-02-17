@@ -33,7 +33,7 @@
 
 	<body 
         x-init="console.log('Im initing')"
-        class="{{ body_class }} bg-gray-900" >
+        class="{{ body_class }} bg-gray-900 layout-base">
 	
 		{% block alert %}
 			{% for alert in alerts %}
@@ -46,7 +46,7 @@
             {% include '@Globals/headers/_global-header-main.twig' %}
         {% endblock %}
 
-		<main id="swup" class="bg-white lg:pt-20 layout transition-fade" role="main">
+		<main id="swup" class="bg-white lg:pt-20 layout transition-fade layout-base__main" role="main">
 			{% block content %}
 				Sorry, no content
 			{% endblock %}

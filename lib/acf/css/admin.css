@@ -8,6 +8,11 @@
     display: none;
 }
 
+body.wp-admin .acfe-flexible-layout-thumbnail {
+    background-color: #fff;
+    background-size: contain;
+}
+
 /* Checkbox Lists */
 ul.acf-checkbox-list {
     outline: none;

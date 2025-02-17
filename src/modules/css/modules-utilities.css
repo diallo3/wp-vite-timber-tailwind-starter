@@ -1,3 +1,17 @@
+:root {
+  --broken-image-color: #f9f9f9;
+}
+
+[x-cloak] {
+    display: none !important;
+  }
+
+.admin-bar {
+    .site-header, .site-header__mobile-nav {
+      top: 32px;
+    }
+}
+
 @utility is-changing {
   /* SWUG Define a transition duration during page visits */
   &html .transition-fade {
@@ -23,5 +37,26 @@
   /* Define the styles for the unloaded pages */
   &html .transition-fade {
     opacity: 0;
+  }
+}
+
+/* Broken Images if class has __main */
+[class*="__main"] img {
+  display: inline-block;
+  font-weight: 300;
+  line-height: 2;
+  text-align: center;
+  min-width: 300px;
+  min-height: 50px;
+  position: relative;
+  &::before {
+    content: '';
+	@apply  rounded-md absolute top-1/2 left-0 size-full -translate-y-1/2;
+    height: calc(100% + 10px);
+    background-color: var(--broken-image-color);
+  }
+  &::after {
+    content: "\2639" " " attr(alt);
+    @apply text-gray-500 text-base absolute z-2 size-full flex items-center justify-center inset-0;
   }
 }
