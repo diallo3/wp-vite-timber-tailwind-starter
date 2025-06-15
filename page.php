@@ -1,5 +1,9 @@
 <?php
 
+if (is_admin()) {
+    die('ADMIN CONTEXT FROM PAGE.PHP');
+}
+
 /**
  * The template for displaying all pages.
  *
@@ -32,12 +36,14 @@ $context = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
 
-// Collect flexible content data
-$context['flexible_content'] = render_acf_flexible_content($timber_post->ID);
+// Only build context and render on the frontend
+if (!is_admin() && !wp_doing_ajax()) {
+    $context['flexible_content'] = render_acf_flexible_content($timber_post->ID);
 
-$templates = [
-	'pages/page-' . $timber_post->post_name . '/page-' . $timber_post->post_name . '.twig',
-	'pages/page/page.twig'
-];
-Timber::render($templates, $context);
+    $templates = [
+        'pages/page-' . $timber_post->post_name . '/page-' . $timber_post->post_name . '.twig',
+        'pages/page/page.twig'
+    ];
+    Timber::render($templates, $context);
+}
 

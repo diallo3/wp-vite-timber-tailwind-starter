@@ -14,8 +14,6 @@
         {% set image = component.image.url %}
         {% set content_reverse = component.content_reverse %}
 
-        <script>console.log({{ content_reverse | json_encode | raw }})</script>
-
         <div class="mx-auto section-component-content-with-image__container">
             <div class="flex flex-col gap-12 {{ content_reverse ? 'lg:flex-row' : 'lg:flex-row-reverse' }} lg:items-center lg:gap-0">
 

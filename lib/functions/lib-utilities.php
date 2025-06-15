@@ -83,7 +83,7 @@ function post_type_archives($args, $post_type) {
 function custom_admin_styles() {
     wp_enqueue_style('custom-admin-styles', get_stylesheet_directory_uri() . '/lib/acf/css/admin.css', [], null);
 }
-add_action('admin_enqueue_scripts', 'custom_admin_styles');
+// add_action('admin_enqueue_scripts', 'custom_admin_styles');
 
 
 /**

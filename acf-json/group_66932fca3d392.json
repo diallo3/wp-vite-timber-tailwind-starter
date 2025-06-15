@@ -24,7 +24,8 @@
             "acfe_flexible_stylised_button": 1,
             "acfe_flexible_layouts_templates": 1,
             "acfe_flexible_layouts_previews": 1,
-            "acfe_flexible_layouts_previews_iframe": 0,
+            "acfe_flexible_layouts_previews_iframe": 1,
+            "acfe_flexible_layouts_previews_responsive": 1,
             "acfe_flexible_layouts_thumbnails": 1,
             "acfe_flexible_layouts_settings": 1,
             "acfe_flexible_layouts_locations": 0,
@@ -1325,7 +1326,7 @@
     ],
     "active": true,
     "description": "",
-    "show_in_rest": 0,
+    "show_in_rest": 1,
     "acfe_autosync": [
         "php",
         "json"
@@ -1346,5 +1347,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1739497219
+    "modified": 1749492211
 }

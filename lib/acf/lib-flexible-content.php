@@ -63,48 +63,14 @@ function render_acf_flexible_thumbnail($thumbnail, $field, $layout) {
  * Layout Render Template.
  */
 
- add_filter('acfe/flexible/render/template', 'render_acfe_flexible_template', 50, 4);
- function render_acfe_flexible_template($template, $field, $layout, $is_preview) {
-     // Define the context object
-     $context = Timber::context();
-     
-     // Check if preview mode
-     if ($is_preview) {
-        wp_dequeue_style('global-styles');
-        wp_dequeue_style('wp-block-library');
-        wp_dequeue_style('wp-block-library-theme');
-        
-        // Get the current layout's content field
-        $context['component'] = [
-            'content' => get_sub_field('content')
-        ];
-
-        // Set preview template path
-        $template = get_stylesheet_directory() . '/templates/app/components/content/' . $layout['name'] . '/index.twig';
-
-        // Add preview context
-        $context['is_preview'] = true;
-        $context['preview_data'] = 'Additional data for preview';
-
-
-        
-        
-     } else {
-         // Set normal template path
-        $template = get_stylesheet_directory() . '/templates/app/layouts/flexible-content.twig';
-        
-         // Add regular context
-        $context['is_preview'] = false;
-        $context['regular_data'] = 'Additional data for regular view';
-     }
-     
-    // Render the template with Timber
-    Timber::render($template, $context);
-     
- 
-    // Return false to prevent default rendering
-    return false;
-}
+add_filter('acfe/flexible/render/template', function($template, $field, $layout, $is_preview) {
+    if ($is_preview) {
+        // Return the path to your PHP preview file
+        return get_stylesheet_directory() . '/lib/acf/layout-preview.php';
+    }
+    // For frontend, use your normal logic
+    // return get_stylesheet_directory() . '/templates/app/layouts/flexible-content.twig';
+}, 50, 4);
 
 /**
  * @param $layouts layout
