@@ -14,8 +14,10 @@ Alpine.plugin(
    
 
 export function initializeAlpine() {
-    // Alpine.js
-    if(!window.Alpine) {
+    // Prevent multiple initializations
+    if (window.Alpine) return;
+
+    try {
         Alpine.data('visibleNavHighlighter', moduleAlpineNavHighlighter);
         Alpine.data('scrollerComponent', () => ({
             init() {
@@ -24,8 +26,9 @@ export function initializeAlpine() {
                 }
             },
             addAnimation() {
-                this.$refs.scroller.setAttribute("data-animated", true);
+                if (!this.$refs.scroller || !this.$refs.scrollerInner) return;
 
+                this.$refs.scroller.setAttribute("data-animated", true);
                 const scrollerContent = Array.from(this.$refs.scrollerInner.children);
 
                 scrollerContent.forEach((item) => {
@@ -35,10 +38,10 @@ export function initializeAlpine() {
                 });
             }
         }));
+
         window.Alpine = Alpine;
         Alpine.start();
+    } catch (error) {
+        console.warn('Failed to initialize Alpine.js:', error);
     }
-
-    // 
-    
 }

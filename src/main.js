@@ -1,26 +1,36 @@
-// Vite Stuff
-// Accept HMR as per: https://vitejs.dev/guide/api-hmr.html
+// Vite HMR
 if (import.meta.hot) {
 	import.meta.hot.accept(() => {
-		console.log('HMR');
+		console.log('HMR update applied');
 	});
 }
 
-// import JS files if applicable
+// Core dependencies
 import 'iconify-icon';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeHeadroom } from './modules/js/module-headroom';
+import { initializeSwup } from './modules/js/module-swup';
+import { navHeader, generalInView, scrollAnimations } from './modules/js/module-motionOne';
 
-// import SCSS files if applicable
-import '../src/app.css';
+// Styles
+import './app.css';
 
-// glob import all css or scss files
+// Auto-import component styles
 import.meta.glob([
-    '../templates/**/*.css'
+    '../templates/**/*.css',
+    '../templates/**/*.scss'
 ], { eager: true });
 
-// component imports
-document.addEventListener('DOMContentLoaded', function() {
-    initializeAlpine();
-    initializeHeadroom();
+// Initialize modules when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        initializeAlpine();
+        initializeHeadroom();
+        initializeSwup();
+        navHeader();
+        generalInView();
+        scrollAnimations();
+    } catch (error) {
+        console.warn('Failed to initialize some modules:', error);
+    }
 });

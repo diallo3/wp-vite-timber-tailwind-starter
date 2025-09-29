@@ -3,61 +3,59 @@
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-badge.twig" as badges %}
 
-<article
-    id="{{ post_type }}-archive-hero" 
-    class="relative archive-hero inview-hero">
-    
-    <div class="relative gap-4 archive-hero__entry lg:grid lg:grid-cols-12 lg:gap-8">
-        <div
-            class="space-y-8 archive-hero__content hero-container lg:col-span-9">
-            <!-- hero content -->
-            <div class="space-y-2 hero-heading inview-hero__item">
-                <span class="block text-sm font-medium tracking-tight text-blue-600 uppercase hero-heading__accen">
-                    {{ badges.render_accent_badge({
+<article id="{{ post_type }}-archive-hero" class="relative archive-hero inview-hero">
+
+	<div class="relative gap-4 archive-hero__entry lg:grid lg:grid-cols-12 lg:gap-8">
+		<div
+			class="space-y-8 archive-hero__content hero-container lg:col-span-9">
+			<!-- hero content -->
+			<div class="space-y-2 hero-heading inview-hero__item">
+				<span class="block text-sm font-medium tracking-tight text-blue-600 uppercase hero-heading__accen">
+					{{ badges.render_accent_badge({
                         title: accent ?: post_type,
                     }) }}
-                </span>
+				</span>
 
-                <hgroup class="flex flex-col Space-y-2 secondary-heading-display hero-heading__title">
-                    {{ headings.render_heading_one({
+				<hgroup class="flex flex-col Space-y-2 secondary-heading-display hero-heading__title">
+					{{ headings.render_heading(1, {
                             title: title ? title : 'Longer Page Title Description'
                     })}}
-                    {% if subtitle %}
-                        <div class="view-hero__item">
-                            {{ headings.render_heading_two({
+					{% if subtitle %}
+						<div class="view-hero__item">
+							{{ headings.render_heading(2, {
                                 title: subtitle
                             })}}
-                        </div>
-                    {% endif %}
-                </hgroup>
-                
-                {% if entry %}
-                    {% embed "/templates/app/layouts/prose/_embed-prose-hero.twig" with {
+						</div>
+					{% endif %}
+				</hgroup>
+
+				{% if entry %}
+					{% embed "/templates/app/layouts/prose/_embed-prose-hero.twig" with {
                         class: 'hero-heading__entry'
                     } %}
-                        {% block prose_content %}
-                            {{ entry }}
-                        {% endblock %}
-                        
-                    {% endembed %}
-                {% endif %}
+						{% block prose_content %}
+							{{ entry }}
+						{% endblock %}
 
-                {% if ctas %}
-                <div class="flex items-center space-x-4 hero-heading__cta">
-                    {% for item in ctas %}
-                        {{ buttons.render_button_link({
+					{% endembed %}
+				{% endif %}
+
+				{% if ctas %}
+					<div class="flex items-center space-x-4 hero-heading__cta">
+						{% for item in ctas %}
+							{{ buttons.render_button_link({
                             text: item.link.title,
                             style: loop.first ? 'solid' : 'outline',
                             size: 'default',
                             link: item.link.url,
                         })}}
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
 
-            
-        </div>
-    </div>
-    
+
+		</div>
+	</div>
+
 </article>
