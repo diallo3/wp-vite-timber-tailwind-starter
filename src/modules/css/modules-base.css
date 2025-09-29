@@ -1,16 +1,43 @@
 @layer base {
+    /* Alpine.js cloak directive */
     [x-cloak] {
         display: none !important;
     }
 
+    /* WordPress admin bar support */
     .admin-bar {
-        .site-header, .site-header__mobile-nav {
+        .site-header,
+        .site-header__mobile-nav {
             top: 32px;
+
+            @media screen and (max-width: 782px) {
+                top: 46px;
+            }
         }
     }
 
+    /* Reset paragraph font size inheritance */
     p {
         font-size: inherit;
     }
 
+    /* Enhanced focus styles for accessibility */
+    *:focus-visible {
+        outline: 2px solid var(--color-blue-600, #2563eb);
+        outline-offset: 2px;
+    }
+
+    /* Smooth scrolling for supported browsers */
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+
+    /* Print styles */
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+    }
 }

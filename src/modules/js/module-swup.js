@@ -181,51 +181,12 @@ function handleWordPressIntegration(swup) {
 /**
  * Create smooth page transition animations
  */
+/**
+ * Create smooth page transition animations
+ * Note: Transition styles are now in modules-utilities.css for better performance
+ */
 export function createSwupTransitions() {
-    const style = document.createElement('style');
-    style.textContent = `
-        /* Swup page transition styles */
-        .swup-transition-fade {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .swup-transition-slide {
-            transition: transform 0.4s ease-in-out;
-        }
-
-        .swup-transition-scale {
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        }
-
-        /* Loading state styles */
-        .is-changing {
-            pointer-events: none;
-        }
-
-        .is-changing .swup-transition-fade {
-            opacity: 0.7;
-        }
-
-        .is-changing .swup-transition-slide {
-            transform: translateY(-20px);
-        }
-
-        .is-changing .swup-transition-scale {
-            transform: scale(0.98);
-            opacity: 0.8;
-        }
-
-        /* WordPress admin bar compatibility */
-        .has-admin-bar .swup-progress-bar {
-            top: 32px;
-        }
-
-        @media screen and (max-width: 782px) {
-            .has-admin-bar .swup-progress-bar {
-                top: 46px;
-            }
-        }
-    `;
-
-    document.head.appendChild(style);
+    // Transition styles are now handled in CSS for better performance
+    // This function can be used for dynamic transition adjustments if needed
+    console.log('Swup transition styles loaded from CSS modules');
 }

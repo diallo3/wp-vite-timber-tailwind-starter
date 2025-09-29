@@ -2,7 +2,8 @@
 
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
-@import "./modules/css/modules-utilities.css";
+@import "./modules/css/modules-utilities.css" layer(utilities);
+@import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
@@ -11,6 +12,16 @@
 
 @theme {
   --color-wordpress-blue: #0d99d5;
+  --color-blue-wordpress: #0d99d5;
+
+  /* Enhanced responsive design tokens */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
 }
 
 /*
@@ -30,71 +41,64 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  /* Enhanced fluid typography system */
   :root {
-    --text-fluid-xs: clamp(0.75rem, 1.2vw, 0.875rem); /* 12px → 14px */
-    --text-fluid-sm: clamp(0.875rem, 1.5vw, 1rem); /* 14px → 16px */
-    --text-fluid-base: clamp(1rem, 1.8vw, 1.125rem); /* 16px → 18px */
-    --text-fluid-lg: clamp(1.125rem, 2vw, 1.25rem); /* 18px → 20px */
-    --text-fluid-xl: clamp(1.25rem, 2.5vw, 1.5rem); /* 20px → 24px */
-    --text-fluid-2xl: clamp(1.5rem, 3vw, 1.875rem); /* 24px → 30px */
-    --text-fluid-3xl: clamp(1.875rem, 4vw, 2.25rem); /* 30px → 36px */
-    --text-fluid-4xl: clamp(2.25rem, 5vw, 2.5rem); /* 36px → 40px */
-    --text-fluid-5xl: clamp(3rem, 6vw, 3.5rem); /* 48px → 56px */
-    --text-fluid-6xl: clamp(3.75rem, 7vw, 4rem); /* 60px → 64px */
-    --text-fluid-7xl: clamp(4.5rem, 8vw, 5rem); /* 72px → 80px */
-    --text-fluid-8xl: clamp(6rem, 10vw, 6.5rem); /* 96px → 104px */
-    --text-fluid-9xl: clamp(8rem, 12vw, 8.5rem); /* 128px → 136px */
+    /* Refined fluid typography with better viewport scaling */
+    --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); /* 12px → 14px */
+    --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem); /* 14px → 16px */
+    --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* 16px → 18px */
+    --text-fluid-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem); /* 18px → 20px */
+    --text-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem); /* 20px → 24px */
+    --text-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem); /* 24px → 30px */
+    --text-fluid-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem); /* 30px → 36px */
+    --text-fluid-4xl: clamp(2.25rem, 2rem + 1.25vw, 2.75rem); /* 36px → 44px */
+    --text-fluid-5xl: clamp(2.75rem, 2.4rem + 1.75vw, 3.5rem); /* 44px → 56px */
+    --text-fluid-6xl: clamp(3.5rem, 3rem + 2.5vw, 4.25rem); /* 56px → 68px */
+    --text-fluid-7xl: clamp(4.25rem, 3.7rem + 2.75vw, 5.25rem); /* 68px → 84px */
+    --text-fluid-8xl: clamp(5.25rem, 4.5rem + 3.75vw, 7rem); /* 84px → 112px */
+    --text-fluid-9xl: clamp(7rem, 6rem + 5vw, 9rem); /* 112px → 144px */
+
+    /* Fluid line heights for better typography */
+    --leading-fluid-tight: clamp(1.1, 1.05 + 0.25vw, 1.25);
+    --leading-fluid-snug: clamp(1.2, 1.15 + 0.25vw, 1.35);
+    --leading-fluid-normal: clamp(1.4, 1.35 + 0.25vw, 1.55);
+    --leading-fluid-relaxed: clamp(1.5, 1.45 + 0.25vw, 1.65);
+
+    /* Fluid spacing system */
+    --space-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+    --space-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
+    --space-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    --space-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    --space-fluid-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+    --space-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
   }
 
-  .fluid-text-xs {
-    font-size: var(--text-fluid-xs);
-  }
+  /* Fluid typography utilities */
+  .fluid-text-xs { font-size: var(--text-fluid-xs); }
+  .fluid-text-sm { font-size: var(--text-fluid-sm); }
+  .fluid-text-base { font-size: var(--text-fluid-base); }
+  .fluid-text-lg { font-size: var(--text-fluid-lg); }
+  .fluid-text-xl { font-size: var(--text-fluid-xl); }
+  .fluid-text-2xl { font-size: var(--text-fluid-2xl); }
+  .fluid-text-3xl { font-size: var(--text-fluid-3xl); }
+  .fluid-text-4xl { font-size: var(--text-fluid-4xl); }
+  .fluid-text-5xl { font-size: var(--text-fluid-5xl); }
+  .fluid-text-6xl { font-size: var(--text-fluid-6xl); }
+  .fluid-text-7xl { font-size: var(--text-fluid-7xl); }
+  .fluid-text-8xl { font-size: var(--text-fluid-8xl); }
+  .fluid-text-9xl { font-size: var(--text-fluid-9xl); }
 
-  .fluid-text-sm {
-    font-size: var(--text-fluid-sm);
-  }
+  /* Fluid line height utilities */
+  .leading-fluid-tight { line-height: var(--leading-fluid-tight); }
+  .leading-fluid-snug { line-height: var(--leading-fluid-snug); }
+  .leading-fluid-normal { line-height: var(--leading-fluid-normal); }
+  .leading-fluid-relaxed { line-height: var(--leading-fluid-relaxed); }
 
-  .fluid-text-base {
-    font-size: var(--text-fluid-base);
-  }
-
-  .fluid-text-lg {
-    font-size: var(--text-fluid-lg);
-  }
-
-  .fluid-text-xl {
-    font-size: var(--text-fluid-xl);
-  }
-
-  .fluid-text-2xl {
-    font-size: var(--text-fluid-2xl);
-  }
-
-  .fluid-text-3xl {
-    font-size: var(--text-fluid-3xl);
-  }
-
-  .fluid-text-4xl {
-    font-size: var(--text-fluid-4xl);
-  }
-
-  .fluid-text-5xl {
-    font-size: var(--text-fluid-5xl);
-  }
-
-  .fluid-text-6xl {
-    font-size: var(--text-fluid-6xl);
-  }
-
-  .fluid-text-7xl {
-    font-size: var(--text-fluid-7xl);
-  }
-
-  .fluid-text-8xl {
-    font-size: var(--text-fluid-8xl);
-  }
-
-  .fluid-text-9xl {
-    font-size: var(--text-fluid-9xl);
-  }
+  /* Fluid spacing utilities */
+  .space-fluid-xs { margin: var(--space-fluid-xs); }
+  .space-fluid-sm { margin: var(--space-fluid-sm); }
+  .space-fluid-md { margin: var(--space-fluid-md); }
+  .space-fluid-lg { margin: var(--space-fluid-lg); }
+  .space-fluid-xl { margin: var(--space-fluid-xl); }
+  .space-fluid-2xl { margin: var(--space-fluid-2xl); }
 }

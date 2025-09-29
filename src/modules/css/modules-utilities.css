@@ -1,42 +1,44 @@
-:root {
-  --broken-image-color: #f9f9f9;
+/* Modern Swup transitions - integrated with our module-swup.js */
+@utility swup-transition-fade {
+  transition: opacity 0.3s ease-in-out;
 }
 
-[x-cloak] {
-    display: none !important;
-  }
-
-.admin-bar {
-    .site-header, .site-header__mobile-nav {
-      top: 32px;
-    }
+@utility swup-transition-slide {
+  transition: transform 0.4s ease-in-out;
 }
 
+@utility swup-transition-scale {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Loading state styles */
 @utility is-changing {
-  /* SWUG Define a transition duration during page visits */
-  &html .transition-fade {
-    transition: opacity 0.25s;
-    opacity: 1;
+  pointer-events: none;
+
+  .swup-transition-fade {
+    opacity: 0.7;
+  }
+
+  .swup-transition-slide {
+    transform: translateY(-20px);
+  }
+
+  .swup-transition-scale {
+    transform: scale(0.98);
+    opacity: 0.8;
   }
 }
 
-@utility transition-fade {
-  /* SWUG Define a transition duration during page visits */
-  html.is-changing & {
-    transition: opacity 0.25s;
-    opacity: 1;
+/* WordPress admin bar compatibility */
+@utility has-admin-bar {
+  .swup-progress-bar {
+    top: 32px;
   }
 
-  /* Define the styles for the unloaded pages */
-  html.is-animating & {
-    opacity: 0;
-  }
-}
-
-@utility is-animating {
-  /* Define the styles for the unloaded pages */
-  &html .transition-fade {
-    opacity: 0;
+  @media screen and (max-width: 782px) {
+    .swup-progress-bar {
+      top: 46px;
+    }
   }
 }
 
