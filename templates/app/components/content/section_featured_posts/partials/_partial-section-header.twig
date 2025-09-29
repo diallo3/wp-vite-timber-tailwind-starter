@@ -11,7 +11,7 @@
 
     {% if has_title and title %}
         <hgroup class="section-component-header-simple__title">
-            {{ headings.render_heading_two({
+            {{ headings.render_heading(2,{
                 title: title,
                 size: 'text-xl md:text-2xl lg:fluid-text-4xl',
                 preview: is_preview

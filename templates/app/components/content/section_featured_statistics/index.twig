@@ -2,65 +2,65 @@
     section_id_name: 'section-featured-statistics',
     section_class_name: 'section-featured-statistics',
 } %}
-    {% block component_content %}
-        {% import "@Elements/_macro-icon.twig" as icons %}
-        {% import "@Elements/_macro-heading.twig" as headings %}
-        {% import "@Elements/_macro-badge.twig" as badges %}
-        {% import "@Elements/_macro-image-object.twig" as images %}
-        {% import "@Elements/_macro-button.twig" as buttons %}
+	{% block component_content %}
+		{% import "@Elements/_macro-icon.twig" as icons %}
+		{% import "@Elements/_macro-heading.twig" as headings %}
+		{% import "@Elements/_macro-badge.twig" as badges %}
+		{% import "@Elements/_macro-image-object.twig" as images %}
+		{% import "@Elements/_macro-button.twig" as buttons %}
 
-        <script>console.log({{ component | json_encode | raw }})</script>
+		<script>
+			console.log({{ component | json_encode | raw }})
+		</script>
 
-        {% set accent = component.accent %}
-        {% set title = component.title %}
-        {% set sub_title = component.sub_title %}
-        {% set entry = component.entry %}
-        {% set stats = component.stats %}
+		{% set accent = component.accent %}
+		{% set title = component.title %}
+		{% set sub_title = component.sub_title %}
+		{% set entry = component.entry %}
+		{% set stats = component.stats %}
 
-        <div class="max-w-2xl mx-auto lg:max-w-none">
+		<div class="max-w-2xl mx-auto lg:max-w-none">
 			<div class="text-center section-featured-statistics__header">
-                {% if accent %}
-                    {{ badges.render_accent_badge({
+				{% if accent %}
+					{{ badges.render_accent_badge({
                         title: accent,
                         class: 'section-entry__accent',
                     })}}
-                {% endif %}
+				{% endif %}
 
-                <hgroup class="space-y-2 section-featured-statistics__title">
-                    {{ headings.render_heading_two({
+				<hgroup class="space-y-2 section-featured-statistics__title">
+					{{ headings.render_heading(2,{
                         title: title,
                     }) }}
 
-                    {% if sub_title %}
-                        {{ headings.render_heading_three({
+					{% if sub_title %}
+						{{ headings.render_heading(3,{
                             title: sub_title,
                         }) }}
-                    {% endif %}
-                </hgroup>
+					{% endif %}
+				</hgroup>
 
-                {% if entry %}
-                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                        {% block prose_content %}
-                            {{ entry }}
-                        {% endblock %}
-                    {% endembed %}
-                {% endif %}
-				
+				{% if entry %}
+					{% embed "@Layouts/prose/_embed-prose-section.twig" %}
+						{% block prose_content %}
+							{{ entry }}
+						{% endblock %}
+					{% endembed %}
+				{% endif %}
+
 			</div>
 
-            <div class="px-6 mx-auto max-w-7xl lg:px-8">
-                <dl class="grid grid-cols-1 text-center gap-x-8 gap-y-16 lg:grid-cols-3 section-featured-statistics__items">
-                    {% for item in stats %}
-                        <div id="stat-list-{{ loop.index }}" class="flex flex-col p-8 inview-item">
-                            <dt class="mx-auto text-base leading-7 text-center text-gray-600 lg:max-w-44">{{ item.entry }}</dt>
-                            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ item.stat }}{{ item.caret }}</dd>
-                        </div>
-                    {% endfor %}
-                </dl>
-            </div>
+			<div class="px-6 mx-auto max-w-7xl lg:px-8">
+				<dl class="grid grid-cols-1 text-center gap-x-8 gap-y-16 lg:grid-cols-3 section-featured-statistics__items">
+					{% for item in stats %}
+						<div id="stat-list-{{ loop.index }}" class="flex flex-col p-8 inview-item">
+							<dt class="mx-auto text-base leading-7 text-center text-gray-600 lg:max-w-44">{{ item.entry }}</dt>
+							<dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ item.stat }}{{ item.caret }}</dd>
+						</div>
+					{% endfor %}
+				</dl>
+			</div>
 		</div>
 
-    {% endblock %}
+	{% endblock %}
 {% endembed %}
-
-

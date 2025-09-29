@@ -29,7 +29,7 @@
 
             {% if has_title and title %}
                 <div class="inview-item text-pretty dark:text-white">
-                    {{ headings.render_heading_two({
+                    {{ headings.render_heading(2, {
                         title: title,
                         size: 'text-3xl sm:fluid-text-5xl',
                         preview: is_preview

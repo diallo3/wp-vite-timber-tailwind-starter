@@ -1,0 +1,55 @@
+{# Base template that automatically imports all UI macros #}
+
+{# Import all element macros automatically #}
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+{% import "@Elements/_macro-card.twig" as cards %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="wordpress">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    {{ function('wp_head') }}
+</head>
+<body {{ body_class }}>
+
+    <div id="swup" class="swup-transition-fade">
+        {% block header %}
+            {# Header content with access to all macros #}
+        {% endblock %}
+
+        <main role="main">
+            {% block content %}
+                {# Your content here - all macros are available #}
+                {#
+                Example usage in child templates:
+                {{ headings.render_heading(1, { title: page.title }) }}
+                {{ cards.simple_card({ title: 'Card', content: 'Content' }) }}
+                #}
+            {% endblock %}
+        </main>
+
+        {% block footer %}
+            {# Footer content with access to all macros #}
+        {% endblock %}
+    </div>
+
+    {{ function('wp_footer') }}
+</body>
+</html>
+
+{#
+Child templates extend this and automatically have access to all macros:
+
+{% extends "@Layouts/_base-with-macros.twig" %}
+
+{% block content %}
+    {{ headings.render_heading(1, { title: 'Page Title' }) }}
+    {{ cards.simple_card({ title: 'My Card', content: 'Card content...' }) }}
+{% endblock %}
+#}

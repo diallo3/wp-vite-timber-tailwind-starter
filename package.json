@@ -28,6 +28,7 @@
 		"@iconify/tailwind": "^1.1.3",
 		"@tailwindcss/postcss": "^4.0.0",
 		"@tailwindcss/typography": "^0.5.16",
+		"daisyui": "^5.1.25",
 		"dotenv": "latest",
 		"postcss": "^8.4.39",
 		"sass": "latest",

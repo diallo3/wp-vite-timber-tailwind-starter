@@ -29,7 +29,7 @@
 
                     {% if has_title and title %}
                         <div class="tracking-tight inview-item text-pretty dark:text-white">
-                            {{ headings.render_heading_two({
+                            {{ headings.render_heading(2,{
                                 title: title,
                                 size: 'text-3xl sm:fluid-text-4xl',
                                 weight: 'font-bold',
@@ -74,7 +74,7 @@
                                         width="100%">
                                     </iconify-icon>
                                 </span>
-                                {{ headings.render_heading_three({
+                                {{ headings.render_heading(3,{
                                     title: item.title,
                                     size: 'text-xl lg:text-2xl tracking-tight',
                                     color: 'text-graay-500 dark:text-cyan-400',
