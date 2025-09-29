@@ -9,7 +9,7 @@ if (import.meta.hot) {
 import 'iconify-icon';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeHeadroom } from './modules/js/module-headroom';
-import { initializeSwup } from './modules/js/module-swup';
+import { initializeSwup, createSwupTransitions } from './modules/js/module-swup';
 import { navHeader, generalInView, scrollAnimations } from './modules/js/module-motionOne';
 
 // Styles
@@ -24,12 +24,23 @@ import.meta.glob([
 // Initialize modules when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        // Initialize transition styles first
+        createSwupTransitions();
+
+        // Initialize core modules
         initializeAlpine();
         initializeHeadroom();
         initializeSwup();
+
+        // Initialize animations
         navHeader();
         generalInView();
         scrollAnimations();
+
+        // Store animation functions globally for Swup re-initialization
+        window.generalInView = generalInView;
+        window.scrollAnimations = scrollAnimations;
+
     } catch (error) {
         console.warn('Failed to initialize some modules:', error);
     }

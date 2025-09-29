@@ -105,3 +105,109 @@ PHP functions are documented with DocBlocks and located primarily in:
 - `lib/functions/lib-vite.php` - Vite asset management
 
 This theme is optimized for medium-to-large sites requiring both custom blocks for content editors and flexible templating for developers.
+
+## Advanced JavaScript Module Integration
+
+### Swup Page Transitions (WordPress-Specific Implementation)
+
+Implementing Swup in WordPress requires careful consideration of WordPress-specific features and potential conflicts. The `src/modules/js/module-swup.js` contains a comprehensive WordPress-optimized implementation.
+
+**Critical WordPress Considerations:**
+
+1. **Admin/Customizer Detection**: Swup must be disabled in WordPress admin areas and customizer to prevent conflicts:
+   ```javascript
+   // Check if Swup should be disabled
+   if (document.body.classList.contains('wp-admin') ||
+       document.body.classList.contains('customize-support')) {
+       return;
+   }
+   ```
+
+2. **Container Selectors**: WordPress themes use various main content containers:
+   ```javascript
+   containers: ['#swup', '#main', 'main', '.site-main']
+   ```
+
+3. **Link Exclusions**: WordPress-specific links must be excluded from Swup:
+   ```javascript
+   linkSelector: 'a[href]:not([data-no-swup]):not([href^="#"]):not([href*="wp-admin"]):not([href*="wp-login"]):not([target="_blank"]):not([download])'
+   ```
+
+**Module Re-initialization After Transitions:**
+
+WordPress sites with complex JavaScript need module re-initialization after each page transition:
+
+- **Alpine.js**: `window.Alpine.initTree(document.body)` - Re-scans for new Alpine components
+- **Motion Animations**: Re-run `generalInView()` and `scrollAnimations()` for new page content
+- **Headroom.js**: Re-initialize header behavior for new pages
+- **WordPress Forms**: Handle Contact Form 7 and Gravity Forms re-initialization
+
+**WordPress Plugin Integration:**
+
+The implementation includes specific handlers for common WordPress plugins:
+
+```javascript
+// Contact Form 7 re-initialization
+if (window.wpcf7) {
+    const forms = document.querySelectorAll('.wpcf7 > form');
+    forms.forEach(form => {
+        if (window.wpcf7.initForm) {
+            window.wpcf7.initForm(form);
+        }
+    });
+}
+```
+
+**Page Class Management:**
+
+WordPress relies heavily on body classes for styling. The implementation maintains these:
+
+```javascript
+// Remove old page classes and add new ones based on URL
+document.body.className = document.body.className
+    .replace(/page-id-\d+/g, '')
+    .replace(/page-template-[\w-]+/g, '')
+    .replace(/postid-\d+/g, '');
+```
+
+**Transition Animations:**
+
+Custom CSS classes provide smooth transitions:
+- `.swup-transition-fade` - Simple opacity transitions
+- `.swup-transition-slide` - Transform-based sliding
+- `.swup-transition-scale` - Scale + opacity effects
+- `.is-changing` - Loading state management
+
+**Usage in Templates:**
+
+Add transition classes to main content containers:
+```html
+<main id="main" class="swup-transition-fade">
+    <!-- Page content -->
+</main>
+```
+
+Disable Swup on specific links:
+```html
+<a href="/special-page" data-no-swup>No Transition Link</a>
+```
+
+**Performance Considerations:**
+
+- Caching is enabled for faster subsequent loads
+- Animation functions are stored globally for efficient re-use
+- Error handling prevents JavaScript failures from breaking navigation
+- WordPress customizer events are properly triggered
+
+**Testing Checklist for Swup Implementation:**
+
+1. ✅ Admin area navigation works normally (no Swup interference)
+2. ✅ WordPress customizer functions properly
+3. ✅ Contact forms submit correctly after transitions
+4. ✅ Alpine.js components initialize on new pages
+5. ✅ Motion animations trigger on new content
+6. ✅ Header behavior (Headroom) works across transitions
+7. ✅ Page-specific CSS classes are maintained
+8. ✅ WordPress admin bar positioning remains correct
+
+This implementation represents a production-ready WordPress Swup integration that handles the complexities of WordPress's ecosystem while providing smooth page transitions.
