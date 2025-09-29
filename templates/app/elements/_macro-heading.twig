@@ -1,136 +1,3 @@
-{% macro render_heading_display(options={}) %}
-    {% set options = {
-        title: 'Heading Display',
-        color: 'text-white',
-        font: font | default('font-sans'),
-        size: size | default('fluid-text-6xl'),
-        weight: weight | default('font-semibold'),
-        case: case,
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight  %}
-
-    {% if is_preview %}
-        <div class="{{ headingOptions }} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h1 class="{{ headingOptions }} font-bold">{{ options.title }}</h1>
-    {% endif %}
-
-    
-{% endmacro %}
-
-{# Heading One #}
-{% macro render_heading_one(options=[]) %}
-
-    {% set options = {
-        title: 'Heading One',
-        color: color ?: currentColor,
-        font: font | default('font-sans'),
-        size: size | default('fluid-text-5xl'),
-        weight: weight | default('font-semibold'),
-        case: case,
-        preview: ''
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
-
-    {% if options.preview %}
-        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h1 class="{{headingOptions}} font-bold">{{ options.title }}</h1>
-    {% endif %}
-
-{% endmacro %}
-
-{# Heading Two #}
-{% macro render_heading_two(options={}) %}
-
-    {% set options = {
-        title: 'Heading Two',
-        color: color ?: currentColor,
-        font: font | default('font-sans'),
-        size: size ?? 'fluid-text-xl/snug',
-        weight: weight | default('font-semibold'),
-        case: case,
-        preview: ''
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
-
-    {% if options.preview %}
-        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h2 class="{{headingOptions}} font-bold">{{ options.title }}</h2>
-    {% endif %}
-    
-{% endmacro %}
-
-{# Heading Three #}
-{% macro render_heading_three(options={}) %}
-
-    {% set options = {
-        title: 'Heading Three',
-        color: color ?: currentColor,
-        font: font | default('font-sans'),
-        size: size | default('fluid-text-lg/snug'),
-        weight: weight | default('font-semibold'),
-        case: case
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
-
-    {% if options.preview %}
-        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h3 class="{{headingOptions}} font-bold">{{ options.title }}</h3>
-    {% endif %}
-
-{% endmacro %}
-
-{# Heading four #}
-{% macro render_heading_four(options={}) %}
-
-    {% set options = {
-        title: 'Heading Four',
-        color: 'text-white',
-        font: font | default('font-sans'),
-        size: size | default('fluid-text-xl'),
-        weight: weight | default('font-semibold'),
-        case: case
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
-
-    {% if options.preview %}
-        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h4 class="{{headingOptions}} font-bold">{{ options.title }}</h4>
-    {% endif %}
-
-{% endmacro %}
-
-{% macro render_heading_five(options={}) %}
-
-    {% set options = {
-        title: 'Heading Five',
-        color: 'text-white',
-        font: font | default('font-sans'),
-        size: size | default('fluid-text-lg'),
-        weight: weight | default('font-semibold'),
-        case: case
-    } | merge(options)  %}
-
-    {% set headingOptions = options.color ~ ' ' ~ options.size ~ ' ' ~ options.case ~ ' ' ~ options.font ~ ' ' ~ options.weight %}
-
-    {% if options.preview %}
-        <div class="{{headingOptions}} font-bold">{{ options.title }}</div>
-    {% else %}
-        <h5 class="{{headingOptions}} font-bold">{{ options.title }}</h5>
-    {% endif %}
-
-{% endmacro %}
-
-
 {# Main Heading #}
 {% macro render_heading(level = 1, options = {}) %}
     {# Validate heading level #}
@@ -175,19 +42,12 @@
         {% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value ~ '"' %}
     {% endfor %}
 
-    {% if options.preview %}
-        <div 
-            class="{{ headingOptions }}"
-            {% if options.id %}id="{{ options.id }}"{% endif %}
-            {{ attributes|raw }}
-        >{{ options.title }}</div>
-    {% else %}
-        <h{{ level }} 
-            class="{{ headingOptions }}"
-            {% if options.id %}id="{{ options.id }}"{% endif %}
-            {{ attributes|raw }}
-        >{{ options.title }}</h{{ level }}>
-    {% endif %}
+    <h{{ level }} 
+        id="{{ options.id }}"
+        class="{{ headingOptions }}"
+        {{ attributes|raw }}>
+            {{ options.title }}
+    </h{{ level }}>
 {% endmacro %}
 
 {# Heading Usage 
