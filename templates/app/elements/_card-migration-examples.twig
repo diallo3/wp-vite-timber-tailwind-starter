@@ -1,0 +1,271 @@
+{# Card Migration Examples #}
+{#
+This file shows how to convert existing card components to use the new unified macro.
+Delete this file after migration is complete.
+#}
+
+{% import "@Elements/_macro-card.twig" as cards %}
+
+{# ========================
+   SIMPLE CARD MIGRATION
+   ======================== #}
+
+{# OLD: Using _component-card-simple.twig #}
+{#
+{% include "@Components/cards/_component-card-simple.twig" with {
+    id: 'card-1',
+    title: 'Card Title',
+    entry: 'Card content...',
+    image: image_object,
+    accent: 'New',
+    link: '/read-more',
+    clamp: 'line-clamp-3'
+} %}
+#}
+
+{# NEW: Using unified card macro #}
+{{ cards.simple_card({
+    id: 'card-1',
+    title: 'Card Title',
+    content: 'Card content...',
+    image: {
+        src: image_object.src,
+        alt: image_object.alt
+    },
+    badge: 'New',
+    link: '/read-more',
+    class: 'line-clamp-3'
+}) }}
+
+
+{# ========================
+   POST CARD MIGRATION
+   ======================== #}
+
+{# OLD: Using _component-card-post.twig #}
+{#
+{% include "@Components/cards/_component-card-post.twig" with {
+    post: post
+} %}
+#}
+
+{# NEW: Using unified card macro #}
+{{ cards.post_card({
+    id: 'post-' ~ post.ID,
+    title: post.title,
+    excerpt: post.excerpt,
+    image: {
+        src: post.thumbnail.src,
+        alt: post.thumbnail.alt
+    },
+    link: post.link,
+    meta: {
+        video_post: post.terms[1].slug is same as 'video',
+        video_url: post.meta('video_url'),
+        referral_link: post.meta('referral_link')
+    }
+}) }}
+
+
+{# ========================
+   CUSTOMER STORY MIGRATION
+   ======================== #}
+
+{# OLD: Using _component-card-customer-story.twig #}
+{#
+{% include "@Components/cards/_component-card-customer-story.twig" with {
+    id: story.id,
+    title: story.title,
+    entry: story.excerpt,
+    thumbnail: story.logo,
+    link: story.url,
+    cta: story.cta
+} %}
+#}
+
+{# NEW: Using unified card macro #}
+{{ cards.customer_story_card({
+    id: story.id,
+    title: story.title,
+    content: story.excerpt,
+    thumbnail: {
+        src: story.logo.src,
+        alt: story.logo.alt
+    },
+    link: story.url,
+    button: {
+        text: 'Read Success Story',
+        url: story.cta.link.url,
+        style: 'outline',
+        size: 'small',
+        class: 'text-blue-600 border-blue-600'
+    }
+}) }}
+
+
+{# ========================
+   TEAM CARD MIGRATION
+   ======================== #}
+
+{# OLD: Using _component-card-team-default.twig #}
+{#
+{% include "@Components/cards/teams/_component-card-team-default.twig" with {
+    id: member.id,
+    title: member.name,
+    position: member.position,
+    profile: member.image,
+    social: member.linkedin,
+    theme: theme
+} %}
+#}
+
+{# NEW: Using unified card macro #}
+{{ cards.team_card({
+    id: 'team-member-' ~ member.id,
+    title: member.name,
+    image: {
+        src: member.image.url,
+        alt: member.image.alt
+    },
+    meta: {
+        position: member.position,
+        social: member.linkedin
+    },
+    theme: theme
+}) }}
+
+
+{# ========================
+   TESTIMONIAL MIGRATION
+   ======================== #}
+
+{# OLD: Using _component-card-testimonial-boxed.twig #}
+{#
+{% include "@Components/cards/testimonials/_component-card-testimonial-boxed.twig" with {
+    quote: testimonial.quote,
+    name: testimonial.author,
+    position: testimonial.position
+} %}
+#}
+
+{# NEW: Using unified card macro #}
+{{ cards.testimonial_card({
+    id: 'testimonial-' ~ loop.index,
+    content: testimonial.quote,
+    title: testimonial.author,
+    meta: {
+        position: testimonial.position
+    }
+}) }}
+
+
+{# ========================
+   DAISYUI CARD (NEW)
+   ======================== #}
+
+{# NEW: Using DaisyUI-styled card #}
+{{ cards.daisyui_card({
+    title: 'DaisyUI Card',
+    content: 'This card uses DaisyUI classes for consistent styling.',
+    image: {
+        src: 'image.jpg',
+        alt: 'Card image'
+    },
+    button: {
+        text: 'Action'
+    }
+}) }}
+
+
+{# ========================
+   BULK REPLACEMENT EXAMPLES
+   ======================== #}
+
+{# Example: Converting a loop of cards #}
+
+{# OLD WAY #}
+{#
+{% for post in posts %}
+    {% include "@Components/cards/_component-card-post.twig" with {
+        post: post
+    } %}
+{% endfor %}
+#}
+
+{# NEW WAY #}
+{% for post in posts %}
+    {{ cards.post_card({
+        id: 'post-' ~ post.ID,
+        title: post.title,
+        excerpt: post.excerpt,
+        image: {
+            src: post.thumbnail.src | towebp,
+            alt: post.thumbnail.alt
+        },
+        link: post.link,
+        meta: {
+            video_post: post.terms[1].slug is same as 'video',
+            video_url: post.meta('video_url'),
+            referral_link: post.meta('referral_link')
+        }
+    }) }}
+{% endfor %}
+
+
+{# ========================
+   ADVANCED CUSTOMIZATION
+   ======================== #}
+
+{# Custom card with additional attributes and classes #}
+{{ cards.simple_card({
+    title: 'Advanced Card',
+    content: 'This card has custom styling and attributes.',
+    image: { src: 'image.jpg', alt: 'Custom image' },
+    link: '/custom-link',
+    class: 'hover:shadow-lg transform hover:scale-105 transition-all duration-300',
+    attributes: {
+        'data-card-type': 'featured',
+        'data-analytics': 'track-click'
+    },
+    button: {
+        text: 'Custom Action',
+        style: 'solid',
+        class: 'btn-primary'
+    }
+}) }}
+
+
+{# ========================
+   SEARCH & REPLACE PATTERNS
+   ======================== #}
+
+{#
+To migrate your templates, use these search & replace patterns:
+
+1. Simple cards:
+   FIND: {% include "@Components/cards/_component-card-simple.twig" with {
+   REPLACE: {{ cards.simple_card({
+
+2. Post cards:
+   FIND: {% include "@Components/cards/_component-card-post.twig" with {
+   REPLACE: {{ cards.post_card({
+
+3. Customer story cards:
+   FIND: {% include "@Components/cards/_component-card-customer-story.twig" with {
+   REPLACE: {{ cards.customer_story_card({
+
+4. Team cards:
+   FIND: {% include "@Components/cards/teams/_component-card-team-default.twig" with {
+   REPLACE: {{ cards.team_card({
+
+5. Testimonial cards:
+   FIND: {% include "@Components/cards/testimonials/_component-card-testimonial-boxed.twig" with {
+   REPLACE: {{ cards.testimonial_card({
+
+6. Close includes:
+   FIND: } %}
+   REPLACE: }) }}
+
+Don't forget to add the import at the top of your templates:
+{% import "@Elements/_macro-card.twig" as cards %}
+#}

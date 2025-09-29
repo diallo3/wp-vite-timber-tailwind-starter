@@ -1,0 +1,80 @@
+{# Master Elements Macro - Import all element macros in one place #}
+
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+{% import "@Elements/_macro-card.twig" as cards %}
+
+{# Re-export all icon functions #}
+{% macro icon(name, classes = '') %}
+    {{ icons.icon(name, classes) }}
+{% endmacro %}
+
+{# Re-export all heading functions #}
+{% macro render_heading(level = 1, options = {}) %}
+    {{ headings.render_heading(level, options) }}
+{% endmacro %}
+
+{# Re-export all badge functions #}
+{% macro render_accent_badge(options = {}) %}
+    {{ badges.render_accent_badge(options) }}
+{% endmacro %}
+
+{% macro render_badge(options = {}) %}
+    {{ badges.render_badge(options) }}
+{% endmacro %}
+
+{# Re-export all image functions #}
+{% macro render_image(options = {}) %}
+    {{ images.render_image(options) }}
+{% endmacro %}
+
+{# Re-export all button functions #}
+{% macro render_button_link(options = {}) %}
+    {{ buttons.render_button_link(options) }}
+{% endmacro %}
+
+{% macro render_button(options = {}) %}
+    {{ buttons.render_button(options) }}
+{% endmacro %}
+
+{# Re-export all card functions #}
+{% macro render_card(type = 'simple', options = {}) %}
+    {{ cards.render_card(type, options) }}
+{% endmacro %}
+
+{% macro simple_card(options = {}) %}
+    {{ cards.simple_card(options) }}
+{% endmacro %}
+
+{% macro post_card(options = {}) %}
+    {{ cards.post_card(options) }}
+{% endmacro %}
+
+{% macro customer_story_card(options = {}) %}
+    {{ cards.customer_story_card(options) }}
+{% endmacro %}
+
+{% macro team_card(options = {}) %}
+    {{ cards.team_card(options) }}
+{% endmacro %}
+
+{% macro testimonial_card(options = {}) %}
+    {{ cards.testimonial_card(options) }}
+{% endmacro %}
+
+{% macro daisyui_card(options = {}) %}
+    {{ cards.daisyui_card(options) }}
+{% endmacro %}
+
+{#
+Usage: Import once, access everything
+{% import "@Elements/_macro-elements.twig" as ui %}
+
+{{ ui.render_heading(1, { title: 'Main Title' }) }}
+{{ ui.render_badge({ title: 'New' }) }}
+{{ ui.simple_card({ title: 'Card Title', content: 'Content...' }) }}
+{{ ui.render_button_link({ text: 'Click Me', link: '/action' }) }}
+#}

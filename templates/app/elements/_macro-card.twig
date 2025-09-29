@@ -1,0 +1,412 @@
+{# Unified Card Macro - Consolidates all card variations #}
+{# Using master elements import for cleaner code #}
+{% import "@Elements/_macro-elements.twig" as ui %}
+
+{#
+  Unified Card Macro
+
+  Supports all card variants:
+  - simple: Basic content card
+  - post: WordPress post card
+  - customer-story: Customer/case study card
+  - team: Team member card
+  - testimonial: Quote/testimonial card
+
+  Parameters:
+  - type: string (simple|post|customer-story|team|testimonial) [default: 'simple']
+  - id: string - Unique identifier
+  - title: string - Card title
+  - content/entry: string - Main content
+  - excerpt: string - Short description (for posts)
+  - image: object - Main image {src, alt, class}
+  - thumbnail: object - Alternative image format
+  - badge/accent: string - Badge/accent text
+  - link: string - Card link URL
+  - button: object - Button configuration {text, url, style, size, class}
+  - meta: object - Additional metadata
+  - class: string - Additional CSS classes
+  - attributes: object - Additional HTML attributes
+  - is_preview: boolean - Preview mode flag
+#}
+
+{% macro render_card(type = 'simple', options = {}) %}
+    {% set defaults = {
+        id: random(),
+        title: '',
+        content: '',
+        entry: '',
+        excerpt: '',
+        image: null,
+        thumbnail: null,
+        badge: '',
+        accent: '',
+        link: '#',
+        button: {
+            text: 'Read More',
+            url: null,
+            style: 'outline',
+            size: 'small',
+            class: ''
+        },
+        meta: {},
+        class: '',
+        attributes: {},
+        is_preview: false,
+        theme: null
+    } %}
+
+    {% set config = defaults | merge(options) %}
+    {% set card_id = config.id %}
+    {% set card_class = 'card card-' ~ type ~ ' ' ~ config.class %}
+
+    {# Simple Card #}
+    {% if type == 'simple' %}
+        <article id="{{ card_id }}" class="{{ card_class }} relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm text-pretty size-full"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            {% if config.image %}
+                <figure class="aspect-16/7 card-simple__featured">
+                    {{ images.render_image({
+                        src: config.image.src ?: (config.theme ? config.theme.link ~ '/dist/icons/defaults/icon-temp-image.svg' : ''),
+                        alt: config.image.alt ?: config.title,
+                        class: config.image.class ?: ''
+                    }) }}
+                </figure>
+            {% endif %}
+
+            <div class="flex flex-col gap-2 p-5 pb-2.5 card-simple__body">
+                <div class="card-simple__header lg:min-h-12">
+                    <hgroup class="block space-y-2 text-balance">
+                        {% if config.badge or config.accent %}
+                            {{ badges.render_accent_badge({
+                                title: config.badge ?: config.accent,
+                                color: 'text-blue-600 dark:text-cyan-400'
+                            }) }}
+                        {% endif %}
+
+                        {% if config.title %}
+                            <div class="pe-8">
+                                {{ headings.render_heading(3, {
+                                    title: config.title,
+                                    size: 'text-lg md:text-xl lg:text-2xl/7 line-clamp-2 tracking-tight',
+                                    weight: 'font-bold',
+                                    preview: config.is_preview
+                                }) }}
+                            </div>
+                        {% endif %}
+                    </hgroup>
+                </div>
+
+                {% if config.content or config.entry %}
+                    <div class="prose-sm prose card-simple__entry prose-p:leading-5">
+                        {{ config.content ?: config.entry }}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if config.button.text and (config.button.url or config.link) %}
+                <div class="absolute inset-x-0 bottom-0 w-full p-5 card-simple__footer">
+                    {{ buttons.render_button_link({
+                        text: config.button.text,
+                        link: config.button.url ?: config.link,
+                        style: config.button.style,
+                        size: config.button.size,
+                        class: config.button.class
+                    }) }}
+                </div>
+            {% endif %}
+        </article>
+
+    {# Post Card #}
+    {% elseif type == 'post' %}
+        {% set video_post = config.meta.video_post ?: false %}
+        {% set video_url = config.meta.video_url ?: '' %}
+        {% set referral_link = config.meta.referral_link ?: '' %}
+
+        <article id="{{ card_id }}" class="{{ card_class }} relative flex flex-col items-start h-full gap-4 overflow-hidden bg-white border rounded-md shadow-sm"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            {% if config.image or config.thumbnail %}
+                <div class="relative w-full">
+                    <a href="{{ referral_link ?: config.link }}" class="group" title="{{ config.title }}">
+                        <figure class="aspect-16/8 w-full bg-gray-200 card-post__featured border-b border-gray-100 relative">
+                            {% if video_post %}
+                                <div class="absolute inset-0 flex items-center justify-center text-white bg-black/30">
+                                    {{ icons.icon('youtube', 'w-12 h-12 group-hover:scale-110 transition-all duration-100 ease-linear') }}
+                                </div>
+                            {% endif %}
+                            {% set image_src = config.image ? config.image.src : config.thumbnail.src %}
+                            {{ images.render_image({
+                                src: image_src,
+                                alt: config.image.alt ?: config.thumbnail.alt ?: config.title,
+                                class: 'w-full h-full object-cover'
+                            }) }}
+                        </figure>
+                    </a>
+                </div>
+            {% endif %}
+
+            <div class="px-6 pb-12 card-post__body">
+                <div class="relative group">
+                    {% if config.title %}
+                        <div class="card-post__title">
+                            <h3 class="mt-3 text-lg font-semibold leading-6 tracking-tight text-gray-900 font-alexandria group-hover:text-gray-600">
+                                <a href="{{ referral_link ?: config.link }}" class="group" title="{{ config.title }}">
+                                    <span class="absolute inset-0"></span>
+                                    {{ config.title }}
+                                </a>
+                            </h3>
+                        </div>
+                    {% endif %}
+
+                    {% if config.excerpt or config.content %}
+                        <div class="card-post__excerpt">
+                            <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-3">
+                                {{ config.excerpt ?: config.content }}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if config.button.text %}
+                <div class="absolute inset-x-0 bottom-0 px-6 pb-2 card-post__cta">
+                    {{ buttons.render_button_link({
+                        text: config.button.text,
+                        link: config.button.url ?: config.link,
+                        style: config.button.style,
+                        size: config.button.size,
+                        class: config.button.class
+                    }) }}
+                </div>
+            {% endif %}
+        </article>
+
+    {# Customer Story Card #}
+    {% elseif type == 'customer-story' %}
+        <article id="{{ card_id }}" class="{{ card_class }} relative flex flex-col items-start h-full overflow-hidden bg-white border-2 border-blue-100 group rounded-md"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            {% if config.image or config.thumbnail %}
+                <div class="relative w-full">
+                    <a href="{{ config.link }}" class="group" title="{{ config.title }}">
+                        <figure class="relative w-full aspect-16/8 flex items-center px-4 pt-8 bg-white card-post__featured max-w-64 saturate-0 group-hover:saturate-100 group-hover:scale-110 transition-all duration-200 ease-in-out">
+                            {% set image_src = config.image ? config.image.src : config.thumbnail.src %}
+                            {{ images.render_image({
+                                src: image_src,
+                                alt: config.image.alt ?: config.thumbnail.alt ?: config.title,
+                                class: 'w-full h-full object-contain'
+                            }) }}
+                        </figure>
+                    </a>
+                </div>
+            {% endif %}
+
+            <div class="px-6 pb-4 card-post__body">
+                <div class="relative group">
+                    {% if config.title %}
+                        <div class="card-post__title">
+                            <a href="{{ config.link }}" class="group line-clamp-2" title="{{ config.title }}">
+                                <span class="absolute inset-0"></span>
+                                {{ headings.render_heading(3, {
+                                    title: config.title,
+                                    color: 'text-blue-600 group-hover:text-blue-700 dark:text-cyan-400 dark:group-hover:text-cyan-600',
+                                    size: 'text-lg md:text-lg lg:text-xl',
+                                    preview: config.is_preview
+                                }) }}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if config.content or config.entry %}
+                        <div class="card-post__excerpt">
+                            <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-3">
+                                {{ config.content ?: config.entry }}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    {% if config.button.text %}
+                        <div class="py-2 mt-4 card-post__cta">
+                            {{ buttons.render_button_link({
+                                text: config.button.text,
+                                link: config.button.url ?: config.link,
+                                style: config.button.style,
+                                size: config.button.size,
+                                class: config.button.class ?: 'text-blue-600 border-blue-600'
+                            }) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+
+    {# Team Card #}
+    {% elseif type == 'team' %}
+        <div id="{{ card_id }}" class="{{ card_class }} card-team-member-default"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            {% if config.image %}
+                <figure class="aspect-3/2 rounded-lg overflow-hidden bg-gray-400">
+                    {{ images.render_image({
+                        src: config.image.src ?: (config.theme ? config.theme.link ~ '/dist/icons/defaults/icon-temp-image.svg' : ''),
+                        alt: config.image.alt ?: config.title,
+                        class: 'w-full h-full object-cover'
+                    }) }}
+                </figure>
+            {% endif %}
+
+            <div class="flex justify-between px-1 py-2 card-team-member-default__entry">
+                <div class="grow card-team-member-default__header">
+                    {% if config.title %}
+                        {{ headings.render_heading(3, {
+                            title: config.title,
+                            size: 'fluid-text-lg/2xl',
+                            color: 'text-gray-900 dark:text-white'
+                        }) }}
+                    {% endif %}
+                    {% if config.meta.position %}
+                        <p class="text-sm font-semibold leading-7 text-blue-500 dark:text-gray-400">
+                            {{ config.meta.position }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                {% if config.meta.social %}
+                    <div class="shrink">
+                        <a href="{{ config.meta.social }}" class="block pb-1 transition-colors duration-200 ease-linear text-white/30 hover:text-white" target="_blank">
+                            <span class="sr-only">LinkedIn for {{ config.title }}</span>
+                            {{ icons.icon({
+                                path: 'social',
+                                name: 'linkedin',
+                                classes: 'size-5'
+                            }) }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if config.meta.modal_content %}
+                <div class="flex justify-between px-1 card-team-member-default__cta">
+                    {# Modal trigger can be added here if needed #}
+                </div>
+            {% endif %}
+        </div>
+
+    {# Testimonial Card #}
+    {% elseif type == 'testimonial' %}
+        <div id="{{ card_id }}" class="{{ card_class }} relative flex border border-gray-200 h-full testimonial-boxed rounded-md shadow-xs bg-gray-50 dark:border-gray-700/75 dark:bg-gray-800 dark:text-gray-100"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            <div class="absolute right-0 mt-1 mr-2 font-serif text-blue-200 rotate-180 opacity-75 text-8xl bottom-8 dark:text-blue-800">
+                "
+            </div>
+
+            <blockquote class="relative flex flex-col p-8 text-xl:p-10 testimonial-boxed__quote">
+                {% if config.content %}
+                    <div class="mb-5 leading-relaxed grow">
+                        <div class="prose prose-base">
+                            {{ config.content }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if config.title or config.meta.position %}
+                    <footer class="flex items-center gap-4 flex-nonw testimonial-boxed__cite">
+                        <div>
+                            {% if config.title %}
+                                <a href="javascript:void(0)" class="font-semibold text-blue-600 testimonial-boxed__name hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300">
+                                    {{ config.title }}
+                                </a>
+                            {% endif %}
+                            {% if config.meta.position %}
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400 testimonial-boxed__position">
+                                    {{ config.meta.position }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </footer>
+                {% endif %}
+            </blockquote>
+        </div>
+
+    {# Fallback: DaisyUI Card #}
+    {% else %}
+        <div class="card bg-base-100 shadow-xl {{ config.class }}"
+        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+            {% if config.image %}
+                <figure>
+                    {{ images.render_image({
+                        src: config.image.src,
+                        alt: config.image.alt ?: config.title,
+                        class: config.image.class
+                    }) }}
+                </figure>
+            {% endif %}
+
+            <div class="card-body">
+                {% if config.title %}
+                    <h2 class="card-title">{{ config.title }}</h2>
+                {% endif %}
+                {% if config.content %}
+                    <p>{{ config.content }}</p>
+                {% endif %}
+                {% if config.button.text %}
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">{{ config.button.text }}</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{# Convenience macros for specific card types #}
+{% macro simple_card(options = {}) %}
+    {{ _self.render_card('simple', options) }}
+{% endmacro %}
+
+{% macro post_card(options = {}) %}
+    {{ _self.render_card('post', options) }}
+{% endmacro %}
+
+{% macro customer_story_card(options = {}) %}
+    {{ _self.render_card('customer-story', options) }}
+{% endmacro %}
+
+{% macro team_card(options = {}) %}
+    {{ _self.render_card('team', options) }}
+{% endmacro %}
+
+{% macro testimonial_card(options = {}) %}
+    {{ _self.render_card('testimonial', options) }}
+{% endmacro %}
+
+{% macro daisyui_card(options = {}) %}
+    {{ _self.render_card('daisyui', options) }}
+{% endmacro %}
+
+{#
+Usage Examples:
+
+{{ cards.simple_card({
+    title: 'Card Title',
+    content: 'Card content...',
+    image: { src: 'image.jpg', alt: 'Image' },
+    badge: 'New',
+    link: '/read-more',
+    button: { text: 'Read More', style: 'solid' }
+}) }}
+
+{{ cards.post_card({
+    title: post.title,
+    excerpt: post.excerpt,
+    image: { src: post.thumbnail.src, alt: post.thumbnail.alt },
+    link: post.link,
+    meta: {
+        video_post: false,
+        referral_link: ''
+    }
+}) }}
+
+{{ cards.testimonial_card({
+    content: quote,
+    title: name,
+    meta: { position: position }
+}) }}
+#}

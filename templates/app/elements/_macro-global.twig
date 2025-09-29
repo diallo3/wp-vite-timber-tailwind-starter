@@ -1,0 +1,50 @@
+{# Global Macro Registration System #}
+
+{# Import all element macros #}
+{% import "@Elements/_macro-icon.twig" as _icons %}
+{% import "@Elements/_macro-heading.twig" as _headings %}
+{% import "@Elements/_macro-badge.twig" as _badges %}
+{% import "@Elements/_macro-image-object.twig" as _images %}
+{% import "@Elements/_macro-button.twig" as _buttons %}
+{% import "@Elements/_macro-card.twig" as _cards %}
+
+{# Create a unified namespace with all functions #}
+{% set ui = {
+    'icons': _icons,
+    'headings': _headings,
+    'badges': _badges,
+    'images': _images,
+    'buttons': _buttons,
+    'cards': _cards
+} %}
+
+{# Convenience functions for common UI elements #}
+{% macro render_ui_element(type, subtype = '', options = {}) %}
+    {% if type == 'heading' %}
+        {{ ui.headings.render_heading(subtype ?: 1, options) }}
+    {% elseif type == 'button' %}
+        {{ ui.buttons.render_button_link(options) }}
+    {% elseif type == 'badge' %}
+        {{ ui.badges.render_accent_badge(options) }}
+    {% elseif type == 'image' %}
+        {{ ui.images.render_image(options) }}
+    {% elseif type == 'card' %}
+        {{ ui.cards.render_card(subtype ?: 'simple', options) }}
+    {% elseif type == 'icon' %}
+        {{ ui.icons.icon(subtype, options.classes ?: '') }}
+    {% endif %}
+{% endmacro %}
+
+{#
+Usage Examples:
+
+{% import "@Elements/_macro-global.twig" as global %}
+
+<!-- Access via namespaces -->
+{{ global.ui.headings.render_heading(1, { title: 'Title' }) }}
+{{ global.ui.cards.simple_card({ title: 'Card', content: 'Content' }) }}
+
+<!-- Or use the convenience function -->
+{{ global.render_ui_element('heading', 1, { title: 'Title' }) }}
+{{ global.render_ui_element('card', 'simple', { title: 'Card' }) }}
+#}
