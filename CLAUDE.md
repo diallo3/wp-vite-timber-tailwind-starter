@@ -576,3 +576,296 @@ This project uses Alpine.js v3.15.0 as the primary JavaScript framework for inte
 - **WordPress Compatibility**: Test components work with Swup transitions
 
 This Alpine.js implementation provides a solid foundation for building interactive WordPress themes with modern JavaScript patterns, excellent accessibility, and optimal performance.
+
+## DaisyUI v5.1.25 Integration
+
+This project integrates DaisyUI v5.1.25, a comprehensive component library for Tailwind CSS, providing pre-built, accessible, and customizable UI components that work seamlessly with Alpine.js.
+
+### DaisyUI Architecture
+
+**Plugin Integration**: DaisyUI is configured as a Tailwind plugin with custom WordPress-optimized themes
+**Theme System**: Custom `wordpress` and `wordpress-dark` themes using WordPress blue (#0d99d5)
+**Alpine.js Integration**: Enhanced theme store with automatic theme switching
+**Accessibility**: All DaisyUI components are WCAG 2.1 AA compliant out of the box
+
+### Custom WordPress Themes
+
+**WordPress Light Theme:**
+```css
+"wordpress": {
+  "primary": "#0d99d5",        // WordPress blue
+  "secondary": "#6366f1",      // Indigo
+  "accent": "#f59e0b",         // Amber
+  "neutral": "#374151",        // Gray
+  "base-100": "#ffffff",       // White background
+  "info": "#3b82f6",          // Blue
+  "success": "#10b981",        // Green
+  "warning": "#f59e0b",        // Amber
+  "error": "#ef4444",          // Red
+}
+```
+
+**WordPress Dark Theme:**
+```css
+"wordpress-dark": {
+  "primary": "#0d99d5",        // WordPress blue (consistent)
+  "secondary": "#8b5cf6",      // Purple
+  "accent": "#fbbf24",         // Yellow
+  "neutral": "#1f2937",        // Dark gray
+  "base-100": "#111827",       // Dark background
+  // ... additional dark theme colors
+}
+```
+
+### Available DaisyUI Components
+
+**Button Components:**
+```html
+<!-- Primary WordPress button -->
+<button class="btn btn-primary">WordPress Button</button>
+
+<!-- Button variants -->
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-accent">Accent</button>
+<button class="btn btn-ghost">Ghost</button>
+<button class="btn btn-outline">Outline</button>
+
+<!-- Button sizes -->
+<button class="btn btn-lg">Large</button>
+<button class="btn btn-md">Medium</button>
+<button class="btn btn-sm">Small</button>
+<button class="btn btn-xs">Extra Small</button>
+```
+
+**Card Components:**
+```html
+<div class="card bg-base-100 shadow-xl">
+  <figure><img src="image.jpg" alt="Image" /></figure>
+  <div class="card-body">
+    <h2 class="card-title">Card Title</h2>
+    <p>Card description content.</p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">Action</button>
+    </div>
+  </div>
+</div>
+```
+
+**Modal Components (with Alpine.js):**
+```html
+<div x-data="modalComponent" class="modal" :class="{ 'modal-open': open }">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Modal Title</h3>
+    <p class="py-4">Modal content goes here.</p>
+    <div class="modal-action">
+      <button @click="open = false" class="btn">Close</button>
+      <button @click="open = false" class="btn btn-primary">Confirm</button>
+    </div>
+  </div>
+</div>
+```
+
+**Dropdown Components:**
+```html
+<div class="dropdown" x-data="dropdownComponent">
+  <label tabindex="0" class="btn m-1" @click="toggle()">
+    Dropdown
+  </label>
+  <ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+    <li><a>Item 3</a></li>
+  </ul>
+</div>
+```
+
+**Form Components:**
+```html
+<!-- Input with DaisyUI styling -->
+<div class="form-control w-full max-w-xs">
+  <label class="label">
+    <span class="label-text">Email</span>
+  </label>
+  <input type="email" placeholder="Enter email" class="input input-bordered w-full max-w-xs" />
+  <label class="label">
+    <span class="label-text-alt">Required field</span>
+  </label>
+</div>
+
+<!-- Select dropdown -->
+<select class="select select-bordered w-full max-w-xs">
+  <option disabled selected>Select option</option>
+  <option>Option 1</option>
+  <option>Option 2</option>
+</select>
+
+<!-- Checkbox -->
+<div class="form-control">
+  <label class="label cursor-pointer">
+    <span class="label-text">Remember me</span>
+    <input type="checkbox" class="checkbox checkbox-primary" />
+  </label>
+</div>
+```
+
+**Navigation Components:**
+```html
+<!-- Navbar -->
+<div class="navbar bg-base-100">
+  <div class="navbar-start">
+    <a class="btn btn-ghost normal-case text-xl">WordPress Site</a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li><a>Home</a></li>
+      <li><a>About</a></li>
+      <li><a>Services</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a class="btn btn-primary">Get Started</a>
+  </div>
+</div>
+
+<!-- Breadcrumbs -->
+<div class="text-sm breadcrumbs">
+  <ul>
+    <li><a>Home</a></li>
+    <li><a>Documents</a></li>
+    <li>Add Document</li>
+  </ul>
+</div>
+```
+
+**Alert Components:**
+```html
+<div class="alert alert-info">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+  </svg>
+  <span>New software update available.</span>
+</div>
+
+<div class="alert alert-success">
+  <span>Your purchase has been confirmed!</span>
+</div>
+```
+
+### Theme Selector Component
+
+**Alpine.js Theme Selector:**
+```html
+<div x-data="themeSelector" class="dropdown dropdown-end">
+  <label tabindex="0" class="btn btn-ghost" @click="open = !open">
+    <span x-text="getThemeLabel(currentTheme)"></span>
+    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </label>
+
+  <ul x-show="open" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <template x-for="(themes, category) in getThemesByCategory()">
+      <li>
+        <span class="menu-title" x-text="category.charAt(0).toUpperCase() + category.slice(1)"></span>
+        <template x-for="theme in themes">
+          <li>
+            <a @click="selectTheme(theme.name)"
+               :class="{ 'active': currentTheme === theme.name }"
+               x-text="theme.label">
+            </a>
+          </li>
+        </template>
+      </li>
+    </template>
+  </ul>
+</div>
+```
+
+**Simple Theme Toggle:**
+```html
+<div x-data class="form-control">
+  <label class="label cursor-pointer">
+    <span class="label-text">Dark Mode</span>
+    <input type="checkbox" class="toggle toggle-primary"
+           :checked="$store.theme.mode === 'dark'"
+           @change="$store.theme.toggle()" />
+  </label>
+</div>
+```
+
+### WordPress Integration Features
+
+**Admin Bar Compatible**: All components work with WordPress admin bar positioning
+**Swup Compatible**: Components maintain state across page transitions
+**ACF Integration**: DaisyUI classes work seamlessly with ACF field styling
+**Responsive**: All components are mobile-first and fully responsive
+
+### Usage Examples
+
+**WordPress Post Card:**
+```html
+<article class="card bg-base-100 shadow-lg">
+  <figure class="aspect-video">
+    <img src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}" />
+  </figure>
+  <div class="card-body">
+    <div class="flex items-center gap-2 text-sm text-base-content/70">
+      <time>{{ post.date }}</time>
+      <span class="badge badge-primary">{{ post.category }}</span>
+    </div>
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p>{{ post.excerpt }}</p>
+    <div class="card-actions justify-between items-center">
+      <div class="avatar-group -space-x-6">
+        <div class="avatar">
+          <div class="w-12">
+            <img src="{{ post.author.avatar }}" />
+          </div>
+        </div>
+      </div>
+      <a href="{{ post.link }}" class="btn btn-primary btn-sm">Read More</a>
+    </div>
+  </div>
+</article>
+```
+
+**Contact Form with DaisyUI:**
+```html
+<form class="space-y-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="form-control">
+      <label class="label"><span class="label-text">Name</span></label>
+      <input type="text" class="input input-bordered" required />
+    </div>
+    <div class="form-control">
+      <label class="label"><span class="label-text">Email</span></label>
+      <input type="email" class="input input-bordered" required />
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="label"><span class="label-text">Message</span></label>
+    <textarea class="textarea textarea-bordered h-24" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+</form>
+```
+
+### Performance Considerations
+
+1. **CSS-Only Components**: Most DaisyUI components require no JavaScript
+2. **Utility Classes**: Built on Tailwind's utility system for minimal CSS
+3. **Tree Shaking**: Unused components are automatically removed in production
+4. **Theme Switching**: Efficient CSS custom property-based theming
+5. **Alpine Integration**: Reactive theme switching without page reloads
+
+### Development Guidelines
+
+- **Component Consistency**: Use DaisyUI components for consistent UI patterns
+- **Theme Adherence**: Stick to the defined color palette for brand consistency
+- **Responsive Design**: Always test components across device sizes
+- **Accessibility**: DaisyUI components are accessible by default, maintain this
+- **WordPress Integration**: Ensure components work with WordPress features
+
+This DaisyUI integration provides a comprehensive design system that accelerates development while maintaining design consistency and accessibility standards.

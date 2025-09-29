@@ -246,19 +246,68 @@ function registerAlpineComponents() {
             }
         }
     }));
+
+    // DaisyUI-integrated theme selector component
+    Alpine.data('themeSelector', () => ({
+        open: false,
+        currentTheme: Alpine.$persist('wordpress'),
+
+        init() {
+            // Initialize with current theme
+            this.currentTheme = this.$store.theme.daisyTheme;
+
+            // Watch for theme changes
+            this.$watch('currentTheme', (value) => {
+                this.$store.theme.setDaisyTheme(value);
+            });
+        },
+
+        selectTheme(themeName) {
+            this.currentTheme = themeName;
+            this.open = false;
+        },
+
+        getThemeLabel(themeName) {
+            const themes = this.$store.theme.getAvailableThemes();
+            const theme = themes.find(t => t.name === themeName);
+            return theme ? theme.label : themeName;
+        },
+
+        getThemesByCategory() {
+            const themes = this.$store.theme.getAvailableThemes();
+            const categories = {};
+
+            themes.forEach(theme => {
+                if (!categories[theme.category]) {
+                    categories[theme.category] = [];
+                }
+                categories[theme.category].push(theme);
+            });
+
+            return categories;
+        }
+    }));
 }
 
 /**
  * Register Alpine.js stores for global state management
  */
 function registerAlpineStores() {
-    // Theme store for dark/light mode
+    // Enhanced theme store with DaisyUI integration
     Alpine.store('theme', {
         mode: Alpine.$persist('system'),
+        daisyTheme: Alpine.$persist('wordpress'),
 
         init() {
             // Apply theme on initialization
             this.applyTheme();
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (this.mode === 'system') {
+                    this.applyTheme();
+                }
+            });
         },
 
         toggle() {
@@ -266,11 +315,38 @@ function registerAlpineStores() {
             this.applyTheme();
         },
 
+        setDaisyTheme(themeName) {
+            this.daisyTheme = themeName;
+            this.applyDaisyTheme();
+        },
+
         applyTheme() {
             const isDark = this.mode === 'dark' ||
                          (this.mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
             document.documentElement.classList.toggle('dark', isDark);
+
+            // Auto-switch DaisyUI themes based on dark/light mode
+            if (this.daisyTheme === 'wordpress' || this.daisyTheme === 'wordpress-dark') {
+                this.daisyTheme = isDark ? 'wordpress-dark' : 'wordpress';
+            }
+
+            this.applyDaisyTheme();
+        },
+
+        applyDaisyTheme() {
+            document.documentElement.setAttribute('data-theme', this.daisyTheme);
+        },
+
+        getAvailableThemes() {
+            return [
+                { name: 'wordpress', label: 'WordPress Light', category: 'wordpress' },
+                { name: 'wordpress-dark', label: 'WordPress Dark', category: 'wordpress' },
+                { name: 'light', label: 'Light', category: 'default' },
+                { name: 'dark', label: 'Dark', category: 'default' },
+                { name: 'cupcake', label: 'Cupcake', category: 'colorful' },
+                { name: 'corporate', label: 'Corporate', category: 'professional' }
+            ];
         }
     });
 
