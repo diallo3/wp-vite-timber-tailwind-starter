@@ -1,44 +1,43 @@
 /* Modern Swup transitions - integrated with our module-swup.js */
-@utility swup-transition-fade {
+/* Note: Cannot use @utility when imported via layer() in Tailwind v4 */
+.swup-transition-fade {
   transition: opacity 0.3s ease-in-out;
 }
 
-@utility swup-transition-slide {
+.swup-transition-slide {
   transition: transform 0.4s ease-in-out;
 }
 
-@utility swup-transition-scale {
+.swup-transition-scale {
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* Loading state styles */
-@utility is-changing {
+/* Loading state styles - cannot use @utility with nested selectors */
+.is-changing {
   pointer-events: none;
-
-  .swup-transition-fade {
-    opacity: 0.7;
-  }
-
-  .swup-transition-slide {
-    transform: translateY(-20px);
-  }
-
-  .swup-transition-scale {
-    transform: scale(0.98);
-    opacity: 0.8;
-  }
 }
 
-/* WordPress admin bar compatibility */
-@utility has-admin-bar {
-  .swup-progress-bar {
-    top: 32px;
-  }
+.is-changing .swup-transition-fade {
+  opacity: 0.7;
+}
 
-  @media screen and (max-width: 782px) {
-    .swup-progress-bar {
-      top: 46px;
-    }
+.is-changing .swup-transition-slide {
+  transform: translateY(-20px);
+}
+
+.is-changing .swup-transition-scale {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+/* WordPress admin bar compatibility - cannot use @utility with nested selectors */
+.has-admin-bar .swup-progress-bar {
+  top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  .has-admin-bar .swup-progress-bar {
+    top: 46px;
   }
 }
 
