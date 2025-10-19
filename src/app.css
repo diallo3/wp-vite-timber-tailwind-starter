@@ -7,7 +7,9 @@
 @import "./modules/css/module-headroom.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: false;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -23,80 +25,6 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   --breakpoint-3xl: 1920px;
-}
-
-/* DaisyUI Configuration */
-@config {
-  daisyui: {
-    themes: [
-      {
-        "wordpress": {
-          "primary": "#0d99d5",
-          "primary-focus": "#0a80b0",
-          "primary-content": "#ffffff",
-          "secondary": "#6366f1",
-          "secondary-focus": "#4f46e5",
-          "secondary-content": "#ffffff",
-          "accent": "#f59e0b",
-          "accent-focus": "#d97706",
-          "accent-content": "#ffffff",
-          "neutral": "#374151",
-          "neutral-focus": "#1f2937",
-          "neutral-content": "#f9fafb",
-          "base-100": "#ffffff",
-          "base-200": "#f9fafb",
-          "base-300": "#f3f4f6",
-          "base-content": "#1f2937",
-          "info": "#3b82f6",
-          "info-content": "#ffffff",
-          "success": "#10b981",
-          "success-content": "#ffffff",
-          "warning": "#f59e0b",
-          "warning-content": "#ffffff",
-          "error": "#ef4444",
-          "error-content": "#ffffff",
-        }
-      },
-      {
-        "wordpress-dark": {
-          "primary": "#0d99d5",
-          "primary-focus": "#0a80b0",
-          "primary-content": "#ffffff",
-          "secondary": "#8b5cf6",
-          "secondary-focus": "#7c3aed",
-          "secondary-content": "#ffffff",
-          "accent": "#fbbf24",
-          "accent-focus": "#f59e0b",
-          "accent-content": "#000000",
-          "neutral": "#1f2937",
-          "neutral-focus": "#111827",
-          "neutral-content": "#f9fafb",
-          "base-100": "#111827",
-          "base-200": "#1f2937",
-          "base-300": "#374151",
-          "base-content": "#f9fafb",
-          "info": "#60a5fa",
-          "info-content": "#000000",
-          "success": "#34d399",
-          "success-content": "#000000",
-          "warning": "#fbbf24",
-          "warning-content": "#000000",
-          "error": "#f87171",
-          "error-content": "#000000",
-        }
-      },
-      "light",
-      "dark",
-      "cupcake",
-      "corporate"
-    ],
-    darkTheme: "wordpress-dark",
-    base: true,
-    styled: true,
-    utils: true,
-    prefix: "",
-    logs: false,
-  }
 }
 
 /*
@@ -119,17 +47,29 @@
   /* Enhanced fluid typography system */
   :root {
     /* Refined fluid typography with better viewport scaling */
-    --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); /* 12px → 14px */
+    --text-fluid-xs: clamp(
+      0.75rem,
+      0.7rem + 0.25vw,
+      0.875rem
+    ); /* 12px → 14px */
     --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem); /* 14px → 16px */
     --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* 16px → 18px */
     --text-fluid-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem); /* 18px → 20px */
     --text-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem); /* 20px → 24px */
     --text-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem); /* 24px → 30px */
-    --text-fluid-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem); /* 30px → 36px */
+    --text-fluid-3xl: clamp(
+      1.875rem,
+      1.6rem + 1.375vw,
+      2.25rem
+    ); /* 30px → 36px */
     --text-fluid-4xl: clamp(2.25rem, 2rem + 1.25vw, 2.75rem); /* 36px → 44px */
     --text-fluid-5xl: clamp(2.75rem, 2.4rem + 1.75vw, 3.5rem); /* 44px → 56px */
     --text-fluid-6xl: clamp(3.5rem, 3rem + 2.5vw, 4.25rem); /* 56px → 68px */
-    --text-fluid-7xl: clamp(4.25rem, 3.7rem + 2.75vw, 5.25rem); /* 68px → 84px */
+    --text-fluid-7xl: clamp(
+      4.25rem,
+      3.7rem + 2.75vw,
+      5.25rem
+    ); /* 68px → 84px */
     --text-fluid-8xl: clamp(5.25rem, 4.5rem + 3.75vw, 7rem); /* 84px → 112px */
     --text-fluid-9xl: clamp(7rem, 6rem + 5vw, 9rem); /* 112px → 144px */
 
@@ -149,31 +89,77 @@
   }
 
   /* Fluid typography utilities */
-  .fluid-text-xs { font-size: var(--text-fluid-xs); }
-  .fluid-text-sm { font-size: var(--text-fluid-sm); }
-  .fluid-text-base { font-size: var(--text-fluid-base); }
-  .fluid-text-lg { font-size: var(--text-fluid-lg); }
-  .fluid-text-xl { font-size: var(--text-fluid-xl); }
-  .fluid-text-2xl { font-size: var(--text-fluid-2xl); }
-  .fluid-text-3xl { font-size: var(--text-fluid-3xl); }
-  .fluid-text-4xl { font-size: var(--text-fluid-4xl); }
-  .fluid-text-5xl { font-size: var(--text-fluid-5xl); }
-  .fluid-text-6xl { font-size: var(--text-fluid-6xl); }
-  .fluid-text-7xl { font-size: var(--text-fluid-7xl); }
-  .fluid-text-8xl { font-size: var(--text-fluid-8xl); }
-  .fluid-text-9xl { font-size: var(--text-fluid-9xl); }
+  .fluid-text-xs {
+    font-size: var(--text-fluid-xs);
+  }
+  .fluid-text-sm {
+    font-size: var(--text-fluid-sm);
+  }
+  .fluid-text-base {
+    font-size: var(--text-fluid-base);
+  }
+  .fluid-text-lg {
+    font-size: var(--text-fluid-lg);
+  }
+  .fluid-text-xl {
+    font-size: var(--text-fluid-xl);
+  }
+  .fluid-text-2xl {
+    font-size: var(--text-fluid-2xl);
+  }
+  .fluid-text-3xl {
+    font-size: var(--text-fluid-3xl);
+  }
+  .fluid-text-4xl {
+    font-size: var(--text-fluid-4xl);
+  }
+  .fluid-text-5xl {
+    font-size: var(--text-fluid-5xl);
+  }
+  .fluid-text-6xl {
+    font-size: var(--text-fluid-6xl);
+  }
+  .fluid-text-7xl {
+    font-size: var(--text-fluid-7xl);
+  }
+  .fluid-text-8xl {
+    font-size: var(--text-fluid-8xl);
+  }
+  .fluid-text-9xl {
+    font-size: var(--text-fluid-9xl);
+  }
 
   /* Fluid line height utilities */
-  .leading-fluid-tight { line-height: var(--leading-fluid-tight); }
-  .leading-fluid-snug { line-height: var(--leading-fluid-snug); }
-  .leading-fluid-normal { line-height: var(--leading-fluid-normal); }
-  .leading-fluid-relaxed { line-height: var(--leading-fluid-relaxed); }
+  .leading-fluid-tight {
+    line-height: var(--leading-fluid-tight);
+  }
+  .leading-fluid-snug {
+    line-height: var(--leading-fluid-snug);
+  }
+  .leading-fluid-normal {
+    line-height: var(--leading-fluid-normal);
+  }
+  .leading-fluid-relaxed {
+    line-height: var(--leading-fluid-relaxed);
+  }
 
   /* Fluid spacing utilities */
-  .space-fluid-xs { margin: var(--space-fluid-xs); }
-  .space-fluid-sm { margin: var(--space-fluid-sm); }
-  .space-fluid-md { margin: var(--space-fluid-md); }
-  .space-fluid-lg { margin: var(--space-fluid-lg); }
-  .space-fluid-xl { margin: var(--space-fluid-xl); }
-  .space-fluid-2xl { margin: var(--space-fluid-2xl); }
+  .space-fluid-xs {
+    margin: var(--space-fluid-xs);
+  }
+  .space-fluid-sm {
+    margin: var(--space-fluid-sm);
+  }
+  .space-fluid-md {
+    margin: var(--space-fluid-md);
+  }
+  .space-fluid-lg {
+    margin: var(--space-fluid-lg);
+  }
+  .space-fluid-xl {
+    margin: var(--space-fluid-xl);
+  }
+  .space-fluid-2xl {
+    margin: var(--space-fluid-2xl);
+  }
 }

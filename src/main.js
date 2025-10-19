@@ -7,6 +7,7 @@ if (import.meta.hot) {
 
 // Core dependencies
 import 'iconify-icon';
+import '@tailwindplus/elements';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeHeadroom } from './modules/js/module-headroom';
 import { initializeSwup, createSwupTransitions } from './modules/js/module-swup';

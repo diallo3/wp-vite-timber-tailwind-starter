@@ -14,6 +14,7 @@
 		"@alpinejs/collapse": "^3.13.3",
 		"@alpinejs/focus": "^3.13.3",
 		"@alpinejs/persist": "^3.13.3",
+		"@tailwindplus/elements": "^1.0.18",
 		"alpinejs": "^3.14.8",
 		"baselayer.css": "latest",
 		"headroom.js": "^0.12.0",
