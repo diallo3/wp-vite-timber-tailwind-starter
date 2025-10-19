@@ -1,0 +1,172 @@
+// Brand Guidelines Page Styles
+
+.brand-guidelines {
+    min-height: 100vh;
+    background: theme('colors.base-100');
+
+    // Navigation
+    .brand-nav {
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+
+        .nav-link {
+            @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200;
+            @apply text-base-content/70 hover:text-primary hover:bg-primary/10;
+
+            &.active {
+                @apply text-primary bg-primary/10;
+            }
+        }
+    }
+
+    // Section spacing
+    .brand-section {
+        scroll-margin-top: 5rem;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    // Enhanced card hover effects
+    .card {
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    // Color swatch enhancements
+    .card {
+        .h-40, .h-32, .h-24 {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            .h-40, .h-32, .h-24 {
+                transform: scale(1.02);
+            }
+        }
+    }
+
+    // Clipboard button animation
+    button[x-on\:click*="clipboard"] {
+        position: relative;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    // Typography specimens
+    .prose {
+        max-width: none;
+
+        p {
+            @apply text-base-content/80;
+        }
+    }
+
+    // Smooth spacing visualization
+    .bg-primary\/20 {
+        transition: width 0.3s ease;
+        border-radius: 4px;
+    }
+
+    // Enhanced shadow examples
+    .shadow-lg {
+        &:has(.w-24.h-24) {
+            background: linear-gradient(135deg, theme('colors.base-100') 0%, theme('colors.base-200') 100%);
+        }
+    }
+
+    // Component examples styling
+    #components {
+        .card-body {
+            @apply p-8;
+        }
+
+        h4 {
+            @apply text-base-content/90;
+        }
+    }
+
+    // Icon grid
+    #icons {
+        iconify-icon {
+            transition: all 0.3s ease;
+        }
+
+        .flex.flex-col.items-center {
+            &:hover {
+                iconify-icon {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    // Mobile responsiveness
+    @media (max-width: 768px) {
+        .brand-section {
+            scroll-margin-top: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem !important;
+        }
+
+        h2 {
+            font-size: 2rem !important;
+        }
+
+        h3 {
+            font-size: 1.5rem !important;
+        }
+    }
+}
+
+// Fade in animation
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Copy feedback animation
+.copy-feedback {
+    animation: copyPulse 0.3s ease;
+}
+
+@keyframes copyPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+// Print styles
+@media print {
+    .brand-nav {
+        display: none;
+    }
+
+    .brand-section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid theme('colors.base-300');
+    }
+}

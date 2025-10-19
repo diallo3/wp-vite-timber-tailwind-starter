@@ -1,0 +1,528 @@
+{% extends "@Layouts/layout-base.twig" %}
+
+{% block content %}
+
+<div class="brand-guidelines" x-data="brandGuidelinesNav()">
+    {# Sticky Navigation #}
+    <nav class="brand-nav sticky top-0 z-40 bg-base-100/95 backdrop-blur-sm border-b border-base-300" x-data="{ mobileOpen: false }">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl font-bold text-primary">{{ brand.name }}</span>
+                    <span class="hidden sm:block text-sm text-base-content/60">Brand Guidelines</span>
+                </div>
+
+                {# Desktop Navigation #}
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="#overview" class="nav-link" @click.prevent="scrollToSection('overview')">Overview</a>
+                    <a href="#colors" class="nav-link" @click.prevent="scrollToSection('colors')">Colors</a>
+                    <a href="#typography" class="nav-link" @click.prevent="scrollToSection('typography')">Typography</a>
+                    <a href="#spacing" class="nav-link" @click.prevent="scrollToSection('spacing')">Spacing</a>
+                    <a href="#components" class="nav-link" @click.prevent="scrollToSection('components')">Components</a>
+                    <a href="#icons" class="nav-link" @click.prevent="scrollToSection('icons')">Icons</a>
+                </div>
+
+                {# Mobile Menu Toggle #}
+                <button class="lg:hidden btn btn-ghost btn-sm" @click="mobileOpen = !mobileOpen">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            {# Mobile Navigation #}
+            <div x-show="mobileOpen" x-collapse class="lg:hidden py-4 space-y-2">
+                <a href="#overview" class="block nav-link" @click="mobileOpen = false; scrollToSection('overview')">Overview</a>
+                <a href="#colors" class="block nav-link" @click="mobileOpen = false; scrollToSection('colors')">Colors</a>
+                <a href="#typography" class="block nav-link" @click="mobileOpen = false; scrollToSection('typography')">Typography</a>
+                <a href="#spacing" class="block nav-link" @click="mobileOpen = false; scrollToSection('spacing')">Spacing</a>
+                <a href="#components" class="block nav-link" @click="mobileOpen = false; scrollToSection('components')">Components</a>
+                <a href="#icons" class="block nav-link" @click="mobileOpen = false; scrollToSection('icons')">Icons</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12 max-w-7xl">
+
+        {# Overview Section #}
+        <section id="overview" class="brand-section mb-24">
+            <div class="max-w-3xl">
+                <h1 class="text-6xl font-bold mb-6">{{ brand.name }}</h1>
+                <p class="text-2xl text-base-content/70 mb-8">{{ brand.tagline }}</p>
+                <div class="prose lg:prose-lg">
+                    <p>This brand guidelines document defines our visual identity and ensures consistency across all touchpoints. Use this as a reference for all design and development work.</p>
+                </div>
+            </div>
+        </section>
+
+        {# Colors Section #}
+        <section id="colors" class="brand-section mb-24">
+            <h2 class="text-4xl font-bold mb-8">Color Palette</h2>
+
+            {# Primary Colors #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Primary Colors</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for color in brand.colors.primary %}
+                        <div class="card bg-base-100 shadow-lg overflow-hidden">
+                            <div class="h-40" style="background-color: {{ color.hex }}"></div>
+                            <div class="card-body">
+                                <h4 class="card-title text-lg">{{ color.name }}</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="font-mono">HEX</span>
+                                        <button class="font-mono hover:text-primary" @click="$clipboard('{{ color.hex }}')">{{ color.hex }}</button>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-mono">RGB</span>
+                                        <button class="font-mono hover:text-primary" @click="$clipboard('{{ color.rgb }}')">{{ color.rgb }}</button>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-base-content/60 mt-4">{{ color.usage }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Secondary Colors #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Secondary Colors</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for color in brand.colors.secondary %}
+                        <div class="card bg-base-100 shadow-lg overflow-hidden">
+                            <div class="h-40" style="background-color: {{ color.hex }}"></div>
+                            <div class="card-body">
+                                <h4 class="card-title text-lg">{{ color.name }}</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="font-mono">HEX</span>
+                                        <button class="font-mono hover:text-primary" @click="$clipboard('{{ color.hex }}')">{{ color.hex }}</button>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-mono">RGB</span>
+                                        <button class="font-mono hover:text-primary" @click="$clipboard('{{ color.rgb }}')">{{ color.rgb }}</button>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-base-content/60 mt-4">{{ color.usage }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Neutral Colors #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Neutral Colors</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {% for color in brand.colors.neutral %}
+                        <div class="card bg-base-100 shadow overflow-hidden">
+                            <div class="h-24" style="background-color: {{ color.hex }}"></div>
+                            <div class="p-4">
+                                <h5 class="font-semibold text-sm mb-2">{{ color.name }}</h5>
+                                <button class="font-mono text-xs hover:text-primary" @click="$clipboard('{{ color.hex }}')">{{ color.hex }}</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Semantic Colors #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Semantic Colors</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for color in brand.colors.semantic %}
+                        <div class="card bg-base-100 shadow-lg overflow-hidden">
+                            <div class="h-32" style="background-color: {{ color.hex }}"></div>
+                            <div class="card-body">
+                                <h4 class="card-title text-base">{{ color.name }}</h4>
+                                <button class="font-mono text-sm hover:text-primary text-left" @click="$clipboard('{{ color.hex }}')">{{ color.hex }}</button>
+                                <p class="text-sm text-base-content/60 mt-2">{{ color.usage }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        {# Typography Section #}
+        <section id="typography" class="brand-section mb-24">
+            <h2 class="text-4xl font-bold mb-8">Typography</h2>
+
+            {# Font Families #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Font Families</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {% for font in brand.typography.families %}
+                        <div class="card bg-base-100 shadow-lg">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ font.name }}</h4>
+                                <p class="font-mono text-sm text-base-content/70">{{ font.font }}</p>
+                                <div class="divider my-2"></div>
+                                <p class="text-sm">Weights: {{ font.weights }}</p>
+                                <div class="mt-4 text-2xl" style="font-family: {{ font.font }}">Aa Bb Cc 123</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Type Scale #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Type Scale</h3>
+                <div class="space-y-6">
+                    {% for type in brand.typography.scale %}
+                        <div class="card bg-base-100 shadow-lg">
+                            <div class="card-body">
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                                    <div>
+                                        <h4 class="font-semibold mb-1">{{ type.name }}</h4>
+                                        <p class="text-sm text-base-content/60 font-mono">{{ type.size }}</p>
+                                        <p class="text-sm text-base-content/60">Line height: {{ type.lineHeight }}</p>
+                                        <p class="text-xs text-base-content/50 mt-2">{{ type.usage }}</p>
+                                    </div>
+                                    <div class="lg:col-span-2">
+                                        <p style="font-size: {{ type.size|split(' / ')[0] }}; line-height: {{ type.lineHeight }}">
+                                            The quick brown fox jumps over the lazy dog
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        {# Spacing Section #}
+        <section id="spacing" class="brand-section mb-24">
+            <h2 class="text-4xl font-bold mb-8">Spacing System</h2>
+
+            <div class="space-y-6 mb-12">
+                {% for space in brand.spacing %}
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                                <div>
+                                    <h4 class="font-semibold mb-1">{{ space.name }}</h4>
+                                    <p class="text-sm text-base-content/60 font-mono">{{ space.value }}</p>
+                                    <p class="text-xs text-base-content/50 mt-2">{{ space.usage }}</p>
+                                </div>
+                                <div class="lg:col-span-2">
+                                    <div class="bg-primary/20 inline-block" style="width: {{ space.value|split(' / ')[0] }}; height: 2rem;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {# Border Radius #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Border Radius</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    {% for radius in brand.radius %}
+                        <div class="card bg-base-100 shadow-lg">
+                            <div class="card-body items-center text-center">
+                                <div class="w-20 h-20 bg-primary mb-4" style="border-radius: {{ radius.value }}"></div>
+                                <h4 class="font-semibold">{{ radius.name }}</h4>
+                                <p class="text-sm text-base-content/60 font-mono">{{ radius.value }}</p>
+                                <p class="text-xs text-base-content/50 mt-2">{{ radius.usage }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Shadows #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Shadows</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {% for shadow in brand.shadows %}
+                        <div class="card bg-base-100 shadow-lg">
+                            <div class="card-body">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-24 h-24 bg-base-100 rounded-lg" style="box-shadow: {{ shadow.value }}"></div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold mb-1">{{ shadow.name }}</h4>
+                                        <p class="text-xs text-base-content/60 font-mono mb-2">{{ shadow.value }}</p>
+                                        <p class="text-sm text-base-content/50">{{ shadow.usage }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        {# Components Section #}
+        <section id="components" class="brand-section mb-24">
+            <h2 class="text-4xl font-bold mb-8">UI Components</h2>
+
+            {# Buttons #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Buttons</h3>
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">Primary Buttons</h4>
+                                <div class="flex flex-wrap gap-4 items-center">
+                                    <button class="btn btn-primary btn-lg">Large</button>
+                                    <button class="btn btn-primary">Medium</button>
+                                    <button class="btn btn-primary btn-sm">Small</button>
+                                    <button class="btn btn-primary btn-xs">Extra Small</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Button Variants</h4>
+                                <div class="flex flex-wrap gap-4 items-center">
+                                    <button class="btn btn-primary">Primary</button>
+                                    <button class="btn btn-secondary">Secondary</button>
+                                    <button class="btn btn-accent">Accent</button>
+                                    <button class="btn btn-ghost">Ghost</button>
+                                    <button class="btn btn-link">Link</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Outlined Buttons</h4>
+                                <div class="flex flex-wrap gap-4 items-center">
+                                    <button class="btn btn-outline btn-primary">Primary</button>
+                                    <button class="btn btn-outline btn-secondary">Secondary</button>
+                                    <button class="btn btn-outline btn-accent">Accent</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Button States</h4>
+                                <div class="flex flex-wrap gap-4 items-center">
+                                    <button class="btn btn-primary">Normal</button>
+                                    <button class="btn btn-primary" disabled>Disabled</button>
+                                    <button class="btn btn-primary loading">Loading</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Forms #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Form Elements</h3>
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">Text Inputs</h4>
+                                <div class="space-y-4">
+                                    <div class="form-control">
+                                        <label class="label"><span class="label-text">Default Input</span></label>
+                                        <input type="text" placeholder="Enter text" class="input input-bordered" />
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label"><span class="label-text">Primary Input</span></label>
+                                        <input type="text" placeholder="Enter text" class="input input-bordered input-primary" />
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label"><span class="label-text">Disabled Input</span></label>
+                                        <input type="text" placeholder="Disabled" class="input input-bordered" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Selects & Checkboxes</h4>
+                                <div class="space-y-4">
+                                    <div class="form-control">
+                                        <label class="label"><span class="label-text">Select Dropdown</span></label>
+                                        <select class="select select-bordered">
+                                            <option disabled selected>Pick one</option>
+                                            <option>Option 1</option>
+                                            <option>Option 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer justify-start gap-4">
+                                            <input type="checkbox" class="checkbox checkbox-primary" checked />
+                                            <span class="label-text">Checkbox option</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer justify-start gap-4">
+                                            <input type="radio" name="radio" class="radio radio-primary" checked />
+                                            <span class="label-text">Radio option</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Cards #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Cards</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h4 class="card-title">Basic Card</h4>
+                            <p>Simple card with shadow</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h4 class="card-title">Shadow XL Card</h4>
+                            <p>Card with larger shadow</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 border border-base-300">
+                        <div class="card-body">
+                            <h4 class="card-title">Bordered Card</h4>
+                            <p>Card with border instead of shadow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Alerts #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Alerts</h3>
+                <div class="space-y-4">
+                    <div class="alert alert-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>This is an informational alert message.</span>
+                    </div>
+                    <div class="alert alert-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Your operation completed successfully!</span>
+                    </div>
+                    <div class="alert alert-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <span>Warning: Please review before proceeding.</span>
+                    </div>
+                    <div class="alert alert-error">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Error! Task failed successfully.</span>
+                    </div>
+                </div>
+            </div>
+
+            {# Badges #}
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6">Badges</h3>
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="flex flex-wrap gap-4 items-center">
+                            <span class="badge">Default</span>
+                            <span class="badge badge-primary">Primary</span>
+                            <span class="badge badge-secondary">Secondary</span>
+                            <span class="badge badge-accent">Accent</span>
+                            <span class="badge badge-ghost">Ghost</span>
+                            <span class="badge badge-outline">Outline</span>
+                            <span class="badge badge-lg">Large Badge</span>
+                            <span class="badge badge-sm">Small Badge</span>
+                            <span class="badge badge-xs">Tiny</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# Icons Section #}
+        <section id="icons" class="brand-section mb-24">
+            <h2 class="text-4xl font-bold mb-8">Icons</h2>
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <p class="mb-6">This theme uses Iconify for a comprehensive icon library. Here are some commonly used icons:</p>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:home" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Home</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:account" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Account</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:settings" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Settings</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:email" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Email</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:phone" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Phone</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:cart" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Cart</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:heart" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Heart</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:star" class="text-4xl text-primary"></iconify-icon>
+                            <span class="text-xs text-center">Star</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:check-circle" class="text-4xl text-success"></iconify-icon>
+                            <span class="text-xs text-center">Success</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:alert-circle" class="text-4xl text-warning"></iconify-icon>
+                            <span class="text-xs text-center">Warning</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:close-circle" class="text-4xl text-error"></iconify-icon>
+                            <span class="text-xs text-center">Error</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <iconify-icon icon="mdi:information" class="text-4xl text-info"></iconify-icon>
+                            <span class="text-xs text-center">Info</span>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <a href="https://icon-sets.iconify.design/" target="_blank" class="btn btn-primary btn-sm">
+                            Browse All Icons
+                            <iconify-icon icon="mdi:open-in-new" class="ml-2"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('brandGuidelinesNav', () => ({
+        scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80; // Account for sticky nav
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }));
+});
+</script>
+
+{% endblock %}
