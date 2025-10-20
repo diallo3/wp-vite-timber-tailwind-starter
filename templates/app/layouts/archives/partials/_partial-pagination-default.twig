@@ -6,7 +6,7 @@
 
             {# First #}
             {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
-                <li class="first btn">
+                <li class="first">
                     <a href="{{ posts.pagination.pages|first.link }}" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:border-gray-300 hover:text-gray-700">
                     <span class="inline-flex w-5 h-4 mr-3 text-gray-400">
                         {{ icons.icon({
@@ -18,18 +18,18 @@
                     First</a>
                 </li>
             {% else %}
-                <li class="first btn disabled">
+                <li class="first disabled">
                     <button class="inline-flex items-center pt-4 pr-1 text-sm font-medium opacity-25" disabled>First</button>
                 </li>
             {% endif %}
 
             {# Previous #}
             {% if posts.pagination.prev %}
-                <li class="prev btn">
+                <li class="prev">
                     <a href="{{ posts.pagination.prev.link }}" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:border-gray-300 hover:text-gray-700">Previous</a>
                 </li>
             {% else %}
-                <li class="prev btn disabled">
+                <li class="prev disabled">
                     <button class="inline-flex items-center pt-4 pr-1 text-sm font-medium opacity-25" disabled>Previous</button>
                 </li>
             {% endif %}
@@ -51,18 +51,18 @@
 
             {# Next #}
             {% if posts.pagination.next %}
-                <li class="next btn">
+                <li class="next">
                     <a href="{{ posts.pagination.next.link }}" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:border-gray-300 hover:text-gray-700">Next</a>
                 </li>
             {% else %}
-                <li class="next btn disabled">
+                <li class="next disabled">
                     <button class="inline-flex items-center pt-4 pr-1 text-sm font-medium opacity-25" disabled>Next</button>
                 </li>
             {% endif %}
 
             {# Last #}
             {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
-                <li class="last btn">
+                <li class="last">
                     <a href="{{ posts.pagination.pages|last.link }}" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:border-gray-300 hover:text-gray-700">
                         Last
                         <span class="inline-flex w-5 h-4 ml-3 text-gray-400 -rotate-180">
@@ -75,7 +75,7 @@
                     </a>
                 </li>
             {% else %}
-                <li class="last btn disabled">
+                <li class="last disabled">
                     <button class="inline-flex items-center pt-4 pr-1 text-sm font-medium opacity-25" disabled>Last</button>
                 </li>
             {% endif %}

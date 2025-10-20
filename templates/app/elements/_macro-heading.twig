@@ -1,24 +1,24 @@
 {# Main Heading #}
 {% macro render_heading(level = 1, options = {}) %}
-    {# Validate heading level #}
-    {% set level = level|default(1)|abs|round %}
-    {% if level < 1 or level > 6 %}
-        {% set level = 1 %}
-    {% endif %}
+	{# Validate heading level #}
+	{% set level = level|default(1)|abs|round %}
+	{% if level < 1 or level > 6 %}
+		{% set level = 1 %}
+	{% endif %}
 
-    {% set defaults = {
+	{% set defaults = {
         title: 'Heading ' ~ level,
         color: color ?: currentColor,
         font: font | default('font-sans'),
         size: size | default(
-            level == 1 ? 'fluid-text-5xl' :
-            level == 2 ? 'fluid-text-xl/snug' :
-            level == 3 ? 'fluid-text-lg/snug' :
-            level == 4 ? 'fluid-text-xl' :
-            level == 5 ? 'fluid-text-lg' :
-            'fluid-text-base'
+            level == 1 ? 'text-fluid-5xl leading-16' :
+            level == 2 ? 'text-fluid-3xl/snug leading-10' :
+            level == 3 ? 'text-fluid-2xl/snug' :
+            level == 4 ? 'text-fluid-xl' :
+            level == 5 ? 'text-fluid-lg' :
+            'text-fluid-base'
         ),
-        weight: weight | default('font-semibold'),
+        weight: weight | default('font-medium'),
         case: case,
         preview: '',
         id: '',                    
@@ -26,28 +26,26 @@
         attributes: {}             
     } %}
 
-    {% set options = defaults | merge(options) %}
-    {% set headingOptions = [
+	{% set options = defaults | merge(options) %}
+	{% set headingOptions = [
         options.color,
         options.size,
         options.case,
         options.font,
         options.weight,
-        'font-bold',
-        options.classes
+        options.classes,
     ]|join(' ')|trim %}
 
-    {% set attributes = '' %}
-    {% for key, value in options.attributes %}
-        {% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value ~ '"' %}
-    {% endfor %}
+	{% set attributes = '' %}
+	{% for key, value in options.attributes %}
+		{% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value ~ '"' %}
+	{% endfor %}
 
-    <h{{ level }} 
-        id="{{ options.id }}"
-        class="{{ headingOptions }}"
-        {{ attributes|raw }}>
-            {{ options.title }}
-    </h{{ level }}>
+	{% if options.preview %}
+		<div class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title }}</div>
+	{% else %}
+		<h{{level}} class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title }}</h{{level}}>
+	{% endif %}
 {% endmacro %}
 
 {# Heading Usage 

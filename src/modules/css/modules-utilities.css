@@ -1,5 +1,14 @@
 /* Modern Swup transitions - integrated with our module-swup.js */
 /* Note: Cannot use @utility when imported via layer() in Tailwind v4 */
+
+:root {
+  --swup-transition-fade: opacity 0.3s ease-in-out;
+  --swup-transition-slide: transform 0.4s ease-in-out;
+  --swup-transition-scale: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  --broken-image-color: #f0f0f0;
+}
+
 .swup-transition-fade {
   transition: opacity 0.3s ease-in-out;
 }
@@ -61,3 +70,78 @@
     @apply text-gray-500 text-base absolute z-2 size-full flex items-center justify-center inset-0;
   }
 }
+
+
+.fluid-text-xs {
+    font-size: var(--text-fluid-xs);
+  }
+  .fluid-text-sm {
+    font-size: var(--text-fluid-sm);
+  }
+  .fluid-text-base {
+    font-size: var(--text-fluid-base);
+  }
+  .fluid-text-lg {
+    font-size: var(--text-fluid-lg);
+  }
+  .fluid-text-xl {
+    font-size: var(--text-fluid-xl);
+  }
+  .fluid-text-2xl {
+    font-size: var(--text-fluid-2xl);
+  }
+  .fluid-text-3xl {
+    font-size: var(--text-fluid-3xl);
+  }
+  .fluid-text-4xl {
+    font-size: var(--text-fluid-4xl);
+  }
+  .fluid-text-5xl {
+    font-size: var(--text-fluid-5xl);
+  }
+  .fluid-text-6xl {
+    font-size: var(--text-fluid-6xl);
+  }
+  .fluid-text-7xl {
+    font-size: var(--text-fluid-7xl);
+  }
+  .fluid-text-8xl {
+    font-size: var(--text-fluid-8xl);
+  }
+  .fluid-text-9xl {
+    font-size: var(--text-fluid-9xl);
+  }
+
+  /* Fluid line height utilities */
+  .leading-fluid-tight {
+    line-height: var(--leading-fluid-tight);
+  }
+  .leading-fluid-snug {
+    line-height: var(--leading-fluid-snug);
+  }
+  .leading-fluid-normal {
+    line-height: var(--leading-fluid-normal);
+  }
+  .leading-fluid-relaxed {
+    line-height: var(--leading-fluid-relaxed);
+  }
+
+  /* Fluid spacing utilities */
+  .space-fluid-xs {
+    margin: var(--space-fluid-xs);
+  }
+  .space-fluid-sm {
+    margin: var(--space-fluid-sm);
+  }
+  .space-fluid-md {
+    margin: var(--space-fluid-md);
+  }
+  .space-fluid-lg {
+    margin: var(--space-fluid-lg);
+  }
+  .space-fluid-xl {
+    margin: var(--space-fluid-xl);
+  }
+  .space-fluid-2xl {
+    margin: var(--space-fluid-2xl);
+  }

@@ -2,9 +2,9 @@
 {% macro icon(options={}) %}
 
     {% set options = {
-        name: name,
-        classes: [],
-        path: path ?  options.path : '', 
+        name: options.name ?: '',
+        classes: options.classes ?: [],
+        path: options.path ?: '', 
     } | merge(options) %}
     
         {# Include the SVG icon #}

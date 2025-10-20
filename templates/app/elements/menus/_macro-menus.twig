@@ -120,7 +120,7 @@
     } | merge(options) %}
 
     {% if menu %}
-         <ul class="menu {{ classes|join(' ') }} flex space-x-2">
+         <ul class="nav-buttons nav-buttons__menu {{ classes|join(' ') }} flex space-x-2 header-actions__ctas flex-nowrap">
             {% for item in menu %}
             
                 {% set item_button_options = options.button_options | merge({
@@ -151,7 +151,7 @@
     } | merge(options) %}
 
     {% if menu %}
-        <div class="menu {{ options.classes|join(' ') }} {{ options.name }}">
+        <div class="nav-social {{ options.classes|join(' ') }} {{ options.name }}">
             {% for item in menu %}
                 <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition duration-150 ease-in-out" title="{{ item.title }}" target="_blank">
                     {{ icons.icon({
@@ -180,7 +180,7 @@
     } | merge(options) %}
 
     {% if menu %}
-        <menu class="menu {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
+        <menu class="basic-nav {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
             {% for item in menu %}
                 <li class="{{ item.classes|join(' ') }}">
                     <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition-colors duration-150 ease-in-out">{{ item.title }}</a>

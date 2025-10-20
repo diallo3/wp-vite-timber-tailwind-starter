@@ -1,11 +1,11 @@
 {% macro render_image(options={}) %}
     {% set options = {
-        src: get_image(src).src | default('https://via.placeholder.com/150'),
-        class: class,
-        fit: fit | default('object-cover w-full h-full'),
-        alt: alt | default('Image alt text'),
+        src: options.src | default('https://via.placeholder.com/150'),
+        class: options.class | default(''),
+        fit: options.fit | default('object-cover w-full h-full'),
+        alt: options.alt | default('Image alt text'),
     } | merge(options) %}
 
     {# Image #}
-    <img src="{{ options.src | towebp }}" class="{{ options.fit }} {{ options.class|join(' ') }}" alt="{{ options.alt }}" loading="lazy">
+    <img src="{{ options.src }}" class="{{ options.fit }} {{ options.class }}" alt="{{ options.alt }}" loading="lazy">
 {% endmacro %}

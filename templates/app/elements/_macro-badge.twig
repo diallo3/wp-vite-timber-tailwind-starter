@@ -1,7 +1,7 @@
 {% macro render_accent_badge(options={}) %}
 
     {% set options = {
-        title: title | default('Badge'),
+        title: options.title | default('Badge'),
     } | merge(options)  %}
 
     {# accent bagdge #}
@@ -13,9 +13,9 @@
 {% macro render_contained_badge(options=[]) %}
 
     {% set options = {
-        title: title | default('Badge'),
-        color: color | default('dodger-blue'),
-        size: size | default('text-sm'),
+        title: options.title | default('Badge'),
+        color: options.color | default('dodger-blue'),
+        size: options.size | default('text-sm'),
     } | merge(options)  %}
 
     {# contained bagdge #}

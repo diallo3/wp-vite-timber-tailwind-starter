@@ -1,6 +1,6 @@
 {# Unified Card Macro - Consolidates all card variations #}
-{# Using master elements import for cleaner code #}
-{% import "@Elements/_macro-elements.twig" as ui %}
+{# Import individual element macros to avoid circular dependencies #}
+
 
 {#
   Unified Card Macro
@@ -30,29 +30,35 @@
 #}
 
 {% macro render_card(type = 'simple', options = {}) %}
+    {% import "@Elements/_macro-icon.twig" as icons %}
+    {% import "@Elements/_macro-heading.twig" as headings %}
+    {% import "@Elements/_macro-badge.twig" as badges %}
+    {% import "@Elements/_macro-image-object.twig" as images %}
+    {% import "@Elements/_macro-button.twig" as buttons %}
+
     {% set defaults = {
         id: random(),
-        title: '',
-        content: '',
-        entry: '',
-        excerpt: '',
-        image: null,
-        thumbnail: null,
-        badge: '',
-        accent: '',
-        link: '#',
-        button: {
+        title: options.title ?: '',
+        content: options.content ?: '',
+        entry: options.entry ?: '',
+        excerpt: options.excerpt ?: '',
+        image: options.image ?: null,
+        thumbnail: options.thumbnail ?: null,
+        badge: options.badge ?: '',
+        accent: options.accent ?: '',
+        href: options.href ?: '#',
+        button: options.button ?: {
             text: 'Read More',
-            url: null,
+            href: null,
             style: 'outline',
             size: 'small',
             class: ''
         },
-        meta: {},
-        class: '',
-        attributes: {},
-        is_preview: false,
-        theme: null
+        meta: options.meta ?: {},
+        class: options.class ?: '',
+        attributes: options.attributes ?: {},
+        is_preview: options.is_preview ?: false,
+        theme: options.theme ?: null
     } %}
 
     {% set config = defaults | merge(options) %}
@@ -62,16 +68,16 @@
     {# Simple Card #}
     {% if type == 'simple' %}
         <article id="{{ card_id }}" class="{{ card_class }} relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm text-pretty size-full"
-        {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
-            {% if config.image %}
-                <figure class="aspect-16/7 card-simple__featured">
-                    {{ images.render_image({
-                        src: config.image.src ?: (config.theme ? config.theme.link ~ '/dist/icons/defaults/icon-temp-image.svg' : ''),
-                        alt: config.image.alt ?: config.title,
-                        class: config.image.class ?: ''
-                    }) }}
-                </figure>
-            {% endif %}
+            {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
+                {% if config.image %}
+                    <figure class="aspect-16/7 card-simple__featured">
+                        {{ images.render_image({
+                            src: config.image.src ?: (config.theme ? config.theme.link ~ '/dist/icons/defaults/icon-temp-image.svg' : ''),
+                            alt: config.image.alt ?: config.title,
+                            class: config.image.class ?: ''
+                        }) }}
+                    </figure>
+                {% endif %}
 
             <div class="flex flex-col gap-2 p-5 pb-2.5 card-simple__body">
                 <div class="card-simple__header lg:min-h-12">
@@ -84,11 +90,11 @@
                         {% endif %}
 
                         {% if config.title %}
-                            <div class="pe-8">
-                                {{ headings.render_heading(3, {
+                            <div class="pe-8 line-clamp-2">
+                                {{ headings.render_heading(3, { 
                                     title: config.title,
-                                    size: 'text-lg md:text-xl lg:text-2xl/7 line-clamp-2 tracking-tight',
                                     weight: 'font-bold',
+                                    classes: 'fluid-text-xl',
                                     preview: config.is_preview
                                 }) }}
                             </div>
@@ -103,11 +109,11 @@
                 {% endif %}
             </div>
 
-            {% if config.button.text and (config.button.url or config.link) %}
+            {% if config.button.text and (config.button.href or config.link) %}
                 <div class="absolute inset-x-0 bottom-0 w-full p-5 card-simple__footer">
                     {{ buttons.render_button_link({
                         text: config.button.text,
-                        link: config.button.url ?: config.link,
+                        href: config.button.href ?: config.link,
                         style: config.button.style,
                         size: config.button.size,
                         class: config.button.class
@@ -130,7 +136,10 @@
                         <figure class="aspect-16/8 w-full bg-gray-200 card-post__featured border-b border-gray-100 relative">
                             {% if video_post %}
                                 <div class="absolute inset-0 flex items-center justify-center text-white bg-black/30">
-                                    {{ icons.icon('youtube', 'w-12 h-12 group-hover:scale-110 transition-all duration-100 ease-linear') }}
+                                    {{ icons.icon({
+                                        name: 'youtube',
+                                        classes: ['w-12', 'h-12', 'group-hover:scale-110', 'transition-all', 'duration-100', 'ease-linear']
+                                    }) }}
                                 </div>
                             {% endif %}
                             {% set image_src = config.image ? config.image.src : config.thumbnail.src %}
@@ -171,7 +180,7 @@
                 <div class="absolute inset-x-0 bottom-0 px-6 pb-2 card-post__cta">
                     {{ buttons.render_button_link({
                         text: config.button.text,
-                        link: config.button.url ?: config.link,
+                        href: config.button.url ?: config.link,
                         style: config.button.style,
                         size: config.button.size,
                         class: config.button.class
@@ -227,7 +236,7 @@
                         <div class="py-2 mt-4 card-post__cta">
                             {{ buttons.render_button_link({
                                 text: config.button.text,
-                                link: config.button.url ?: config.link,
+                                href: config.button.url ?: config.link,
                                 style: config.button.style,
                                 size: config.button.size,
                                 class: config.button.class ?: 'text-blue-600 border-blue-600'
@@ -275,7 +284,7 @@
                             {{ icons.icon({
                                 path: 'social',
                                 name: 'linkedin',
-                                classes: 'size-5'
+                                classes: ['size-5']
                             }) }}
                         </a>
                     </div>

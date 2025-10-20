@@ -1,6 +1,9 @@
 {% extends "@Layouts/layout-base.twig" %}
 
+
+
 {% block content %}
+
 
     {% embed "@Layouts/archives/_embed-archive-with-header.twig" %}
     
@@ -10,26 +13,29 @@
                 inview: 'false',
             } %}
                 {% block section_content %}
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts">
+
+                    {% import "@Elements/_macro-card.twig" as cards %}
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts">
                         {% for post in posts %}
                             <div id="article-{{ post.id }}" class="artice-posts__item artice-posts__item-{{ loop.index }}">
-                                {% include "/templates/app/components/cards/_component-card-simple.twig" with {
-                                    id: post.id,
+                                {{ cards.simple_card({
                                     title: post.title,
-                                    link: post.link,
-                                    image: post.thumbnail.src,
-                                    entry: post.excerpt,
-                                    clamp: 'line-clamp-3',
-                                } %}
+                                    content: post.excerpt,
+                                    image: { src: post.thumbnail.src, alt: post.thumbnail.alt },
+                                    badge: '',
+                                    button: { 
+                                        text: 'Read More', 
+                                        style: 'solid', 
+                                        href: post.link 
+                                    }
+                                }) }}
                             </div>
                         {% endfor %}
                     </div>
-                
-                    
+
                 {% endblock %}
                 
             {% endembed %}
-    
         {% endblock %}
     {% endembed %}
 {% endblock %}
