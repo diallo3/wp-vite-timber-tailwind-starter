@@ -18,7 +18,8 @@
 
 				<hgroup class="flex flex-col Space-y-2 secondary-heading-display hero-heading__title">
 					{{ headings.render_heading(1, {
-                            title: title ? title : 'Longer Page Title Description'
+                        title: title ? title : 'Longer Page Title Description',
+                        size: 'text-6xl md:text-7xl lg:fluid-text-5xl'
                     })}}
 					{% if subtitle %}
 						<div class="view-hero__item">

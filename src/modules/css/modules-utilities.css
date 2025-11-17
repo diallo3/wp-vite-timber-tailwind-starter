@@ -1,27 +1,28 @@
 /* Modern Swup transitions - integrated with our module-swup.js */
-/* Note: Cannot use @utility when imported via layer() in Tailwind v4 */
+/* Using @utility directive for Tailwind 4 responsive variants */
+/* Note: This file is imported without layer() wrapper to allow @utility directives */
 
 :root {
   --swup-transition-fade: opacity 0.3s ease-in-out;
   --swup-transition-slide: transform 0.4s ease-in-out;
   --swup-transition-scale: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-
   --broken-image-color: #f0f0f0;
 }
 
-.swup-transition-fade {
+/* Swup transition utilities - now with responsive variants */
+@utility swup-transition-fade {
   transition: opacity 0.3s ease-in-out;
 }
 
-.swup-transition-slide {
+@utility swup-transition-slide {
   transition: transform 0.4s ease-in-out;
 }
 
-.swup-transition-scale {
+@utility swup-transition-scale {
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* Loading state styles - cannot use @utility with nested selectors */
+/* Loading state styles - state variants work with @utility */
 .is-changing {
   pointer-events: none;
 }
@@ -39,7 +40,7 @@
   opacity: 0.8;
 }
 
-/* WordPress admin bar compatibility - cannot use @utility with nested selectors */
+/* WordPress admin bar compatibility */
 .has-admin-bar .swup-progress-bar {
   top: 32px;
 }
@@ -61,7 +62,7 @@
   position: relative;
   &::before {
     content: '';
-	@apply  rounded-md absolute top-1/2 left-0 size-full -translate-y-1/2;
+    @apply rounded-md absolute top-1/2 left-0 size-full -translate-y-1/2;
     height: calc(100% + 10px);
     background-color: var(--broken-image-color);
   }
@@ -71,77 +72,148 @@
   }
 }
 
+/* Fluid typography utilities - now with responsive variants (sm:, md:, lg:, etc.) */
+@utility fluid-text-xs {
+  font-size: var(--text-fluid-xs);
+}
 
-.fluid-text-xs {
-    font-size: var(--text-fluid-xs);
-  }
-  .fluid-text-sm {
-    font-size: var(--text-fluid-sm);
-  }
-  .fluid-text-base {
-    font-size: var(--text-fluid-base);
-  }
-  .fluid-text-lg {
-    font-size: var(--text-fluid-lg);
-  }
-  .fluid-text-xl {
-    font-size: var(--text-fluid-xl);
-  }
-  .fluid-text-2xl {
-    font-size: var(--text-fluid-2xl);
-  }
-  .fluid-text-3xl {
-    font-size: var(--text-fluid-3xl);
-  }
-  .fluid-text-4xl {
-    font-size: var(--text-fluid-4xl);
-  }
-  .fluid-text-5xl {
-    font-size: var(--text-fluid-5xl);
-  }
-  .fluid-text-6xl {
-    font-size: var(--text-fluid-6xl);
-  }
-  .fluid-text-7xl {
-    font-size: var(--text-fluid-7xl);
-  }
-  .fluid-text-8xl {
-    font-size: var(--text-fluid-8xl);
-  }
-  .fluid-text-9xl {
-    font-size: var(--text-fluid-9xl);
-  }
+@utility fluid-text-sm {
+  font-size: var(--text-fluid-sm);
+}
 
-  /* Fluid line height utilities */
-  .leading-fluid-tight {
-    line-height: var(--leading-fluid-tight);
-  }
-  .leading-fluid-snug {
-    line-height: var(--leading-fluid-snug);
-  }
-  .leading-fluid-normal {
-    line-height: var(--leading-fluid-normal);
-  }
-  .leading-fluid-relaxed {
-    line-height: var(--leading-fluid-relaxed);
-  }
+@utility fluid-text-base {
+  font-size: var(--text-fluid-base);
+}
 
-  /* Fluid spacing utilities */
-  .space-fluid-xs {
-    margin: var(--space-fluid-xs);
-  }
-  .space-fluid-sm {
-    margin: var(--space-fluid-sm);
-  }
-  .space-fluid-md {
-    margin: var(--space-fluid-md);
-  }
-  .space-fluid-lg {
-    margin: var(--space-fluid-lg);
-  }
-  .space-fluid-xl {
-    margin: var(--space-fluid-xl);
-  }
-  .space-fluid-2xl {
-    margin: var(--space-fluid-2xl);
-  }
+@utility fluid-text-lg {
+  font-size: var(--text-fluid-lg);
+}
+
+@utility fluid-text-xl {
+  font-size: var(--text-fluid-xl);
+}
+
+@utility fluid-text-2xl {
+  font-size: var(--text-fluid-2xl);
+}
+
+@utility fluid-text-3xl {
+  font-size: var(--text-fluid-3xl);
+}
+
+@utility fluid-text-4xl {
+  font-size: var(--text-fluid-4xl);
+}
+
+@utility fluid-text-5xl {
+  font-size: var(--text-fluid-5xl);
+}
+
+@utility fluid-text-6xl {
+  font-size: var(--text-fluid-6xl);
+}
+
+@utility fluid-text-7xl {
+  font-size: var(--text-fluid-7xl);
+}
+
+@utility fluid-text-8xl {
+  font-size: var(--text-fluid-8xl);
+}
+
+@utility fluid-text-9xl {
+  font-size: var(--text-fluid-9xl);
+}
+
+/* Fluid line height utilities - now with responsive variants */
+@utility leading-fluid-tight {
+  line-height: var(--leading-fluid-tight);
+}
+
+@utility leading-fluid-snug {
+  line-height: var(--leading-fluid-snug);
+}
+
+@utility leading-fluid-normal {
+  line-height: var(--leading-fluid-normal);
+}
+
+@utility leading-fluid-relaxed {
+  line-height: var(--leading-fluid-relaxed);
+}
+
+/* Fluid spacing utilities - now with responsive variants */
+/* Margin variants */
+@utility m-fluid-xs {
+  margin: var(--space-fluid-xs);
+}
+
+@utility m-fluid-sm {
+  margin: var(--space-fluid-sm);
+}
+
+@utility m-fluid-md {
+  margin: var(--space-fluid-md);
+}
+
+@utility m-fluid-lg {
+  margin: var(--space-fluid-lg);
+}
+
+@utility m-fluid-xl {
+  margin: var(--space-fluid-xl);
+}
+
+@utility m-fluid-2xl {
+  margin: var(--space-fluid-2xl);
+}
+
+/* Padding variants */
+@utility p-fluid-xs {
+  padding: var(--space-fluid-xs);
+}
+
+@utility p-fluid-sm {
+  padding: var(--space-fluid-sm);
+}
+
+@utility p-fluid-md {
+  padding: var(--space-fluid-md);
+}
+
+@utility p-fluid-lg {
+  padding: var(--space-fluid-lg);
+}
+
+@utility p-fluid-xl {
+  padding: var(--space-fluid-xl);
+}
+
+@utility p-fluid-2xl {
+  padding: var(--space-fluid-2xl);
+}
+
+/* Legacy support - keep space-fluid-* for backward compatibility */
+@utility space-fluid-xs {
+  margin: var(--space-fluid-xs);
+}
+
+@utility space-fluid-sm {
+  margin: var(--space-fluid-sm);
+}
+
+@utility space-fluid-md {
+  margin: var(--space-fluid-md);
+}
+
+@utility space-fluid-lg {
+  margin: var(--space-fluid-lg);
+}
+
+@utility space-fluid-xl {
+  margin: var(--space-fluid-xl);
+}
+
+@utility space-fluid-2xl {
+  margin: var(--space-fluid-2xl);
+}

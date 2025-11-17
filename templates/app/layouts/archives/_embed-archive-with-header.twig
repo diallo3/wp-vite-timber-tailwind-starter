@@ -1,6 +1,6 @@
-<div class="content-wrapper inview-container">
+<div class="archive-container inview-container">
     
-    <div class="">
+    <div class="archive-container__body space-y-8">
         {# archive hero #}
         {% embed "@Layouts/sections/_embed-section-full.twig" with {
                 inview: 'false',
@@ -19,7 +19,7 @@
         {% endembed %}
         
 
-        <div class="archive-body inview-content">
+        <div class="archive-container__content inview-content">
             {% block archive_content %}
                 <p>Archive Content</p>
             {% endblock %}

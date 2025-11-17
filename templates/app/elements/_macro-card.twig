@@ -67,10 +67,10 @@
 
     {# Simple Card #}
     {% if type == 'simple' %}
-        <article id="{{ card_id }}" class="{{ card_class }} relative pb-16 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm text-pretty size-full"
+        <article id="card-simple-{{ card_id }}" class="{{ card_class }} flex flex-col relative overflow-hidden bg-white border border-gray-200 rounded-md text-pretty size-full card-simple"
             {% for attr, value in config.attributes %} {{ attr }}="{{ value }}"{% endfor %}>
                 {% if config.image %}
-                    <figure class="aspect-16/7 card-simple__featured">
+                    <figure class="card-simple__featured aspect-16/9 flex-shrink-0">
                         {{ images.render_image({
                             src: config.image.src ?: (config.theme ? config.theme.link ~ '/dist/icons/defaults/icon-temp-image.svg' : ''),
                             alt: config.image.alt ?: config.title,
@@ -79,47 +79,49 @@
                     </figure>
                 {% endif %}
 
-            <div class="flex flex-col gap-2 p-5 pb-2.5 card-simple__body">
-                <div class="card-simple__header lg:min-h-12">
-                    <hgroup class="block space-y-2 text-balance">
-                        {% if config.badge or config.accent %}
-                            {{ badges.render_accent_badge({
-                                title: config.badge ?: config.accent,
-                                color: 'text-blue-600 dark:text-cyan-400'
-                            }) }}
-                        {% endif %}
-
-                        {% if config.title %}
-                            <div class="pe-8 line-clamp-2">
-                                {{ headings.render_heading(3, { 
-                                    title: config.title,
-                                    weight: 'font-bold',
-                                    classes: 'fluid-text-xl',
-                                    preview: config.is_preview
+            <div class="card-simple__body grid grid-cols-1 grid-rows-3 p-fluid-md md:p-fluid-lg !pb-0 gap-fluid-sm md:gap-fluid-md flex-1 justify-between gap-4">
+                <div class="flex flex-col flex-1 gap-fluid-sm md:gap-fluid-md row-span-2">
+                    <header class="card-simple__header">
+                        <hgroup class="block space-y-2 text-balance">
+                            {% if config.badge or config.accent %}
+                                {{ badges.render_accent_badge({
+                                    title: config.badge ?: config.accent,
+                                    color: 'text-blue-600 dark:text-cyan-400'
                                 }) }}
-                            </div>
-                        {% endif %}
-                    </hgroup>
+                            {% endif %}
+                            {% if config.title %}
+                                <div class="pe-8 line-clamp-2">
+                                    {{ headings.render_heading(3, {
+                                        title: config.title,
+                                        weight: 'font-bold',
+                                        classes: 'fluid-text-xl leading-tight',
+                                        preview: config.is_preview
+                                    }) }}
+                                </div>
+                            {% endif %}
+                        </hgroup>
+                    </header>
+                    {% if config.excerpt or config.content %}
+                        <section class="card-post__excerpt prose min-h-0 overflow-hidden">
+                            <p class="mt-2 text-gray-600 line-clamp-3">
+                                {{ config.excerpt ?: config.content }}
+                            </p>
+                        </section>
+                    {% endif %}
                 </div>
 
-                {% if config.content or config.entry %}
-                    <div class="prose-sm prose card-simple__entry prose-p:leading-5">
-                        {{ config.content ?: config.entry }}
-                    </div>
-                {% endif %}
+                {% if config.button.text and (config.button.href or config.link) %}
+                    <footer class="card-simple__footer py-5">
+                        {{ buttons.render_button_link({
+                            text: config.button.text,
+                            href: config.button.href ?: config.link,
+                            style: config.button.style,
+                            size: config.button.size,
+                            class: config.button.class
+                        }) }}
+                    </footer>
+              {% endif %}
             </div>
-
-            {% if config.button.text and (config.button.href or config.link) %}
-                <div class="absolute inset-x-0 bottom-0 w-full p-5 card-simple__footer">
-                    {{ buttons.render_button_link({
-                        text: config.button.text,
-                        href: config.button.href ?: config.link,
-                        style: config.button.style,
-                        size: config.button.size,
-                        class: config.button.class
-                    }) }}
-                </div>
-            {% endif %}
         </article>
 
     {# Post Card #}
@@ -153,7 +155,7 @@
                 </div>
             {% endif %}
 
-            <div class="px-6 pb-12 card-post__body">
+            <div class="px-6 pb-12 card-post__body flex-1 bg-blue-500">
                 <div class="relative group">
                     {% if config.title %}
                         <div class="card-post__title">

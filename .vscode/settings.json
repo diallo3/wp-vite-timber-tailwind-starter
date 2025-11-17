@@ -1,0 +1,10 @@
+{
+    // Sets the number of spaces for indentation
+    "editor.tabSize": 4,
+    // Inserts spaces when pressing Tab
+    "editor.insertSpaces": true,
+    // Associates files matching "*.css" pattern with the "tailwindcss" language identifier
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
+}
