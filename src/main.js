@@ -11,7 +11,7 @@ import '@tailwindplus/elements';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeHeadroom } from './modules/js/module-headroom';
 import { initializeSwup, createSwupTransitions } from './modules/js/module-swup';
-import { navHeader, generalInView, scrollAnimations } from './modules/js/module-motionOne';
+import { initMotionLoaded, navHeader, generalInView, staggerInView, scrollAnimations } from './modules/js/module-motionOne';
 
 // Styles
 import './app.css';
@@ -34,12 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeSwup();
 
         // Initialize animations
+        initMotionLoaded();
         navHeader();
         generalInView();
+        staggerInView();
         scrollAnimations();
 
         // Store animation functions globally for Swup re-initialization
         window.generalInView = generalInView;
+        window.staggerInView = staggerInView;
         window.scrollAnimations = scrollAnimations;
 
     } catch (error) {

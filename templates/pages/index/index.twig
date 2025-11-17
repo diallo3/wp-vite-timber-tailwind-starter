@@ -15,9 +15,9 @@
                 {% block section_content %}
 
                     {% import "@Elements/_macro-card.twig" as cards %}
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts">
+                    <ul class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts stagger-inview-container">
                         {% for post in posts %}
-                            <div id="article-{{ post.id }}" class="artice-posts__item artice-posts__item-{{ loop.index }}">
+                            <li id="article-{{ post.id }}" class="artice-posts__item artice-posts__item-{{ loop.index }} stagger-inview-item">
                                 {{ cards.simple_card({
                                     title: post.title,
                                     content: post.excerpt,
@@ -29,9 +29,9 @@
                                         href: post.link 
                                     }
                                 }) }}
-                            </div>
+                            </li>
                         {% endfor %}
-                    </div>
+                    </ul>
 
                 {% endblock %}
                 

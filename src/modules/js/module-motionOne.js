@@ -1,4 +1,27 @@
-import { animate, inView } from "motion";
+import { animate, inView, stagger } from "motion";
+
+/**
+ * Add a class to indicate Motion One is loaded
+ * This allows CSS to respond when animations are available
+ */
+export const initMotionLoaded = () => {
+    try {
+        // If document is not ready, wait for it
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.documentElement.classList.add('motion-loaded');
+            });
+        } else {
+            // Document is already ready
+            document.documentElement.classList.add('motion-loaded');
+        }
+    } catch (error) {
+        console.warn('Failed to initialize motion loaded class:', error);
+    }
+};
+  
+// Initialize when module loads (Motion One is loaded if import succeeds)
+initMotionLoaded();
 
 /**
  * Animate navigation header elements on page load
@@ -59,43 +82,71 @@ export const navHeader = () => {
  * Targets: .inview-container elements and their .inview-item children
  */
 export const generalInView = () => {
-  const sections = document.querySelectorAll(".inview-container");
+    const sections = document.querySelectorAll(".inview-container .inview-item");
 
-  if (!sections.length) return;
+    if (!sections.length) return;
 
-  try {
-    sections.forEach((section) => {
-      inView(section, ({ target }) => {
-        const sectionItems = target.querySelectorAll(".inview-item");
-
-        // Animate the container first
-        animate(target,
-          { opacity: [0, 1], y: ["1.5rem", "0"] },
-          { delay: 0.1, duration: 0.6, easing: [0.17, 0.55, 0.55, 1] }
+    inView(sections, (element) => {
+        animate(
+            element, 
+            { 
+                opacity: [0, 1], 
+                y: ["1.5rem", "0"] 
+            }, 
+            { 
+                duration: 0.6, 
+                easing: [0.17, 0.55, 0.55, 1],
+                delay: stagger(0.5)
+            }
         );
-
-        // Then animate child items with stagger
-        if (sectionItems.length) {
-          sectionItems.forEach((item, index) => {
-            animate(item,
-              { opacity: [0, 1], y: ["1.5rem", "0"] },
-              {
-                delay: 0.3 + (index * 0.1),
-                duration: 0.6,
-                easing: [0.17, 0.55, 0.55, 1]
-              }
+        return () => {
+            animate(
+                element, 
+                { 
+                    opacity: [0, 1], 
+                    y: ["0", "1.5rem" ] 
+                }, 
             );
-          });
-        }
-      }, {
+        };
+    }, {
         amount: 0.3,
-        margin: "-100px"  // Start animation 100px before element is visible
-      });
+        margin: "-100px"
     });
-  } catch (error) {
-    console.warn('InView animation failed:', error);
-  }
+}
+
+export const staggerInView = () => {
+    const sections = document.querySelectorAll(".stagger-inview-container");
+
+    if (!sections.length) return;
+
+    // Handle each stagger-inview container separately
+    inView(sections, (element) => {
+        const items = element.querySelectorAll(".stagger-inview-item");
+        animate(
+            items, 
+            { 
+                opacity: [0, 1], 
+                y: ["0.5rem", "0"] 
+            }, 
+            { 
+                duration: 0.85, 
+                easing: [0.17, 0.55, 0.55, 1], 
+                delay: stagger(0.2) 
+            }
+        );
+        return () => animate(
+            element, 
+            { 
+                opacity: [1, 0], 
+                y: ["0", "-0.5rem"] 
+            }
+        );
+    }, { 
+        amount: 0.3, 
+        margin: "-50px" 
+    });
 };
+
 
 /**
  * Animate elements on scroll with more control
