@@ -149,7 +149,7 @@ class StarterTimber extends Site {
 	 * @param string $twig get extension.
 	 */
 	public function add_to_twig($twig) {
-		$twig->addExtension(new Twig\Extension\StringLoaderExtension());
+		// StringLoaderExtension was removed in Twig 3.0 - not needed if not using template_from_string()
 		$twig->addFilter(new Twig\TwigFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
 	}

@@ -17,7 +17,8 @@
 	],
 	"require": {
 		"palmiak/timber-acf-wp-blocks": "dev-master",
-		"timber/timber": "^2.0"
+		"timber/timber": "^2.0",
+		"twig/twig": "^3.0"
 	},
 	"config": {
 		"allow-plugins": {

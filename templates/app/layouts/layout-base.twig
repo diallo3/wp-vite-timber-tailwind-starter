@@ -3,7 +3,7 @@
 	<head>
 		<!-- Base meta tags -->
 		<meta charset="{{ site.charset }}">
-		<title>{{ title }}</title>
+		<title>{{ title | default(site.name) }}</title>
 		<meta name="language" content="english" />
 		<meta name="description" content="{{ site.description }}" />
 		
@@ -46,7 +46,7 @@
             {% include '@Globals/headers/_global-header-main.twig' %}
         {% endblock %}
 
-		<main id="swup" class="bg-white lg:pt-20 layout transition-fade layout-base__main" role="main">
+		<main id="swup" class="bg-white lg:pt-20 layout transition-fade layout-base__main [.admin-bar_&]:pt-24" role="main">
 			{% block content %}
 				Sorry, no content
 			{% endblock %}
