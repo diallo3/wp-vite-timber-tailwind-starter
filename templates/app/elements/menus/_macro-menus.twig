@@ -10,7 +10,7 @@
 
     {% if menu %}
    
-        <menu class="lg:flex items-center justify-between space-x-2 hidden {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
+        <menu class="menu menu-horizontal {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
             {% for item in menu %}
                 <li
                     x-data="{ 
@@ -131,7 +131,7 @@
                     
                     {{ buttons.render_button_link({
                         text: item.title,
-                        link: item.link,
+                        href: item.link,
                     } | merge(item_button_options )) }}
                 </li>
             {% endfor %}
