@@ -16,6 +16,17 @@
         }
     }
 
+    /* Header nav link hover — over hero (transparent) vs solid */
+    .site-header .site-header__center a span {
+        @apply transition-colors duration-300;
+    }
+    .site-header--over-hero .site-header__center a:hover span {
+        @apply bg-tiber-500/30;
+    }
+    .site-header:not(.site-header--over-hero) .site-header__center a:hover span {
+        @apply bg-gray-200;
+    }
+
     /* Reset paragraph font size inheritance */
     p {
         font-size: inherit;

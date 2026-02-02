@@ -21,7 +21,9 @@
                     @mouseenter="open = true"
                     @mouseleave="open = false"
                     class="{{ item.classes | join(' ') }} group cursor-pointer relative">
-                    <a href="{{ item.link }}" class="block {{ options.link_classes|join(' ') }}" target="{{ item.target }}">{{ item.title }}</a>
+                    <a href="{{ item.link }}" class="block {{ options.link_classes|join(' ') }}" target="{{ item.target }}">
+                        <span class="block py-2 px-4 transition-colors duration-300 ease-in-out">{{ item.title }}</span>
+                    </a>
 
                     {# item children #}
                     {% if item.children %}
@@ -35,7 +37,7 @@
                             x-transition:leave-end="opacity-0"
                             x-cloak
                             @focusout="await $nextTick();!$el.contains($focus.focused()) && (open = false)"
-                            class="origin-top-right absolute top-[80%] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded-sm shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
+                            class="origin-top-right absolute top-[calc(100%+0.2rem)] left-1/2 -translate-x-1/2  min-w-full border-2 border-dodger-blue-900/50 px-8 py-1 text-left rounded-sm shadow-lg [& z-50] [x-cloak]:hidden overflow-hidden bg-white"
                             data-level="{{ options.level + 1 }}"
                         >
                             {% if item.meta('mega_menu_item') %} 
@@ -118,16 +120,23 @@
     {% set options = {
         name: '',
         classes: [],
-        button_options: {}
+        button_options: {},
+        over_hero: false,
+        rest_style: 'secondary',
+        rest_type: 'outline',
+        default_style: 'secondary',
+        default_type: 'outline',
     } | merge(options) %}
 
     {% if menu %}
          <ul class="nav-buttons nav-buttons__menu {{ classes|join(' ') }} flex space-x-2 lg:space-x-4 xl:space-x-6 header-actions__ctas flex-nowrap">
             {% for item in menu %}
-            
+                {# Over hero: first = style/type, rest = rest_style/rest_type. Not over hero: all = default_style/default_type. #}
+                {% set resolved_style = options.over_hero ? (loop.first ? options.style : options.rest_style) : options.default_style and loop.first ? 'secondary' : 'primary'  %}
+                {% set resolved_type = options.over_hero ? (loop.first ? options.type : options.rest_type) : options.default_type and loop.first ? 'solid' : 'outline'    %}
                 {% set item_button_options = options.button_options | merge({
-                    style: loop.first ? 'secondary' : 'white',
-                    type: loop.first ? 'solid' : 'outline',
+                    style: resolved_style,
+                    type: resolved_type,
                 }) | merge(item.button_options | default({})) %}
                 
                 <li class="{{ item.classes | join(' ') }} btn-{{ loop.index }}">

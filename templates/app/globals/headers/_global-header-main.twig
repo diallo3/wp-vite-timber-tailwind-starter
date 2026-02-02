@@ -2,12 +2,22 @@
 {% import "@Elements/_macro-icon.twig" as icons %}
 {% import "@Elements/_macro-logos.twig" as logos %}
 
-<header x-data="{ mobileNavOpen: false,  scrolledFromTop: false  }" 
+{# Transparent header when Section Header Complex is the first section; otherwise white #}
+{% set is_header_transparent = flexible_content is defined and flexible_content|length > 0 and flexible_content[0].component_name == 'section_header_complex' %}
+
+<header x-data="{ 
+        mobileNavOpen: false, 
+        scrolledFromTop: false,
+        isHeaderTransparent: {{ is_header_transparent ? 'true' : 'false' }}
+    }"
         id="site-header" 
-         x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
-        @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
-        :class="{ '' : scrolledFromTop }"
-        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header [.admin-bar_&]:top-[32px]"
+        x-init="scrolledFromTop = window.pageYOffset >= 50"
+        @scroll.window="scrolledFromTop = window.pageYOffset >= 50"
+        :class="{
+            'bg-white border-b border-gray-200': !isHeaderTransparent,
+            'bg-transparent site-header--over-hero': isHeaderTransparent && !scrolledFromTop
+        }"
+        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 [.admin-bar_&]:top-[32px]"
 >
     <!-- Main Header Content -->
     <div id="header-content" class="container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
@@ -16,8 +26,10 @@
             :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
             class="flex relative w-48 transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300">
-                <span class="inline-flex w-full">
+            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300 ">
+                <span 
+                    :class="isHeaderTransparent ? 'ring-transparent' : 'ring-gray-200 bg-white'"
+                    class="inline-flex w-full ring-2 ">
                     {{ logos.render_main_logo() }}
                 </span>
                 <span class="sr-only">{{ site.title }}</span>
@@ -26,12 +38,14 @@
         </div>
         
 
-        {# center navigation #}
-        <nav id="headerNavigation" class="site-header__center w-full lg:px-8 xl:px-16">
+        {# center navigation — white text over hero, dark when solid or scrolled #}
+        <nav id="headerNavigation" 
+             class="site-header__center w-full lg:px-8 xl:px-16 transition-colors duration-300"
+             :class="(isHeaderTransparent && !scrolledFromTop) ? 'text-white' : 'text-gray-900'">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
-                classes: 'w-full text-white',
-                link_classes: 'text-white sm:text-base tracking-widest font-semibold px-4 py-6',
+                classes: 'w-full',
+                link_classes: 'sm:text-base tracking-wide font-semibold py-3 px-0.5 hover:bg-transparent [&>span]:rounded-sm transition-colors duration-300',
                 })
             }}
         </nav>
@@ -40,7 +54,13 @@
         <div id="headerActions" class="flex items-center justify-between space-x-4 header-actions site-header__right">
 
             <nav id="headerActions" class="hidden site-header__ctas lg:flex">
-                {{ menus.render_buttons_menu(menu.header_buttons.get_items) }}
+                {{ menus.render_buttons_menu(menu.header_buttons.get_items, {
+                    over_hero: is_header_transparent,
+                    style: 'secondary',
+                    type: 'solid',
+                    rest_style: 'white',
+                    rest_type: 'outline',
+                }) }}
             </nav> 
 
             <!-- Open Mobile Navigation lg:hidden  -->
