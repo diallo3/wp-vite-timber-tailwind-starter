@@ -1,0 +1,191 @@
+{
+    "key": "group_69802e8e0e0d2",
+    "title": "Component Button",
+    "fields": [
+        {
+            "key": "field_69802e8e52d17",
+            "label": "Label",
+            "name": "label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Button Name",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_69802ec652d18",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_6980304cdaff1",
+            "label": "(Column 6\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "6\/12",
+            "endpoint": 0,
+            "border": "",
+            "allow_in_bindings": 0,
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_69802ff052d1a",
+            "label": "Type",
+            "name": "type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "solid": "Solid",
+                "outline": "Outline",
+                "ghost": "Ghost",
+                "soft": "Soft",
+                "link": "Link"
+            },
+            "default_value": "Solid",
+            "return_format": "value",
+            "multiple": 0,
+            "max": "",
+            "prepend": "",
+            "append": "",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": "",
+            "min": ""
+        },
+        {
+            "key": "field_6980306fdaff2",
+            "label": "(Column 6\/12)",
+            "name": "",
+            "aria-label": "",
+            "type": "acfe_column",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "columns": "6\/12",
+            "endpoint": 0,
+            "border": "",
+            "allow_in_bindings": 0,
+            "border_endpoint": [
+                "endpoint"
+            ]
+        },
+        {
+            "key": "field_69802ef752d19",
+            "label": "Style",
+            "name": "style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary"
+            },
+            "default_value": "primary",
+            "return_format": "value",
+            "multiple": 0,
+            "max": "",
+            "allow_custom": 0,
+            "placeholder": "",
+            "search_placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "create_options": 0,
+            "save_options": 0,
+            "min": ""
+        }
+    ],
+    "location": [],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "is_acf_component": 1,
+    "acf_component_defaults": {
+        "layout": "block",
+        "repeatable": "0",
+        "pagination": "0",
+        "rows_per_page": "20",
+        "min": "",
+        "max": "",
+        "button_label": "",
+        "appearances": ""
+    },
+    "modified": 1770009063
+}

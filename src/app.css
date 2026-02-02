@@ -56,6 +56,7 @@
   --color-tiber-800: oklch(0.248 0.059 251.37);
   --color-tiber-900: oklch(0.188 0.039 252.4);
   --color-tiber-950: oklch(0.148 0.027 255.17);
+
 }
 
 /*
@@ -107,5 +108,5 @@
     --space-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
   }
 
-  /* Fluid typography utilities */
+
 }

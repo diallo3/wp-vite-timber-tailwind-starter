@@ -564,7 +564,7 @@
             "acfe_wysiwyg_toolbar_buttons": []
         },
         {
-            "key": "field_659fef4b2d488",
+            "key": "field_6980313944f74",
             "label": "Call to Actions",
             "name": "call_to_actions",
             "aria-label": "",
@@ -595,11 +595,11 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_659fef5d2d489",
-                    "label": "Link",
-                    "name": "link",
+                    "key": "field_6980313944f75",
+                    "label": "CTA",
+                    "name": "cta",
                     "aria-label": "",
-                    "type": "link",
+                    "type": "component_field",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -608,77 +608,18 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
-                    "parent_repeater": "field_659fef4b2d488",
-                    "repeatable": true
-                },
-                {
-                    "key": "field_66bf9105b6e82",
-                    "label": "Style",
-                    "name": "style",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "solid": "Solid",
-                        "outline": "Outline"
-                    },
-                    "default_value": false,
-                    "return_format": "array",
-                    "multiple": 0,
-                    "max": "",
-                    "allow_custom": 0,
-                    "placeholder": "",
-                    "search_placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "allow_null": 0,
-                    "ui": 1,
-                    "ajax": 0,
-                    "min": "",
-                    "parent_repeater": "field_659fef4b2d488"
-                },
-                {
-                    "key": "field_670e561c83a48",
-                    "label": "Size",
-                    "name": "size",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "default": "Default",
-                        "small": "Small",
-                        "large": "Large"
-                    },
-                    "default_value": "default",
-                    "return_format": "value",
-                    "multiple": 0,
-                    "max": "",
-                    "allow_custom": 0,
-                    "search_placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "allow_null": 0,
+                    "field_group_key": "group_69802e8e0e0d2",
+                    "layout": "block",
+                    "repeatable": 0,
                     "allow_in_bindings": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "min": "",
-                    "parent_repeater": "field_659fef4b2d488"
+                    "button_label": "Add Row",
+                    "appearances": "",
+                    "min": 0,
+                    "max": 0,
+                    "rows_per_page": 20,
+                    "collapsed": "",
+                    "sub_fields": [],
+                    "parent_repeater": "field_6980313944f74"
                 }
             ]
         },
@@ -884,12 +825,12 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
     "acfe_autosync": [
         "php",
         "json"
     ],
     "acfe_form": 0,
-    "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
     "is_acf_component": 1,
@@ -906,5 +847,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730580892
+    "modified": 1770008987
 }

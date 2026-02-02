@@ -21,7 +21,7 @@
                     @mouseenter="open = true"
                     @mouseleave="open = false"
                     class="{{ item.classes | join(' ') }} group cursor-pointer relative">
-                    <a href="{{ item.link }}" class="block py-6 px-2.5 {{ options.link_classes|join(' ') }}" target="{{ item.target }}">{{ item.title }}</a>
+                    <a href="{{ item.link }}" class="block {{ options.link_classes|join(' ') }}" target="{{ item.target }}">{{ item.title }}</a>
 
                     {# item children #}
                     {% if item.children %}

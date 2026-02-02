@@ -508,11 +508,11 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_66a56cee6d1f3",
-                    "label": "Link",
-                    "name": "link",
+                    "key": "field_698030be912da",
+                    "label": "CTA",
+                    "name": "cta",
                     "aria-label": "",
-                    "type": "link",
+                    "type": "component_field",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -521,77 +521,17 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
-                    "parent_repeater": "field_66a56cda6d1f2"
-                },
-                {
-                    "key": "field_66a56cfb6d1f4",
-                    "label": "Style",
-                    "name": "style",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "solid": "Solid",
-                        "outline": "Outline",
-                        "link": "Link"
-                    },
-                    "default_value": "solid",
-                    "return_format": "array",
-                    "multiple": 0,
-                    "max": "",
-                    "prepend": "",
-                    "append": "",
-                    "allow_null": 0,
-                    "allow_in_bindings": 1,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "allow_custom": 0,
-                    "search_placeholder": "",
-                    "min": "",
-                    "parent_repeater": "field_66a56cda6d1f2"
-                },
-                {
-                    "key": "field_670e565015129",
-                    "label": "Size",
-                    "name": "size",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "default": "Default",
-                        "small": "Small",
-                        "large": "Large"
-                    },
-                    "default_value": "default",
-                    "return_format": "value",
-                    "multiple": 0,
-                    "max": "",
-                    "prepend": "",
-                    "append": "",
-                    "allow_null": 0,
+                    "field_group_key": "group_69802e8e0e0d2",
                     "allow_in_bindings": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "allow_custom": 0,
-                    "search_placeholder": "",
-                    "min": "",
+                    "repeatable": false,
+                    "min": 0,
+                    "max": 0,
+                    "rows_per_page": 20,
+                    "layout": "block",
+                    "button_label": "Add Row",
+                    "collapsed": "",
+                    "appearances": [],
+                    "sub_fields": [],
                     "parent_repeater": "field_66a56cda6d1f2"
                 }
             ]
@@ -652,12 +592,12 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
     "acfe_autosync": [
         "php",
         "json"
     ],
     "acfe_form": 0,
-    "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
     "is_acf_component": 1,
@@ -674,5 +614,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730604776
+    "modified": 1770008912
 }

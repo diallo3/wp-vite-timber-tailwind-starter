@@ -10,14 +10,14 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        {# <script>console.log({{ component | json_encode | raw }})</script> #}
+        <script>console.log({{ component | json_encode | raw }})</script>
 
         {% set title = component.title %}
         {% set entry = component.entry %}
         
         <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pb-20">
             <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
-                <div class="space-y-4 section-component-header-simple__header text-balance">
+                <div class="space-y-10 section-component-header-simple__header text-balance">
                     {{ badges.render_accent_badge({
                         title: accent ?: post.title,
                         color: 'text-white'
@@ -34,7 +34,7 @@
 
                 <div class="max-w-3xl">
                     {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                        class: 'prose-invert'
+                        class: 'prose-invert dark:text-white'
                     } %}
                         {% block prose_content %}
                             {{ entry }}
@@ -45,13 +45,14 @@
 
                 {% if ctas %}
                     <ul class="gap-4 section-component-header-simple__ctas lg:flex lg:items-center lg:pt-8">
-                        {% for cta in ctas %}
+                        {% for cta_link in ctas %}
+                            {% set cta = cta_link.cta[0] %}
                             <li class="section-component-header-simple__cta-item">
                                 {{ buttons.render_button_link({
                                     text: cta.link.title,
-                                    link: cta.link.url,
-                                    style: 'white',
-                                    size: 'large'
+                                    href: cta.link.url,
+                                    style: cta.style,
+                                    size: cta.size,
                                 }) }}
                             </li>
                         {% endfor %}

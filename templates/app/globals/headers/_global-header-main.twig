@@ -26,11 +26,11 @@
         
 
         {# center navigation #}
-        <nav id="headerNavigation" class="site-header__center w-full lg:px-8">
+        <nav id="headerNavigation" class="site-header__center w-full lg:px-8 xl:px-16">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
                 classes: 'w-full text-white',
-                link_classes: 'text-white sm:text-lg font-semibold',
+                link_classes: 'text-white sm:text-base tracking-widest font-semibold px-4 py-6',
                 })
             }}
         </nav>
