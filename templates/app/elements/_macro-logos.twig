@@ -87,3 +87,14 @@
         </svg>
 
 {% endmacro %}
+
+
+
+{%  macro render_vote_logo(options={})  %}
+    {% set options = {
+        classes: options.classes ?: [],
+    } | merge(options) %}
+
+    <img src="{{ theme.uri }}/assets/images/img-voting-logo.png" alt="">
+
+{% endmacro %}
