@@ -52,7 +52,7 @@
 }
 
 /* Broken Images if class has __main */
-[class*="__main"] img {
+[class*="__main"] img:not([class*="section-header-complex__gallery-img"]) {
   display: inline-block;
   font-weight: 300;
   line-height: 2;

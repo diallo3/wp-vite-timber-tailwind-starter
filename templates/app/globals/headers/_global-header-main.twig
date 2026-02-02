@@ -20,11 +20,11 @@
         class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 [.admin-bar_&]:top-[32px]"
 >
     <!-- Main Header Content -->
-    <div id="header-content" class="container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
+    <div id="header-content" class="lg:container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
             :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
-            class="flex relative w-48 transition-opacity duration-300 ease-in-out">
+            class="flex relative w-20 lg:w-32 xl:w-48 transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
             <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300 ">
                 <span 
@@ -40,7 +40,7 @@
 
         {# center navigation — white text over hero, dark when solid or scrolled #}
         <nav id="headerNavigation" 
-             class="site-header__center w-full lg:px-8 xl:px-16 transition-colors duration-300"
+             class="site-header__center w-full lg:px-8 xl:px-16 transition-colors duration-300 hidden lg:block main-header__nav"
              :class="(isHeaderTransparent && !scrolledFromTop) ? 'text-white' : 'text-gray-900'">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
@@ -65,10 +65,10 @@
 
             <!-- Open Mobile Navigation lg:hidden  -->
             <div class="header-actions__mobile-menu mobile-menu lg:hidden">
-                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
+                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5 text-white  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle" aria-controls="tkMobileNav">
                     {{ icons.icon({
                         path: 'controls',
-                        name: 'bars-3',
+                        name: 'bars-3-bottom-right',
                         classes: 'w-6 h-6',
                     }) }}
                     <span class="sr-only">Menu</span>

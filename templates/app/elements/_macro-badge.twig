@@ -1,11 +1,17 @@
-{% macro render_accent_badge(options={}) %}
 
+{% macro render_accent_badge(options={}) %}
+    {% import "@Elements/_macro-icon.twig" as icons %}
     {% set options = {
         title: options.title | default('Badge'),
     } | merge(options)  %}
 
     {# accent bagdge #}
-    <span class="block text-base lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] text-dodger-blue-600 uppercase">
+    <span class="inline-flex items-center text-sm lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] text-dodger-blue-600 uppercase">
+        {{ icons.icon({
+            path: 'defaults',
+            name: 'ballot-box',
+            classes: 'size-5 me-2',
+        }) }}
         {{ options.title }}
     </span>
 {% endmacro %}

@@ -1,7 +1,7 @@
 {# Section Heade Complex Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
     section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8',
 } %}
     {% block component_content %}
         {% import "@Elements/_macro-icon.twig" as icons %}
@@ -10,12 +10,30 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        <script>console.log({{ component | json_encode | raw }})</script>
-
         {% set title = component.title %}
         {% set entry = component.entry %}
-        
-        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pt-96 xl:pb-20">
+        {% set gallery = component.image_gallery|default([]) %}
+
+        {# Full-bleed background gallery — absolute, behind content, slow crossfade, no controls; images stack back-to-back in same space #}
+        {% if gallery|length > 0 %}
+        <div class="section-header-complex__gallery absolute inset-0 z-0 min-h-[60vh] overflow-hidden pointer-events-none"
+             x-data="{ currentIndex: 0, total: {{ gallery|length }} }"
+             x-init="setInterval(() => { if (total > 1) currentIndex = (currentIndex + 1) % total }, 5000)">
+            <div class="absolute inset-0 bg-red-500">
+                {% for img in gallery %}
+                <img src="{{ img.url }}"
+                     alt=""
+                     class="section-header-complex__gallery-img absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
+                     :class="{{ loop.index0 }} === currentIndex ? 'opacity-100' : 'opacity-0'"
+                     loading="lazy" />
+                {% endfor %}
+                <div class="absolute inset-0 bg-tiber-900/50 mix-blend-hard-light" aria-hidden="true"></div>
+                <div class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-tiber-950 to-transparent" aria-hidden="true"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="relative z-10 w-full py-8 pt-32 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pt-120   xl:pb-20">
             <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
                 <div class="space-y-10 section-component-header-simple__header text-balance">
                     {{ badges.render_accent_badge({
@@ -44,7 +62,7 @@
                 </div>
 
                 {% if ctas %}
-                    <ul class="gap-4 section-component-header-simple__ctas lg:flex lg:items-center lg:pt-8">
+                    <ul class="gap-4 section-component-header-simple__ctas flex items-center lg:pt-8">
                         {% for cta_link in ctas %}
                             {% set cta = cta_link.cta[0] %}
                             <script>console.log({{ cta | json_encode | raw }})</script>
