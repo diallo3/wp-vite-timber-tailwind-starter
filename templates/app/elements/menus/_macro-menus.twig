@@ -122,11 +122,12 @@
     } | merge(options) %}
 
     {% if menu %}
-         <ul class="nav-buttons nav-buttons__menu {{ classes|join(' ') }} flex space-x-2 header-actions__ctas flex-nowrap">
+         <ul class="nav-buttons nav-buttons__menu {{ classes|join(' ') }} flex space-x-2 lg:space-x-4 xl:space-x-6 header-actions__ctas flex-nowrap">
             {% for item in menu %}
             
                 {% set item_button_options = options.button_options | merge({
-                    style: loop.first ? 'outline' : 'solid'
+                    style: loop.first ? 'secondary' : 'white',
+                    type: loop.first ? 'solid' : 'outline',
                 }) | merge(item.button_options | default({})) %}
                 
                 <li class="{{ item.classes | join(' ') }} btn-{{ loop.index }}">

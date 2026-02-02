@@ -15,7 +15,7 @@
         {% set title = component.title %}
         {% set entry = component.entry %}
         
-        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pb-20">
+        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pt-96 xl:pb-20">
             <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
                 <div class="space-y-10 section-component-header-simple__header text-balance">
                     {{ badges.render_accent_badge({
@@ -47,11 +47,13 @@
                     <ul class="gap-4 section-component-header-simple__ctas lg:flex lg:items-center lg:pt-8">
                         {% for cta_link in ctas %}
                             {% set cta = cta_link.cta[0] %}
+                            <script>console.log({{ cta | json_encode | raw }})</script>
                             <li class="section-component-header-simple__cta-item">
                                 {{ buttons.render_button_link({
                                     text: cta.link.title,
                                     href: cta.link.url,
                                     style: cta.style,
+                                    type: cta.type,
                                     size: cta.size,
                                 }) }}
                             </li>

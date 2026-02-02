@@ -1,0 +1,99 @@
+.btn {
+    @apply relative overflow-hidden isolate;
+
+    &__content {
+        @apply relative z-10 block;
+    }
+
+    &::before {
+        @apply absolute inset-0 bg-blue-600;
+        content: '';
+        transition: transform 0.3s ease-in-out;
+        transform: scaleX(0);
+        transform-origin: left;
+        will-change: transform;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    &:hover {
+        &::before {
+            transform: scaleX(1);
+        }
+    }
+
+    &.btn-primary {
+        &::before {
+            @apply bg-tiber-500;
+        }
+        &:hover {
+            @apply border-tiber-500;
+        }
+        &.btn-soft {
+            @apply bg-tiber-500/30 border-tiber-500/30;
+        }
+    }
+
+    &.btn-secondary {
+        &::before {
+            @apply bg-metallic-red-500;
+        }
+        &:hover {
+            @apply border-metallic-red-500;
+        }
+        &.btn-soft {
+            @apply bg-metallic-red-500/30 border-metallic-red-500/30;
+        }
+    }
+
+    &.btn-tertiary {
+        &::before { 
+            @apply bg-azure-500;
+        }
+        &:hover {
+            @apply border-azure-500;
+        }
+    }
+
+    &.btn-white {
+        &::before {
+            @apply bg-white;
+        }
+        &:hover {
+            @apply border-white;
+        }
+        &.btn-soft {
+            @apply bg-white/30 border-white/30;
+        }
+    }
+
+    &.btn-outline {
+        &::before {
+            @apply bg-white;
+        }
+        &:hover {
+            @apply border-white text-tiber-600;
+        }
+    }
+
+    &.btn-ghost {
+        
+        &::before {
+            @apply bg-transparent;
+        }
+        &:hover {
+            @apply border-transparent;
+        }
+    }
+
+
+    &.btn-link {
+        background-color: transparent;
+        border: none;
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        &::before {
+            @apply bg-transparent;
+        }
+    }
+}

@@ -3,27 +3,6 @@
     "title": "Component Button",
     "fields": [
         {
-            "key": "field_69802e8e52d17",
-            "label": "Label",
-            "name": "label",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Button Name",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_69802ec652d18",
             "label": "Link",
             "name": "link",
@@ -187,5 +166,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1770009063
+    "modified": 1770046473
 }

@@ -3,6 +3,7 @@
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
 @import "./modules/css/modules-utilities.css";
+@import "./modules/css/module-buttons.css" layer(utilities);
 @import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
 
@@ -29,6 +30,21 @@
   --breakpoint-3xl: 1920px;
 
   /* site colors */
+
+  /* metallic red colors */
+
+  --color-metallic-red-50: oklch(0.958 0.012 17.51);
+  --color-metallic-red-100: oklch(0.918 0.028 17.73);
+  --color-metallic-red-200: oklch(0.827 0.069 18.67);
+  --color-metallic-red-300: oklch(0.747 0.119 20.3);
+  --color-metallic-red-400: oklch(0.669 0.184 23.49);
+  --color-metallic-red-500: oklch(0.577 0.213 27.16);
+  /* main metallic red color */
+  --color-metallic-red-600: oklch(0.489 0.19 28.14);
+  --color-metallic-red-700: oklch(0.406 0.15 27.13);
+  --color-metallic-red-800: oklch(0.315 0.113 26.64);
+  --color-metallic-red-900: oklch(0.233 0.079 25.83);
+  --color-metallic-red-950: oklch(0.184 0.058 25.02);
 
   /* azure colors */
   --color-azure-50: oklch(0.949 0.01 267.41);

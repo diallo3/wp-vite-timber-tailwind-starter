@@ -5,24 +5,28 @@
     {% set options = {
         text: options.text ?? 'Button Text',
         style: options.style ?? 'primary',
+        type: options.type ?? 'solid',
         size: options.size ?? 'default',
         icon: options.icon ?? null,
         href: options.href ?? null,
     } | merge(options) %}
 
-    {% set style_class = {
-        primary: 'bg-azure-600 text-white',
-        secondary: 'bg-tiber-600 text-white',
-        tertiary: 'bg-azure-600 text-white',
-    }[options.style] ?? '' %}
-
     {% set type_class = {
-        solid: 'btn-solid',
+        solid: '',
         outline: 'btn-outline',
         ghost: 'btn-ghost',
         soft: 'btn-soft',
         link: 'btn-link',
+    }[options.type] ?? '' %}
+
+    {% set style_class = {
+        primary: 'btn-primary ' ~ (options.type == 'outline' ? ' bg-transparent border-tiber-300 text-tiber-300' : ' bg-tiber-500 border-tiber-500 text-white'),
+        secondary: 'btn-secondary ' ~ (options.type == 'outline' ? ' bg-transparent border-metallic-red-500 text-metallic-red-500' : 'bg-metallic-red-500 border-metallic-red-500 text-white'),
+        tertiary: 'btn-tertiary ' ~ (options.type == 'outline' ? ' bg-transparent border-azure-300 text-azure-300' : 'bg-azure-500 border-azure-500 text-white'),
+        white: 'btn-white ' ~ (options.type == 'outline' ? 'bg-transparent border-white text-white' : 'bg-white border-white text-tiber-600'),
     }[options.style] ?? '' %}
+
+    
 
     {% set size_class = {
         small: 'btn-sm',
@@ -34,11 +38,11 @@
         style_class,
         type_class,
         size_class,
-        'btn rounded-full px-10'
+        'btn rounded-full px-10 shadow-none'
     ]|join(' ') %}
 
     {% set button_text %}
-        <span class="inline-flex">{{ options.text }}</span>
+        <span class="inline-flex btn__content">{{ options.text }}</span>
         {# Include an optional SVG icon #}
         {% if options.icon is not null %}
             <span class="relative inline-flex items-center justify-center w-5 h-5 bg-current rounded-full">
