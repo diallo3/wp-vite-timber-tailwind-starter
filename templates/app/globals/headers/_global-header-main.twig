@@ -1,21 +1,24 @@
 {% import "@Elements/menus/_macro-menus.twig" as menus %}
 {% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-logos.twig" as logos %}
 
 <header x-data="{ mobileNavOpen: false,  scrolledFromTop: false  }" 
         id="site-header" 
          x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
         @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
-        :class="{ 'border-b shadow-sm' : scrolledFromTop }"
-        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header [.admin-bar_&]:top-[32px] border"
+        :class="{ '' : scrolledFromTop }"
+        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header [.admin-bar_&]:top-[32px]"
 >
     <!-- Main Header Content -->
-    <div id="header-content" class="container flex items-center justify-between mx-auto text-center xl:max-w-(--breakpoint-2xl) site-header__left">
+    <div id="header-content" class="container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
-            class="flex items-center">
+            class="flex relative bg-blue-500 w-48">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
-                <span class="inline-flex size-10">{{ site_logo }}</span>
+            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0">
+                <span class="inline-flex w-full">
+                    {{ logos.render_main_logo() }}
+                </span>
                 <span class="sr-only">{{ site.title }}</span>
             </a>
             <!-- END Logo -->
@@ -23,10 +26,11 @@
         
 
         {# center navigation #}
-        <nav id="headerNavigation" class="site-header__center">
+        <nav id="headerNavigation" class="site-header__center w-full lg:px-8">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
-                classes: 'test-class',
+                classes: 'w-full text-white',
+                link_classes: 'text-white sm:text-lg font-semibold',
                 })
             }}
         </nav>

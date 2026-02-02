@@ -1,7 +1,7 @@
 {# Section Heade Complex Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-header-simple',
-    section_class_name: 'section-component-header-simple',
+    section_id_name: block.component_name|replace({'_': '-'}),
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
 } %}
     {% block component_content %}
         {% import "@Elements/_macro-icon.twig" as icons %}
@@ -10,12 +10,12 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        <script>console.log({{ component | json_encode | raw }})</script>
+        {# <script>console.log({{ component | json_encode | raw }})</script> #}
 
         {% set title = component.title %}
         {% set entry = component.entry %}
         
-        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-8 xl:pb-20">
+        <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-64 xl:pb-20">
             <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
                 <div class="space-y-4 section-component-header-simple__header text-balance">
                     {{ badges.render_accent_badge({

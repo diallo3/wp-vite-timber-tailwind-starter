@@ -33,11 +33,13 @@ export default defineConfig(({ command }) => {
       fs: {
         strict: false,
       },
-      origin: `http://${process.env.VITE_HOST}:${process.env.VITE_PORT}`,
+      origin: `${process.env.VITE_PROTOCOL}://${process.env.VITE_HOST}:${process.env.VITE_PORT}`,
       port: parseInt(process.env.VITE_PORT),
       strictPort: true,
       hmr: {
         host: process.env.VITE_HOST,
+        port: parseInt(process.env.VITE_PORT),
+        protocol: process.env.VITE_PROTOCOL === "https" ? "wss" : "ws",
       },
       host: true,
     },

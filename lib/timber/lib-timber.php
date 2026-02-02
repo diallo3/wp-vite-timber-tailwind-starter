@@ -9,6 +9,7 @@ class StarterTimber extends Site {
 		add_filter('timber/twig', array($this, 'add_to_twig'));
 		add_action('init', array($this, 'register_post_types'));
 		add_action('init', array($this, 'register_taxonomies'));
+		add_action('wp_enqueue_scripts', array($this, 'enqueue_google_fonts'));
 		parent::__construct();
 	}
 	/** This is where you can register custom post types. */
@@ -16,6 +17,16 @@ class StarterTimber extends Site {
 	}
 	/** This is where you can register custom taxonomies. */
 	public function register_taxonomies() {
+	}
+
+	/** Enqueue Google Fonts */
+	public function enqueue_google_fonts() {
+		wp_enqueue_style(
+			'google-fonts',
+			'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap',
+			array(),
+			null
+		);
 	}
 
 	/** This is where you add some context

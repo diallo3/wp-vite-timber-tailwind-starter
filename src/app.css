@@ -15,6 +15,10 @@
   --color-wordpress-blue: #0d99d5;
   --color-blue-wordpress: #0d99d5;
 
+  /* Google Fonts Configuration */
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Jost", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
   /* Enhanced responsive design tokens */
   --breakpoint-xs: 360px;
   --breakpoint-sm: 640px;
@@ -23,6 +27,35 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   --breakpoint-3xl: 1920px;
+
+  /* site colors */
+
+  /* azure colors */
+  --color-azure-50: oklch(0.949 0.01 267.41);
+  --color-azure-100: oklch(0.898 0.027 269.67);
+  --color-azure-200: oklch(0.785 0.07 268.43);
+  --color-azure-300: oklch(0.684 0.122 263.09);
+  --color-azure-400: oklch(0.581 0.151 258.27);
+  --color-azure-500: oklch(0.476 0.136 256.96);
+  /* main azure color */
+  --color-azure-600: oklch(0.368 0.12 254.57);
+  --color-azure-700: oklch(0.313 0.089 257.27);
+  --color-azure-800: oklch(0.251 0.066 258.7);
+  --color-azure-900: oklch(0.199 0.048 261.47);
+  --color-azure-950: oklch(0.151 0.03 261.87);
+
+  /* tiber colors */
+  --color-tiber-50: oklch(0.958 0.002 247.73);
+  --color-tiber-100: oklch(0.906 0.009 264.56);
+  --color-tiber-200: oklch(0.809 0.03 264.4);
+  --color-tiber-300: oklch(0.715 0.064 261.4);
+  --color-tiber-400: oklch(0.621 0.086 257.3);
+  --color-tiber-500: oklch(0.526 0.086 256.51);
+  --color-tiber-600: oklch(0.441 0.082 255);
+  --color-tiber-700: oklch(0.344 0.071 253.66);
+  --color-tiber-800: oklch(0.248 0.059 251.37);
+  --color-tiber-900: oklch(0.188 0.039 252.4);
+  --color-tiber-950: oklch(0.148 0.027 255.17);
 }
 
 /*

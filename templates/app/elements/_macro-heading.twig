@@ -9,7 +9,7 @@
 	{% set defaults = {
         title: 'Heading ' ~ level,
         color: color ?: currentColor,
-        font: font | default('font-sans'),
+        font: font | default('font-serif'),
         size: size | default(
             level == 1 ? 'text-fluid-5xl leading-16' :
             level == 2 ? 'text-fluid-3xl/snug leading-10' :

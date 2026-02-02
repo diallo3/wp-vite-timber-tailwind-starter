@@ -8,7 +8,7 @@ ul.acf-checkbox-list, ul.acf-radio-list {
 
 /* section choice ul.acf-checklist */
 ul.acf-checkbox-list {
-    @apply !border-0 !space-x-2;
+    /* @apply !border-0 !space-x-2; */
     li {
         @apply !mr-0;
     }
@@ -58,7 +58,7 @@ ul.acf-checkbox-list {
     .acf-input:first-child {
         @apply ml-3 space-x-2;
     }
-    .acf-input, {
+    .acf-input {
         .acf-fields > .acf-field:first-child {
             border-top: inherit;
         }

@@ -80,11 +80,19 @@ add_filter('acfe/flexible/render/template', function($template, $field, $layout,
 add_action('acfe/flexible/enqueue/name=page_content', 'render_acf_flexible_enqueue', 20, 10);
 function render_acf_flexible_enqueue($field, $is_preview){
     if ($is_preview) {
+        // Enqueue Google Fonts for ACF preview
+        wp_enqueue_style(
+            'google-fonts-acf-preview',
+            'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap',
+            array(),
+            null
+        );
+
         // Get the main CSS file from the Vite manifest
         $css_file = get_main_vite_css_file();
-        
+
         if ($css_file) {
-            wp_enqueue_style('page_content', $css_file, [], null);
+            wp_enqueue_style('page_content', $css_file, ['google-fonts-acf-preview'], null);
         }
     }
 }
