@@ -13,9 +13,10 @@
     <div id="header-content" class="container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
-            class="flex relative bg-blue-500 w-48">
+            :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
+            class="flex relative w-48 transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0">
+            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300">
                 <span class="inline-flex w-full">
                     {{ logos.render_main_logo() }}
                 </span>
