@@ -36,10 +36,10 @@
 
     &.btn-secondary {
         &::before {
-            @apply bg-metallic-red-500;
+            @apply bg-metallic-red-800/70;
         }
         &:hover {
-            @apply border-metallic-red-500;
+            @apply border-metallic-red-800/70;
         }
         &.btn-soft {
             @apply bg-metallic-red-500/30 border-metallic-red-500/30;
