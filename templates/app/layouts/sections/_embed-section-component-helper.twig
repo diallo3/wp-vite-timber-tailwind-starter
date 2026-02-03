@@ -84,15 +84,15 @@
 {# Theme classes differ between preview and frontend #}
 {% set section_theme_options = is_preview
     ? {
-        'default': 'bg-white',
-        'light': 'bg-gray-100',
-        'dark': 'bg-gray-900 dark'
-      }[section_theme] | default('bg-white')
+        'default': 'default bg-white',
+        'light': 'bg-gray-200 light',
+        'dark': 'bg-tiber-900 dark'
+      }[section_theme] | default('bg-transparent')
     : {
-        'default': 'bg-white',
-        'light': 'bg-gray-100',
-        'dark': 'bg-tiber-800 dark'
-      }[section_theme] | default('bg-white')
+        'default': 'default',
+        'light': 'light',
+        'dark': 'dark'
+      }[section_theme] | default('bg-transparent')
 %}
 
 {# ============================================

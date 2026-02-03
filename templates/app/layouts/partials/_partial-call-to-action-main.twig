@@ -1,14 +1,11 @@
-<script>console.log({{ options | json_encode | raw }})</script>
-
-
 {% set general_call_to_action = options.general_call_to_action %}
 {% set section_background_image = general_call_to_action.image %}
 
-<section class="donate-section bg-white py-10">
+<section class="donate-section bg-white py-2 px-6 lg:px-8">
 
     <div class="container relative mx-auto bg-tiber-900 bg-center bg-no-repeat bg-cover dark rounded-lg overflow-hidden before:absolute before:inset-0 before:bg-tiber-800/50 " id="call-to-action-main" style="background-image: url('{{ get_image(section_background_image).src | towebp }}')">
         <div class="donate-section__content  rounded-lg p-8 lg:p-12 xl:py-20 relative">
-            <div class="grid grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 <div class="col-span-1">
                         <img class="w-full h-full object-cover" src="{{ site.theme.link }}/dist/imgs/img-voting-logo.png" alt="">
                 </div>

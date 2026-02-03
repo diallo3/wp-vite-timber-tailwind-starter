@@ -16,7 +16,7 @@
 
                 {{ menus.render_menu(menu.footer_nav.get_items, {
                     level: 0,
-                    classes: 'grid grid-cols-4 gap-8 mt-16 xl:mt-0 main-footer__menu',
+                    classes: 'hidden lg:grid grid-cols-4 gap-4 xl:gap-8 main-footer__menu',
                     link_classes: 'text-base font-semibold leading-6 text-gray-600',
                     child_classes: 'text-sm leading-6 text-gray-300 mt-4 space-y-2',
                     child_link_classes: '',
@@ -40,7 +40,7 @@
 
             
 		</div>
-		<div class="pt-8 mt-6 border-t border-white/10">
+		<div class="pt-8 mt-6 border-t border-white/10 text-center lg:text-left">
 			<p class="text-xs leading-5 text-gray-400">&copy; {{ 'now' | date('Y')  ~ ' ' ~ site.title ~ ' ' ~ site.description }}, Inc. All rights reserved.</p>
 		</div>
 	</div>

@@ -52,7 +52,7 @@
 
                 <div class="max-w-3xl">
                     {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                        class: 'prose-invert dark:text-white'
+                        class: 'prose-invert dark:text-white text-balance prose-p:text-lg lg:prose-p:text-xl lg:prose-p:leading-10'
                     } %}
                         {% block prose_content %}
                             {{ entry }}
@@ -62,10 +62,9 @@
                 </div>
 
                 {% if ctas %}
-                    <ul class="gap-4 section-component-header-simple__ctas flex items-center lg:pt-8">
+                    <ul class="gap-4 section-component-header-simple__ctas flex items-center pt-10 pb-6 lg:pt-8">
                         {% for cta_link in ctas %}
                             {% set cta = cta_link.cta[0] %}
-                            <script>console.log({{ cta | json_encode | raw }})</script>
                             <li class="section-component-header-simple__cta-item">
                                 {{ buttons.render_button_link({
                                     text: cta.link.title,

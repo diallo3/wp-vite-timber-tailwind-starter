@@ -2,14 +2,17 @@
 {% import "@Elements/_macro-button.twig" as buttons %}
 
 {% if has_ctas and ctas %}
-    <div class="py-6 section-component-content-with-image__ctas">
+    <div class="py-4 section-component-content-with-image__ctas">
         <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
-            {% for cta in ctas %}
-                <li class="entry-ctas__item">
+            {% for cta_link in ctas %}
+                {% set cta = cta_link.cta[0] %}
+                <li class="section-component-header-simple__cta-item">
                     {{ buttons.render_button_link({
                         text: cta.link.title,
-                        link: cta.link.url,
+                        href: cta.link.url,
                         style: cta.style,
+                        type: cta.type,
+                        size: cta.size,
                     }) }}
                 </li>
             {% endfor %}

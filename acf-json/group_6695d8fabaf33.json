@@ -419,6 +419,28 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
+                    "key": "field_698149d5ad6cb",
+                    "label": "Heading",
+                    "name": "heading",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "Heading",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6695d9fce0fef"
+                },
+                {
                     "key": "field_6695da0ae0ff0",
                     "label": "Title",
                     "name": "title",
@@ -566,7 +588,9 @@
                     "ajax": 0,
                     "placeholder": "",
                     "min": "",
-                    "parent_repeater": "field_670ca569a48af"
+                    "parent_repeater": "field_670ca569a48af",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_670e596b66928",
@@ -601,7 +625,9 @@
                     "ajax": 0,
                     "placeholder": "",
                     "min": "",
-                    "parent_repeater": "field_670ca569a48af"
+                    "parent_repeater": "field_670ca569a48af",
+                    "create_options": 0,
+                    "save_options": 0
                 }
             ]
         },
@@ -661,12 +687,12 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
     "acfe_autosync": [
         "php",
         "json"
     ],
     "acfe_form": 0,
-    "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
     "is_acf_component": 1,
@@ -683,5 +709,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1730253345
+    "modified": 1770080756
 }
