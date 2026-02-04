@@ -86,7 +86,7 @@
                             {% if config.badge or config.accent %}
                                 {{ badges.render_accent_badge({
                                     title: config.badge ?: config.accent,
-                                    color: 'text-blue-600 dark:text-cyan-400'
+                                    color: 'text-blue-600'
                                 }) }}
                             {% endif %}
                             {% if config.title %}
@@ -218,7 +218,7 @@
                                 <span class="absolute inset-0"></span>
                                 {{ headings.render_heading(3, {
                                     title: config.title,
-                                    color: 'text-blue-600 group-hover:text-blue-700 dark:text-cyan-400 dark:group-hover:text-cyan-600',
+                                    color: 'text-blue-600 group-hover:text-blue-700',
                                     size: 'text-lg md:text-lg lg:text-xl',
                                     preview: config.is_preview
                                 }) }}

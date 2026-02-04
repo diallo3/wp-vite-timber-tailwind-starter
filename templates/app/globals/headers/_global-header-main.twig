@@ -24,12 +24,11 @@
         <!-- Left Section -->
         <div
             :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
-            class="flex relative w-20 lg:w-32 xl:w-48 transition-opacity duration-300 ease-in-out">
+            class="flex relative w-20 lg:w-44 xl:w-48 -mt-px transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
             <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300 ">
                 <span 
-                    :class="isHeaderTransparent ? 'ring-transparent' : 'ring-gray-200 bg-white'"
-                    class="inline-flex w-full ring-2 ">
+                    class="inline-flex w-full ">
                     {{ logos.render_main_logo() }}
                 </span>
                 <span class="sr-only">{{ site.title }}</span>

@@ -1,7 +1,7 @@
 {# Section #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-header-simple',
-    section_class_name: 'section-component-header-simple',
+    section_id_name: block.component_name|replace({'_': '-'}),
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8',
 } %}
 
     {% block component_content %}
@@ -16,79 +16,86 @@
         {% set logo = component.logo %}
 
         {% set accent = accent ? accent : fn('get_the_title') %}
+        {% set subtitle = component.sub_title ? component.sub_title : '' %}
 
         {% set heading_size_options = {
             'default': fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl',
             'post': 'text-4xl lg:fluid-text-6xl',
-            'user_story': 'text-4xl sm:fluid-text-5xl',
         }[header_type] | default(fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl') %}
         
-    
-        <div class="max-w-5xl pb-4 mx-auto space-y-6 lg:mx-0">
-			<div class="space-y-4">
-                
-                <div class="dark:text-cyan-400">
-                    {{ badges.render_accent_badge({
-                        title: accent,
-                        color: 'text-blue-600 dark:text-cyan-400'
-                    })}}
-                </div>
-                
+        <div class="relative z-10 w-full py-8 pt-32 mx-auto max-w-(--breakpoint-2xl) lg:pt-56 xl:pb-20">
+            <div class="container pb-4 mx-auto space-y-6 lg:mx-0">
+                <div class="space-y-4">
+                    
+                    <div class="header-simple__accent">
+                        {{ badges.render_accent_badge({
+                            title: accent,
+                            color: 'text-blue-600 [&_.badge-icon]:text-gray-500'
+                        })}}
+                    </div>
+                    
 
-                {% if has_title and title %}
-                    <hgroup class="font-bold tracking-tighter section-component-header-simple__headings text-balance">
-                        {{ headings.render_heading(3,{
-                            title: title,
-                            color: 'text-gray-800 dark:text-white',
-                            size: heading_size_options,
-                            weight: 'font-bold',
-                            preview: is_preview
-                        }) }}
-                    </hgroup>
-                {% endif %}
-
-                {% if user_story and  logo %}
-                    <figure class=""><img src="{{ logo.url }}" alt=""></figure>
-                {% endif %}
-            </div>
-
-            {% if has_entry and entry %}
-                {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
-                    {% block prose_content %}
-                        {{ entry }}
-                    {% endblock %}
-                {% endembed %}
-            {% endif %}
-
-            {% if has_ctas and ctas %}
-                <div class="flex items-center lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 inview-item section-component-call_to_action__cta">
-                    {% for cta in ctas %}
-
-                        {% if cta.style.value is same as 'link'  %}
-                            {{ buttons.render_button_link({
-                                label: cta.link.title,
-                                link: cta.link.url,
-                                color: 'text-gray-900 dark:text-white',
-                                border: 'text-blue-600 dark:text-cyan-400',
-                                size: 'fluid-text-base',
-                                padding: 'px-6 py-4',
-                                target: '_self',
+                    {% if has_title and title %}
+                    <div class="flex flex-col lg:flex-row justify-between gap-4">
+                        <hgroup class=" tracking-tighter section-component-header-simple__headings text-balance max-w-3xl">
+                            {{ headings.render_heading(2,{
+                                title: title,
+                                color: 'text-gray-800',
+                                weight: 'font-semibold',
+                                preview: is_preview
                             }) }}
+                        </hgroup>
+
+                        <div class="flex flex-col gap-4 justify-end text-gray-600 max-w-lg lg:max-w-2xl">
+                            <p class="fluid-text-base xl:fluid-text-xl font-medium font-serif">{{ subtitle }}</p>
+                        </div>
                             
-                        {% else %}
-                                
-                            {{ buttons.render_button_link({
-                                text: cta.link.title,
-                                link: cta.link.url,
-                                style: cta.style.value,
-                                size: 'large',
-                            }) }}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+                        </div>
+                    {% endif %}
 
-		</div>
+                </div>
+
+               
+                {% if has_entry and entry %}
+                    {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
+                        class: 'text-balance prose-p:text-base lg:prose-p:leading-10'
+                    } %}
+                        {% block prose_content %}
+                            {{ entry }}
+                        {% endblock %}
+                    {% endembed %}
+                {% endif %}
+
+                {% if has_ctas and ctas %}
+                    <div class="flex items-center lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 inview-item section-component-call_to_action__cta">
+                        {% for cta in ctas %}
+
+                            {% if cta.style.value is same as 'link'  %}
+                                {{ buttons.render_button_link({
+                                    label: cta.link.title,
+                                    link: cta.link.url,
+                                    color: 'text-gray-900 dark:text-white',
+                                    border: 'text-blue-600',
+                                    size: 'fluid-text-base',
+                                    padding: 'px-6 py-4',
+                                    target: '_self',
+                                }) }}
+                                
+                            {% else %}
+                                    
+                                {{ buttons.render_button_link({
+                                    text: cta.link.title,
+                                    link: cta.link.url,
+                                    style: cta.style.value,
+                                    size: 'large',
+                                }) }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
     {% endblock %}
     
 {% endembed %}
