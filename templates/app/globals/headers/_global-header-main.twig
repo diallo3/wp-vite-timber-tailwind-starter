@@ -14,7 +14,7 @@
         x-init="scrolledFromTop = window.pageYOffset >= 50"
         @scroll.window="scrolledFromTop = window.pageYOffset >= 50"
         :class="{
-            'bg-white border-b border-gray-200': !isHeaderTransparent,
+            'bg-white': !isHeaderTransparent,
             'bg-transparent site-header--over-hero': isHeaderTransparent && !scrolledFromTop
         }"
         class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 [.admin-bar_&]:top-[32px]"
@@ -24,9 +24,9 @@
         <!-- Left Section -->
         <div
             :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
-            class="flex relative w-20 lg:w-44 xl:w-48 -mt-px transition-opacity duration-300 ease-in-out">
+            class="flex z-10 relative w-20 sm:w-28 lg:w-48 -mt-px transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block group absolute top-0 inset-x-0 transition-transform duration-300 ">
+            <a href="{{ site.url }}" class="block group absolute top-0 z-10 inset-x-0 transition-transform duration-300 ">
                 <span 
                     class="inline-flex w-full ">
                     {{ logos.render_main_logo() }}
@@ -64,7 +64,7 @@
 
             <!-- Open Mobile Navigation lg:hidden  -->
             <div class="header-actions__mobile-menu mobile-menu lg:hidden">
-                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5 text-white  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle" aria-controls="tkMobileNav">
+                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle" aria-controls="tkMobileNav">
                     {{ icons.icon({
                         path: 'controls',
                         name: 'bars-3-bottom-right',

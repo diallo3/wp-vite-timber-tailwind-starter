@@ -20,6 +20,7 @@
     - inview (enable/disable scroll animations - default: 'true')
 #}
 
+
 {# ============================================
    DATA EXTRACTION
    ============================================ #}
@@ -30,11 +31,19 @@
    THEME CONFIGURATION
    ============================================ #}
 {% set section_theme = section.theme ?? 'default' %}
-{% set section_theme_options = {
-    'default': '',
-    'light': 'light bg-gray-200',
-    'dark': 'bg-tiber-900 dark'
-}[section_theme] | default('') %}
+
+{% set section_theme_options = is_preview
+    ? {
+        'default': 'default bg-white',
+        'light': 'bg-gray-200 light',
+        'dark': 'bg-tiber-900 dark'
+      }[section_theme] | default('bg-transparent')
+    : {
+        'default': '',
+        'light': 'bg-gray-200/70 light',
+        'dark': 'bg-tiber-900 dark'
+      }[section_theme] | default('bg-transparent')
+%}
 
 {# ============================================
    SPACING CONFIGURATION
@@ -80,12 +89,13 @@
     class ?? '',
 ] | join(' ') %}
 
+{% set section_id = 'render-component-' ~ name ~ '-' ~ loop.index %}
+
 {# ============================================
    MARKUP
    ============================================ #}
 <section
-    id="{{ id }}"
-    class="relative {{ section_classes }}"
+    id="{{ section_id }}" class="relative render-section-{{ loop.index }} {{ section_classes }}"
     {{ data }}>
     <div class="px-2 mx-auto {{ max_width_options }}">
         {% block section_content %}

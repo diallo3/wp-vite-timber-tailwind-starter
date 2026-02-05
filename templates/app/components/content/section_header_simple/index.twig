@@ -1,7 +1,7 @@
 {# Section #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
     section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8',
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8 overflow-hidden',
 } %}
 
     {% block component_content %}
@@ -11,88 +11,113 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        {% set header_type = component.header_type %}
-        {% set user_story = header_type is same as 'customer_story' %}
-        {% set logo = component.logo %}
-
         {% set accent = accent ? accent : fn('get_the_title') %}
         {% set subtitle = component.sub_title ? component.sub_title : '' %}
+        {% set image = component.image ? component.image : '' %}
+        {% set image_gallery = component.image_gallery|default([]) %}
 
         {% set heading_size_options = {
             'default': fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl',
             'post': 'text-4xl lg:fluid-text-6xl',
         }[header_type] | default(fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl') %}
         
-        <div class="relative z-10 w-full py-8 pt-32 mx-auto max-w-(--breakpoint-2xl) lg:pt-56 xl:pb-20">
-            <div class="container pb-4 mx-auto space-y-6 lg:mx-0">
-                <div class="space-y-4">
-                    
+        <div class="relative w-full py-8 pt-32 mx-auto max-w-(--breakpoint-2xl)sm:pt-40 xl:pt-48 xl:pb-20">
+            <div class="container pb-4 mx-auto space-y-6 lg:space-y-12 lg:mx-0">
+                <header class="space-y-4">
                     <div class="header-simple__accent">
                         {{ badges.render_accent_badge({
                             title: accent,
                             color: 'text-blue-600 [&_.badge-icon]:text-gray-500'
                         })}}
                     </div>
-                    
 
                     {% if has_title and title %}
-                    <div class="flex flex-col lg:flex-row justify-between gap-4">
-                        <hgroup class=" tracking-tighter section-component-header-simple__headings text-balance max-w-3xl">
-                            {{ headings.render_heading(2,{
-                                title: title,
-                                color: 'text-gray-800',
-                                weight: 'font-semibold',
-                                preview: is_preview
-                            }) }}
-                        </hgroup>
+                        <div class="flex flex-col lg:flex-row justify-between gap-4">
+                            <hgroup 
+                                class="tracking-tighter section-component-header-simple__headings text-balance max-w-3xl">
+                                {{ headings.render_heading(2,{
+                                    title: title,
+                                    color: 'text-gray-800',
+                                    weight: 'font-medium',
+                                    preview: is_preview
+                                }) }}
+                            </hgroup>
 
-                        <div class="flex flex-col gap-4 justify-end text-gray-600 max-w-lg lg:max-w-2xl">
-                            <p class="fluid-text-base xl:fluid-text-xl font-medium font-serif">{{ subtitle }}</p>
-                        </div>
-                            
+                            <div class="flex flex-col gap-4 justify-end text-gray-800 max-w-lg lg:max-w-2xl">
+                                <p class="fluid-text-base xl:fluid-text-xl font-medium font-serif">
+                                    {{ subtitle ?: entry }}
+                                </p>
+                            </div>
                         </div>
                     {% endif %}
+                </header>
 
-                </div>
+                <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
+                    <div class="lg:col-end-1 lg:w-full lg:max-w-4xl lg:pb-8 lg:pt-8">
+                        {% if has_entry and entry %}
+                            {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
+                                class: 'text-balance prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10'
+                            } %}
+                                {% block prose_content %}
+                                    {{ entry }}
+                                {% endblock %}
+                            {% endembed %}
+                        {% endif %}
 
-               
-                {% if has_entry and entry %}
-                    {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                        class: 'text-balance prose-p:text-base lg:prose-p:leading-10'
-                    } %}
-                        {% block prose_content %}
-                            {{ entry }}
-                        {% endblock %}
-                    {% endembed %}
-                {% endif %}
-
-                {% if has_ctas and ctas %}
-                    <div class="flex items-center lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 inview-item section-component-call_to_action__cta">
-                        {% for cta in ctas %}
-
-                            {% if cta.style.value is same as 'link'  %}
-                                {{ buttons.render_button_link({
-                                    label: cta.link.title,
-                                    link: cta.link.url,
-                                    color: 'text-gray-900 dark:text-white',
-                                    border: 'text-blue-600',
-                                    size: 'fluid-text-base',
-                                    padding: 'px-6 py-4',
-                                    target: '_self',
-                                }) }}
-                                
-                            {% else %}
-                                    
-                                {{ buttons.render_button_link({
-                                    text: cta.link.title,
-                                    link: cta.link.url,
-                                    style: cta.style.value,
-                                    size: 'large',
-                                }) }}
-                            {% endif %}
-                        {% endfor %}
+                        {% if ctas %}
+                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta">
+                                {% for cta_link in ctas %}
+                                        {% set cta = cta_link.cta[0] %}
+                                        
+                                        <li class="section-component-header-simple__cta-item">
+                                            {{ buttons.render_button_link({
+                                                text: cta.link.title,
+                                                href: cta.link.url,
+                                                style: cta.style,
+                                                type: cta.type,
+                                                size: 'large',
+                                            }) }}
+                                        </li>
+                                    {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
-                {% endif %}
+                    {% if image_gallery|length > 0 %}
+                        <div class="flex flex-wrap items-start lg:justify-end gap-6 sm:gap-8 lg:contents w-full">
+                            {% set gallery_positions = [
+                                { 
+                                    wrapper: 'w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end', 
+                                    img: 'aspect-video lg:aspect-7/5 w-148 max-w-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
+                                },
+                                { 
+                                    wrapper: 'order-first flex w-64 flex-none justify-end self-end max-sm:w-40 lg:w-auto', 
+                                    img: 'aspect-video lg:aspect-4/3 w-[24rem] max-w-none flex-none rounded-2xl bg-gray-800 object-cover' 
+                                },
+                                { 
+                                    wrapper: 'flex w-md flex-auto justify-end lg:w-auto lg:flex-none', 
+                                    img: 'aspect-video lg:aspect-[7/4.3] w-148 max-w-none flex-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
+                                },
+                                { 
+                                    wrapper: 'hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none', 
+                                    img: 'aspect-video lg:aspect-[4/2.3] w-lg max-w-none rounded-2xl bg-gray-800 object-cover' 
+                                },
+                            ] %}
+                            {% if image_gallery[0] is defined %}
+                            <div class="{{ gallery_positions[0].wrapper }}">
+                                <img src="{{ image_gallery[0].url }}" alt="{{ image_gallery[0].alt ?? '' }}" class="{{ gallery_positions[0].img }}" loading="lazy" />
+                            </div>
+                            {% endif %}
+                            <div class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-148 lg:items-start lg:justify-end lg:gap-x-8">
+                            {% for img in image_gallery|slice(1, 3) %}
+                                {% set pos = gallery_positions[loop.index] ?? gallery_positions[1] %}
+                                <div class="{{ pos.wrapper }}">
+                                    <img src="{{ img.url }}" alt="{{ img.alt ?? '' }}" class="{{ pos.img }}" loading="lazy" />
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
 
             </div>
         </div>
