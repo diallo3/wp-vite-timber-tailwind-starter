@@ -8,19 +8,15 @@
     {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
 
     {% if template_exists(template_path) %}
-        {% if loop.first %}
-            {% include full_template_path with { 'layout': component } %}
-        {% else %}
-            
-            {% embed "@Layouts/sections/_embed-section-full.twig" %}
+        {% embed "@Layouts/sections/_embed-section-full.twig" %}
                 {% block section_content %}
                     
-                    {% include full_template_path with { 'layout': component } %}
-                {% endblock %}
-            {% endembed %}
-
-        {% endif %}
-            
+                {% include full_template_path with { 
+                    'layout': component,
+                    'position': loop.index
+                    } %}
+            {% endblock %}
+        {% endembed %}    
     {% else %}
         <div class="unknown-block">
             <p>Unknown layout: {{ layout }}</p>

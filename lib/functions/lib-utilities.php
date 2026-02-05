@@ -103,3 +103,14 @@ function enqueue_iconify_for_admin() {
     );
 }
 add_action('admin_enqueue_scripts', 'enqueue_iconify_for_admin');
+
+
+/**
+ * Disable Gravity Forms CSS
+ *
+ * @return bool True to disable CSS, false to enable
+ */
+function disable_gravity_forms_css() {
+    return true;
+}
+add_filter( 'gform_disable_css', 'disable_gravity_forms_css' );

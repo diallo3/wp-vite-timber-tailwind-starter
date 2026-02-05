@@ -1,0 +1,234 @@
+/**
+ * Gravity Forms - Theme Override Styles
+ * Matches site look and feel: tiber/azure palette, Open Sans/Jost, btn-primary styling
+ * Targets both gravity-theme and legacy markup wrappers
+ */
+
+@layer utilities {
+  /* -------------------------------------------------------------------------
+     Form wrapper
+     ------------------------------------------------------------------------- */
+  .gform_wrapper {
+    font-family: var(--font-serif, "Open Sans", ui-sans-serif, system-ui, sans-serif);
+  }
+
+  .gform_wrapper .gform_body, .gform_fields {
+    @apply space-y-6 ;
+  }
+
+  .gform-grid-row {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+    span {
+      @apply block relative;
+    }
+  }
+
+  /* Floating labels - text inputs, textareas, selects
+     Tip: Add placeholder=" " (space) to fields in GF for label to stay floated when filled */
+  .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) {
+    @apply relative;
+  }
+
+  /* Starting point: label inside input, visible */
+  .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) label.gform-field-label,
+  .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) label.gfield_label,
+  .gform_wrapper .gfield:not(.gfield--type-select) label.gfield_label,
+  .gform_wrapper .gfield:not(.gfield--type-select) label.gform-field-label,
+  .gform_wrapper .gfield:not(.gfield--type-select) label.gfield_label {
+    @apply absolute left-4 top-0 translate-y-3/4 px-2 text-tiber-600 transition-all duration-200 pointer-events-none origin-left z-10;
+    font-size: 1rem;
+  }
+
+  /* .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) input,
+  .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) textarea {
+    @apply pt-6;
+  } */
+
+  .gform_wrapper .gfield:not(.gfield--type-radio):not(.gfield--type-checkbox):not(.gfield--type-list) {
+    /* Floated when focused */
+    &:focus-within > label.gform-field-label,
+    &:focus-within > label.gfield_label,
+    .gform-grid-col:focus-within > label.gform-field-label,
+    .gform-grid-col:focus-within > label.gfield_label,
+
+    /* Floated when has value (not focused) */
+    &:has(input:not(:placeholder-shown)) > label.gform-field-label,
+    &:has(input:not(:placeholder-shown)) > label.gfield_label,
+    .gform-grid-col:has(input:not(:placeholder-shown)) > label.gform-field-label,
+    .gform-grid-col:has(input:not(:placeholder-shown)) > label.gfield_label,
+    &:has(textarea:not(:placeholder-shown)) > label.gform-field-label,
+    &:has(textarea:not(:placeholder-shown)) > label.gfield_label {
+        @apply text-sm font-semibold text-tiber-600 bg-gray-50;
+        transform: translateY(-1.5rem) !important;   
+    }
+}
+
+  /* Select fields: float on focus only (no placeholder) */
+.gform_wrapper .gfield--type-select .gform-field-label,
+  .gform_wrapper .gfield--type-select .gfield_label {
+    font-size: 1rem;
+    position: static !important;
+  }
+
+  .gform_wrapper .gfield--type-select select {
+    @apply pt-6;
+  }
+
+  
+
+  .gsection_title {
+    @apply fluid-text-base font-semibold tracking-tight text-tiber-700;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-tiber-300);
+      margin-top: 0.5rem;
+    }
+  }
+
+  .gsection_description {
+    @apply fluid-text-lg my-8 text-tiber-500;
+  }
+
+  /* -------------------------------------------------------------------------
+     Field containers
+     ------------------------------------------------------------------------- */
+  .gform_wrapper .gfield {
+    @apply my-4 block;
+  }
+
+  .gform_wrapper .gfield_label {
+    @apply block mb-6 text-sm font-medium text-tiber-700 relative top-1/2;
+  }
+
+  .gform_wrapper .gfield--type-select .gfield-label {
+    @apply static top-0 border border-red-500;
+  }
+
+  .gform_wrapper .gfield_required {
+    @apply text-metallic-red-600;
+  }
+
+  .gform_wrapper .gfield_description {
+    @apply mt-1.5 text-sm text-tiber-500;
+  }
+
+  .gfield.gfield--type-select {
+    @apply pb-4;
+  }
+
+  /* -------------------------------------------------------------------------
+     Text inputs, textarea, select
+     ------------------------------------------------------------------------- */
+  .gform_wrapper input[type="text"],
+  .gform_wrapper input[type="email"],
+  .gform_wrapper input[type="tel"],
+  .gform_wrapper input[type="url"],
+  .gform_wrapper input[type="number"],
+  .gform_wrapper input[type="date"],
+  .gform_wrapper textarea,
+  .gform_wrapper select {
+    @apply w-full px-4 py-4 text-base text-tiber-900 bg-white border border-tiber-300 rounded-lg transition-colors duration-150;
+    font-family: inherit;
+  }
+
+  .gform_wrapper input:focus,
+  .gform_wrapper textarea:focus,
+  .gform_wrapper select:focus {
+    @apply outline-none ring-2 ring-azure-500/50 border-azure-500;
+  }
+
+  .gform_wrapper input::placeholder,
+  .gform_wrapper textarea::placeholder {
+    @apply text-gray-500/5;
+  }
+
+  .gform_wrapper textarea {
+    @apply min-h-32 resize-y;
+  }
+
+  .gform_wrapper select {
+    @apply appearance-none bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2352668133' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    padding-right: 2.5rem;
+  }
+
+  /* -------------------------------------------------------------------------
+     Submit button - match btn btn-primary
+     ------------------------------------------------------------------------- */
+  .gform_wrapper .gform_footer input[type="submit"],
+  .gform_wrapper .gform_footer button[type="submit"] {
+    @apply btn btn-primary btn-lg rounded-full px-10 font-medium cursor-pointer;
+  }
+
+  .gform_wrapper .gform_footer {
+    @apply mt-8 pt-6;
+  }
+
+  /* -------------------------------------------------------------------------
+     Radio & checkbox lists
+     ------------------------------------------------------------------------- */
+  .gform_wrapper .gfield_radio,
+  .gform_wrapper .gfield_checkbox {
+    @apply space-y-3;
+  }
+
+  .gform_wrapper .gfield_radio li,
+  .gform_wrapper .gfield_checkbox li {
+    @apply flex items-center gap-3;
+  }
+
+  .gform_wrapper .gfield_radio input,
+  .gform_wrapper .gfield_checkbox input {
+    @apply w-4 h-4 rounded border-tiber-300 text-azure-600 focus:ring-azure-500;
+  }
+
+  .gform_wrapper .gfield_radio label,
+  .gform_wrapper .gfield_checkbox label {
+    @apply text-tiber-700 cursor-pointer;
+  }
+
+  /* -------------------------------------------------------------------------
+     Validation - error state
+     ------------------------------------------------------------------------- */
+  .gform_wrapper .gfield_error input,
+  .gform_wrapper .gfield_error textarea,
+  .gform_wrapper .gfield_error select {
+    @apply border-metallic-red-500 focus:ring-metallic-red-500/50 focus:border-metallic-red-500;
+  }
+
+  .gform_wrapper .gfield_error .gfield_label {
+    @apply text-metallic-red-600;
+  }
+
+  .gform_wrapper .validation_message {
+    @apply mt-1.5 text-sm text-metallic-red-600;
+  }
+
+  /* -------------------------------------------------------------------------
+     Validation - form level messages
+     ------------------------------------------------------------------------- */
+  .gfield_required {
+    @apply text-metallic-red-600;
+    &.gfield_required_text {
+        @apply sr-only;
+    }
+    &:before {
+        content: '*';
+        display: inline-block;
+        margin-left: 0.25rem;
+    }
+  }
+  .gform_wrapper .validation_error {
+    @apply p-4 mb-6 text-metallic-red-700 bg-metallic-red-50 border border-metallic-red-200 rounded-lg;
+  }
+
+  .gform_wrapper .gform_confirmation_message {
+    @apply p-4 text-tiber-700 bg-azure-50 border border-azure-200 rounded-lg;
+  }
+}

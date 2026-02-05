@@ -40,11 +40,11 @@
         {# center navigation — white text over hero, dark when solid or scrolled #}
         <nav id="headerNavigation" 
              class="site-header__center w-full lg:px-8 xl:px-16 transition-colors duration-300 hidden lg:block main-header__nav"
-             :class="isHeaderTransparent ? 'text-white' : 'text-gray-900'">
+             :class="isHeaderTransparent ? 'text-white' : 'text-gray-800'">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
                 classes: 'w-full',
-                link_classes: 'sm:text-base tracking-wide font-semibold py-3 px-0.5 hover:bg-transparent [&>span]:rounded-sm transition-colors duration-300',
+                link_classes: 'sm:text-base uppercase font-bold py-3 px-0.5 hover:bg-transparent [&>span]:rounded-sm transition-colors duration-300',
                 })
             }}
         </nav>

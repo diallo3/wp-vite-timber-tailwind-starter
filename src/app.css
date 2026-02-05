@@ -6,6 +6,7 @@
 @import "./modules/css/module-buttons.css" layer(utilities);
 @import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
+@import "./modules/css/module-gravity-forms.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {

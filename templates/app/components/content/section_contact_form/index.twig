@@ -32,29 +32,13 @@
         {% set form_hubspot = component.hubspot %}
         {% set form_other = component.other %}
 
-        <div class="py-8 mx-auto space-y-6 max-w-7xl lg:mx-0">
-            <div class="relative overflow-hidden bg-blue-900 border rounded-lg isolate dark">
-                <div class="grid grid-cols-1 mx-auto max-w-7xl lg:grid-cols-2">
-                    <div class="relative px-6 pt-4 pb-6 sm:pt-8 lg:static lg:px-8 lg:py-16">
-                        <div class="max-w-2xl mx-auto space-y-4 lg:max-w-md text-gray-50 dark">
-                            
-                            {# contact info #}
-                            {{ headings.render_heading(3,{
-                                title: title,
-                                size: 'fluid-text-2xl lg:fluid-text-4xl',
-                                weight: 'font-bold',
-                                color: 'text-white',
-                                preview: is_preview
-                            }) }}
+        <script>console.log({{ form_type | json_encode | raw }})</script>
 
-                            <div class="prose-sm prose text-gray-100 prose-p:text-gray-50 first:prose-p:text-lg prose-headings:my-2 text-pretty marker:text-gray-100">
-                                {{ entry }}
-                            </div>
+        <div class="py-8 mx-auto space-y-6 max-w-6xl">
+            <div class="relative overflow-hidden border rounded-lg isolate dark bg-gray-50">
+                <div class="grid grid-cols-1 mx-auto">
 
-                           
-                        </div>
-                    </div>
-                    <div class="px-6 py-16 bg-white lg:px-8 xl:px-12">
+                    <div class="px-6 py-16 lg:px-8 xl:px-12">
                         {# form #}
                         <div class="space-y-4 form-container">
                             {{ headings.render_heading(3,{
@@ -67,7 +51,7 @@
                             {% if has_shortcode %}
                                 {# filter shortcode #}
                                 {% apply shortcodes %}
-                                   [{{ form_shortcode }}]
+                                   {{ form_shortcode }}
                                 {% endapply %}
                             {% endif %}
                         </div>

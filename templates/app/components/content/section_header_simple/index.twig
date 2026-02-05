@@ -1,7 +1,7 @@
 {# Section #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
     section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8 overflow-hidden',
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component overflow-hidden',
 } %}
 
     {% block component_content %}
@@ -95,11 +95,11 @@
                                 },
                                 { 
                                     wrapper: 'flex w-md flex-auto justify-end lg:w-auto lg:flex-none', 
-                                    img: 'aspect-video lg:aspect-[7/4.3] w-148 max-w-none flex-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
+                                    img: 'aspect-video lg:aspect-[7/4.3] w-140  max-w-none flex-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
                                 },
                                 { 
                                     wrapper: 'hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none', 
-                                    img: 'aspect-video lg:aspect-[4/2.3] w-lg max-w-none rounded-2xl bg-gray-800 object-cover' 
+                                    img: 'aspect-video lg:aspect-[4/2.1] w-lg max-w-none rounded-2xl bg-gray-800 object-cover' 
                                 },
                             ] %}
                             {% if image_gallery[0] is defined %}

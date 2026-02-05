@@ -15,7 +15,7 @@
         {% set title_on_side = title_position is same as 'side' %}
 
         {% if title_on_side %}
-            <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
+            <div class="flex flex-col gap-4 lg:flex-row lg:gap-8 title-on-side">
                 <div class="w-full space-y-2 lg:max-w-48 section-component-header-simple__header text-balance">
                     {{ badges.render_accent_badge({
                         title: accent,
@@ -45,9 +45,7 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                    {% endif %}
-
-                    
+                    {% endif %} 
                 </div>
 
                 <div class="grow w-full">
@@ -61,43 +59,44 @@
                 </div>
             </div>
         {% else %}
-            <div class="space-y-6 lg:max-w-7xl">
-                <div class="space-y-2 section-component-header-simple__header text-balance">
-                    {{ badges.render_accent_badge({
-                        title: accent,
-                        color: 'text-white'
-                    })}}
-
-                    <hgroup class="section-component-header-simple__title">
-                        {{ headings.render_heading(2,{
-                            title: title,
-                            size: 'text-xl md:text-2xl lg:fluid-text-4xl',
-                            preview: is_preview
-                        }) }}
-                    </hgroup>
-                </div>
-        
-                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                    {% block prose_content %}
-                        {{ component.entry }}
-                    {% endblock %}
-                {% endembed %}
-
-                {% if ctas %}
-                    <div class="py-6 section-component-content-entry__ctas">
-                        <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
-                            {% for cta in ctas %}
-                                <li class="entry-ctas__item">
-                                    {{ buttons.render_button_link({
-                                        text: cta.link.title,
-                                        link: cta.link.url,
-                                        style: cta.style,
-                                    }) }}
-                                </li>
-                            {% endfor %}
-                        </ul>
+            <div class="space-y-6">
+                <div class="max-w-3xl mx-auto space-y-6 py-8 xl:py-32">
+                    <div class="space-y-2 section-component-header-simple__header text-balance">
+                        {{ badges.render_accent_badge({
+                            title: accent,
+                            color: 'text-white'
+                        })}}
+                        <hgroup class="section-component-header-simple__title">
+                            {{ headings.render_heading(2,{
+                                title: title,
+                                size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                                preview: is_preview
+                            }) }}
+                        </hgroup>
                     </div>
-                {% endif %}
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" with {
+                        class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none'
+                    } %}
+                        {% block prose_content %}
+                            {{ component.entry }}
+                        {% endblock %}
+                    {% endembed %}
+                    {% if ctas %}
+                        <div class="py-6 section-component-content-entry__ctas">
+                            <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                                {% for cta in ctas %}
+                                    <li class="entry-ctas__item">
+                                        {{ buttons.render_button_link({
+                                            text: cta.link.title,
+                                            link: cta.link.url,
+                                            style: cta.style,
+                                        }) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
 

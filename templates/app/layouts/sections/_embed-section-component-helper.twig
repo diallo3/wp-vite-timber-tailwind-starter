@@ -50,6 +50,7 @@
    DATA EXTRACTION
    ============================================ #}
 {% set component = component.content[0] %}
+{% set position = position ?? 0 %}
 
 {# ============================================
    CONTENT AVAILABILITY CHECKS
@@ -101,7 +102,7 @@
 {% set section_classes = [
     section_class_name,
     section_theme_options,
-    'relative',
+    position == 1 ? '' : 'relative',
 ] %}
 
 {# Add padding for preview mode #}
@@ -124,6 +125,8 @@
     {% set section_bg_attrs = '' %}
 {% endif %}
 
+
+
 <section
     id="{{ section_id }}"
     class="{{ section_classes|join(' ') }} {{ section_bg_classes }}"
@@ -135,4 +138,5 @@
         {# Component Styles Block #}
         {% block component_styles %}{% endblock %}
     </div>
+
 </section>
