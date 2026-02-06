@@ -8,11 +8,14 @@
 <header x-data="{ 
         mobileNavOpen: false, 
         scrolledFromTop: false,
+        logoScrolled: false,
+        scrolledFromTopThreshold: 50,
+        logoOpacityThreshold: 300,
         isHeaderTransparent: {{ is_header_transparent ? 'true' : 'false' }}
     }"
         id="site-header" 
-        x-init="scrolledFromTop = window.pageYOffset >= 50"
-        @scroll.window="scrolledFromTop = window.pageYOffset >= 50"
+        x-init="scrolledFromTop = window.pageYOffset >= scrolledFromTopThreshold; logoScrolled = window.pageYOffset >= logoOpacityThreshold"
+        @scroll.window="scrolledFromTop = window.pageYOffset >= scrolledFromTopThreshold; logoScrolled = window.pageYOffset >= logoOpacityThreshold"
         :class="{
             'bg-white': !isHeaderTransparent,
             'bg-transparent site-header--over-hero': isHeaderTransparent && !scrolledFromTop
@@ -23,7 +26,7 @@
     <div id="header-content" class="lg:container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
-            :class="scrolledFromTop ? 'opacity-0' : 'opacity-100'"
+            :class="logoScrolled ? 'opacity-0' : 'opacity-100'"
             class="flex z-10 relative w-20 sm:w-28 lg:w-48 -mt-px transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
             <a href="{{ site.url }}" class="block group absolute top-0 z-10 inset-x-0 transition-transform duration-300 ">

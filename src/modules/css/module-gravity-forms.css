@@ -12,6 +12,10 @@
     font-family: var(--font-serif, "Open Sans", ui-sans-serif, system-ui, sans-serif);
   }
 
+  .gform_heading {
+    @apply hidden;
+  }
+
   .gform_wrapper .gform_body, .gform_fields {
     @apply space-y-6 ;
   }

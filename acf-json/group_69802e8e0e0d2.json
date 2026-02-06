@@ -118,23 +118,24 @@
             "choices": {
                 "primary": "Primary",
                 "secondary": "Secondary",
-                "tertiary": "Tertiary"
+                "tertiary": "Tertiary",
+                "white": "White"
             },
             "default_value": "primary",
             "return_format": "value",
             "multiple": 0,
             "max": "",
-            "allow_custom": 0,
-            "placeholder": "",
-            "search_placeholder": "",
             "prepend": "",
             "append": "",
             "allow_null": 0,
             "allow_in_bindings": 0,
             "ui": 0,
             "ajax": 0,
+            "placeholder": "",
             "create_options": 0,
             "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": "",
             "min": ""
         },
         {
@@ -224,5 +225,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1770310247
+    "modified": 1770338750
 }

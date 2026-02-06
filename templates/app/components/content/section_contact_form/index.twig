@@ -32,9 +32,9 @@
         {% set form_hubspot = component.hubspot %}
         {% set form_other = component.other %}
 
-        <script>console.log({{ form_type | json_encode | raw }})</script>
 
-        <div class="py-8 mx-auto space-y-6 max-w-6xl">
+
+        <div id="section-contact-form" class="py-8 mx-auto space-y-6 max-w-6xl">
             <div class="relative overflow-hidden border rounded-lg isolate dark bg-gray-50">
                 <div class="grid grid-cols-1 mx-auto">
 
@@ -43,7 +43,7 @@
                         <div class="space-y-4 form-container">
                             {{ headings.render_heading(3,{
                                 title: form_title,
-                                size: 'fluid-text-sm/snug',
+                                size: 'fluid-text-2xl',
                                 color: 'text-gray-600',
                                 preview: is_preview
                             }) }}

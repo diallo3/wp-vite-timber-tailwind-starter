@@ -96,7 +96,7 @@
    MARKUP
    ============================================ #}
 <section
-    id="{{ section_id }}" class="relative render-section-{{ loop.index }} {{ section_classes }}"
+    id="{{ section_id }}" class="relative isolate render-section-{{ loop.index }} {{ section_classes }}"
     {{ data }}>
     <div class="px-2 mx-auto {{ max_width_options }}">
         {% block section_content %}

@@ -52,10 +52,15 @@
     {% endset %}
 
     {% if options.href is not empty %}
+        {% set is_hash_link = options.href starts with '#' %}
         {# Generate button HTML #}
-        <a href="{{ options.href }}" class="{{ button_classes }}">
+        <span x-data>
+        <a href="{{ options.href }}" 
+           {% if is_hash_link %} @click.prevent="document.getElementById('{{ options.href|slice(1) }}').scrollIntoView({ behavior: 'smooth' })"{% endif %}
+           class="{{ button_classes }}">
             {{ button_text }}
         </a>
+        </span>
     {% else %}
         <button class="{{ button_classes }}">
             {{ button_text }}
