@@ -78,75 +78,9 @@ export const navHeader = () => {
 };
 
 /**
- * Animate sections when they come into view
- * Targets: .inview-container elements and their .inview-item children
+ * inview animations use native CSS scroll-driven animations (animation-timeline: view())
+ * in module-scroll-animations.css - no JS needed
  */
-export const generalInView = () => {
-    const sections = document.querySelectorAll(".inview-container .inview-item");
-
-    if (!sections.length) return;
-
-    inView(sections, (element) => {
-        animate(
-            element, 
-            { 
-                opacity: [0, 1], 
-                y: ["1.5rem", "0"] 
-            }, 
-            { 
-                duration: 0.6, 
-                easing: [0.17, 0.55, 0.55, 1],
-                delay: stagger(0.5)
-            }
-        );
-        return () => {
-            animate(
-                element, 
-                { 
-                    opacity: [0, 1], 
-                    y: ["0", "1.5rem" ] 
-                }, 
-            );
-        };
-    }, {
-        amount: 0.3,
-        margin: "-100px"
-    });
-}
-
-export const staggerInView = () => {
-    const sections = document.querySelectorAll(".stagger-inview-container");
-
-    if (!sections.length) return;
-
-    // Handle each stagger-inview container separately
-    inView(sections, (element) => {
-        const items = element.querySelectorAll(".stagger-inview-item");
-        animate(
-            items, 
-            { 
-                opacity: [0, 1], 
-                y: ["0.5rem", "0"] 
-            }, 
-            { 
-                duration: 0.85, 
-                easing: [0.17, 0.55, 0.55, 1], 
-                delay: stagger(0.2) 
-            }
-        );
-        return () => animate(
-            element, 
-            { 
-                opacity: [1, 0], 
-                y: ["0", "-0.5rem"] 
-            }
-        );
-    }, { 
-        amount: 0.3, 
-        margin: "-50px" 
-    });
-};
-
 
 /**
  * Animate elements on scroll with more control

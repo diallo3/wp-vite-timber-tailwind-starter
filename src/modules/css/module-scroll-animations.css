@@ -1,0 +1,237 @@
+/* On-Load Animations */
+/* Animations that trigger on page load (first view) */
+@keyframes fadeInOnLoad {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* On-load animation classes - trigger immediately on page load */
+.fade-in-on-load {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInOnLoad 0.8s ease-out forwards;
+}
+
+.fade-in-on-load-delay-1 {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInOnLoad 0.8s ease-out 0.2s forwards;
+}
+
+.fade-in-on-load-delay-2 {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInOnLoad 0.8s ease-out 0.4s forwards;
+}
+
+.fade-in-on-load-delay-3 {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInOnLoad 0.8s ease-out 0.6s forwards;
+}
+
+/* CSS Scroll-Driven Animations */
+/* Scroll timeline animations for scroll-based effects */
+
+
+/* Fade in on scroll */
+@keyframes fadeInOnScroll {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Scale in on scroll */
+@keyframes scaleInOnScroll {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Scroll animations using Intersection Observer pattern */
+/* More reliable than CSS scroll-driven animations API */
+.scroll-fade-in {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade-in.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.scroll-scale-in {
+	opacity: 0;
+	transform: scale(0.9);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-scale-in.visible {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.scroll-slide-left {
+	opacity: 0;
+	transform: translateX(-50px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-left.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.scroll-slide-right {
+	opacity: 0;
+	transform: translateX(50px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-right.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+/* Staggered animations for grid items */
+/* Using Intersection Observer pattern with CSS delays */
+.scroll-fade-in-stagger > *,
+.scroll-scale-in-stagger > *,
+.scroll-slide-left-stagger > *,
+.scroll-slide-right-stagger > * {
+	opacity: 0;
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Stagger delays - up to 12 items */
+.scroll-fade-in-stagger > *:nth-child(1) { transition-delay: 0ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(2) { transition-delay: 100ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(3) { transition-delay: 200ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(4) { transition-delay: 300ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(5) { transition-delay: 400ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(6) { transition-delay: 500ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(7) { transition-delay: 600ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(8) { transition-delay: 700ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(9) { transition-delay: 800ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(10) { transition-delay: 900ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(11) { transition-delay: 1000ms; transform: translateY(20px); }
+.scroll-fade-in-stagger > *:nth-child(12) { transition-delay: 1100ms; transform: translateY(20px); }
+
+.scroll-scale-in-stagger > *:nth-child(1) { transition-delay: 0ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(2) { transition-delay: 100ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(3) { transition-delay: 200ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(4) { transition-delay: 300ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(5) { transition-delay: 400ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(6) { transition-delay: 500ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(7) { transition-delay: 600ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(8) { transition-delay: 700ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(9) { transition-delay: 800ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(10) { transition-delay: 900ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(11) { transition-delay: 1000ms; transform: scale(0.9); }
+.scroll-scale-in-stagger > *:nth-child(12) { transition-delay: 1100ms; transform: scale(0.9); }
+
+.scroll-slide-left-stagger > *:nth-child(1) { transition-delay: 0ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(2) { transition-delay: 100ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(3) { transition-delay: 200ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(4) { transition-delay: 300ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(5) { transition-delay: 400ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(6) { transition-delay: 500ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(7) { transition-delay: 600ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(8) { transition-delay: 700ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(9) { transition-delay: 800ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(10) { transition-delay: 900ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(11) { transition-delay: 1000ms; transform: translateX(-50px); }
+.scroll-slide-left-stagger > *:nth-child(12) { transition-delay: 1100ms; transform: translateX(-50px); }
+
+.scroll-slide-right-stagger > *:nth-child(1) { transition-delay: 0ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(2) { transition-delay: 100ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(3) { transition-delay: 200ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(4) { transition-delay: 300ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(5) { transition-delay: 400ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(6) { transition-delay: 500ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(7) { transition-delay: 600ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(8) { transition-delay: 700ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(9) { transition-delay: 800ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(10) { transition-delay: 900ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(11) { transition-delay: 1000ms; transform: translateX(50px); }
+.scroll-slide-right-stagger > *:nth-child(12) { transition-delay: 1100ms; transform: translateX(50px); }
+
+/* Visible state for staggered items */
+.scroll-fade-in-stagger.visible > *,
+.scroll-scale-in-stagger.visible > *,
+.scroll-slide-left-stagger.visible > *,
+.scroll-slide-right-stagger.visible > * {
+	opacity: 1;
+	transform: translateY(0) translateX(0) scale(1);
+}
+
+/* inview-container / inview-item - native CSS scroll-driven fade-in */
+@keyframes inview-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+.inview-container .inview-item,
+.stagger-inview-container .stagger-inview-item {
+	animation: inview-fade-in 0.5s ease-out both;
+	animation-timeline: view();
+	animation-range: entry 0% entry 40%;
+}
+
+/* Fallback: show immediately if view() not supported (older browsers) */
+@supports not (animation-timeline: view()) {
+	.inview-container .inview-item,
+	.stagger-inview-container .stagger-inview-item {
+		animation: none;
+		opacity: 1;
+	}
+}
+
+/* Base styles */
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	@apply antialiased;
+}

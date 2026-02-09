@@ -7,6 +7,7 @@
 @import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
 @import "./modules/css/module-gravity-forms.css" layer(utilities);
+@import "./modules/css/module-scroll-animations.css";
 
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
@@ -129,3 +130,14 @@
 
 
 }
+
+@layer components {
+  .section-component-content-entry-list__list > li:nth-child(odd)::after {
+  content: "";
+  position: absolute;
+  right: -3rem;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-gray-200);
+}}

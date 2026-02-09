@@ -85,10 +85,7 @@ function reinitializeModules() {
             window.Alpine.initTree(document.body);
         }
 
-        // Re-initialize motion animations
-        if (window.generalInView) {
-            window.generalInView();
-        }
+        // Re-initialize scroll animations (inview uses native CSS, no re-init needed)
         if (window.scrollAnimations) {
             window.scrollAnimations();
         }

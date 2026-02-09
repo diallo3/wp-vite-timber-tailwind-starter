@@ -1,7 +1,4 @@
 /* components */
 
 @layer components {
-  .motion-loaded .inview-item, .motion-loaded .stagger-inview-item {
-    opacity: 0;
-  }
 }
