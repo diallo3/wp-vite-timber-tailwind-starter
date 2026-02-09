@@ -15,71 +15,12 @@
         {% set image = component.image %}
         {% set list = component.list %}
 
-        <div class="items-start gap-4 space-y-8 lg:gap-8 xl:gap-12 ">
-            <div class="space-y-6 inview-item section-component-content-entry-list__entry">
-                
-                {# title #}
-                <div class="space-y-4 section-component-content-entry-list__title lg:pt-10">
-                    {% if has_accent and accent %}
-                        <div class="inview-item">
-                            {{ badges.render_accent_badge({
-                                title: accent,
-                            })}}
-                        </div>
-                    {% endif %}
+        <div class="items-start gap-4 space-y-8 lg:gap-8 xl:gap-12 py-8 lg:py-12 xl:py-16">
+            {# Header #}
+            {% include 'app/components/content/section_content_entry_list/partials/_partial-section-header.twig' %}
 
-                    {% if has_title and title %}
-                        <div class="tracking-tight inview-item text-pretty">
-                            {{ headings.render_heading(2,{
-                                title: title,
-                                size: 'text-3xl sm:fluid-text-4xl',
-                                weight: 'font-semibold',
-                                preview: is_preview
-                            }) }}
-                        </div>
-                    {% endif %}
-                </div>
-
-
-                 <div class="section-component-content-entry-list__content flex justify-between">
-                    <div class="max-w-3xl">
-                
-                    {# Entry content #}
-                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                        {% block prose_content %}
-                            {{ entry }}
-                        {% endblock %}
-                    {% endembed %}
-                </div>
-
-                {% if has_ctas and ctas %}
-                    
-                    <ul class="flex items-end gap-4">
-                        
-                        {% for cta in ctas %}
-                            <script>console.log({{ cta.cta[0] | json_encode | raw }})</script>
-                            {% set cta = cta.cta[0] %}
-                            <li class="section-component-content-entry-list__cta-item"> 
-                                {{ buttons.render_button_link({
-                                    text: cta.link.title,
-                                    link: cta.link.url,
-                                    size: cta.size,
-                                    style: cta.style,
-                                    type: cta.type,
-                                }) }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                    
-                 </div>
-
-                
-            </div>
-
-           
-
-            <figure class="section-component-content-entry-list__figure overflow-hidden rounded-lg aspect-16/7">
+            {# Image #}
+            <figure class="section-component-content-entry-list__figure overflow-hidden rounded-lg aspect-16/7 inview-item">
                 <img src="{{ get_image(image).src | towebp }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
                 <figcaption class="text-center text-sm text-gray-500">
                     {{ figure.caption }}
@@ -87,40 +28,7 @@
             </figure>
 
             {# List #}
-            <div class="section-component-content-entry-list__items lg:col-span-3 mt-12 xl:mt-24 pb-24">
-                <ul class="grid lg:grid-cols-2 xl:gap-y-12 section-component-content-entry-list__list inview-container">
-                
-                    {# list items #}
-                    {% for item in list %}
-                        <li class="{{ loop.index is divisible by(2) ? ' pl-4' : '' }} relative flex gap-4 inview-item section-featured-list__item border-b border-gray-200 pb-8 max-w-2xl">
-                            <div class="flex space-y-2 grow-0">
-                                <span class="size-10 rounded-full flex items-center justify-center bg-gray-200">
-                                    
-                                </span>
-                            </div>
-                            <div class="flex flex-col space-y-2">
-                                <div class="space-y-2">
-                                    {{ headings.render_heading(3,{
-                                        title: item.title,
-                                        size: 'text-xl lg:text-2xl tracking-tight font-semibold font-serif',
-                                        color: 'text-gray-700',
-                                    }) }}
-                                </div>
-
-                                <div class="prose prose-p:text-gray-600 dark:prose-invert max-w-xl text-pretty">
-                                    {% embed "@Layouts/prose/_embed-prose-section.twig" with {
-                                        class: ' prose-li:[&>p]:m-0 prose-base lg:fluid-text-sm',
-                                    } %}
-                                        {% block prose_content %}
-                                            {{ item.entry }}
-                                        {% endblock %}
-                                    {% endembed %}
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% include 'app/components/content/section_content_entry_list/partials/_partial-section-list.twig' %}
         </div>
     {% endblock %}
     

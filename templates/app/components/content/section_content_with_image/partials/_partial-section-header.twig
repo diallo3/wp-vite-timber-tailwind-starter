@@ -6,17 +6,17 @@
 
 {% if has_accent or has_title %}
     <!-- Heading -->
-    <div class="space-y-4 lg:space-y-8 section-entry">
+    <div class="space-y-4 lg:space-y-8 section-entry inview-container">
         {% if has_accent and accent %}
             {{ badges.render_accent_badge({
                 title: accent,
-                class: 'section-entry__accent ',
+                class: 'section-entry__accent inview-item',
                 color: 'text-azure-400 [&_.badge-icon]:text-gray-500',
             }) }}
         {% endif %}
 
         {% if has_title and title %}
-            <hgroup class="space-y-3 hgroup section-entry__headings text-balance">
+            <hgroup class="space-y-3 hgroup section-entry__headings text-balance inview-item">
                 {{ headings.render_heading(2,{
                     title: title,
                     size: 'fluid-text-4xl xl:fluid-text-5xl leading-10 lg:leading-12 xl:leading-16',

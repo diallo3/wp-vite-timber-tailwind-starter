@@ -213,9 +213,21 @@
 
 .inview-container .inview-item,
 .stagger-inview-container .stagger-inview-item {
-	animation: inview-fade-in 0.5s ease-out both;
+	animation: inview-fade-in 1.5s ease-out both;
 	animation-timeline: view();
-	animation-range: entry 0% entry 40%;
+	animation-range: entry 20% entry 60%;
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+    &:nth-child(4) { animation-delay: 0.6s; }
+    &:nth-child(5) { animation-delay: 0.8s; }
+    &:nth-child(6) { animation-delay: 1s; }
+    &:nth-child(7) { animation-delay: 1.2s; }
+    &:nth-child(8) { animation-delay: 1.4s; }
+    &:nth-child(9) { animation-delay: 1.6s; }
+    &:nth-child(10) { animation-delay: 1.8s; }
+    &:nth-child(11) { animation-delay: 2s; }
+    &:nth-child(12) { animation-delay: 2.2s; }
 }
 
 /* Fallback: show immediately if view() not supported (older browsers) */

@@ -20,7 +20,7 @@
     }[options.type] ?? '' %}
 
     {% set style_class = {
-        primary: 'btn-primary ' ~ (options.type == 'outline' ? ' bg-transparent border-tiber-500 text-tiber-600' : ' bg-tiber-500 border-tiber-500 text-white'),
+        primary: 'btn-primary ' ~ (options.type == 'outline' ? ' bg-transparent border-tiber-500 text-tiber-600 hover:border-tiber-500' : ' bg-tiber-500 border-tiber-500 text-white hover:border-tiber-500'),
         secondary: 'btn-secondary ' ~ (options.type == 'outline' ? ' bg-transparent border-metallic-red-500 text-metallic-red-500' : 'bg-metallic-red-500 border-metallic-red-500 text-white'),
         tertiary: 'btn-tertiary ' ~ (options.type == 'outline' ? ' bg-transparent border-azure-300 text-azure-300' : 'bg-azure-500 border-azure-500 text-white'),
         white: 'btn-white ' ~ (options.type == 'outline' ? 'bg-transparent border-white text-white' : 'bg-white border-white text-tiber-600'),

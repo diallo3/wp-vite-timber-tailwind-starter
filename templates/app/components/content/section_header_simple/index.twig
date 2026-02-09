@@ -26,19 +26,19 @@
         }[header_type] | default(fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl') %}
         
         <div class="relative w-full py-8 pt-32 mx-auto max-w-(--breakpoint-2xl)sm:pt-40 xl:pt-48 xl:pb-20">
-            <div class="container pb-4 mx-auto space-y-6 lg:space-y-12 lg:mx-0">
-                <header class="space-y-4">
+            <div class="container pb-4 mx-auto space-y-6 lg:space-y-12 lg:mx-0 inview-container">
+                <header class="space-y-4 inview-item">
                     <div class="header-simple__accent">
                         {{ badges.render_accent_badge({
                             title: accent,
-                            color: 'text-blue-600 [&_.badge-icon]:text-gray-500'
+                            color: 'text-blue-600 [&_.badge-icon]:text-gray-500 inview-item'
                         })}}
                     </div>
 
                     {% if has_title and title %}
                         <div class="flex flex-col lg:flex-row justify-between gap-4">
                             <hgroup 
-                                class="tracking-tighter section-component-header-simple__headings text-balance max-w-3xl">
+                                class="tracking-tighter section-component-header-simple__headings text-balance max-w-3xl inview-item">
                                 {{ headings.render_heading(2,{
                                     title: title,
                                     color: 'text-gray-800',
@@ -47,7 +47,7 @@
                                 }) }}
                             </hgroup>
 
-                            <div class="flex flex-col gap-4 justify-end text-gray-800 max-w-lg lg:max-w-2xl">
+                            <div class="flex flex-col gap-4 justify-end text-gray-800 max-w-lg lg:max-w-2xl inview-item">
                                 {% if subtitle %}
                                 <p class="fluid-text-base xl:fluid-text-2xl font-medium font-serif">
                                     {{ subtitle }}
@@ -58,11 +58,11 @@
                     {% endif %}
                 </header>
 
-                <div class="mx-auto grid max-w-2xl grid-cols-1  gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
-                    <div class="lg:col-end-1 lg:w-full lg:max-w-4xl lg:pb-8 lg:pt-8">
+                <div class="mx-auto grid max-w-2xl grid-cols-1  gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8 inview-container">
+                    <div class="lg:col-end-1 lg:w-full lg:max-w-4xl lg:pb-8 lg:pt-8 inview-item">
                         {% if has_entry and entry %}
                             {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                                class: 'text-balance prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10'
+                                class: 'text-balance prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 inview-item'
                             } %}
                                 {% block prose_content %}
                                     {{ entry }}
@@ -71,11 +71,11 @@
                         {% endif %}
 
                         {% if ctas %}
-                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta">
+                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta stagger-inview-container">
                                 {% for cta_link in ctas %}
                                         {% set cta = cta_link.cta[0] %}
                                         
-                                        <li class="section-component-header-simple__cta-item">
+                                        <li class="section-component-header-simple__cta-item stagger-inview-item">
                                             {{ buttons.render_button_link({
                                                 text: cta.link.title,
                                                 href: cta.link.url,
@@ -91,9 +91,9 @@
 
                     {% if image_gallery|length > 0 %}
                         {% if image_gallery|length == 2 %}
-                        <div class="grid grid-cols-2 gap-4 w-full relative xl:-ml-24">
+                        <div class="grid grid-cols-2 gap-4 w-full relative xl:-ml-24    stagger-inview-container">
                             {% for img in image_gallery %}
-                                <div class="w-full aspect-3/4 rounded-lg overflow-hidden {{ loop.index == 1 ? 'order-first ' : 'order-last mt-4 lg:mt-10 ' }} ">
+                                <div class="w-full aspect-3/4 rounded-lg overflow-hidden {{ loop.index == 1 ? 'order-first ' : 'order-last mt-4 lg:mt-10 ' }} stagger-inview-item">
                                     <img class="size-full object-cover" src="{{ img.url }}" alt="{{ img.alt ?? '' }}">
                                 </div>
                             {% endfor %}
@@ -103,34 +103,34 @@
                         {% else %}
                     
                     
-                            <div class="flex flex-wrap items-start lg:justify-end gap-6 sm:gap-8 lg:contents w-full">
+                            <div class="flex flex-wrap items-start lg:justify-end gap-6 sm:gap-8 lg:contents w-full stagger-inview-container">
                                 {% set gallery_positions = [
                                     { 
                                         wrapper: 'w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end', 
-                                        img: 'aspect-video lg:aspect-7/5 w-148 max-w-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
+                                        img: 'aspect-video lg:aspect-7/5 w-148 max-w-none rounded-2xl bg-gray-800 object-cover max-sm:w-120 stagger-inview-item' 
                                     },
                                     { 
                                         wrapper: 'order-first flex w-64 flex-none justify-end self-end max-sm:w-40 lg:w-auto', 
-                                        img: 'aspect-video lg:aspect-4/3 w-[24rem] max-w-none flex-none rounded-2xl bg-gray-800 object-cover' 
+                                        img: 'aspect-video lg:aspect-4/3 w-[24rem] max-w-none flex-none rounded-2xl bg-gray-800 object-cover stagger-inview-item' 
                                     },
                                     { 
                                         wrapper: 'flex w-md flex-auto justify-end lg:w-auto lg:flex-none', 
-                                        img: 'aspect-video lg:aspect-[7/4.3] w-140  max-w-none flex-none rounded-2xl bg-gray-800 object-cover max-sm:w-120' 
+                                        img: 'aspect-video lg:aspect-[7/4.3] w-140  max-w-none flex-none rounded-2xl bg-gray-800 object-cover max-sm:w-120 stagger-inview-item' 
                                     },
                                     { 
                                         wrapper: 'hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none', 
-                                        img: 'aspect-video lg:aspect-[4/2.1] w-lg max-w-none rounded-2xl bg-gray-800 object-cover' 
+                                        img: 'aspect-video lg:aspect-[4/2.1] w-lg max-w-none rounded-2xl bg-gray-800 object-cover stagger-inview-item' 
                                     },
                                 ] %}
                                 {% if image_gallery[0] is defined %}
-                                <div class="{{ gallery_positions[0].wrapper }}">
+                                <div class="{{ gallery_positions[0].wrapper }} stagger-inview-item">
                                     <img src="{{ image_gallery[0].url }}" alt="{{ image_gallery[0].alt ?? '' }}" class="{{ gallery_positions[0].img }}" loading="lazy" />
                                 </div>
                                 {% endif %}
                                 <div class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-148 lg:items-start lg:justify-end lg:gap-x-8">
                                 {% for img in image_gallery|slice(1, 3) %}
                                     {% set pos = gallery_positions[loop.index] ?? gallery_positions[1] %}
-                                    <div class="{{ pos.wrapper }}">
+                                    <div class="{{ pos.wrapper }} stagger-inview-item">
                                         <img src="{{ img.url }}" alt="{{ img.alt ?? '' }}" class="{{ pos.img }}" loading="lazy" />
                                     </div>
                                 {% endfor %}

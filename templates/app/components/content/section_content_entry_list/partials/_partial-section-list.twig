@@ -1,0 +1,45 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+<div class="section-component-content-entry-list__items lg:col-span-3 mt-12 xl:mt-24 pb-24">
+    <ul class="grid lg:grid-cols-2 xl:gap-y-12 section-component-content-entry-list__list stagger-inview-container">
+    
+        {# list items #}
+        {% for item in list %}
+            <li class="{{ loop.index is divisible by(2) ? 'lg:pl-4' : '' }} relative flex flex-col lg:flex-row gap-4 inview-item section-featured-list__item border-b border-gray-200 pb-8 max-w-2xl stagger-inview-item pt-8 lg:pt-0">
+                <div class="flex  gap-4 grow-0 py-1">
+                    <span class="size-6 rounded-full flex items-center justify-center">    
+
+                        {{ icons.icon({
+                            name: 'circle-information',
+                            path: 'defaults',
+                            class: 'size-full text-gray-500'
+                        }) }}
+                    </span>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <div class="space-y-2">
+                        {{ headings.render_heading(3,{
+                            title: item.title,
+                            size: 'text-xl lg:text-2xl tracking-tight font-semibold font-serif',
+                            color: 'text-gray-700',
+                        }) }}
+                    </div>
+
+                    <div class="prose prose-p:text-gray-600 dark:prose-invert max-w-xl text-pretty">
+                        {% embed "@Layouts/prose/_embed-prose-section.twig" with {
+                            class: ' prose-li:[&>p]:m-0 prose-base lg:fluid-text-sm',
+                        } %}
+                            {% block prose_content %}
+                                {{ item.entry }}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

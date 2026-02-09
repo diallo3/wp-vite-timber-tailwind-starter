@@ -59,14 +59,14 @@
                 </div>
             </div>
         {% else %}
-            <div class="space-y-6">
+            <div class="space-y-6 inview-container">
                 <div class="max-w-3xl mx-auto space-y-6 py-8 xl:py-32">
-                    <div class="space-y-2 section-component-header-simple__header text-balance">
+                    <div class="space-y-2 section-component-header-simple__header text-balance inview-item">
                         {{ badges.render_accent_badge({
                             title: accent,
                             color: 'text-white'
                         })}}
-                        <hgroup class="section-component-header-simple__title">
+                        <hgroup class="section-component-header-simple__title inview-item">
                             {{ headings.render_heading(2,{
                                 title: title,
                                 size: 'text-xl md:text-2xl lg:fluid-text-4xl',
@@ -75,7 +75,7 @@
                         </hgroup>
                     </div>
                     {% embed "@Layouts/prose/_embed-prose-section.twig" with {
-                        class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none'
+                        class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none inview-item'
                     } %}
                         {% block prose_content %}
                             {{ component.entry }}

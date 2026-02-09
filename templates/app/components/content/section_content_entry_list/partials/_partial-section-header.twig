@@ -1,0 +1,63 @@
+{% import "@Elements/_macro-icon.twig" as icons %}
+{% import "@Elements/_macro-heading.twig" as headings %}
+{% import "@Elements/_macro-badge.twig" as badges %}
+{% import "@Elements/_macro-image-object.twig" as images %}
+{% import "@Elements/_macro-button.twig" as buttons %}
+<div class="space-y-6 inview-item section-component-content-entry-list__entry inview-container">
+
+	{# title #}
+	<div class="space-y-4 section-component-content-entry-list__title lg:pt-10 inview-item">
+		{% if has_accent and accent %}
+			<div class="inview-item">
+				{{ badges.render_accent_badge({
+                    title: accent,
+                })}}
+			</div>
+		{% endif %}
+
+		{% if has_title and title %}
+			<div class="tracking-tight inview-item text-pretty">
+				{{ headings.render_heading(2,{
+                    title: title,
+                    size: 'text-3xl sm:fluid-text-4xl',
+                    weight: 'font-semibold',
+                    preview: is_preview
+                }) }}
+			</div>
+		{% endif %}
+	</div>
+
+
+	<div class="section-component-content-entry-list__content flex flex-col lg:flex-row justify-between gap-4 lg:gap-8 inview-item">
+		<div class="max-w-3xl inview-item">
+
+			{# Entry content #}
+			{% embed "@Layouts/prose/_embed-prose-section.twig" with {
+                        class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none inview-item'
+                    } %}
+				{% block prose_content %}
+					{{ entry }}
+				{% endblock %}
+			{% endembed %}
+		</div>
+
+		{% if has_ctas and ctas %}
+
+			<ul class="flex items-end gap-4 stagger-inview-container">
+
+				{% for cta in ctas %}
+					{% set cta = cta.cta[0] %}
+					<li class="section-component-content-entry-list__cta-item stagger-inview-item">
+						{{ buttons.render_button_link({
+                                    text: cta.link.title,
+                                    link: cta.link.url,
+                                    size: cta.size,
+                                    style: cta.style,
+                                    type: cta.type,
+                                }) }}
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+</div>

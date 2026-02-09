@@ -2,17 +2,17 @@
 {% import "@Elements/_macro-heading.twig" as headings %}
 {% import "@Elements/_macro-badge.twig" as badges %}
 
-<div class="space-y-4 section-component-header-simple__header text-balance">
+<div class="space-y-4 section-component-header-simple__header text-balance inview-container">
     {% if has_accent and accent %}
         {{ badges.render_accent_badge({
             title: accent,
-            class: 'section-entry__accent ',
+            class: 'section-entry__accent inview-item',
             color: 'text-azure-400 [&_.badge-icon]:text-gray-500',
         }) }}
     {% endif %}
 
     {% if has_title and title %}
-        <hgroup class="section-component-header-simple__title max-w-3xl xl:max-w-5xl">
+        <hgroup class="section-component-header-simple__title max-w-3xl xl:max-w-5xl inview-item">
             {{ headings.render_heading(2,{
                 title: title,
                 color: 'text-gray-800',
@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if has_entry and entry %}
-        <div class="lg:max-w-5xl">
+        <div class="lg:max-w-5xl inview-item">
             {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                 {% block prose_content %}
                     {{ entry }}
