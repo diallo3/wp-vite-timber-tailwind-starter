@@ -22,7 +22,7 @@
                     @mouseleave="open = false"
                     class="{{ item.classes | join(' ') }} group cursor-pointer relative">
                     <a href="{{ item.link }}" class="block {{ options.link_classes|join(' ') }}" target="{{ item.target }}">
-                        <span class="block py-2 px-4 transition-colors duration-300 ease-in-out">{{ item.title }}</span>
+                        <span class="block py-2 px-4 transition-colors duration-300 ease-in-out bg-transparent!">{{ item.title }}</span>
                     </a>
 
                     {# item children #}
