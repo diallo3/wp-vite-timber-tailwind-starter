@@ -26,7 +26,9 @@
     <div id="header-content" class="lg:container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
-            :class="logoScrolled ? 'opacity-0' : 'opacity-100'"
+            :class="[
+                logoScrolled ? 'opacity-0' : 'opacity-100',
+            ]"
             class="flex z-10 relative w-32 lg:w-64 transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
             <a 
@@ -34,15 +36,17 @@
                 :class="[
                     isHeaderTransparent ? 'bg-transparent' : 'bg-white',
                     'block rounded-b-sm px-4 py-2 group absolute top-0 z-10 inset-x-0 transition-transform duration-300']">
+                    <div class="absolute inset-x-0 bg-white bottom-0 h-4 xl:h-1 2xl:h-10 shadow"></div>
                 <span 
                     :class="isHeaderTransparent ? 
                     '[&_.logo-letters]:fill-white text-white' : '[&_.logo-letters]:fill-tiber-900 text-tiber-900'"
-                    class="inline-flex w-full">
+                    class="inline-flex w-full relative [&_.logo-accent]:fill-metallic-red-500">
                     {{ logos.render_miranda_logo() }}
                 </span>
                 <span class="sr-only">{{ site.title }}</span>
             </a>
             <!-- END Logo -->
+            
         </div>
         
 
