@@ -33,7 +33,7 @@
                         {% endif %}
 
                         {% if gallery %}    
-                            <div class="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 xl:gap-8 lg:pt-16 stagger-inview-container">
+                            <div class=": grid grid-cols-2 gap-4 lg:grid-cols-2 xl:gap-8 lg:pt-16 stagger-inview-container">
                                 {% for img in gallery %}
                                     <figure class="{{ loop.index is divisible by(2)  ? 'lg:-mt-24' : '' }} aspect-video lg:aspect-square overflow-hidden rounded-xl  -outline-offset-1 outline-black/10 stagger-inview-item">
                                         <img src="{{ get_image(img).src | towebp }}" alt="" class="block size-full object-cover" />
