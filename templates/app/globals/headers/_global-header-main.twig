@@ -27,12 +27,18 @@
         <!-- Left Section -->
         <div
             :class="logoScrolled ? 'opacity-0' : 'opacity-100'"
-            class="flex z-10 relative w-20 sm:w-28 lg:w-48 -mt-px transition-opacity duration-300 ease-in-out">
+            class="flex z-10 relative w-32 lg:w-64 transition-opacity duration-300 ease-in-out">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block group absolute top-0 z-10 inset-x-0 transition-transform duration-300 ">
+            <a 
+                href="{{ site.url }}" 
+                :class="[
+                    isHeaderTransparent ? 'bg-transparent' : 'bg-white',
+                    'block rounded-b-sm px-4 py-2 group absolute top-0 z-10 inset-x-0 transition-transform duration-300']">
                 <span 
-                    class="inline-flex w-full ">
-                    {{ logos.render_main_logo() }}
+                    :class="isHeaderTransparent ? 
+                    '[&_.logo-letters]:fill-white text-white' : '[&_.logo-letters]:fill-tiber-900 text-tiber-900'"
+                    class="inline-flex w-full">
+                    {{ logos.render_miranda_logo() }}
                 </span>
                 <span class="sr-only">{{ site.title }}</span>
             </a>
@@ -67,11 +73,16 @@
 
             <!-- Open Mobile Navigation lg:hidden  -->
             <div class="header-actions__mobile-menu mobile-menu lg:hidden">
-                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle" aria-controls="tkMobileNav">
+                <button 
+                        x-on:click="mobileNavOpen = true" 
+                    type="button" 
+                    :class="isHeaderTransparent ? 'text-white' : 'text-gray-800'"
+                    class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle size-12" 
+                    aria-controls="tkMobileNav">
                     {{ icons.icon({
                         path: 'controls',
                         name: 'bars-3-bottom-right',
-                        classes: 'w-6 h-6',
+                        classes: 'size-full',
                     }) }}
                     <span class="sr-only">Menu</span>
                 </button>

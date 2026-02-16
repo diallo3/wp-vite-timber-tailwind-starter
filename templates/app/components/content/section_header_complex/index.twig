@@ -1,7 +1,7 @@
 {# Section Heade Complex Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
     section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-6 lg:px-8',
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-0 lg:px-8',
 } %}
     {% block component_content %}
         {% import "@Elements/_macro-icon.twig" as icons %}
@@ -19,11 +19,11 @@
         <div class="section-header-complex__gallery absolute inset-0 z-0 min-h-[60vh] overflow-hidden pointer-events-none"
              x-data="{ currentIndex: 0, total: {{ gallery|length }} }"
              x-init="setInterval(() => { if (total > 1) currentIndex = (currentIndex + 1) % total }, 5000)">
-            <div class="absolute inset-0 bg-red-500">
+            <div class="absolute inset-0 bg-tiber-950">
                 {% for img in gallery %}
                 <img src="{{ img.url }}"
                      alt=""
-                     class="section-header-complex__gallery-img absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
+                     class="section-header-complex__gallery-img absolute inset-0 size-full object-cover transition-opacity duration-1500 ease-in-out"
                      :class="{{ loop.index0 }} === currentIndex ? 'opacity-100' : 'opacity-0'"
                      loading="lazy" />
                 {% endfor %}
@@ -44,15 +44,15 @@
                     <hgroup class="section-component-header-simple__title">
                         {{ headings.render_heading(1, {
                             title: title,
-                            size: 'text-6xl md:text-7xl lg:fluid-text-7xl',
+                            size: 'text-5xl md:text-7xl lg:fluid-text-7xl xl:fluid-text-8xl',
                             preview: is_preview
                         }) }}
                     </hgroup>
                 </div>
 
-                <div class="max-w-3xl">
+                <div class="max-w-sm lg:max-w-3xl lg:px-2">
                     {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
-                        class: 'prose-invert dark:text-white text-balance prose-p:text-lg lg:prose-p:text-xl lg:prose-p:leading-10'
+                        class: 'prose-invert dark:text-white text-balance prose-p:text-lg lg:prose-p:text-xl 2xl:prose-p:text-2xl lg:prose-p:leading-10 font-medium'
                     } %}
                         {% block prose_content %}
                             {{ entry }}
@@ -62,7 +62,7 @@
                 </div>
 
                 {% if ctas %}
-                    <ul class="gap-4 section-component-header-simple__ctas flex items-center pt-10 pb-6 lg:pt-8">
+                    <ul class="gap-4 section-component-header-simple__ctas flex items-center pt-10 pb-6 lg:pt-8 lg:px-2">
                         {% for cta_link in ctas %}
                             {% set cta = cta_link.cta[0] %}
                             <li class="section-component-header-simple__cta-item">

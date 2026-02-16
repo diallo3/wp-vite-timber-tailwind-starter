@@ -41,7 +41,7 @@
       }[section_theme] | default('bg-transparent')
     : {
         'default': '',
-        'light': 'bg-gray-200/70 light',
+        'light': 'bg-gray-200 light',
         'dark': 'bg-tiber-900 dark'
       }[section_theme] | default('bg-transparent')
 %}
@@ -62,7 +62,7 @@
 {# Horizontal Padding #}
 {% set padding_inline = section.padding_inline ?? 'default' %}
 {% set padding_inline_options = {
-    'default': 'px-8',
+    'default': 'px-4 lg:px-8',
     'small': 'px-4',
     'medium': 'px-8',
     'large': 'px-16'
