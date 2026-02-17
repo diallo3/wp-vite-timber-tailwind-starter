@@ -141,3 +141,22 @@
   height: 100%;
   background-color: var(--color-gray-200);
 }}
+
+
+.current-menu-item a:not(.btn) {
+  /* add stars to the before and  */
+  position: relative;
+  &::before, &::after {
+    content: "★";
+    color: var(--color-azure-400);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &::before {
+    left: 0;
+  }
+  &::after {
+    right: 0;
+  }
+}

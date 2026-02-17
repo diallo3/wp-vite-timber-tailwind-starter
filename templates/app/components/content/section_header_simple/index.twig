@@ -71,7 +71,7 @@
                         {% endif %}
 
                         {% if ctas %}
-                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta stagger-inview-container">
+                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta stagger-inview-container">
                                 {% for cta_link in ctas %}
                                         {% set cta = cta_link.cta[0] %}
                                         
@@ -91,7 +91,7 @@
 
                     {% if image_gallery|length > 0 %}
                         {% if image_gallery|length == 2 %}
-                        <div class="grid grid-cols-2 gap-4 w-full relative xl:-ml-24    stagger-inview-container">
+                        <div class="grid grid-cols-2 gap-4 w-full relative xl:-ml-24 2xl:w-[112%]    stagger-inview-container">
                             {% for img in image_gallery %}
                                 <div class="w-full aspect-3/4 rounded-lg overflow-hidden {{ loop.index == 1 ? 'order-first ' : 'order-last mt-4 lg:mt-10 ' }} stagger-inview-item">
                                     <img class="size-full object-cover" src="{{ img.url }}" alt="{{ img.alt ?? '' }}">

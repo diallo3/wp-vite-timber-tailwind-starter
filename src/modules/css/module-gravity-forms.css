@@ -167,7 +167,7 @@
      ------------------------------------------------------------------------- */
   .gform_wrapper .gform_footer input[type="submit"],
   .gform_wrapper .gform_footer button[type="submit"] {
-    @apply btn btn-primary btn-lg rounded-full px-10 font-medium cursor-pointer;
+    @apply btn bg-azure-500 border-azure-500 text-white hover:border-azure-500 btn-lg rounded-full px-10 font-medium cursor-pointer;
   }
 
   .gform_wrapper .gform_footer {

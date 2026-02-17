@@ -20,7 +20,7 @@
             'bg-white': !isHeaderTransparent,
             'bg-transparent site-header--over-hero': isHeaderTransparent && !scrolledFromTop
         }"
-        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 [.admin-bar_&]:top-[32px]"
+        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 in-[.admin-bar]:top-[32px]"
 >
     <!-- Main Header Content -->
     <div id="header-content" class="lg:container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
@@ -34,13 +34,16 @@
             <a 
                 href="{{ site.url }}" 
                 :class="[
-                    isHeaderTransparent ? 'bg-transparent' : 'bg-white',
-                    'block rounded-b-sm px-4 py-2 group absolute top-0 z-10 inset-x-0 transition-transform duration-300']">
-                    <div class="absolute inset-x-0 bg-white bottom-0 h-4 xl:h-1 2xl:h-10 shadow"></div>
+                    isHeaderTransparent ? 'bg-transparent pl- pr-4' : 'bg-white px-8',
+                    'block rounded-b-sm  py-2 group absolute top-0 z-10 inset-x-0']">
+                    <div :class="[
+                        isHeaderTransparent ? 'hidden' : 'block',
+                        'absolute inset-x-0 bg-white bottom-0 h-4 xl:h-1 2xl:h-10 shadow']"></div>
                 <span 
-                    :class="isHeaderTransparent ? 
+                    :class="
+                        isHeaderTransparent ? 
                     '[&_.logo-letters]:fill-white text-white' : '[&_.logo-letters]:fill-tiber-900 text-tiber-900'"
-                    class="inline-flex w-full relative [&_.logo-accent]:fill-metallic-red-500">
+                    class="inline-flex w-full relative [&_.logo-accent]:fill-metallic-red-500 [&_.logo-accent]:transition-all [&_.logo-accent]:duration-300 group-hover:[&_.logo-accent]:fill-azure-500 hover:scale-105 transition-transform duration-300">
                     {{ logos.render_miranda_logo() }}
                 </span>
                 <span class="sr-only">{{ site.title }}</span>
@@ -57,7 +60,10 @@
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
                 classes: 'w-full',
-                link_classes: 'sm:text-base uppercase font-bold py-3 px-0.5 bg-transparent! transition-colors duration-300 [&>span]:rounded-sm [&>span]:ring-1 [&>span]:ring-transparent hover:[&>span]:ring-tiber-500',
+                link_classes: [
+                    is_header_transparent ? 'hover:[&>span]:text-tiber-300' : 'hover:[&>span]:text-metallic-red-600',
+                    'sm:text-base uppercase font-bold py-3 px-0.5 bg-transparent transition-colors duration-300 [&>span]:rounded-sm',
+                ],
                 })
             }}
         </nav>
@@ -71,7 +77,7 @@
                     style: 'secondary',
                     type: 'solid',
                     rest_style: 'white',
-                    rest_type: 'outline',
+                    rest_type: 'outline white',
                 }) }}
             </nav> 
 

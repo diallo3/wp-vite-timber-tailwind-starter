@@ -38,11 +38,11 @@
         style_class,
         type_class,
         size_class,
-        'btn rounded-full lg:px-10 px-6 shadow-none'
+        'btn rounded-full lg:px-10 px-6 shadow-none whitespace-nowrap'
     ]|join(' ') %}
 
     {% set button_text %}
-        <span class="inline-flex btn__content">{{ options.text }}</span>
+        <span class="inline-flex btn__content font-bold">{{ options.text }}</span>
         {# Include an optional SVG icon #}
         {% if options.icon is not null %}
             <span class="relative inline-flex items-center justify-center w-5 h-5 bg-current rounded-full">

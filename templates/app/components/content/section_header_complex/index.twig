@@ -1,7 +1,7 @@
 {# Section Heade Complex Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
     section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component px-0 lg:px-8',
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
 } %}
     {% block component_content %}
         {% import "@Elements/_macro-icon.twig" as icons %}

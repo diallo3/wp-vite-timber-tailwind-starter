@@ -10,13 +10,16 @@
 		<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between">
 			<div class="flex w-full  items-center gap-x-8">
 				<div class="flex w-full max-w-32 mx-auto lg:mx-0 lg:w-auto flex-col lg:flex-row  items-center space-x-2 text-gray-700 main-footer__logo">
-                       <span class="w-full [&_.logo-accent]:fill-blue-600"> {{ logos.render_miranda_logo() }}</span>
-                    <span class="sr-only">{{ site.title }}</span>
+                    <a href="{{ site.url }}" class="inline-block group">         
+                        <span class="w-full [&_.logo-accent]:fill-metallic-red-500 [&_.logo-accent]:transition-colors [&_.logo-accent]:duration-300 group-hover:[&_.logo-accent]:fill-azure-500"> 
+                            {{ logos.render_miranda_logo() }}</span>
+                        <span class="sr-only">{{ site.title }}</span>
+                    </a>
                 </div>
 
                 {{ menus.render_menu(menu.footer_nav.get_items, {
                     level: 0,
-                    classes: 'hidden lg:grid grid-cols-4 gap-4 xl:gap-8 main-footer__menu',
+                    classes: 'hidden lg:flex lg:items-center gap-4 xl:gap-8 main-footer__menu',
                     link_classes: 'text-sm font-bold leading-6 text-gray-600 uppercase',
                     child_classes: 'text-sm leading-6 text-gray-300 mt-4 space-y-2',
                     child_link_classes: '',

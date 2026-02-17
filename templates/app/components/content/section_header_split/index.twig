@@ -17,9 +17,6 @@
         {% set entry = component.entry %}
         {% set image = component.image %}
 
-        <script>
-            console.log({{ component | json_encode | raw }});
-        </script>
         <div class="bg-white inset-x-0 absolute bottom-0 h-12 hidden xl:block"></div>
         <div class="relative inview-container {{ is_preview ? 'pt-0' : 'pt-16' }}">
             <div class="section-header-split__content grid grid-cols-1 xl:grid-cols-12 w-full ">
@@ -47,7 +44,7 @@
                     {% endif %}
                 </header>
 
-                <div class="mx-auto grid max-w-2xl grid-cols-1  gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
+                <div class="mx-auto grid max-w-2xl grid-cols-1 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
                     <div class="lg:col-end-1 lg:w-full lg:max-w-4xl lg:pb-8 lg:pt-8 inview-item">
                         {% if has_entry and entry %}
                             {% embed "@Layouts/prose/_embed-prose-hero.twig" with {
@@ -60,10 +57,9 @@
                         {% endif %}
 
                         {% if ctas %}
-                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:gap-x-8 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta">
+                            <ul class="flex items-center pt-4 lg:pt-8 gap-x-4 lg:mt-0 lg:shrink-0 section-component-call_to_action__cta">
                                 {% for cta_link in ctas %}
                                         {% set cta = cta_link.cta[0] %}
-                                        
                                         <li class="section-component-header-simple__cta-item">
                                             {{ buttons.render_button_link({
                                                 text: cta.link.title,
@@ -86,7 +82,7 @@
                         style="background-image: url('{{ get_image(image).src | towebp }}')">
                         <div class="flex h-full flex-col gap-4 justify-end relative z-10 text-white px-6 py-24 bg-linear-to-t from-black/70 to-transparent">
                                 <p class="fluid-text-lg xl:fluid-text-2xl font-medium font-serif max-w-lg mx-auto text-balance">
-                                    {{ subtitle ?: entry }}
+                                    {{ subtitle ?: '' }}
                                 </p>
                             </div>
                     </section>
