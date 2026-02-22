@@ -11,14 +11,10 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        {% set accent = accent ? accent : fn('get_the_title') %}
         {% set subtitle = component.sub_title ? component.sub_title : '' %}
         {% set image = component.image ? component.image : '' %}
         {% set image_gallery = component.image_gallery|default([]) %}
         
-        <script>
-            console.log({{ component | json_encode | raw }});
-        </script>
 
         {% set heading_size_options = {
             'default': fn('is_front_page') ? 'sm:text-6xl lg:fluid-text-9xl' : 'sm:text-5xl lg:fluid-text-7xl',

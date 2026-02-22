@@ -143,7 +143,7 @@
 }}
 
 
-.current-menu-item a:not(.btn) {
+.current-menu-item > a:not(.btn) {
   /* add stars to the before and  */
   position: relative;
   &::before, &::after {
