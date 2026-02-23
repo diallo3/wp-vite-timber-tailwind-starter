@@ -1,0 +1,90 @@
+{# Section CContact Form #}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: block.component_name|replace({'_': '-'}),
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
+} %}
+
+    {% block component_content %}
+        {% import "@Elements/_macro-icon.twig" as icons %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-badge.twig" as badges %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+        {% import "@Elements/_macro-button.twig" as buttons %}
+
+        {% set has_accent = component.has_accent %}
+        {% set accent = component.accent %}
+        {% set has_title = component.has_title %}
+        {% set title = component.title %}
+        {% set has_entry = component.has_entry %}
+        {% set entry = component.entry %}
+        {% set has_markup = component.has_markup %}
+        {% set markup = component.markup %}
+        {% set has_ctas = component.has_ctas %}
+
+        <script>console.log({{ component | json_encode | raw }})</script>
+
+
+        {% set code = component.code %}
+        {% set markup = code.markup %}
+        {% set css = code.css %}
+        {% set javascript = code.javascript %}
+
+
+        <div class="space-y-6 inview-container">
+                <div class="max-w-3xl mx-auto space-y-6 py-8 xl:py-32"  >
+                    <div class="space-y-2 {{ block.component_name }}__header text-balance inview-item"> 
+                    {% if has_accent and accent %}  
+                            {{ badges.render_accent_badge({
+                                title: accent,
+                                color: 'text-white'
+                            })}}
+                        {% endif %}
+                        {% if has_title and title %}    
+                        <hgroup class="{{ block.component_name }}__title inview-item">
+                            {{ headings.render_heading(2,{
+                                title: title,
+                                size: 'text-xl md:text-2xl lg:fluid-text-4xl',
+                                preview: is_preview
+                            }) }}
+                        </hgroup>
+                        {% endif %}
+                    </div>
+
+                    {# entry #}
+                    {% if entry %}
+                        <div class="{{ block.component_name }}__entry">
+                            {% embed "@Layouts/prose/_embed-prose-section.twig" with {
+                                class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none inview-item prose-headings:font-serif prose-headings:fluid-text-3xl prose-headings:font-medium prose-headings:tracking-tight prose-li:fluid-text-lg prose-li:[&>p]:m-0 prose-base lg:fluid-text-sm'
+                            } %}
+                        {% block prose_content %}
+                            {{ component.entry }}
+                                {% endblock %}
+                            {% endembed %}
+                        </div>
+                    {% endif %}
+
+
+                    <div class="{{ block.component_name }}__markup">
+                        {{ markup }}
+                    </div>
+
+                    {% if ctas %}
+                        <div class="py-6 section-component-content-entry__ctas">
+                            <ul class="flex flex-col lg:flex-row lg:items-end lg:space-x-3 entry-ctas">
+                                {% for cta in ctas %}
+                                    <li class="entry-ctas__item">
+                                        {{ buttons.render_button_link({
+                                            text: cta.link.title,
+                                            link: cta.link.url,
+                                            style: cta.style,
+                                        }) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    {% endblock %}
+
+{% endembed %}

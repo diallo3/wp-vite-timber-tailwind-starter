@@ -1306,8 +1306,8 @@
                 },
                 "layout_671e31274725f": {
                     "key": "layout_671e31274725f",
-                    "name": "section_content_customer_story",
-                    "label": "Section Content Customer Story",
+                    "name": "section_content_code_block",
+                    "label": "Section Content Code Block",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -1328,18 +1328,18 @@
                             "hide_label": "",
                             "hide_instructions": "",
                             "hide_required": "",
-                            "field_group_key": "group_671e7986625eb",
+                            "field_group_key": "group_699c959ae386e",
                             "instruction_placement": "",
                             "acfe_permissions": "",
                             "allow_in_bindings": 0,
+                            "button_label": "Add Row",
+                            "appearances": "",
                             "repeatable": false,
                             "min": 0,
                             "max": 0,
                             "rows_per_page": 20,
                             "layout": "block",
-                            "button_label": "Add Row",
                             "collapsed": "",
-                            "appearances": [],
                             "sub_fields": []
                         }
                     ],
@@ -1416,5 +1416,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1770652617
+    "modified": 1771870519
 }

@@ -80,11 +80,13 @@
                     <section 
                         class="aspect-square xl:aspect-auto xl:size-full bg-gray-800 xl:xl:absolute inset-0 rounded-lg xl:rounded-t-none overflow-hidden bg-cover bg-center transition-opacity duration-1000 ease-in-out inview-item" 
                         style="background-image: url('{{ get_image(image).src | towebp }}')">
-                        <div class="flex h-full flex-col gap-4 justify-end relative z-10 text-white px-6 py-24 bg-linear-to-t from-black/70 to-transparent">
+                        {% if subtitle %}
+                            <div class="flex h-full flex-col gap-4 justify-end relative z-10 text-white px-6 py-24 bg-linear-to-t from-black/70 to-transparent">
                                 <p class="fluid-text-lg xl:fluid-text-2xl font-medium font-serif max-w-lg mx-auto text-balance">
-                                    {{ subtitle ?: '' }}
-                                </p>
-                            </div>
+                                        {{ subtitle }}
+                                    </p>
+                                </div>
+                            {% endif %}
                     </section>
 
                     

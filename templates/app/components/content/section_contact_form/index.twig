@@ -1,7 +1,7 @@
 {# Section CContact Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-call_to_action',
-    section_class_name: 'section-component-call_to_action',
+    section_id_name: block.component_name|replace({'_': '-'}),
+    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
 } %}
 
     {% block component_content %}
@@ -11,7 +11,7 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        <script>console.log({{ component | json_encode | raw }})</script>
+        {# <script>console.log({{ component | json_encode | raw }})</script> #}
 
         {% set title = component.title %}
         {% set entry = component.entry %}
@@ -33,7 +33,6 @@
         {% set form_other = component.other %}
 
 
-
         <div id="section-contact-form" class="py-8 mx-auto space-y-6 max-w-6xl">
             <div class="relative overflow-hidden border rounded-lg isolate dark bg-gray-50">
                 <div class="grid grid-cols-1 mx-auto">
@@ -53,6 +52,16 @@
                                 {% apply shortcodes %}
                                    {{ form_shortcode }}
                                 {% endapply %}
+                            {% elseif has_acf_form %}
+                                {{ form_acf_form }}
+                            {% elseif has_hubspot %}
+                                {{ form_hubspot }}
+                            {% elseif has_other %}
+                                <section class="">
+                                    {{ form_other.form_code }}
+
+                                    {{ form_other.form_script }}
+                                </section>
                             {% endif %}
                         </div>
                     </div>
