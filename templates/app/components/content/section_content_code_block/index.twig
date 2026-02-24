@@ -21,7 +21,7 @@
         {% set markup = component.markup %}
         {% set has_ctas = component.has_ctas %}
 
-        <script>console.log({{ component | json_encode | raw }})</script>
+        {# <script>console.log({{ component | json_encode | raw }})</script> #}
 
 
         {% set code = component.code %}
@@ -84,6 +84,18 @@
                         </div>
                     {% endif %}
                 </div>
+
+                {% if javascript %}
+                    <template x-teleport="body">
+                        <script>{{ javascript }}</script>
+                    </template>
+                {% endif %}
+
+                {% if css %}
+                    <template x-teleport="body">
+                        <style>{{ css }}</style>
+                    </template>
+                {% endif %}
             </div>
     {% endblock %}
 
