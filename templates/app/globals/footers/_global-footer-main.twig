@@ -19,9 +19,10 @@
 
                 {{ menus.render_menu(menu.footer_nav.get_items, {
                     level: 0,
-                    classes: 'hidden lg:flex lg:items-center gap-4 xl:gap-8 main-footer__menu',
-                    link_classes: 'text-sm font-bold leading-6 text-gray-600 uppercase',
-                    child_classes: 'text-sm leading-6 text-gray-300 mt-4 space-y-2',
+                    parent_level: 0,
+                    classes: 'hidden lg:flex lg:items-center gap-2 main-footer__menu',
+                    link_classes: 'text-sm px-5 font-bold leading-6 text-gray-600 uppercase',
+                    child_classes: 'hidden',
                     child_link_classes: '',
                 
                 }) }}

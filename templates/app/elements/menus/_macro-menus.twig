@@ -7,6 +7,7 @@
         level: 0,
         link_classes: [],
         child_link_classes: [],
+        child_classes: [],
         classes: [],
     } | merge(options) %}
 
@@ -43,7 +44,11 @@
                             {% if item.meta('mega_menu_item') %} 
                                 {# {{ item.meta('mega_menu_item') }} #}
                             {% else %}
-                                 {{ _self.render_menu(item.children) }}
+                                 {{ _self.render_menu(item.children, {
+                                    level: options.level + 1,
+                                    classes: options.child_classes,
+                                    link_classes: options.child_link_classes,
+                                }) }}
                             {% endif %}
                            
                         </div>
