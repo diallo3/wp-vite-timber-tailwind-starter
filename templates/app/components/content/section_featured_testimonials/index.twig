@@ -5,6 +5,7 @@
 {% import "@Elements/_macro-badge.twig" as badges %}
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-button.twig" as buttons %}
+{% import "@Elements/_macro-card.twig" as cards %}
 
 {% set component = component.content[0] %}
 
@@ -32,7 +33,14 @@
                 {% set position = testimonial.meta('position') %}
 
                 <div id="testimonial-item-{{ loop.index }}" class="inview-item">
-                    {% include "@Components/cards/testimonials/_component-card-testimonial-boxed.twig" %}
+                    {{ cards.testimonial_card({
+                        id: 'testimonial-' ~ loop.index,
+                        content: quote,
+                        title: name,
+                        meta: {
+                            position: position,
+                        },
+                    }) }}
                 </div>
             {% endfor %}
 		</div>
