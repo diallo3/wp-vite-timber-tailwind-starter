@@ -39,7 +39,7 @@
                     {% if has_entry and entry %}
                         <div class="section-component-content-with-image__entry">
                             {# Entry content #}
-                            {% embed "/templates/app/layouts/prose/_embed-prose-section.twig" %}
+                            {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                                 {% block prose_content %}
                                     {{ entry }}
                                 {% endblock %}

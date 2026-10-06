@@ -21,7 +21,6 @@
 		"iconify-icon": "^2.1.0",
 		"js-cookie": "latest",
 		"motion": "^12.4.3",
-		"swup": "^4.8.1",
 		"tailwindcss": "^4.0.6",
 		"tailwindcss-fluid-type": "^2.0.6"
 	},

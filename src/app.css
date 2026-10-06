@@ -11,6 +11,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Native cross-document page transitions (replaces Swup) */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
 @theme {
     --color-wordpress-blue: #0d99d5;
     --color-blue-wordpress: #0d99d5;
@@ -83,21 +90,5 @@
     h1, h2, h3, h4, h5, h6,
     .font-heading {
         font-family: var(--font-family-heading);
-    }
-
-  
-
-
-    /* Fluid typography utilities */
-    @utility fluid-text-xs {
-        font-size: var(--text-fluid-xs);
-    }
-
-    @utility fluid-text-sm {
-        font-size: var(--text-fluid-sm);
-    }
-
-    @utility fluid-text-base {
-        font-size: var(--text-fluid-base);
     }
 }

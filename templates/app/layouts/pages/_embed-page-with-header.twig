@@ -4,7 +4,7 @@
         x-on:scroll.window.throttle.50ms="onScroll()"
         id="{{ post.slug }}"  class="page-{{ post.slug }} page-content">
         {% block page_hero %}
-            {% include "/templates/app/layouts/pages/partials/_partial-hero-default.twig" %}
+            {% include "@Layouts/pages/partials/_partial-hero-default.twig" %}
         {% endblock %}
 
         <section class="page-body article-body inview-content">

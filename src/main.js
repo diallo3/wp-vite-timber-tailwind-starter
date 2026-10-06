@@ -10,7 +10,6 @@ import 'iconify-icon';
 import '@tailwindplus/elements';
 import { initializeAlpine } from './modules/js/module-alpine';
 import { initializeHeadroom } from './modules/js/module-headroom';
-import { initializeSwup, createSwupTransitions } from './modules/js/module-swup';
 import { initMotionLoaded, navHeader, generalInView, staggerInView, scrollAnimations } from './modules/js/module-motionOne';
 
 // Styles
@@ -25,13 +24,9 @@ import.meta.glob([
 // Initialize modules when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     try {
-        // Initialize transition styles first
-        createSwupTransitions();
-
         // Initialize core modules
         initializeAlpine();
         initializeHeadroom();
-        initializeSwup();
 
         // Initialize animations
         initMotionLoaded();
@@ -39,12 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         generalInView();
         staggerInView();
         scrollAnimations();
-
-        // Store animation functions globally for Swup re-initialization
-        window.generalInView = generalInView;
-        window.staggerInView = staggerInView;
-        window.scrollAnimations = scrollAnimations;
-
     } catch (error) {
         console.warn('Failed to initialize some modules:', error);
     }

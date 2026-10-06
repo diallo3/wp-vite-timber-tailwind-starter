@@ -9,10 +9,6 @@
 		{% import "@Elements/_macro-image-object.twig" as images %}
 		{% import "@Elements/_macro-button.twig" as buttons %}
 
-		<script>
-			console.log({{ component | json_encode | raw }})
-		</script>
-
 		{% set accent = component.accent %}
 		{% set title = component.title %}
 		{% set sub_title = component.sub_title %}

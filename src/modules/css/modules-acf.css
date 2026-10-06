@@ -58,7 +58,7 @@ ul.acf-checkbox-list {
     .acf-input:first-child {
         @apply ml-3 space-x-2;
     }
-    .acf-input, {
+    .acf-input {
         .acf-fields > .acf-field:first-child {
             border-top: inherit;
         }

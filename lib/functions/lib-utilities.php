@@ -66,9 +66,10 @@ function site_logo() {
 
 add_filter('register_post_type_args', 'post_type_archives', 10, 2);
 function post_type_archives($args, $post_type) {
-    $post_types = get_field('has_post_type_archive', 'option');
-    
-    if ($post_type && in_array($post_type, $post_types)) {
+    $post_types = function_exists('get_field') ? get_field('has_post_type_archive', 'option') : [];
+    $post_types = is_array($post_types) ? $post_types : [];
+
+    if ($post_type && in_array($post_type, $post_types, true)) {
         // Enable ACF extended admin archive
         $args['acfe_admin_archive'] = true;
     }

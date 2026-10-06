@@ -68,8 +68,7 @@ add_filter('acfe/flexible/render/template', function($template, $field, $layout,
         // Return the path to your PHP preview file
         return get_stylesheet_directory() . '/lib/acf/layout-preview.php';
     }
-    // For frontend, use your normal logic
-    // return get_stylesheet_directory() . '/templates/app/layouts/flexible-content.twig';
+    return $template;
 }, 50, 4);
 
 /**
