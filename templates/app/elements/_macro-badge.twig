@@ -6,7 +6,7 @@
 
     {# accent bagdge #}
     <span class="block text-base lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] text-dodger-blue-600 uppercase">
-        {{ options.title }}
+        {{ options.title|esc_html }}
     </span>
 {% endmacro %}
 
@@ -28,7 +28,7 @@
 
     {# contained bagdge #}
     <span class="{{ options.size }} inline-flex items-center px-2.5 py-0.5 rounded-full  font-medium {{ color_classes }} capitalize">
-        {{ options.title }}
+        {{ options.title|esc_html }}
     </span>
     
 {% endmacro %}

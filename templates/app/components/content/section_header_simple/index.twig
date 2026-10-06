@@ -55,7 +55,7 @@
             {% if has_entry and entry %}
                 {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
                     {% block prose_content %}
-                        {{ entry }}
+                        {{ entry|raw }}
                     {% endblock %}
                 {% endembed %}
             {% endif %}

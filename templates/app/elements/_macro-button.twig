@@ -35,7 +35,7 @@
     ]|join(' ')|trim %}
 
     {% set button_text %}
-        <span class="inline-flex">{{ options.text }}</span>
+        <span class="inline-flex">{{ options.text|esc_html }}</span>
         {# Include an optional SVG icon #}
         {% if options.icon is not null %}
             <span class="relative inline-flex items-center justify-center w-5 h-5 bg-current rounded-full">

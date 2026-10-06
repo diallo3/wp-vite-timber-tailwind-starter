@@ -23,7 +23,7 @@ foreach ($namespaces as $namespace => $path) {
 	$loader->addPath($root . '/' . $path, $namespace);
 }
 
-$twig = new \Twig\Environment($loader);
+$twig = new \Twig\Environment($loader, ['autoescape' => 'html']);
 $twig->registerUndefinedFilterCallback(fn($name) => new \Twig\TwigFilter($name, fn() => null));
 $twig->registerUndefinedFunctionCallback(fn($name) => new \Twig\TwigFunction($name, fn() => null));
 

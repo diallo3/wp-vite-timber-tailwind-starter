@@ -35,7 +35,7 @@
             <div class="max-w-4xl mx-auto space-y-8 text-center section-component-content-key-list__entry inview-item">
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
-                        {{ entry }}
+                        {{ entry|raw }}
                     {% endblock %}
                 {% endembed %}
             </div>

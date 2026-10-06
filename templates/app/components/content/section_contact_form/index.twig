@@ -43,7 +43,7 @@
                             }) }}
 
                             <div class="prose-sm prose text-gray-100 prose-p:text-gray-50 first:prose-p:text-lg prose-headings:text-cyan-400 prose-headings:my-2 text-pretty marker:text-gray-100">
-                                {{ entry }}
+                                {{ entry|raw }}
                             </div>
 
                            
@@ -60,10 +60,7 @@
                             }) }}
                             
                             {% if has_shortcode %}
-                                {# filter shortcode #}
-                                {% apply shortcodes %}
-                                   [{{ form_shortcode }}]
-                                {% endapply %}
+                                {{ ('[' ~ form_shortcode ~ ']')|shortcodes|raw }}
                             {% endif %}
                         </div>
                     </div>

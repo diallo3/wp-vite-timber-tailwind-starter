@@ -42,7 +42,7 @@
                 {# Entry content #}
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
-                        {{ entry }}
+                        {{ entry|raw }}
                     {% endblock %}
                 {% endembed %}
 

@@ -55,7 +55,7 @@
                 
                     {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                         {% block prose_content %}
-                            {{ component.entry }}
+                            {{ component.entry|raw }}
                         {% endblock %}
                     {% endembed %}
 
@@ -80,7 +80,7 @@
         
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
-                        {{ component.entry }}
+                        {{ component.entry|raw }}
                     {% endblock %}
                 {% endembed %}
 

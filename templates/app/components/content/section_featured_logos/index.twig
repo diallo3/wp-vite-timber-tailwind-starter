@@ -38,7 +38,7 @@
 
                 {% if has_entry and entry %}
                     <div class="mx-auto prose text-gray-500 lg:fluid-text-base/7 section-component-featured-logos__entry dark:prose-invert">
-                        {{ entry }}
+                        {{ entry|raw }}
                     </div>
                 {% endif %}
             </div>
@@ -57,7 +57,7 @@
                             class="px-0 m-0 list-none scroller__inner">
                             {% for logo in logo_set.logos %}
                                 <li class="flex items-center w-full px-4 bg-white border border-blue-200 rounded-sm opacity-90 max-w-72 dark:border-transparent dark:invert-100">
-                                    <img src="{{ logo.url }}" alt="{{ logo.title }}" class="max-w-full scroller__item saturate-[.40]">
+                                    <img src="{{ logo.url }}" alt="{{ logo.title|esc_html }}" class="max-w-full scroller__item saturate-[.40]">
                                 </li>
                             {% endfor %}
                         </ul>

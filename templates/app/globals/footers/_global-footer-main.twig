@@ -12,7 +12,7 @@
                         name: 'temp-logo',
                         classes: 'size-8'
                     }) }}
-                    <span class="sr-only">{{ site.title }}</span>
+                    <span class="sr-only">{{ site.title|esc_html }}</span>
                 </div>
                 <div class="xl:max-w-sm">
                     <p class="text-sm leading-6 text-gray-300">Making the world a better place through constructing elegant hierarchies.</p>
@@ -43,7 +43,7 @@
             
 		</div>
 		<div class="pt-8 mt-16 border-t border-white/10 sm:mt-20 lg:mt-24">
-			<p class="text-xs leading-5 text-gray-400">&copy; {{ 'now' | date('Y')  ~ ' ' ~ site.title  }}, Inc. All rights reserved.</p>
+			<p class="text-xs leading-5 text-gray-400">&copy; {{ 'now'|date('Y') }} {{ site.title|esc_html }}, Inc. All rights reserved.</p>
 		</div>
 	</div>
 </footer>

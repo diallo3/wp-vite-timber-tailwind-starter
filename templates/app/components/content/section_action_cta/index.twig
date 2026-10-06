@@ -43,7 +43,7 @@
                         class: 'lg:fluid-text-lg',
                     } %}
                         {% block prose_content %}
-                            {{ entry }}
+                            {{ entry|raw }}
                         {% endblock %}
                     {% endembed %}
                 </div>

@@ -40,7 +40,7 @@
                         class: 'prose-invert'
                     } %}
                         {% block prose_content %}
-                            {{ entry }}
+                            {{ entry|raw }}
                         {% endblock %}
                         
                     {% endembed %}

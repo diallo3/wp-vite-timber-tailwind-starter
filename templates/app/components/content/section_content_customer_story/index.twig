@@ -40,7 +40,7 @@
                     </div>
                     <div class="lg:w-full">
                         <div class="prose sm:prose-lg lg:prose-xl first:prose-p:fluid-text-base">
-                            {{ entry }}
+                            {{ entry|raw }}
                         </div>
 
                         {% include "@Elements/_partial-ctas.twig" with { ctas: cta_group(component.ctas), class: 'pt-8' } only %}

@@ -19,7 +19,7 @@
                     @mouseenter="open = true"
                     @mouseleave="open = false"
                     class="{{ item.classes | join(' ') }} group cursor-pointer relative">
-                    <a href="{{ item.link }}" class="block py-6 px-2.5" target="{{ item.target }}">{{ item.title }}</a>
+                    <a href="{{ item.link }}" class="block py-6 px-2.5" target="{{ item.target }}">{{ item.title|esc_html }}</a>
 
                     {# item children #}
                     {% if item.children %}
@@ -75,20 +75,20 @@
                         <div x-show="expanded" x-collapse>
                             <ul class="pb-4 nav-children" data-level="{{ options.level + 1 }}">
                                 <li class="nav-children__title">
-                                    <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title }}">{{ item.title }}</a>
+                                    <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title|esc_html }}">{{ item.title|esc_html }}</a>
                                 </li>
                                 {% for child in item.children %}
                                     <li class="{{ item.classes|join(' ') }} nav-children__item">
                                         <a 
                                             href="{{ child.url }}"
                                             class="{{ child.children ? 'uppercase text-sm' }} block py-2 text-gray-500 hover:text-blue-70">
-                                            {{ child.title }}
+                                            {{ child.title|esc_html }}
                                         </a>
                                         {% if child.children %}
                                             <ul class="pt-2 pb-6 space-y-4 text-sm nav-children">
                                                 {% for subchild in child.children %}
                                                     <li class="">
-                                                        <a href="{{ subchild.link }}" class="text-blue-50/70">{{ subchild.title }}</a>
+                                                        <a href="{{ subchild.link }}" class="text-blue-50/70">{{ subchild.title|esc_html }}</a>
                                                     </li>
                                                 {% endfor %}
                                             </ul>
@@ -101,7 +101,7 @@
                     </li>
                 {% else %}
                     <li class="{{ item.classes|join(' ') }} mobile-menu_item">
-                        <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title }}">{{ item.title }}</a>
+                        <a href="{{ item.link }}" class="block py-2 font-semibold"  alt="{{ item.title|esc_html }}">{{ item.title|esc_html }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
@@ -153,13 +153,13 @@
     {% if menu %}
         <div class="nav-social {{ options.classes|join(' ') }} {{ options.name }}">
             {% for item in menu %}
-                <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition duration-150 ease-in-out" title="{{ item.title }}" target="_blank">
+                <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition duration-150 ease-in-out" title="{{ item.title|esc_html }}" target="_blank">
                     {{ icons.icon({
                         path: 'social',
                         name: item.title|lower,
                         classes: options.icon_classes|join(' ')
                     })}}
-                    <span class="sr-only">{{ item.title }}</span>
+                    <span class="sr-only">{{ item.title|esc_html }}</span>
                 </a>
             {% endfor %}
         </div>
@@ -183,7 +183,7 @@
         <menu class="basic-nav {{ options.classes|join(' ') }}" data-level="{{ options.level }}">
             {% for item in menu %}
                 <li class="{{ item.classes|join(' ') }}">
-                    <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition-colors duration-150 ease-in-out">{{ item.title }}</a>
+                    <a href="{{ item.link }}" class="{{ options.link_classes|join(' ') }} transition-colors duration-150 ease-in-out">{{ item.title|esc_html }}</a>
                     {% if item.children %}
                         {{ _self.render_menu(item.children, {
                             level: options.level + 1,

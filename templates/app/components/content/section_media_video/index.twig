@@ -31,7 +31,7 @@
                         <div class="max-w-4xl mx-auto">
                             {% embed "@Layouts/prose/_embed-prose-hero.twig" %}
                                 {% block prose_content %}
-                                    {{ entry }}
+                                    {{ entry|raw }}
                                 {% endblock %}
                             {% endembed %}
                         </div>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="aspect-w-16 aspect-h-9 section-component-media-video__content">
-                    {{ component.video }}
+                    {{ component.video|raw }}
                 </div>
 
                 {% if ctas %}

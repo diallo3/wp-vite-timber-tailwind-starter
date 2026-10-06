@@ -45,7 +45,7 @@
                         <div class="px-1 lg:max-w-lg">
                             {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                                 {% block prose_content %}
-                                    {{ entry }}
+                                    {{ entry|raw }}
                                 {% endblock %}
                             {% endembed %}
                         </div>

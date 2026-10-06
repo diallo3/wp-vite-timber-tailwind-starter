@@ -40,7 +40,7 @@
 
             {% if card.entry ?? false %}
                 <div class="prose-sm prose card-simple__entry prose-p:leading-5 {{ card.clamp ?? 'line-clamp-3' }}">
-                    {{ card.entry }}
+                    {{ card.entry|raw }}
                 </div>
             {% endif %}
         </div>
@@ -85,7 +85,7 @@
                 </a>
 
                 {% if card.entry ?? false %}
-                    <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-3">{{ card.entry }}</p>
+                    <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-3">{{ card.entry|raw }}</p>
                 {% endif %}
             </div>
 
@@ -112,12 +112,12 @@
 
         <div class="relative flex flex-col p-8 xl:p-10">
             <blockquote class="mb-5 prose leading-relaxed prose-base grow dark:prose-invert testimonial-boxed__quote">
-                {{ card.quote ?? '' }}
+                {{ (card.quote ?? "")|raw }}
             </blockquote>
 
             {% if (card.name ?? false) or (card.position ?? false) %}
                 <figcaption class="testimonial-boxed__cite">
-                    <p class="font-semibold text-blue-600 dark:text-blue-400 testimonial-boxed__name">{{ card.name ?? '' }}</p>
+                    <p class="font-semibold text-blue-600 dark:text-blue-400 testimonial-boxed__name">{{ (card.name ?? "")|esc_html }}</p>
                     {% if card.position ?? false %}
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400 testimonial-boxed__position">{{ card.position }}</p>
                     {% endif %}
@@ -139,7 +139,7 @@
     {% set image = card.image ?? null %}
 
     <div {% if card.id ?? false %}id="card-team-member-{{ card.id }}"{% endif %} class="card-team-member-default">
-        <button type="button" class="block w-full overflow-hidden bg-gray-400 rounded-lg cursor-pointer aspect-3/2" @click="modalIsOpen = true" aria-label="Read bio for {{ card.name ?? '' }}"{% if not (card.bio ?? false) %} disabled{% endif %}>
+        <button type="button" class="block w-full overflow-hidden bg-gray-400 rounded-lg cursor-pointer aspect-3/2" @click="modalIsOpen = true" aria-label="Read bio for {{ (card.name ?? "")|esc_html }}"{% if not (card.bio ?? false) %} disabled{% endif %}>
             {{ images.render_image({ src: image.url ?? null, alt: image.alt ?? '' }) }}
         </button>
 
@@ -158,7 +158,7 @@
             {% if card.social ?? false %}
                 <div class="shrink">
                     <a href="{{ card.social|e('html_attr') }}" class="block pb-1 text-gray-400 transition-colors duration-200 ease-linear hover:text-gray-900 dark:hover:text-white" target="_blank" rel="noopener">
-                        <span class="sr-only">LinkedIn for {{ card.name ?? '' }}</span>
+                        <span class="sr-only">LinkedIn for {{ (card.name ?? "")|esc_html }}</span>
                         {{ icons.icon({ path: 'social', name: 'linkedin', classes: ['size-5'] }) }}
                     </a>
                 </div>
@@ -178,7 +178,7 @@
                                     <p class="text-base leading-7 text-blue-500 dark:text-gray-400">{{ card.position }}</p>
                                 {% endif %}
                             </div>
-                            <div class="prose entry member-bio__bio dark:prose-invert">{{ card.bio }}</div>
+                            <div class="prose entry member-bio__bio dark:prose-invert">{{ card.bio|raw }}</div>
                         </div>
                         <figure class="relative overflow-hidden rounded-lg aspect-square member-bio__featured">
                             {{ images.render_image({ src: image.url ?? null, alt: image.alt ?? '' }) }}

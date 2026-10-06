@@ -6,9 +6,9 @@
 	{% else %}
 		<article class="px-8 py-16 mx-auto max-w-(--breakpoint-md) post-type-{{ post.post_type }}" id="post-{{ post.id }}">
 			<header class="space-y-4">
-				<h1 class="font-bold fluid-text-4xl text-pretty">{{ post.title }}</h1>
+				<h1 class="font-bold fluid-text-4xl text-pretty">{{ post.title|esc_html }}</h1>
 				<p class="text-sm text-gray-600">
-					<span>By</span> <a class="underline" href="{{ post.author.link }}">{{ post.author.name }}</a>
+					<span>By</span> <a class="underline" href="{{ post.author.link }}">{{ post.author.name|esc_html }}</a>
 					<span aria-hidden="true">&bull;</span>
 					<time datetime="{{ post.date('c') }}">{{ post.date }}</time>
 					{% if post.can_edit %}
@@ -25,7 +25,7 @@
 			{% endif %}
 
 			<div class="prose max-w-none">
-				{{ post.content }}
+				{{ post.content|raw }}
 			</div>
 		</article>
 	{% endif %}

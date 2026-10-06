@@ -42,7 +42,7 @@
 
                 {% if has_entry and entry %}
                     <div class="mx-auto prose text-gray-600 lg:fluid-text-base/7 section-component-featured-logos__entry dark:prose-invert">
-                        {{ entry }}
+                        {{ entry|raw }}
                     </div>
                 {% endif %}
             </div>
@@ -55,7 +55,7 @@
                         {% for item in get_posts(entries) %}
                             <div class="max-w-sm slide">
                                 {% if item.type == 'testimonial' %}
-                                    {{ item.title}}
+                                    {{ item.title|esc_html }}
                                 {% elseif item.type == 'customer-story' %}
                                     {{ cards.customer_story({
                                         id: item.id,
@@ -104,7 +104,7 @@
                             {% for item in get_posts(entries) %}
                             <div class="swiper-slide">
                                 {% if item.type == 'testimonial' %}
-                                    {{ item.title}}
+                                    {{ item.title|esc_html }}
                                 {% elseif item.type == 'customer-story' %}
                                     {{ cards.customer_story({
                                         id: item.id,

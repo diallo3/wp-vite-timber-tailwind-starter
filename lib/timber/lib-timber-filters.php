@@ -16,6 +16,17 @@ add_filter('timber/loader/loader', function($loader) {
 });
 
 /**
+ * Autoescape every `{{ }}` as HTML. Editor rich text (WYSIWYG, oEmbed, post
+ * content) is printed with `|raw`; strings WordPress has already
+ * entity-encoded (post, menu and site titles) with `|esc_html`, which
+ * doesn't double-encode.
+ */
+add_filter('timber/twig/environment/options', function ($options) {
+    $options['autoescape'] = 'html';
+    return $options;
+});
+
+/**
  * Twig function `template_exists(name)` — checks a template against Timber's
  * own loader, so namespaces like `@Content/...` resolve.
  */

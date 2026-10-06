@@ -28,7 +28,7 @@
             <div class="section-component-featured-posts__entry inview-item lg:max-w-5xl">
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
-                        {{ entry }}
+                        {{ entry|raw }}
                     {% endblock %}
                 {% endembed %}
             </div>
