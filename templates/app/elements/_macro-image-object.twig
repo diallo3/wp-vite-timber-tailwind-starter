@@ -1,11 +1,6 @@
 {% macro render_image(options={}) %}
-    {% set options = {
-        src: options.src | default('https://via.placeholder.com/150'),
-        class: options.class | default(''),
-        fit: options.fit | default('object-cover w-full h-full'),
-        alt: options.alt | default('Image alt text'),
-    } | merge(options) %}
+    {% set src = options.src ?: function('get_template_directory_uri') ~ '/dist/icons/defaults/icon-temp-image.svg' %}
+    {% set fit = options.fit ?? 'object-cover w-full h-full' %}
 
-    {# Image #}
-    <img src="{{ options.src }}" class="{{ options.fit }} {{ options.class }}" alt="{{ options.alt }}" loading="lazy">
+    <img src="{{ src|e('html_attr') }}" class="{{ fit }} {{ options.class ?? '' }}" alt="{{ (options.alt ?? '')|e('html_attr') }}"{% if options.width ?? false %} width="{{ options.width }}"{% endif %}{% if options.height ?? false %} height="{{ options.height }}"{% endif %} loading="lazy">
 {% endmacro %}

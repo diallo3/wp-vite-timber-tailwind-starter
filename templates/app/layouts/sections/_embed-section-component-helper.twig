@@ -8,18 +8,18 @@
 
 {% set component = component.content[0] %}
 
-{# field check #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_entry = sections.entry %}
-{% set has_ctas = sections.ctas %}
-
-{# fields #}
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set ctas = component.call_to_actions %}
+{# intro: values are null when toggled off or empty #}
+{% set intro = section_intro(component) %}
+{% set accent = intro.accent %}
+{% set title = intro.title %}
+{% set sub_title = intro.sub_title %}
+{% set entry = intro.entry %}
+{% set ctas = intro.ctas %}
+{% set has_accent = accent is not empty %}
+{% set has_title = title is not empty %}
+{% set has_sub_title = sub_title is not empty %}
+{% set has_entry = entry is not empty %}
+{% set has_ctas = ctas is not empty %}
 
 {# background image #}
 {% set if_image_type = component.image_type %}
@@ -48,9 +48,9 @@
 {% endif %}
 
 {% if if_image_type and background_image %}
-    <section id="{{ section_id_name ~ '-' ~ loop.index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image)}}>
+    <section id="{{ section_id_name ~ '-' ~ index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image)}}>
 {% else %}
-    <section id="{{ section_id_name }}-{{ loop.index }}" class="{{ section_classes|join(' ') }}">
+    <section id="{{ section_id_name }}-{{ index }}" class="{{ section_classes|join(' ') }}">
 {% endif %}
     <div class="container mx-auto max-w-(--breakpoint-2xl)"> 
         {# content #}

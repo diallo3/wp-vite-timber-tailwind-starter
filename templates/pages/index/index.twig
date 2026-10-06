@@ -18,16 +18,12 @@
                     <ul class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 article-posts stagger-inview-container">
                         {% for post in posts %}
                             <li id="article-{{ post.id }}" class="artice-posts__item artice-posts__item-{{ loop.index }} stagger-inview-item">
-                                {{ cards.simple_card({
+                                {{ cards.simple({
                                     title: post.title,
-                                    content: post.excerpt,
-                                    image: { src: post.thumbnail.src, alt: post.thumbnail.alt },
-                                    badge: '',
-                                    button: { 
-                                        text: 'Read More', 
-                                        style: 'solid', 
-                                        href: post.link 
-                                    }
+                                    entry: post.excerpt,
+                                    image: post.thumbnail.src ?? null,
+                                    image_alt: post.thumbnail.alt ?? '',
+                                    link: post.link,
                                 }) }}
                             </li>
                         {% endfor %}

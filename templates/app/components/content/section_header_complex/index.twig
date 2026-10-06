@@ -10,9 +10,6 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        {% set title = component.title %}
-        {% set entry = component.entry %}
-        
         <div class="relative w-full py-8 pt-24 mx-auto text-white max-w-(--breakpoint-2xl) lg:pt-8 xl:pb-20">
             <div class="max-w-5xl mx-auto space-y-6 lg:mx-0">
                 <div class="space-y-4 section-component-header-simple__header text-balance">
@@ -27,6 +24,14 @@
                             size: 'text-6xl md:text-7xl lg:fluid-text-7xl',
                             preview: is_preview
                         }) }}
+
+                        {% if sub_title %}
+                            {{ headings.render_heading(2, {
+                                title: sub_title,
+                                size: 'fluid-text-2xl',
+                                weight: 'font-medium',
+                            }) }}
+                        {% endif %}
                     </hgroup>
                 </div>
 
@@ -48,6 +53,7 @@
                                 {{ buttons.render_button_link({
                                     text: cta.link.title,
                                     link: cta.link.url,
+                                    target: cta.link.target,
                                     style: 'white',
                                     size: 'large'
                                 }) }}

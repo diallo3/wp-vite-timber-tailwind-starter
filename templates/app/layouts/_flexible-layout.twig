@@ -1,0 +1,18 @@
+{#
+    Renders one flexible content layout. Shared by the frontend loop (flexible-content.twig)
+    and the ACFE admin preview (lib/acf/layout-preview.php) so both take the same path.
+
+    name       layout name, matches templates/app/components/content/<name>/index.twig
+    component  the layout row (its `content` key holds the component field value)
+    index      1-based position on the page, used for section IDs
+    is_preview true inside the ACFE preview
+#}
+{% set template = '@Content/' ~ name ~ '/index.twig' %}
+
+{% if template_exists(template) %}
+    {% include template %}
+{% elseif is_preview or function('current_user_can', 'edit_posts') %}
+    <div class="unknown-block">
+        <p>Unknown layout: {{ name }}</p>
+    </div>
+{% endif %}

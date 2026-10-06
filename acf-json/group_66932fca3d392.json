@@ -1,6 +1,6 @@
 {
     "key": "group_66932fca3d392",
-    "title": "Page Content Fields",
+    "title": "Flexible Content Fields",
     "fields": [
         {
             "key": "field_66932fcad3202",
@@ -1314,6 +1314,13 @@
                 "operator": "!=",
                 "value": "posts_page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
         ]
     ],
     "menu_order": 0,
@@ -1347,5 +1354,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1749492211
+    "modified": 1791307268
 }

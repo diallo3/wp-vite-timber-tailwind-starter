@@ -9,6 +9,7 @@
         {% import "@Elements/_macro-badge.twig" as badges %}
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
+        {% import "@Elements/_macro-card.twig" as cards %}
 
         {% set entries = component.posts %}
         {% set carousel = component.carousel_options %}
@@ -56,13 +57,14 @@
                                 {% if item.type == 'testimonial' %}
                                     {{ item.title}}
                                 {% elseif item.type == 'customer-story' %}
-                                    {% set id = item.id %}
-                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
-                                    {% set link = item.link %}
-                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
-                                    {% set thumbnail = item.thumbnail %}
-
-                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                    {{ cards.customer_story({
+                                        id: item.id,
+                                        title: item.title,
+                                        entry: item.excerpt,
+                                        image: item.thumbnail.src ?? null,
+                                        image_alt: item.thumbnail.alt ?? "",
+                                        link: item.link,
+                                    }) }}
                                 {% else %}
                                     
                                 {% endif %}
@@ -104,13 +106,14 @@
                                 {% if item.type == 'testimonial' %}
                                     {{ item.title}}
                                 {% elseif item.type == 'customer-story' %}
-                                    {% set id = item.id %}
-                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
-                                    {% set link = item.link %}
-                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
-                                    {% set thumbnail = item.thumbnail %}
-
-                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                    {{ cards.customer_story({
+                                        id: item.id,
+                                        title: item.title,
+                                        entry: item.excerpt,
+                                        image: item.thumbnail.src ?? null,
+                                        image_alt: item.thumbnail.alt ?? "",
+                                        link: item.link,
+                                    }) }}
                                 {% else %}
                                     
                                 {% endif %}

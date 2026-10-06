@@ -33,11 +33,13 @@
                             })}}
                         {% endif %}
                         
-                        {{ headings.render_heading(3,{
-                            title: title,
-                            size: 'text-lg sm:text-xl md:fluid-text-2xl lg:fluid-text-3xl',
-                            preview: is_preview
-                        })}}
+                        {% if title %}
+                            {{ headings.render_heading(3,{
+                                title: title,
+                                size: 'text-lg sm:text-xl md:fluid-text-2xl lg:fluid-text-3xl',
+                                preview: is_preview
+                            })}}
+                        {% endif %}
                     </div>
                     {% if entry %}
                         <div class="px-1 lg:max-w-lg">
@@ -49,20 +51,7 @@
                         </div>
                     {% endif %}
 
-                    {% if ctas %}
-                        <ul class="flex flex-col entry-ctas lg:pt-8">
-                            {% for cta in ctas %}
-                                <li class="entry-ctas__item">
-                                    {{ buttons.render_button_link({
-                                        text: cta.link.title,
-                                        link: cta.link.url,
-                                        style: cta.style.value,
-                                        size: cta.size,
-                                    }) }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
+                    {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: "lg:pt-8", list_class: "" } only %}
 
                     
                 </div>

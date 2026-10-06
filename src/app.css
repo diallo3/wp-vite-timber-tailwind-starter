@@ -6,7 +6,6 @@
 @import "./modules/css/module-headroom.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
 
 @custom-variant dark (&:is(.dark *));
 

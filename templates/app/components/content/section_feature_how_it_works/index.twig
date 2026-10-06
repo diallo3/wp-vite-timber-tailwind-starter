@@ -48,32 +48,23 @@
 
             {# step list #}
             <ol id="featured-step-list" class="mt-8 hiw-list section-component-how-it-works__list step-list inview-container">
-                {% for key, item in steps %}
-                    {% set image = item.image %}
-                    {% set accent = item.accent %}
-                    {% set title = item.title %}
-                    {% set entry = item.entry %}
-                    {% set ctas = item.call_to_actions %}
+                {% for item in steps %}
+                    {% set step_options = item.step_options ?: [] %}
                     <li id="step-{{ loop.index }}" class="hiw-list__item step-list__item inview-item">
 
-                        {% include "@Components/content/section_feature_how_it_works/partials/_partial-step-content.twig" %}
-                        
+                        {% include "@Components/content/section_feature_how_it_works/partials/_partial-step-content.twig" with {
+                            image: 'image' in step_options ? item.image : null,
+                            accent: 'accent' in step_options ? item.accent : null,
+                            title: 'title' in step_options ? item.title : null,
+                            entry: 'entry' in step_options ? item.entry : null,
+                            ctas: 'ctas' in step_options ? cta_group(item.ctas) : [],
+                        } %}
+
                     </li>
                 {% endfor %}
             </ol>
 
-            {% if has_ctas and ctas %}
-                <div class="flex items-center justify-center gap-4 pt-8 section-component-how-it-works__ctas">
-                    {% for cta in ctas %}
-                        {{ buttons.render_button_link({
-                            text: cta.link.title,
-                            link: cta.link.url,
-                            size: cta.size,
-                            style: cta.style.value,
-                        }) }}
-                    {% endfor %}
-                </div>
-            {% endif %}
+            {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: 'pt-8', list_class: 'justify-center lg:flex-row' } only %}
         </div>
     {% endblock %}
 

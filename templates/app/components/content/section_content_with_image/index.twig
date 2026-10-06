@@ -47,7 +47,7 @@
                         </div>
                     {% endif %}
 
-                    {% include "@Components/content/section_content_with_image/partials/_partial-section-ctas.twig" %}
+                    {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: "py-6" } only %}
 
                 </div>
             </div>

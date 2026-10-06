@@ -43,8 +43,7 @@
     'large': 'max-w-(--breakpoint-xl)',
 }[max_width] | default('max-w-(--breakpoint-2xl)') %}
 
-<section 
-    id="{{ id }}" class="relative {{ section_classes }}" {{ data }}>
+<section {% if id ?? false %}id="{{ id }}" {% endif %}class="relative {{ section_classes }}" {{ data ?? '' }}>
     <div class="px-2 mx-auto {{ max_width_options }}">
         {% block section_content %}
             <p>Section Content</p>

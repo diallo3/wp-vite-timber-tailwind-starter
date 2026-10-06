@@ -7,16 +7,11 @@ class StarterTimber extends Site {
 		add_action('after_setup_theme', array($this, 'theme_supports'));
 		add_filter('timber/context', array($this, 'add_to_context'));
 		add_filter('timber/twig', array($this, 'add_to_twig'));
-		add_action('init', array($this, 'register_post_types'));
-		add_action('init', array($this, 'register_taxonomies'));
+		add_action('wp_enqueue_scripts', array($this, 'dequeue_block_styles'), 100);
 		parent::__construct();
 	}
-	/** This is where you can register custom post types. */
-	public function register_post_types() {
-	}
-	/** This is where you can register custom taxonomies. */
-	public function register_taxonomies() {
-	}
+
+	// Post types and taxonomies are registered in ACF (acf-json/post_type_*.json).
 
 	/** This is where you add some context
 	 *
@@ -84,25 +79,6 @@ class StarterTimber extends Site {
 		);
 
 		/*
-		 * Enable support for Post Formats.
-		 *
-		 * See: https://codex.wordpress.org/Post_Formats
-		 */
-		add_theme_support(
-			'post-formats',
-			array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'audio',
-			)
-		);
-
-
-		/*
 		 * Enable support for Custom Logo
 		 *
 		 * See: https://developer.wordpress.org/themes/functionality/custom-logo/
@@ -126,11 +102,15 @@ class StarterTimber extends Site {
 			]
 		);
 
-		add_theme_support('wp-block-styles');
-		add_theme_support('align-wide');
-		add_theme_support('align-center');
-		add_theme_support('align-full');
 		add_theme_support('responsive-embeds');
+	}
+
+	/** Classic Editor site: drop the block-editor CSS WordPress enqueues on the frontend. */
+	public function dequeue_block_styles() {
+		wp_dequeue_style('wp-block-library');
+		wp_dequeue_style('wp-block-library-theme');
+		wp_dequeue_style('classic-theme-styles');
+		wp_dequeue_style('global-styles');
 	}
 
 	/** This is where you can add your own functions to twig.

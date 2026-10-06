@@ -2,40 +2,37 @@
 {% macro render_button_link(options = {}) %}
     {% import "@Elements/_macro-icon.twig" as icons %}
 
+    {# `link` and `href` are accepted interchangeably; styles/sizes match the CTA Group field choices. #}
+    {% set href = options.href ?? options.link ?? null %}
+    {% set target = options.target ?? null %}
+
     {% set options = {
-        text: options.text ?? 'Button Text',
-        style: options.style ?? 'solid',
-        size: options.size ?? 'default',
-        icon: options.icon ?? null,
-        href: options.href ?? null,
+        text: 'Button Text',
+        icon: null,
+        class: '',
     } | merge(options) %}
 
-    {% set type_class = {
-        primary: 'btn-primary',
-        secondary: 'btn-secondary',
-        accent: 'btn-accent',
-        neutral: 'btn-neutral',
-        info: 'btn-info',
-        success: 'btn-success',
-        warning: 'btn-warning',
-        error: 'btn-error',
-        link: 'btn-link',
-        square: 'btn-square',
-        circle: 'btn-circle',
-        wide: 'btn-wide',
-    }[options.style] ?? '' %}
+    {% set style_class = {
+        solid: 'bg-dodger-blue-600 text-white hover:bg-dodger-blue-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100',
+        outline: 'border border-current text-dodger-blue-700 hover:bg-dodger-blue-50 dark:text-white dark:hover:bg-white/10',
+        white: 'bg-white text-gray-900 hover:bg-gray-100',
+        link: 'px-0! text-dodger-blue-700 underline-offset-4 hover:underline dark:text-white',
+    } %}
+    {% set style_class = style_class[options.style ?? 'solid'] ?? style_class.solid %}
 
     {% set size_class = {
-        small: 'btn-sm',
-        default: 'btn-md',
-        large: 'btn-lg',
-    }[options.size] ?? '' %}
+        small: 'h-9 px-3 text-sm',
+        default: 'h-11 px-5 text-base',
+        large: 'h-13 px-7 text-lg',
+    } %}
+    {% set size_class = size_class[options.size ?? 'default'] ?? size_class.default %}
 
     {% set button_classes = [
-        type_class,
+        'inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+        style_class,
         size_class,
-        'btn'
-    ]|join(' ') %}
+        options.class,
+    ]|join(' ')|trim %}
 
     {% set button_text %}
         <span class="inline-flex">{{ options.text }}</span>
@@ -47,13 +44,12 @@
         {% endif %}
     {% endset %}
 
-    {% if options.href is not empty %}
-        {# Generate button HTML #}
-        <a href="{{ options.href }}" class="{{ button_classes }}">
+    {% if href is not empty %}
+        <a href="{{ href|e('html_attr') }}" class="{{ button_classes }}"{% if target %} target="{{ target|e('html_attr') }}"{% if target == '_blank' %} rel="noopener"{% endif %}{% endif %}>
             {{ button_text }}
         </a>
     {% else %}
-        <button class="{{ button_classes }}">
+        <button type="button" class="{{ button_classes }}">
             {{ button_text }}
         </button>
     {% endif %}

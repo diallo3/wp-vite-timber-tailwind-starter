@@ -171,6 +171,3 @@
   margin: var(--space-fluid-2xl);
 }
 
-@utility menu {
-    @apply p-0;
-}

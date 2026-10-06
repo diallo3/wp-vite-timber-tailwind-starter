@@ -70,7 +70,7 @@
         {# ctas #}
         {% if has_ctas and ctas %}
             <div class="flex justify-center mt-8 section-component-featured-logos__cta">
-                {% include "@Components/content/section_featured_logos/partials/_partial-section-ctas.twig" %}
+                {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: "py-2" } only %}
             </div>
         {% endif %}
 

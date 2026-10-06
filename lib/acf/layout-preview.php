@@ -1,22 +1,16 @@
 <?php
+/**
+ * ACFE Dynamic Render preview for `page_content` layouts.
+ * Loaded via the `acfe/flexible/render/template` filter in lib-flexible-content.php,
+ * inside ACF's have_rows() loop, so get_row_layout()/get_sub_field() refer to the row being previewed.
+ */
+
 use Timber\Timber;
 
-global $args;
-
-// Safely get the layout name
-$layout_name = null;
-if (function_exists('get_row_layout')) {
-    $layout_name = get_row_layout();
-} else {
-    $layout_name = 'section_header_complex';
-}
-
 $context = Timber::context();
-$context['component'] = [
-    'content' => get_sub_field('content')
-];
+$context['name'] = get_row_layout();
+$context['component'] = ['content' => get_sub_field('content')];
+$context['index'] = get_row_index();
 $context['is_preview'] = true;
 
-$template = get_stylesheet_directory() . '/templates/app/components/content/' . $layout_name . '/index.twig';
-
-Timber::render($template, $context);
+Timber::render('@Layouts/_flexible-layout.twig', $context);

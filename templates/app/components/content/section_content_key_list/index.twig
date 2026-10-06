@@ -57,8 +57,9 @@
                         {{ buttons.render_button_link({
                             text: cta.link.title,
                             link: cta.link.url,
+                            target: cta.link.target,
                             size: cta.size,
-                            style: cta.style.value,
+                            style: cta.style,
                         }) }}
                     {% endfor %}
                 </div>
