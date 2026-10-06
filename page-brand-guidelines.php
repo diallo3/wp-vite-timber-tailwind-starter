@@ -49,8 +49,8 @@ $context['brand'] = [
     // Typography
     'typography' => [
         'families' => [
-            ['name' => 'Headings', 'font' => 'System UI, -apple-system, sans-serif', 'weights' => '400, 500, 600, 700, 800, 900'],
-            ['name' => 'Body', 'font' => 'System UI, -apple-system, sans-serif', 'weights' => '400, 500, 600'],
+            ['name' => 'Headings', 'font' => "'Jost', system-ui, -apple-system, sans-serif", 'weights' => '400, 500, 600, 700, 800, 900'],
+            ['name' => 'Body', 'font' => "'Open Sans', system-ui, -apple-system, sans-serif", 'weights' => '400, 500, 600, 700'],
             ['name' => 'Monospace', 'font' => 'ui-monospace, SFMono-Regular, monospace', 'weights' => '400, 500, 600'],
         ],
         'scale' => [
