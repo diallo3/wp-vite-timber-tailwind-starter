@@ -3,7 +3,6 @@
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
 @import "./modules/css/modules-utilities.css";
-@import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
@@ -21,6 +20,18 @@
 @theme {
     --color-wordpress-blue: #0d99d5;
     --color-blue-wordpress: #0d99d5;
+
+    --color-dodger-blue-50: #eef9ff;
+    --color-dodger-blue-100: #d9f1ff;
+    --color-dodger-blue-200: #bce7ff;
+    --color-dodger-blue-300: #8edaff;
+    --color-dodger-blue-400: #59c3ff;
+    --color-dodger-blue-500: #33a6fd;
+    --color-dodger-blue-600: #1d89f3;
+    --color-dodger-blue-700: #1571df;
+    --color-dodger-blue-800: #185bb5;
+    --color-dodger-blue-900: #1a4e8e;
+    --color-dodger-blue-950: #153056;
 
     /* Font families */
     --font-family-heading: 'Jost', system-ui, -apple-system, sans-serif;

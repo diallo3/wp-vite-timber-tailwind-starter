@@ -90,18 +90,11 @@ function render_acf_flexible_enqueue($field, $is_preview){
 
 // Function to get the main CSS file from the Vite manifest
 function get_main_vite_css_file() {
-    $manifestPath = get_stylesheet_directory() . '/dist/.vite/manifest.json';
-    $manifestUri = get_stylesheet_directory_uri() . '/dist/';
-
-    if (file_exists($manifestPath)) {
-        $manifest = json_decode(file_get_contents($manifestPath), true);
-        // Assuming 'app.css' is the key for your main CSS file in the manifest
-        foreach ($manifest as $key => $entry) {
-            if (isset($entry['css'])) {
-                return $manifestUri . $entry['css'][0];
-            }
-        }
+    if (!WPVite::$instance) {
+        return null;
     }
 
-    return null;
+    $css = WPVite::$instance->getProductionAssets()['css'];
+
+    return $css ? WPVite::$instance->distUri . '/' . $css[0] : null;
 }

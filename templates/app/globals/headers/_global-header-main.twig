@@ -6,7 +6,7 @@
          x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
         @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
         :class="{ 'border-b shadow-sm' : scrolledFromTop }"
-        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header [.admin-bar_&]:top-[32px] border"
+        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header [.admin-bar_&]:top-[32px]"
 >
     <!-- Main Header Content -->
     <div id="header-content" class="container flex items-center justify-between mx-auto text-center xl:max-w-(--breakpoint-2xl) site-header__left">
@@ -14,7 +14,7 @@
         <div
             class="flex items-center">
             <!-- Logo -->
-            <a href="{{ site.url }}" class="block space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
+            <a href="{{ site.url }}" class="site-header__logo block space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
                 <span class="inline-flex size-10">{{ site_logo }}</span>
                 <span class="sr-only">{{ site.title }}</span>
             </a>
@@ -34,13 +34,13 @@
         {# right actions #}
         <div id="headerActions" class="flex items-center justify-between space-x-4 header-actions site-header__right">
 
-            <nav id="headerActions" class="hidden site-header__ctas lg:flex">
+            <nav id="headerButtons" class="hidden site-header__ctas lg:flex">
                 {{ menus.render_buttons_menu(menu.header_buttons.get_items) }}
             </nav> 
 
             <!-- Open Mobile Navigation lg:hidden  -->
             <div class="header-actions__mobile-menu mobile-menu lg:hidden">
-                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="tkMobileNav">
+                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="site-header__mobile-nav" :aria-expanded="mobileNavOpen.toString()">
                     {{ icons.icon({
                         path: 'controls',
                         name: 'bars-3',

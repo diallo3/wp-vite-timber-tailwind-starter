@@ -12,6 +12,7 @@ export default defineConfig(({ command }) => {
       rollupOptions: {
         input: {
           app: process.env.VITE_ENTRY_POINT,
+          admin: "src/admin.css",
         },
       },
     },

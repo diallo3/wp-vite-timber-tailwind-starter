@@ -31,8 +31,6 @@ export function initializeAlpine() {
         window.Alpine = Alpine;
         Alpine.start();
 
-        console.log('Alpine.js v3.15.0 initialized successfully');
-
     } catch (error) {
         console.warn('Failed to initialize Alpine.js:', error);
     }
@@ -186,7 +184,7 @@ function registerAlpineComponents() {
 
     // Toast notification component
     Alpine.data('toastComponent', () => ({
-        notifications: Alpine.$persist([]),
+        notifications: [],
 
         addNotification(message, type = 'info', duration = 5000) {
             const id = Date.now().toString();

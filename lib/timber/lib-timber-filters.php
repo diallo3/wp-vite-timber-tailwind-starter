@@ -16,18 +16,12 @@ add_filter('timber/loader/loader', function($loader) {
 });
 
 /**
- * 
-*/
+ * Twig function `template_exists(name)` — checks a template against Timber's
+ * own loader, so namespaces like `@Content/...` resolve.
+ */
 add_filter('timber/twig', function ($twig) {
-    // Add a custom Twig function to check if a template exists
-    $twig->addFunction(new \Twig\TwigFunction('template_exists', function ($template) {
-        $loader = new \Twig\Loader\FilesystemLoader(get_template_directory() . '/templates/app');
-        $exists = $loader->exists($template);
-
-        // Debug log
-        error_log('Checking template: ' . $template . ' - Exists: ' . ($exists ? 'Yes' : 'No'));
-
-        return $exists;
+    $twig->addFunction(new \Twig\TwigFunction('template_exists', function ($template) use ($twig) {
+        return $twig->getLoader()->exists($template);
     }));
     return $twig;
 });

@@ -8,29 +8,28 @@
     'dark': 'dark' 
 }[theme] | default('')  %}
 
-{% set padding_block = section.padding_block %}
 {% set max_width = section.content_width %}
 
-{# padding Y values #}
+{# padding Y values: ACF option, then a class string passed by the caller #}
 {% set padding_block_options = {
     'default': 'py-0',
     'small': 'py-16',
     'medium': 'py-24',
     'large': 'py-32'
-}[padding_block] | default('py-0') %}
+}[section.padding_block ?? ''] ?? padding_block ?? 'py-0' %}
 
-{# padding X values #}
-{% set padding_inline = {
+{# padding X values: ACF option, then a class string passed by the caller #}
+{% set padding_inline_options = {
     'default': 'px-8',
     'small': 'px-4',
     'medium': 'px-8',
     'large': 'px-16'
-}[padding_inline] | default('px-8') %}
+}[section.padding_inline ?? ''] ?? padding_inline ?? 'px-8' %}
 
 {# Define and merge section classes #}  
 {% set section_classes = [
-    padding_inline ?: 'px-8 sm:px-20 lg:px-8',
-    padding_block_options ?: '',
+    padding_inline_options,
+    padding_block_options,
     inview == 'false' ? '' : 'inview-container',
     class ?? '',
     theme_options,

@@ -1,9 +1,5 @@
 <?php
 
-if (is_admin()) {
-    die('ADMIN CONTEXT FROM INDEX.PHP');
-}
-
 /**
  * The main template file
  * This is the most generic template file in a WordPress theme
@@ -22,9 +18,5 @@ use Timber\Timber;
 
 $context          = Timber::context();
 $context['posts'] = Timber::get_posts();
-$context['foo']   = 'bar';
 $templates        = ['pages/index/index.twig'];
-if (is_home()) {
-	// array_unshift($templates, 'pages/front-page/front-page.twig', 'pages/home/home.twig', 'pages/page/page.twig');
-}
 Timber::render($templates, $context);

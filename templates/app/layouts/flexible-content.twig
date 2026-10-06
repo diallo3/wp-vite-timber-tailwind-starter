@@ -2,10 +2,9 @@
     {% set name = block.component_name  %}
     {% set component = block.component_data  %} 
 
-    {% set template_path = 'components/content/' ~ name ~ '/index.twig' %}
     {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
 
-    {% if template_exists(template_path) %}
+    {% if template_exists(full_template_path) %}
         {% if loop.first %}
             {% include full_template_path with { 'layout': component } %}
         {% else %}
@@ -18,9 +17,9 @@
 
         {% endif %}
             
-    {% else %}
+    {% elseif function('current_user_can', 'edit_posts') %}
         <div class="unknown-block">
-            <p>Unknown layout: {{ layout }}</p>
+            <p>Unknown layout: {{ name }}</p>
         </div>
     {% endif %}
 {% endfor %}

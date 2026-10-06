@@ -1,9 +1,5 @@
 <?php
 
-if (is_admin()) {
-    die('ADMIN CONTEXT FROM PAGE.PHP');
-}
-
 /**
  * The template for displaying all pages.
  *

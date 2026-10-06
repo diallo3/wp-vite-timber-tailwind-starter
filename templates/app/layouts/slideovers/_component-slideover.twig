@@ -1,5 +1,6 @@
 <template x-teleport="body">
 	<div 
+        id="{{ name }}"
         x-show="{{ trigger }}" 
         @keydown.window.escape="{{ trigger }}=false" 
         class="relative z-99">

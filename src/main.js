@@ -1,8 +1,6 @@
 // Vite HMR
 if (import.meta.hot) {
-	import.meta.hot.accept(() => {
-		console.log('HMR update applied');
-	});
+	import.meta.hot.accept();
 }
 
 // Core dependencies

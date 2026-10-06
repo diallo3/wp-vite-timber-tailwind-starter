@@ -25,21 +25,6 @@
 {% set if_image_type = component.image_type %}
 {% set background_image = component.image %}
 
-
-{# Define and merge section classes #}
-{% set section_classes = [
-    section_class_name,
-    'relative',
-    'bg-gray-100',
-    'text-gray-800',
-    'dark:text-white',
-] %}
-
-{# Add padding classes if in preview mode #}
-{% if is_preview %}
-    {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
-{% endif %}
-
 {% set options = component.options[0] %}
 {% set section = options.section %}
 {% set theme = section.theme %}

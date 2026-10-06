@@ -23,9 +23,6 @@ class StarterTimber extends Site {
 	 * @param string $context context['this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context($context) {
-		$context['foo']   = 'bar';
-		$context['stuff'] = 'I am a value set in your functions.php file';
-		$context['notes'] = 'These values are available everytime you call Timber::context();';
 		$context['site_logo'] = site_logo();
 		$context['privacy_policy_url'] = get_privacy_policy_url();
 
@@ -124,7 +121,8 @@ class StarterTimber extends Site {
 				'header_nav' => esc_html__('Header Nav', 'StarterTimber'),
 				'header_buttons' => esc_html__('Header Buttons', 'StarterTimber'),
 				'footer_nav' => esc_html__('Footer Nav', 'StarterTimber'),
-				'footer_social' => esc_html__('Social Links', 'StarterTimber')
+				'footer_social' => esc_html__('Social Links', 'StarterTimber'),
+				'footer_utility' => esc_html__('Footer Utility', 'StarterTimber'),
 			]
 		);
 
@@ -135,22 +133,11 @@ class StarterTimber extends Site {
 		add_theme_support('responsive-embeds');
 	}
 
-	/** This Would return 'foo bar!'.
-	 *
-	 * @param string $text being 'foo', then returned 'foo bar!'.
-	 */
-	public function myfoo($text) {
-		$text .= ' bar!';
-		return $text;
-	}
-
 	/** This is where you can add your own functions to twig.
 	 *
-	 * @param string $twig get extension.
+	 * @param \Twig\Environment $twig
 	 */
 	public function add_to_twig($twig) {
-		// StringLoaderExtension was removed in Twig 3.0 - not needed if not using template_from_string()
-		$twig->addFilter(new Twig\TwigFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
 	}
 }

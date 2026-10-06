@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="page-{{ post.id }} {{ tagString }} scroll-smooth">
+<html {{ site.language_attributes }} class="page-{{ post.id }} scroll-smooth">
 	<head>
-		<!-- Base meta tags -->
 		<meta charset="{{ site.charset }}">
-		<title>{{ title | default(site.name) }}</title>
-		<meta name="language" content="english" />
-		<meta name="description" content="{{ site.description }}" />
-		
-		<!-- Reassure the browser that we are mobile-friendly -->
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
-		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,16 +17,13 @@
 		
 		{{function('wp_head')}}
 
-		{% if post.meta('css') %}
-			<style>{{ post.meta('css') }}</style>
-		{% endif %}
-
 		{% block head %}
 		{% endblock %}
 
 	</head>
 
 	<body class="{{ body_class }} bg-gray-900 layout-base">
+		{{ function('wp_body_open') }}
 
 		{% block alert %}{% endblock %}
 
@@ -55,10 +43,5 @@
 		{% endblock %}
 
 		{{ function('wp_footer') }}
-
-		{% if post.meta('js') %}
-			<script>{{ post.meta('js') }}</script>
-		{% endif %}	
-		
 	</body>
 </html>
