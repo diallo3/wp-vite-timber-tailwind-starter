@@ -16,6 +16,29 @@
         }
     }
 
+    /* Header nav link hover — over hero (transparent) vs solid */
+    .site-header .site-header__center a span {
+        @apply transition-colors duration-300;
+    }
+    .site-header--over-hero .site-header__center a:hover span {
+        @apply bg-tiber-500/30;
+    }
+    .site-header:not(.site-header--over-hero) .site-header__center a:hover span {
+        @apply bg-gray-200;
+    }
+
+    /* Section header complex gallery — images stack back-to-back in same space, not vertically */
+    .section-header-complex__gallery .section-header-complex__gallery-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
     /* Reset paragraph font size inheritance */
     p {
         font-size: inherit;

@@ -3,7 +3,10 @@
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
 @import "./modules/css/modules-utilities.css";
+@import "./modules/css/module-buttons.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
+@import "./modules/css/module-gravity-forms.css" layer(utilities);
+@import "./modules/css/module-scroll-animations.css";
 
 @plugin "@tailwindcss/typography";
 
@@ -23,6 +26,42 @@
 
 @theme {
     --color-wordpress-blue: #0d99d5;
+
+    --color-metallic-red-50: oklch(0.958 0.012 17.51);
+    --color-metallic-red-100: oklch(0.918 0.028 17.73);
+    --color-metallic-red-200: oklch(0.827 0.069 18.67);
+    --color-metallic-red-300: oklch(0.747 0.119 20.3);
+    --color-metallic-red-400: oklch(0.669 0.184 23.49);
+    --color-metallic-red-500: oklch(0.577 0.213 27.16);
+    --color-metallic-red-600: oklch(0.489 0.19 28.14);
+    --color-metallic-red-700: oklch(0.406 0.15 27.13);
+    --color-metallic-red-800: oklch(0.315 0.113 26.64);
+    --color-metallic-red-900: oklch(0.233 0.079 25.83);
+    --color-metallic-red-950: oklch(0.184 0.058 25.02);
+
+    --color-azure-50: oklch(0.949 0.01 267.41);
+    --color-azure-100: oklch(0.898 0.027 269.67);
+    --color-azure-200: oklch(0.785 0.07 268.43);
+    --color-azure-300: oklch(0.684 0.122 263.09);
+    --color-azure-400: oklch(0.581 0.151 258.27);
+    --color-azure-500: oklch(0.476 0.136 256.96);
+    --color-azure-600: oklch(0.368 0.12 254.57);
+    --color-azure-700: oklch(0.313 0.089 257.27);
+    --color-azure-800: oklch(0.251 0.066 258.7);
+    --color-azure-900: oklch(0.199 0.048 261.47);
+    --color-azure-950: oklch(0.151 0.03 261.87);
+
+    --color-tiber-50: oklch(0.958 0.002 247.73);
+    --color-tiber-100: oklch(0.906 0.009 264.56);
+    --color-tiber-200: oklch(0.809 0.03 264.4);
+    --color-tiber-300: oklch(0.715 0.064 261.4);
+    --color-tiber-400: oklch(0.621 0.086 257.3);
+    --color-tiber-500: oklch(0.526 0.086 256.51);
+    --color-tiber-600: oklch(0.441 0.082 255);
+    --color-tiber-700: oklch(0.344 0.071 253.66);
+    --color-tiber-800: oklch(0.248 0.059 251.37);
+    --color-tiber-900: oklch(0.188 0.039 252.4);
+    --color-tiber-950: oklch(0.148 0.027 255.17);
 
     --color-dodger-blue-50: #eef9ff;
     --color-dodger-blue-100: #d9f1ff;
