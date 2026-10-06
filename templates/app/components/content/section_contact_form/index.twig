@@ -12,20 +12,11 @@
         {% import "@Elements/_macro-button.twig" as buttons %}
 
         {% set form_type = component.form_type %}
-
-        {# form attributes #}
         {% set form_title = component.form_title %}
-
-        {% set has_shortcode = form_type is same as "shortcode" %}
-        {% set has_acf_form = form_type is same as "frontend_form" %}
-        {% set has_hubspot = form_type is same as "hubspot" %}
-        {% set has_other = form_type is same as "other" %}
-
-        {# forms output #}
         {% set form_shortcode = component.shortcode %}
-        {% set form_acf_form = component.acf_form %}
-        {% set form_hubspot = component.hubspot %}
-        {% set form_other = component.other %}
+        {% set hubspot = component.hubspot %}
+        {% set has_shortcode = form_type == 'shortcode' and form_shortcode %}
+        {% set has_hubspot = form_type == 'hubspot' and hubspot.portal_id and hubspot.form_id %}
 
         <div class="py-8 mx-auto space-y-6 max-w-7xl lg:mx-0">
             <div class="relative overflow-hidden bg-blue-900 border rounded-lg isolate dark">
@@ -46,7 +37,9 @@
                                 {{ entry|raw }}
                             </div>
 
-                           
+                            {% if component.show_company_info %}
+                                {% include "@Content/section_contact_form/partials/_partial-contact-into-general.twig" %}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="px-6 py-16 bg-white lg:px-8 xl:px-12">
@@ -61,6 +54,28 @@
                             
                             {% if has_shortcode %}
                                 {{ ('[' ~ form_shortcode ~ ']')|shortcodes|raw }}
+                            {% elseif has_hubspot and is_preview %}
+                                <p class="p-4 text-sm text-gray-500 border border-dashed rounded-md">HubSpot form {{ hubspot.form_id }} (shown on the site)</p>
+                            {% elseif has_hubspot %}
+                                {% set target = 'hubspot-form-' ~ index %}
+                                <div id="{{ target }}"></div>
+                                <script>
+                                    (function () {
+                                        var create = function () {
+                                            window.hbspt.forms.create({{ {
+                                                region: hubspot.region ?: 'na1',
+                                                portalId: hubspot.portal_id,
+                                                formId: hubspot.form_id,
+                                                target: '#' ~ target,
+                                            }|merge(hubspot.hubspot_message ? { inlineMessage: hubspot.hubspot_message } : {})|json_encode|raw }});
+                                        };
+                                        if (window.hbspt) return create();
+                                        var script = document.createElement('script');
+                                        script.src = 'https://js.hsforms.net/forms/embed/v2.js';
+                                        script.onload = create;
+                                        document.head.appendChild(script);
+                                    })();
+                                </script>
                             {% endif %}
                         </div>
                     </div>

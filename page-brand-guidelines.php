@@ -14,45 +14,67 @@ $context = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
 
+/**
+ * Colour and font tokens from the `@theme` block in src/app.css, so this page
+ * shows exactly what Tailwind generates.
+ *
+ * @return array{colors: array<string, array>, fonts: array<string, string>}
+ *     Colours grouped by scale (`dodger-blue` => shades), fonts by name (`heading`).
+ */
+function brand_theme_tokens(): array {
+    $tokens = ['colors' => [], 'fonts' => []];
+    $css = (string) @file_get_contents(get_template_directory() . '/src/app.css');
+
+    if (!preg_match('/@theme\s*\{(.*?)\n\}/s', $css, $theme)) {
+        return $tokens;
+    }
+
+    preg_match_all('/--(color|font)-([a-z0-9-]+):\s*([^;]+);/', $theme[1], $matches, PREG_SET_ORDER);
+
+    foreach ($matches as [, $type, $name, $value]) {
+        $value = trim($value);
+
+        if ($type === 'font') {
+            $tokens['fonts'][$name] = $value;
+            continue;
+        }
+
+        $group = preg_replace('/-\d+$/', '', $name);
+        $rgb = sscanf(ltrim($value, '#'), '%02x%02x%02x');
+        $tokens['colors'][$group][] = [
+            'name' => $name,
+            'hex' => $value,
+            'rgb' => count(array_filter($rgb, 'is_int')) === 3 ? 'rgb(' . implode(', ', $rgb) . ')' : '',
+            'usage' => '',
+        ];
+    }
+
+    return $tokens;
+}
+
+$tokens = brand_theme_tokens();
+$font_weights = ['heading' => '400, 500, 600, 700, 800, 900', 'body' => '400, 500, 600, 700'];
+
 // Brand Guidelines Data Structure
 $context['brand'] = [
     'name' => get_bloginfo('name'),
     'tagline' => get_bloginfo('description'),
 
-    // Colors
-    'colors' => [
-        'primary' => [
-            ['name' => 'Primary', 'hex' => '#0d99d5', 'rgb' => 'rgb(13, 153, 213)', 'usage' => 'Main brand color, primary CTAs'],
-            ['name' => 'Primary Dark', 'hex' => '#0b7ab0', 'rgb' => 'rgb(11, 122, 176)', 'usage' => 'Hover states, emphasis'],
-            ['name' => 'Primary Light', 'hex' => '#3db3e3', 'rgb' => 'rgb(61, 179, 227)', 'usage' => 'Backgrounds, accents'],
-        ],
-        'secondary' => [
-            ['name' => 'Secondary', 'hex' => '#6366f1', 'rgb' => 'rgb(99, 102, 241)', 'usage' => 'Secondary actions, accents'],
-            ['name' => 'Accent', 'hex' => '#f59e0b', 'rgb' => 'rgb(245, 158, 11)', 'usage' => 'Highlights, warnings'],
-        ],
-        'neutral' => [
-            ['name' => 'Black', 'hex' => '#111827', 'rgb' => 'rgb(17, 24, 39)', 'usage' => 'Primary text, headers'],
-            ['name' => 'Gray Dark', 'hex' => '#374151', 'rgb' => 'rgb(55, 65, 81)', 'usage' => 'Body text, borders'],
-            ['name' => 'Gray', 'hex' => '#6b7280', 'rgb' => 'rgb(107, 114, 128)', 'usage' => 'Secondary text'],
-            ['name' => 'Gray Light', 'hex' => '#d1d5db', 'rgb' => 'rgb(209, 213, 219)', 'usage' => 'Borders, dividers'],
-            ['name' => 'Gray Lighter', 'hex' => '#f3f4f6', 'rgb' => 'rgb(243, 244, 246)', 'usage' => 'Backgrounds, cards'],
-            ['name' => 'White', 'hex' => '#ffffff', 'rgb' => 'rgb(255, 255, 255)', 'usage' => 'Page backgrounds'],
-        ],
-        'semantic' => [
-            ['name' => 'Success', 'hex' => '#10b981', 'rgb' => 'rgb(16, 185, 129)', 'usage' => 'Success messages, positive states'],
-            ['name' => 'Warning', 'hex' => '#f59e0b', 'rgb' => 'rgb(245, 158, 11)', 'usage' => 'Warning messages, caution'],
-            ['name' => 'Error', 'hex' => '#ef4444', 'rgb' => 'rgb(239, 68, 68)', 'usage' => 'Error messages, destructive actions'],
-            ['name' => 'Info', 'hex' => '#3b82f6', 'rgb' => 'rgb(59, 130, 246)', 'usage' => 'Informational messages'],
-        ],
-    ],
+    // Colors: from @theme in src/app.css
+    'colors' => $tokens['colors'],
 
     // Typography
     'typography' => [
-        'families' => [
-            ['name' => 'Headings', 'font' => "'Jost', system-ui, -apple-system, sans-serif", 'weights' => '400, 500, 600, 700, 800, 900'],
-            ['name' => 'Body', 'font' => "'Open Sans', system-ui, -apple-system, sans-serif", 'weights' => '400, 500, 600, 700'],
-            ['name' => 'Monospace', 'font' => 'ui-monospace, SFMono-Regular, monospace', 'weights' => '400, 500, 600'],
-        ],
+        // Font families: from @theme in src/app.css
+        'families' => array_map(
+            fn($name, $font) => [
+                'name' => ucfirst($name) . " (font-{$name})",
+                'font' => $font,
+                'weights' => $font_weights[$name] ?? '',
+            ],
+            array_keys($tokens['fonts']),
+            $tokens['fonts']
+        ),
         'scale' => [
             ['name' => 'Display XL', 'size' => '4.5rem / 72px', 'lineHeight' => '1.1', 'usage' => 'Hero headlines'],
             ['name' => 'Display L', 'size' => '3.75rem / 60px', 'lineHeight' => '1.1', 'usage' => 'Page headers'],

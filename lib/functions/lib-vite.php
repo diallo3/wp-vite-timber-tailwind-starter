@@ -116,6 +116,26 @@ class WPVite {
 	}
 
 	/**
+	 * Enqueue a JavaScript entry (e.g. `src/preview.js`) as a module, from the
+	 * dev server when it is running, otherwise from the build.
+	 *
+	 * @param string $source Source path relative to the theme root (also its manifest key).
+	 * @param string $handle Script handle.
+	 */
+	public function enqueueScript(string $source, string $handle): void {
+		$this->moduleHandles[] = $handle;
+
+		if ($this->isDevServerRunning()) {
+			wp_enqueue_script($handle, $this->devServerUrl() . '/' . $source, [], null, true);
+			return;
+		}
+
+		foreach ($this->getProductionAssets($source)['js'] as $file) {
+			wp_enqueue_script($handle, $this->distUri . '/' . $file, [], null, true);
+		}
+	}
+
+	/**
 	 * Load the entry point from the Vite dev server.
 	 */
 	public function viteDevAssets(): void {

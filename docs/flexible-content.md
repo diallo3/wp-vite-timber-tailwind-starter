@@ -23,7 +23,7 @@ page_content (flexible content, ACFE)
 **ACFE preview (admin):**
 
 - The `acfe/flexible/render/template` filter points previews at `lib/acf/layout-preview.php`. It builds the same `name` / `component` / `index` context from the current row and renders the same `_flexible-layout.twig`, with `is_preview: true`.
-- `acfe/flexible/enqueue/name=page_content` loads the theme CSS for previews, from the dev server when it's running and from `dist/` otherwise. JS doesn't load in previews, so Alpine-driven layouts (carousel, FAQ, modals) are static there.
+- `acfe/flexible/enqueue/name=page_content` loads the theme CSS and `src/preview.js` (Alpine) for previews, from the dev server when it's running and from `dist/` otherwise. Alpine components (carousel, FAQ, modals) work in previews; Motion animations don't run there.
 - Layout thumbnails come from `lib/acf/images/layout-thumbnails/<name>.svg`, with `default-thumbnail.png` as the fallback.
 
 ## Inside a component template

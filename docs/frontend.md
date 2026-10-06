@@ -1,12 +1,12 @@
 # Frontend
 
-Vite builds two entries: `src/main.js` (frontend JS, which imports `src/app.css`) and `src/admin.css` (wp-admin and ACF field styling). `lib/functions/lib-vite.php` enqueues them.
+Vite builds three entries: `src/main.js` (frontend JS, which imports `src/app.css`), `src/admin.css` (wp-admin and ACF field styling) and `src/preview.js` (Alpine only, for ACFE layout previews). `lib/functions/lib-vite.php` enqueues them.
 
 ## Dev server vs built assets
 
 - `npm run dev` starts Vite and writes `.vite-hot` (the dev server URL) to the theme root. It removes the file when it stops.
 - PHP uses the dev server only when `.vite-hot` exists **and** `wp_get_environment_type()` is `local` or `development`. Otherwise it reads `dist/.vite/manifest.json`.
-- `WPVite::enqueueStyle($source, $handle, $entry)` follows the same rule for extra stylesheets (admin CSS, the ACFE preview).
+- `WPVite::enqueueStyle($source, $handle, $entry)` and `WPVite::enqueueScript($source, $handle)` follow the same rule for extra entries (admin CSS, the ACFE preview CSS and JS).
 - `dist/` is not committed. Deploys must run `npm ci && npm run build`.
 - `public/` is served by WordPress as-is (`/wp-content/themes/<theme>/public/...`) and is not copied into `dist/`.
 
@@ -17,7 +17,7 @@ Vite builds two entries: `src/main.js` (frontend JS, which imports `src/app.css`
 `src/app.css` is the only Tailwind entry:
 
 - `@import "tailwindcss" source(none)` plus explicit `@source` rules for `templates/`, `lib/`, root `*.php` and `src/`. A class used anywhere else (markdown, `node_modules`) is not generated.
-- `@theme` holds the tokens: the `dodger-blue-*` colour scale, `wordpress-blue`, breakpoints `xs` (360px) to `3xl` (1920px) and the `text-fluid-*` sizes.
+- `@theme` holds the tokens: the `dodger-blue-*` colour scale, `wordpress-blue`, the `font-heading` / `font-body` families, breakpoints `xs` (360px) to `3xl` (1920px) and the `text-fluid-*` sizes. Only `@theme` variables generate utilities; a variable in `:root` doesn't. The Brand Guidelines page template reads its colours and fonts from this block.
 - `@plugin "@tailwindcss/typography"` provides `prose` for WYSIWYG output.
 - `dark:` is class-based (`.dark` on an ancestor). Sections opt in through their theme option; nothing sets it from the OS preference.
 - Component CSS: any `templates/**/*.css` file is imported automatically by `main.js`.
@@ -43,7 +43,7 @@ All scale with `clamp()` between two sizes and work with responsive variants (`m
 
 `src/main.js` imports and starts each module on `DOMContentLoaded`:
 
-- **Alpine.js** (`module-alpine.js`) with the `focus` and `collapse` plugins. Components used by templates: `visibleNavHighlighter(selector)` (scroll-spy navigation) and `scrollerComponent` (the infinite logo scroller). `modalComponent`, `dropdownComponent`, `toastComponent`, `tabsComponent` and the `$clipboard` / `$toast` magics are registered but not used in templates yet; most interactive bits use inline `x-data`.
+- **Alpine.js** (`module-alpine.js`) with the `focus` and `collapse` plugins. Components used by templates: `visibleNavHighlighter(selector)` (scroll-spy navigation) and `scrollerComponent` (the infinite logo scroller), plus the `$clipboard(text)` magic. Everything else uses inline `x-data`. ACFE previews load the same Alpine setup through `src/preview.js`, without Motion.
 - **Headroom** (`module-headroom.js`) hides the `.js-header` element on scroll down and shows it on scroll up.
 - **Motion** (`module-motionOne.js`):
   - `.inview-container .inview-item` fades/slides items in when they enter the viewport.

@@ -81,5 +81,6 @@ function render_acf_flexible_enqueue($field, $is_preview) {
     if ($is_preview && WPVite::$instance) {
         // The built CSS belongs to the JS entry; in dev, app.css is served directly.
         WPVite::$instance->enqueueStyle('src/app.css', 'page_content', WPVite::$instance->entryPoint);
+        WPVite::$instance->enqueueScript('src/preview.js', 'page_content-preview');
     }
 }

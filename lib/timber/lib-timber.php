@@ -41,7 +41,8 @@ class StarterTimber extends Site {
 
 		$context['menu'] = $menu;
 		$context['site']  = $this;
-        $context['options'] = get_fields('option');
+        // Not `options` or `theme_options`: the section helpers use those names.
+        $context['site_options'] = get_fields('option');
 		return $context;
 	}
 

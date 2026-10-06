@@ -59,7 +59,7 @@
                                 <div class="h-28" style="background-color: {{ color.hex }}"></div>
                                 <div class="p-4 space-y-1">
                                     <p class="font-semibold">{{ color.name }}</p>
-                                    <button type="button" class="font-mono text-sm hover:text-dodger-blue-600" @click="$clipboard('{{ color.hex }}').then(() => $toast('Copied {{ color.hex }}', 'success'))">{{ color.hex }}</button>
+                                    <button type="button" class="font-mono text-sm hover:text-dodger-blue-600" x-data="{ copied: false }" @click="$clipboard('{{ color.hex }}').then(() => { copied = true; setTimeout(() => copied = false, 1500) })" x-text="copied ? 'Copied' : '{{ color.hex }}'">{{ color.hex }}</button>
                                     {% if color.rgb %}<p class="font-mono text-xs text-gray-500">{{ color.rgb }}</p>{% endif %}
                                     {% if color.usage %}<p class="pt-2 {{ muted }}">{{ color.usage }}</p>{% endif %}
                                 </div>

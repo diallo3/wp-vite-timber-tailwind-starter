@@ -53,6 +53,7 @@ export default defineConfig(({ command }) => ({
       input: {
         app: VITE_ENTRY_POINT,
         admin: "src/admin.css",
+        preview: "src/preview.js",
       },
     },
   },

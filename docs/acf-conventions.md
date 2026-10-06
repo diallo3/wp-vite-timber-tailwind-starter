@@ -18,7 +18,7 @@ Required plugins: **ACF Pro**, **ACF Extended Pro** (flexible content UI, previe
 | Components | *Component <Name>* | none, only used through Component Fields |
 | Post type fields | *<Type> Fields* (Team Member, Testimonial) | `post_type == <type>` |
 | Options | *Theme Options Fields* | the ACF options page |
-| Other | *Mega Menu*, *Post Archive Options* | menu items in `header_nav`; the posts page |
+| Other | *Mega Menu*, *Post Archive Options* | menu items in `header_nav`; the posts page and the `solution` archive |
 
 Flexible layouts are named `section_<name>` and match `templates/app/components/content/section_<name>/`. Each layout has a single `content` sub field (a Component Field). See [flexible-content.md](flexible-content.md).
 
@@ -43,17 +43,26 @@ Post types are defined in ACF (`acf-json/post_type_*.json`), not in PHP:
 | `solution` | yes (archive) | no templates yet |
 | `team-member` | no | Featured Team cards (bio modal) |
 | `testimonial` | no | Featured Testimonials |
-| `call-to-action` | no | reusable CTA content |
 
-The last three aren't publicly queryable, are excluded from search and are hidden from nav menus. They're only shown through relationship fields. There are no custom taxonomies.
+The last two aren't publicly queryable, are excluded from search and are hidden from nav menus. They're only shown through relationship fields. There are no custom taxonomies.
 
 ## Theme options
 
-*Theme Options Fields* is on the ACF options page and is available in Twig as `options`:
+*Theme Options Fields* is on the ACF options page and is available in Twig as `site_options` (not `options`, which the section helper uses for a component's own options):
 
-- **General:** company title, summary, address, phone/email/hours repeaters.
-- **Call to Action:** a site-wide CTA (title, entry, link, image, HubSpot form).
+- **General:** company title, summary, address, phone/email/hours repeaters. The Contact Form section shows them under its intro when *Show company info* is on.
 - **Tracking:** `tracking.tracking_codes` rows (name, script, `in_header`). They are printed unescaped in `wp_head` or `wp_footer` by `theme_print_tracking_codes()`, so only admins should have access to the options page.
+
+## Forms
+
+The Contact Form section (*Component Form Info*, `group_671beb0ae9d9e`) has two form types:
+
+- **Shortcode:** the shortcode without brackets (for example `contact-form-7 id="12"`). It's rendered with `do_shortcode`.
+- **HubSpot:** portal ID, form ID, region (`na1` / `eu1`) and an optional thank-you message. The page loads HubSpot's `embed/v2.js` and calls `hbspt.forms.create()`. ACFE previews show a placeholder instead of the form.
+
+## Archive headers
+
+*Post Archive Options* (`group_6692d86597f6c`) adds a Header Simple `content` component and a Featured Posts `related` component to the posts page (edit the page set as "Posts page") and to the `solution` archive (ACFE archive page; `solution` must be ticked in Theme Options → "Has Post Type Archive"). `_embed-archive-with-header.twig` renders them with the same templates as the flexible layouts and falls back to an `<h1>` with the archive title.
 
 ## Content notes
 

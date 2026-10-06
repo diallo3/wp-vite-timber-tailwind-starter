@@ -48,6 +48,27 @@
             "sub_fields": []
         },
         {
+            "key": "field_6ac5f0a100001",
+            "label": "Company Info",
+            "name": "show_company_info",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Show the company name, address, phone and email from Theme Options under the intro.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Show company info",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1,
+            "style": ""
+        },
+        {
             "key": "field_671c05014b576",
             "label": "Form Type",
             "name": "form_type",
@@ -62,10 +83,8 @@
                 "id": ""
             },
             "choices": {
-                "shortcode": "ShortCode",
-                "acf_form": "ACF Form",
-                "hubspot": "Hubspot",
-                "other": "Other"
+                "shortcode": "Shortcode",
+                "hubspot": "HubSpot"
             },
             "default_value": "shortcode",
             "return_format": "value",
@@ -197,12 +216,45 @@
                     "append": ""
                 },
                 {
+                    "key": "field_6ac5f0a100002",
+                    "label": "Region",
+                    "name": "region",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "From the HubSpot embed code (na1 unless the portal is hosted in the EU).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "na1": "na1",
+                        "eu1": "eu1"
+                    },
+                    "default_value": "na1",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "max": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "allow_custom": 0,
+                    "search_placeholder": "",
+                    "min": ""
+                },
+                {
                     "key": "field_671c0d7d21fa9",
-                    "label": "Hubspot Message",
+                    "label": "Thank-you Message",
                     "name": "hubspot_message",
                     "aria-label": "",
                     "type": "wysiwyg",
-                    "instructions": "",
+                    "instructions": "Optional. Replaces the form’s own thank-you message.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -312,5 +364,5 @@
             "hide-outer-label"
         ]
     },
-    "modified": 1791307350
+    "modified": 1791311014
 }
