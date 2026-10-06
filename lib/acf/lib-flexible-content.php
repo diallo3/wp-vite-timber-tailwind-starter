@@ -77,24 +77,9 @@ add_filter('acfe/flexible/render/template', function($template, $field, $layout,
  */
 
 add_action('acfe/flexible/enqueue/name=page_content', 'render_acf_flexible_enqueue', 20, 10);
-function render_acf_flexible_enqueue($field, $is_preview){
-    if ($is_preview) {
-        // Get the main CSS file from the Vite manifest
-        $css_file = get_main_vite_css_file();
-        
-        if ($css_file) {
-            wp_enqueue_style('page_content', $css_file, [], null);
-        }
+function render_acf_flexible_enqueue($field, $is_preview) {
+    if ($is_preview && WPVite::$instance) {
+        // The built CSS belongs to the JS entry; in dev, app.css is served directly.
+        WPVite::$instance->enqueueStyle('src/app.css', 'page_content', WPVite::$instance->entryPoint);
     }
-}
-
-// Function to get the main CSS file from the Vite manifest
-function get_main_vite_css_file() {
-    if (!WPVite::$instance) {
-        return null;
-    }
-
-    $css = WPVite::$instance->getProductionAssets()['css'];
-
-    return $css ? WPVite::$instance->distUri . '/' . $css[0] : null;
 }

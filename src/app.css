@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
 
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
@@ -6,6 +6,11 @@
 @import "./modules/css/module-headroom.css" layer(utilities);
 
 @plugin "@tailwindcss/typography";
+
+@source "../templates";
+@source "../lib";
+@source "../*.php";
+@source "./";
 
 @custom-variant dark (&:is(.dark *));
 

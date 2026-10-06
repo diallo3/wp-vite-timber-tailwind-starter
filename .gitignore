@@ -1,9 +1,16 @@
-/composer.lock
+# Dependencies
+/node_modules/
 /vendor/
+/composer.lock
 /wordpress/
-/node_modules
-package-lock.json
+
+# Build output (run `npm run build` on deploy)
+/dist/
+/.vite-hot
+
+# Local environment
+/.env
+
+# OS / editors
 .DS_Store
-**/.DS_Store
-/dist/assets/
-```
+/.idea/

@@ -15,7 +15,7 @@
             {% if image %}
                 <figure class="w-full lg:w-1/2 aspect-16/9 rounded-lg overflow-hidden step-list__item-image ring-4 ring-celery-300 mb-4 md:mb-6">
                     {{ images.render_image({
-                        src: image ? image.url | towebp : theme.link ~ '/dist/icons/defaults/icon-temp-image.svg',
+                        src: image ? image.url | towebp : theme.link ~ '/public/icons/defaults/icon-temp-image.svg',
                         alt: item.title,
                         width: image.width,
                         height: image.height

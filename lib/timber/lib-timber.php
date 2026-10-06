@@ -94,11 +94,11 @@ class StarterTimber extends Site {
 		add_theme_support('menus');
 		register_nav_menus(
 			[
-				'header_nav' => esc_html__('Header Nav', 'StarterTimber'),
-				'header_buttons' => esc_html__('Header Buttons', 'StarterTimber'),
-				'footer_nav' => esc_html__('Footer Nav', 'StarterTimber'),
-				'footer_social' => esc_html__('Social Links', 'StarterTimber'),
-				'footer_utility' => esc_html__('Footer Utility', 'StarterTimber'),
+				'header_nav' => esc_html__('Header Nav', 'wp-theme-timber-vite-acf'),
+				'header_buttons' => esc_html__('Header Buttons', 'wp-theme-timber-vite-acf'),
+				'footer_nav' => esc_html__('Footer Nav', 'wp-theme-timber-vite-acf'),
+				'footer_social' => esc_html__('Social Links', 'wp-theme-timber-vite-acf'),
+				'footer_utility' => esc_html__('Footer Utility', 'wp-theme-timber-vite-acf'),
 			]
 		);
 

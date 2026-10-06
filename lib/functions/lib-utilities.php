@@ -96,17 +96,10 @@ add_action('wp_head', fn() => theme_print_tracking_codes(true), 99);
 add_action('wp_footer', fn() => theme_print_tracking_codes(false), 99);
 
 /**
- * Enqueue the Vite-built admin stylesheet (src/admin.css).
+ * Enqueue the admin stylesheet (src/admin.css).
  */
 function custom_admin_styles() {
-    if (!WPVite::$instance) {
-        return;
-    }
-
-    $vite = WPVite::$instance;
-    foreach ($vite->getProductionAssets('src/admin.css')['css'] as $i => $file) {
-        wp_enqueue_style('theme-admin-' . $i, $vite->distUri . '/' . $file, [], null);
-    }
+    WPVite::$instance?->enqueueStyle('src/admin.css', 'theme-admin');
 }
 add_action('admin_enqueue_scripts', 'custom_admin_styles');
 

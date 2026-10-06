@@ -1,5 +1,5 @@
 {% macro render_image(options={}) %}
-    {% set src = options.src ?: function('get_template_directory_uri') ~ '/dist/icons/defaults/icon-temp-image.svg' %}
+    {% set src = options.src ?: function('get_template_directory_uri') ~ '/public/icons/defaults/icon-temp-image.svg' %}
     {% set fit = options.fit ?? 'object-cover w-full h-full' %}
 
     <img src="{{ src|e('html_attr') }}" class="{{ fit }} {{ options.class ?? '' }}" alt="{{ (options.alt ?? '')|e('html_attr') }}"{% if options.width ?? false %} width="{{ options.width }}"{% endif %}{% if options.height ?? false %} height="{{ options.height }}"{% endif %} loading="lazy">
