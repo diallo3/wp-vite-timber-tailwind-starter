@@ -1,25 +1,18 @@
 {% for block in flexible_content %}
-    {% set name = block.component_name  %}
-    {% set component = block.component_data  %} 
+    {% set layout_context = {
+        name: block.component_name,
+        component: block.component_data,
+        index: loop.index,
+        is_preview: false,
+    } %}
 
-    
-
-    {% set template_path = 'components/content/' ~ name ~ '/index.twig' %}
-    {% set full_template_path = '@Content/' ~ name ~ '/index.twig' %}
-
-    {% if template_exists(template_path) %}
-        {% embed "@Layouts/sections/_embed-section-full.twig" %}
-                {% block section_content %}
-                    
-                {% include full_template_path with { 
-                    'layout': component,
-                    'position': loop.index
-                    } %}
-            {% endblock %}
-        {% endembed %}    
+    {% if loop.first %}
+        {% include "@Layouts/_flexible-layout.twig" with layout_context %}
     {% else %}
-        <div class="unknown-block">
-            <p>Unknown layout: {{ layout }}</p>
-        </div>
+        {% embed "@Layouts/sections/_embed-section-full.twig" with { component: block.component_data } %}
+            {% block section_content %}
+                {% include "@Layouts/_flexible-layout.twig" with layout_context %}
+            {% endblock %}
+        {% endembed %}
     {% endif %}
 {% endfor %}

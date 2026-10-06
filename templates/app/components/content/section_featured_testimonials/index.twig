@@ -5,13 +5,14 @@
 {% import "@Elements/_macro-badge.twig" as badges %}
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-button.twig" as buttons %}
+{% import "@Elements/_macro-card.twig" as cards %}
 
 {% set component = component.content[0] %}
 
-{% set title = component.title %}
+{% set title = section_intro(component).title %}
 {% set testimonials = get_posts(component.testimonials) %}
 
-<div id="section-component-featured-testimonial-{{ loop.index }}" class="section-component-featured-testimonial">
+<div id="section-component-featured-testimonial-{{ index }}" class="section-component-featured-testimonial">
 	<div class="px-4 mx-auto space-y-8 section-component-featured-testimonial__container lg:px-8 xl:max-w-(--breakpoint-2xl) inview-container">
 		<!-- Heading -->
 		<div class="text-center section-component-featured-testimonial__header inview-item">
@@ -27,12 +28,13 @@
 		<!-- Feedback -->
 		<div class="grid grid-cols-1 gap-4 lg:grid-cols-3 section-component-featured-testimonial__list">
             {% for testimonial in testimonials %}
-                {% set name = testimonial.meta('name') %}
-                {% set quote = testimonial.meta('quote') %}
-                {% set position = testimonial.meta('position') %}
-
-                <div id="testimonial-item-{{ loop.index }}" class="inview-item">
-                    {% include "@Components/cards/testimonials/_component-card-testimonial-boxed.twig" %}
+                <div class="inview-item">
+                    {{ cards.testimonial({
+                        id: testimonial.id,
+                        quote: testimonial.meta('quote'),
+                        name: testimonial.meta('name'),
+                        position: testimonial.meta('position'),
+                    }) }}
                 </div>
             {% endfor %}
 		</div>

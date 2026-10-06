@@ -1,69 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" class="page-{{ post.id }} {{ tagString }} scroll-smooth">
+<html {{ site.language_attributes|raw }} class="page-{{ post.id }} scroll-smooth">
 	<head>
-		<!-- Base meta tags -->
 		<meta charset="{{ site.charset }}">
-		<title>{{ title | default(site.name) }}</title>
-		<meta name="language" content="english" />
-		<meta name="description" content="{{ site.description }}" />
-		
-		<!-- Reassure the browser that we are mobile-friendly -->
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
-		<meta name="HandheldFriendly" content="True">
-		<meta name="view-transition" content="same-origin" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- Favicons -->
-		<link rel="icon" href="{{ theme.link }}/favicons/favicon.ico?cachebust=20220519">
-		<link rel="icon" href="{{ theme.link }}/dist/favicons/favicon.svg?cachebust=20220519" type="image/svg+xml" sizes="any">
-		<link rel="apple-touch-icon" href="{{ theme.link }}/favicons/favicon-apple.png?cachebust=20220519">
-		<meta name="theme-color" content="#08223C"> 
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+		<!-- Favicons 
+		<link rel="icon" href="/assets/favicon/favicon.ico?cachebust=20220519">
+		<link rel="icon" href="/assets/favicon/favicon.svg?cachebust=20220519" type="image/svg+xml" sizes="any">
+		<link rel="apple-touch-icon" href="/assets/favicon/favicon-apple.png?cachebust=20220519">
+		<meta name="theme-color" content="#20242c"> -->
 		
 		{{function('wp_head')}}
-
-		{% if post.meta('css') %}
-			<style>{{ post.meta('css') }}</style>
-		{% endif %}
 
 		{% block head %}
 		{% endblock %}
 
 	</head>
 
-	<body 
-        x-init="console.log('Im initing')"
-        class="{{ body_class }} bg-tiber-900 layout-base">
-	
-		{% block alert %}
-			{% for alert in alerts %}
-				{% include 'components/alert/alert.twig' %}
-			{% endfor %}
-		{% endblock %}
+	<body class="{{ body_class }} bg-gray-900 layout-base">
+		{{ function('wp_body_open') }}
+
+		{% block alert %}{% endblock %}
 
 
         {% block header %}
             {% include '@Globals/headers/_global-header-main.twig' %}
         {% endblock %}
 
-		<main id="swup" class="bg-white layout transition-fade layout-base__main" role="main">
+		<main id="main" class="bg-white lg:pt-20 layout layout-base__main [.admin-bar_&]:pt-24" role="main">
 			{% block content %}
 				Sorry, no content
 			{% endblock %}
 		</main>
-        
-
-        {% include '@Layouts/partials/_partial-call-to-action-main.twig' %}
 
 		{% block footer %}
             {% include '@Globals/footers/_global-footer-main.twig' %}
 		{% endblock %}
 
 		{{ function('wp_footer') }}
-
-		{% if post.meta('js') %}
-			<script>{{ post.meta('js') }}</script>
-		{% endif %}	
-		
 	</body>
 </html>

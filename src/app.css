@@ -1,104 +1,85 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
 
 @import "./modules/css/modules-base.css" layer(base);
 @import "./modules/css/modules-components.css" layer(components);
 @import "./modules/css/modules-utilities.css";
 @import "./modules/css/module-buttons.css" layer(utilities);
-@import "./modules/css/modules-acf.css" layer(utilities);
 @import "./modules/css/module-headroom.css" layer(utilities);
 @import "./modules/css/module-gravity-forms.css" layer(utilities);
 @import "./modules/css/module-scroll-animations.css";
 
 @plugin "@tailwindcss/typography";
-@plugin "daisyui" {
-  themes: light --default;
-}
+
+@source "../templates";
+@source "../lib";
+@source "../*.php";
+@source "./";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-  --color-wordpress-blue: #0d99d5;
-  --color-blue-wordpress: #0d99d5;
-
-  /* Google Fonts Configuration */
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "Jost", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-
-  /* Enhanced responsive design tokens */
-  --breakpoint-xs: 360px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-  --breakpoint-3xl: 1920px;
-
-  /* site colors */
-
-  /* metallic red colors */
-
-  --color-metallic-red-50: oklch(0.958 0.012 17.51);
-  --color-metallic-red-100: oklch(0.918 0.028 17.73);
-  --color-metallic-red-200: oklch(0.827 0.069 18.67);
-  --color-metallic-red-300: oklch(0.747 0.119 20.3);
-  --color-metallic-red-400: oklch(0.669 0.184 23.49);
-  --color-metallic-red-500: oklch(0.577 0.213 27.16);
-  /* main metallic red color */
-  --color-metallic-red-600: oklch(0.489 0.19 28.14);
-  --color-metallic-red-700: oklch(0.406 0.15 27.13);
-  --color-metallic-red-800: oklch(0.315 0.113 26.64);
-  --color-metallic-red-900: oklch(0.233 0.079 25.83);
-  --color-metallic-red-950: oklch(0.184 0.058 25.02);
-
-  /* azure colors */
-  --color-azure-50: oklch(0.949 0.01 267.41);
-  --color-azure-100: oklch(0.898 0.027 269.67);
-  --color-azure-200: oklch(0.785 0.07 268.43);
-  --color-azure-300: oklch(0.684 0.122 263.09);
-  --color-azure-400: oklch(0.581 0.151 258.27);
-  --color-azure-500: oklch(0.476 0.136 256.96);
-  /* main azure color */
-  --color-azure-600: oklch(0.368 0.12 254.57);
-  --color-azure-700: oklch(0.313 0.089 257.27);
-  --color-azure-800: oklch(0.251 0.066 258.7);
-  --color-azure-900: oklch(0.199 0.048 261.47);
-  --color-azure-950: oklch(0.151 0.03 261.87);
-
-  /* tiber colors */
-  --color-tiber-50: oklch(0.958 0.002 247.73);
-  --color-tiber-100: oklch(0.906 0.009 264.56);
-  --color-tiber-200: oklch(0.809 0.03 264.4);
-  --color-tiber-300: oklch(0.715 0.064 261.4);
-  --color-tiber-400: oklch(0.621 0.086 257.3);
-  --color-tiber-500: oklch(0.526 0.086 256.51);
-  --color-tiber-600: oklch(0.441 0.082 255);
-  --color-tiber-700: oklch(0.344 0.071 253.66);
-  --color-tiber-800: oklch(0.248 0.059 251.37);
-  --color-tiber-900: oklch(0.188 0.039 252.4);
-  --color-tiber-950: oklch(0.148 0.027 255.17);
-
+/* Native cross-document page transitions (replaces Swup) */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@theme {
+    --color-wordpress-blue: #0d99d5;
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+    --color-metallic-red-50: oklch(0.958 0.012 17.51);
+    --color-metallic-red-100: oklch(0.918 0.028 17.73);
+    --color-metallic-red-200: oklch(0.827 0.069 18.67);
+    --color-metallic-red-300: oklch(0.747 0.119 20.3);
+    --color-metallic-red-400: oklch(0.669 0.184 23.49);
+    --color-metallic-red-500: oklch(0.577 0.213 27.16);
+    --color-metallic-red-600: oklch(0.489 0.19 28.14);
+    --color-metallic-red-700: oklch(0.406 0.15 27.13);
+    --color-metallic-red-800: oklch(0.315 0.113 26.64);
+    --color-metallic-red-900: oklch(0.233 0.079 25.83);
+    --color-metallic-red-950: oklch(0.184 0.058 25.02);
 
-  /* Enhanced fluid typography system */
-  :root {
-    /* Refined fluid typography with better viewport scaling */
+    --color-azure-50: oklch(0.949 0.01 267.41);
+    --color-azure-100: oklch(0.898 0.027 269.67);
+    --color-azure-200: oklch(0.785 0.07 268.43);
+    --color-azure-300: oklch(0.684 0.122 263.09);
+    --color-azure-400: oklch(0.581 0.151 258.27);
+    --color-azure-500: oklch(0.476 0.136 256.96);
+    --color-azure-600: oklch(0.368 0.12 254.57);
+    --color-azure-700: oklch(0.313 0.089 257.27);
+    --color-azure-800: oklch(0.251 0.066 258.7);
+    --color-azure-900: oklch(0.199 0.048 261.47);
+    --color-azure-950: oklch(0.151 0.03 261.87);
+
+    --color-tiber-50: oklch(0.958 0.002 247.73);
+    --color-tiber-100: oklch(0.906 0.009 264.56);
+    --color-tiber-200: oklch(0.809 0.03 264.4);
+    --color-tiber-300: oklch(0.715 0.064 261.4);
+    --color-tiber-400: oklch(0.621 0.086 257.3);
+    --color-tiber-500: oklch(0.526 0.086 256.51);
+    --color-tiber-600: oklch(0.441 0.082 255);
+    --color-tiber-700: oklch(0.344 0.071 253.66);
+    --color-tiber-800: oklch(0.248 0.059 251.37);
+    --color-tiber-900: oklch(0.188 0.039 252.4);
+    --color-tiber-950: oklch(0.148 0.027 255.17);
+
+    --color-dodger-blue-50: #eef9ff;
+    --color-dodger-blue-100: #d9f1ff;
+    --color-dodger-blue-200: #bce7ff;
+    --color-dodger-blue-300: #8edaff;
+    --color-dodger-blue-400: #59c3ff;
+    --color-dodger-blue-500: #33a6fd;
+    --color-dodger-blue-600: #1d89f3;
+    --color-dodger-blue-700: #1571df;
+    --color-dodger-blue-800: #185bb5;
+    --color-dodger-blue-900: #1a4e8e;
+    --color-dodger-blue-950: #153056;
+
+    /* Font families (`font-heading`, `font-body`) */
+    --font-heading: 'Jost', system-ui, -apple-system, sans-serif;
+    --font-body: 'Open Sans', system-ui, -apple-system, sans-serif;
+
+    /* Fluid type scale (`text-fluid-*`, also used by the `fluid-text-*` utilities) */
     --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); /* 12px → 14px */
     --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem); /* 14px → 16px */
     --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* 16px → 18px */
@@ -113,50 +94,53 @@
     --text-fluid-8xl: clamp(5.25rem, 4.5rem + 3.75vw, 7rem); /* 84px → 112px */
     --text-fluid-9xl: clamp(7rem, 6rem + 5vw, 9rem); /* 112px → 144px */
 
-    /* Fluid line heights for better typography */
-    --leading-fluid-tight: clamp(1.1, 1.05 + 0.25vw, 1.25);
-    --leading-fluid-snug: clamp(1.2, 1.15 + 0.25vw, 1.35);
-    --leading-fluid-normal: clamp(1.4, 1.35 + 0.25vw, 1.55);
-    --leading-fluid-relaxed: clamp(1.5, 1.45 + 0.25vw, 1.65);
-
-    /* Fluid spacing system */
-    --space-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
-    --space-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
-    --space-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
-    --space-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-    --space-fluid-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
-    --space-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
-  }
-
-
+    /* Enhanced responsive design tokens */
+    --breakpoint-xs: 360px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+    --breakpoint-3xl: 1920px;
 }
 
-@layer components {
-  .section-component-content-entry-list__list > li:nth-child(odd)::after {
-  content: "";
-  position: absolute;
-  right: -3rem;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  background-color: var(--color-gray-200);
-}}
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 
-.current-menu-item > a:not(.btn) {
-  /* add stars to the before and  */
-  position: relative;
-  &::before, &::after {
-    content: "★";
-    color: var(--color-azure-400);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  &::before {
-    left: 0;
-  }
-  &::after {
-    right: 0;
-  }
+    /* Font families */
+    :root {
+        font-family: var(--font-body);
+
+        /* Fluid line heights for better typography */
+        --leading-fluid-tight: clamp(1.1, 1.05 + 0.25vw, 1.25);
+        --leading-fluid-snug: clamp(1.2, 1.15 + 0.25vw, 1.35);
+        --leading-fluid-normal: clamp(1.4, 1.35 + 0.25vw, 1.55);
+        --leading-fluid-relaxed: clamp(1.5, 1.45 + 0.25vw, 1.65);
+
+        /* Fluid spacing system */
+        --space-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+        --space-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
+        --space-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+        --space-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+        --space-fluid-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+        --space-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+    }
 }

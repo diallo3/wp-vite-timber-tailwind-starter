@@ -1,0 +1,15 @@
+/* wp-admin styles. No preflight, and only lib/acf is scanned so frontend utilities can't collide with core admin classes. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "./modules/css/modules-acf.css" layer(utilities);
+
+@source "../lib/acf";
+
+@theme {
+    --color-wordpress-blue: #0d99d5;
+}
+
+body.wp-admin .acfe-flexible-layout-thumbnail {
+    background-color: #fff;
+    background-size: contain;
+}

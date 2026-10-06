@@ -63,7 +63,7 @@
     &:has(textarea:not(:placeholder-shown)) > label.gform-field-label,
     &:has(textarea:not(:placeholder-shown)) > label.gfield_label {
         @apply text-sm font-semibold text-tiber-600 bg-gray-50;
-        transform: translateY(-1.5rem) !important;   
+        transform: translateY(-1.5rem) !important;
     }
 }
 
@@ -78,7 +78,7 @@
     @apply pt-6;
   }
 
-  
+
 
   .gsection_title {
     @apply fluid-text-base font-semibold tracking-tight text-tiber-700;
@@ -167,7 +167,7 @@
      ------------------------------------------------------------------------- */
   .gform_wrapper .gform_footer input[type="submit"],
   .gform_wrapper .gform_footer button[type="submit"] {
-    @apply btn bg-azure-500 border-azure-500 text-white hover:border-azure-500 btn-lg rounded-full px-10 font-medium cursor-pointer;
+    @apply relative overflow-hidden isolate bg-azure-500 border border-azure-500 text-white rounded-full px-10 py-4 text-lg font-medium cursor-pointer;
   }
 
   .gform_wrapper .gform_footer {

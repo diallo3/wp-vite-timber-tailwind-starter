@@ -1,0 +1,26 @@
+{#
+    Call-to-action list for rows from a "Component CTA Group" (see `section_intro()` / `cta_group()`).
+
+    {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: 'py-6', size: 'large' } %}
+
+    `size` / `style` override the per-row values when set.
+#}
+{% import "@Elements/_macro-button.twig" as buttons %}
+
+{% if ctas is not empty %}
+    <div class="{{ class ?? '' }} section-ctas">
+        <ul class="flex flex-col gap-3 {{ list_class ?? 'lg:flex-row lg:items-end' }} entry-ctas">
+            {% for cta in ctas %}
+                <li class="entry-ctas__item">
+                    {{ buttons.render_button_link({
+                        text: cta.link.title,
+                        link: cta.link.url,
+                        target: cta.link.target,
+                        style: style ?? cta.style,
+                        size: size ?? cta.size,
+                    }) }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

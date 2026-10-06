@@ -12,35 +12,22 @@
         {% import "@Elements/_macro-button.twig" as buttons %}
 
         {% set image = component.image.url %}
-        {% set gallery = component.image_gallery %}
         {% set content_reverse = component.content_reverse %}
 
-        <div class="mx-auto section-component-content-with-image__container py-12">
-            <div class="flex flex-col gap-12 {{ content_reverse ? 'lg:flex-row' : 'lg:flex-row-reverse' }} lg:gap-0">
+        <div class="mx-auto section-component-content-with-image__container">
+            <div class="flex flex-col gap-12 {{ content_reverse ? 'lg:flex-row' : 'lg:flex-row-reverse' }} lg:items-center lg:gap-0">
 
-                {% if image or gallery %}
+                {% if image %}
                     {# featured Image #}
-                    <div class="relative flex-none group lg:w-1/2 stagger-inview-item {{ content_reverse ? 'lg:mr-16  xl:mr-16' : 'lg:ml-16  xl:ml-16' }}">
-
-                        {% if image %}
-                            <figure class="relative overflow-hidden rounded-sm section-component-content-with-image__figure hidden stagger-inview-item">
-                                {{ images.render_image({
-                                    src: image,
-                                    alt: title,
-                                    class: 'relative mx-auto section-component-content-with-image__src',
-                                }) }}
-                            </figure>
-                        {% endif %}
-
-                        {% if gallery %}    
-                            <div class=": grid grid-cols-2 gap-4 lg:grid-cols-2 xl:gap-8 lg:pt-16 stagger-inview-container">
-                                {% for img in gallery %}
-                                    <figure class="{{ loop.index is divisible by(2)  ? 'lg:-mt-24' : '' }} aspect-video lg:aspect-square overflow-hidden rounded-xl  -outline-offset-1 outline-black/10 stagger-inview-item">
-                                        <img src="{{ get_image(img).src | towebp }}" alt="" class="block size-full object-cover" />
-                                    </figure>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
+                    <div class="relative flex-none group lg:w-1/2 {{ content_reverse ? 'lg:mr-16  xl:mr-16' : 'lg:ml-16  xl:ml-16' }}">
+                    
+                        <figure class="relative overflow-hidden rounded-sm section-component-content-with-image__figure">
+                            {{ images.render_image({
+                                src: image,
+                                alt: title,
+                                class: 'relative mx-auto section-component-content-with-image__src',
+                            }) }}
+                        </figure>
                     </div>
                 {% endif %}
 
@@ -52,17 +39,15 @@
                     {% if has_entry and entry %}
                         <div class="section-component-content-with-image__entry">
                             {# Entry content #}
-                            {% embed "@Layouts/prose/_embed-prose-section.twig" with {
-                                class: 'prose-p:text-current text-pretty prose-p:text-base lg:prose-p:text-lg'
-                            } %}
+                            {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                                 {% block prose_content %}
-                                    {{ entry }}
+                                    {{ entry|raw }}
                                 {% endblock %}
                             {% endembed %}
                         </div>
                     {% endif %}
 
-                    {% include "@Components/content/section_content_with_image/partials/_partial-section-ctas.twig" %}
+                    {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: "py-6" } only %}
 
                 </div>
             </div>

@@ -1,72 +1,32 @@
 {% import "@Elements/menus/_macro-menus.twig" as menus %}
 {% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-logos.twig" as logos %}
 
-{# Transparent header when Section Header Complex is the first section; otherwise white #}
-{% set is_header_transparent = flexible_content is defined and flexible_content|length > 0 and flexible_content[0].component_name == 'section_header_complex' %}
-
-<header x-data="{ 
-        mobileNavOpen: false, 
-        scrolledFromTop: false,
-        logoScrolled: false,
-        scrolledFromTopThreshold: 50,
-        logoOpacityThreshold: 300,
-        isHeaderTransparent: {{ is_header_transparent ? 'true' : 'false' }}
-    }"
+<header x-data="{ mobileNavOpen: false,  scrolledFromTop: false  }" 
         id="site-header" 
-        x-init="scrolledFromTop = window.pageYOffset >= scrolledFromTopThreshold; logoScrolled = window.pageYOffset >= logoOpacityThreshold"
-        @scroll.window="scrolledFromTop = window.pageYOffset >= scrolledFromTopThreshold; logoScrolled = window.pageYOffset >= logoOpacityThreshold"
-        :class="{
-            'bg-white': !isHeaderTransparent,
-            'bg-transparent site-header--over-hero': isHeaderTransparent && !scrolledFromTop
-        }"
-        class="fixed inset-x-0 top-0 z-10 px-4 site-header lg:px-8 js-header transition-colors duration-300 in-[.admin-bar]:top-[32px]"
+         x-init="window.pageYOffset >= 10 ? scrolledFromTop = true : scrolledFromTop = false"
+        @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+        :class="{ 'border-b shadow-sm' : scrolledFromTop }"
+        class="fixed inset-x-0 top-0 z-10 px-4 bg-white site-header lg:px-8 js-header [.admin-bar_&]:top-[32px]"
 >
     <!-- Main Header Content -->
-    <div id="header-content" class="lg:container flex justify-between mx-auto xl:max-w-(--breakpoint-2xl) site-header__left">
+    <div id="header-content" class="container flex items-center justify-between mx-auto text-center xl:max-w-(--breakpoint-2xl) site-header__left">
         <!-- Left Section -->
         <div
-            :class="[
-                logoScrolled ? 'opacity-0' : 'opacity-100',
-            ]"
-            class="flex z-10 relative w-32 lg:min-w-40 transition-opacity duration-300 ease-in-out">
+            class="flex items-center">
             <!-- Logo -->
-            <a 
-                href="{{ site.url }}" 
-                :class="[
-                    isHeaderTransparent ? 'bg-transparent pl- pr-4' : 'bg-white px-8',
-                    'block rounded-b-sm  py-2 group absolute top-0 z-10 inset-x-0']">
-                    <div :class="[
-                        isHeaderTransparent ? 'hidden' : 'block',
-                        'absolute inset-x-0 bg-white bottom-0 h-4 xl:h-1 2xl:h-10 shadow']"></div>
-                <span 
-                    :class="
-                        isHeaderTransparent ? 
-                    '[&_.logo-letters]:fill-white text-white' : '[&_.logo-letters]:fill-tiber-900 text-tiber-900'"
-                    class="inline-flex w-full relative [&_.logo-accent]:fill-metallic-red-500 [&_.logo-accent]:transition-all [&_.logo-accent]:duration-300 group-hover:[&_.logo-accent]:fill-azure-500 hover:scale-105 transition-transform duration-300">
-                    {{ logos.render_miranda_logo() }}
-                </span>
-                <span class="sr-only">{{ site.title }}</span>
+            <a href="{{ site.url }}" class="site-header__logo block space-x-2 text-lg font-bold tracking-wide text-gray-900 group hover:text-gray-600">
+                <span class="inline-flex size-10">{{ site_logo|raw }}</span>
+                <span class="sr-only">{{ site.title|esc_html }}</span>
             </a>
             <!-- END Logo -->
-            
         </div>
         
 
-        {# center navigation — white text over hero, dark when solid or scrolled #}
-        <nav id="headerNavigation" 
-             class="site-header__center w-full lg:px-8 xl:px-16 transition-colors duration-300 hidden lg:block main-header__nav"
-             :class="isHeaderTransparent ? 'text-white' : 'text-gray-800'">
+        {# center navigation #}
+        <nav id="headerNavigation" class="site-header__center">
             {{ menus.render_mega_menu(menu.header_nav.get_items, {
                 level: 0,
-                classes: 'w-full',
-                link_classes: [
-                    is_header_transparent ? 'hover:[&>span]:text-tiber-300' : 'hover:[&>span]:text-metallic-red-600',
-                    'sm:text-base uppercase font-bold py-3 px-0.5 bg-transparent transition-colors duration-300 [&>span]:rounded-sm',
-                ],
-                child_link_classes: [
-                    'sm:text-sm uppercase font-bold py-3 px-0.5 bg-transparent transition-colors duration-300 [&>span]:rounded-sm hover:bg-gray-200 uppercase',
-                ],
+                classes: 'test-class',
                 })
             }}
         </nav>
@@ -74,28 +34,17 @@
         {# right actions #}
         <div id="headerActions" class="flex items-center justify-between space-x-4 header-actions site-header__right">
 
-            <nav id="headerActions" class="hidden site-header__ctas lg:flex">
-                {{ menus.render_buttons_menu(menu.header_buttons.get_items, {
-                    over_hero: is_header_transparent,
-                    style: 'secondary',
-                    type: 'solid',
-                    rest_style: 'white',
-                    rest_type: 'outline white',
-                }) }}
+            <nav id="headerButtons" class="hidden site-header__ctas lg:flex">
+                {{ menus.render_buttons_menu(menu.header_buttons.get_items) }}
             </nav> 
 
             <!-- Open Mobile Navigation lg:hidden  -->
             <div class="header-actions__mobile-menu mobile-menu lg:hidden">
-                <button 
-                        x-on:click="mobileNavOpen = true" 
-                    type="button" 
-                    :class="isHeaderTransparent ? 'text-white' : 'text-gray-800'"
-                    class="inline-flex items-center justify-center px-2 py-2 text-sm font-semibold leading-5  rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none mobile-menu__toggle size-12" 
-                    aria-controls="tkMobileNav">
+                <button x-on:click="mobileNavOpen = true" type="button" class="inline-flex items-center justify-center px-2 py-2 space-x-2 text-sm font-semibold leading-5 text-gray-800 bg-white border border-gray-200 rounded-sm hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40 dark:active:border-gray-700" aria-controls="site-header__mobile-nav" :aria-expanded="mobileNavOpen.toString()">
                     {{ icons.icon({
                         path: 'controls',
-                        name: 'bars-3-bottom-right',
-                        classes: 'size-full',
+                        name: 'bars-3',
+                        classes: 'w-6 h-6',
                     }) }}
                     <span class="sr-only">Menu</span>
                 </button>

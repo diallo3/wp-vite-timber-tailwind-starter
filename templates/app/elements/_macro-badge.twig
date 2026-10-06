@@ -1,21 +1,12 @@
-
 {% macro render_accent_badge(options={}) %}
-    {% import "@Elements/_macro-icon.twig" as icons %}
+
     {% set options = {
         title: options.title | default('Badge'),
-        color: options.color | default('blue'),
     } | merge(options)  %}
 
     {# accent bagdge #}
-    <span class="inline-flex items-center text-sm lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] uppercase {{ options.color }}">
-        <span class="inline-block size-6 mr-2 badge-icon ">
-            {{ icons.icon({
-                path: 'defaults',
-                name: 'ballot-box',
-                classes: 'size-full me-2',
-            }) }}
-        </span>
-        {{ options.title }}
+    <span class="block text-base lg:text-sm font-semibold tracking-widest lg:tracking-[0.25rem] text-dodger-blue-600 uppercase">
+        {{ options.title|esc_html }}
     </span>
 {% endmacro %}
 
@@ -27,9 +18,17 @@
         size: options.size | default('text-sm'),
     } | merge(options)  %}
 
+    {# Full class names so Tailwind can detect them #}
+    {% set color_classes = {
+        'dodger-blue': 'bg-dodger-blue-950 text-dodger-blue-600',
+        'gray': 'bg-gray-950 text-gray-400',
+        'green': 'bg-green-950 text-green-500',
+        'red': 'bg-red-950 text-red-500',
+    }[options.color] ?? 'bg-dodger-blue-950 text-dodger-blue-600' %}
+
     {# contained bagdge #}
-    <span class="{{ options.size }} inline-flex items-center px-2.5 py-0.5 rounded-full  font-medium bg-{{ options.color }}-950 text-{{ options.color }}-600 capitalize">
-        {{ options.title }}
+    <span class="{{ options.size }} inline-flex items-center px-2.5 py-0.5 rounded-full  font-medium {{ color_classes }} capitalize">
+        {{ options.title|esc_html }}
     </span>
     
 {% endmacro %}

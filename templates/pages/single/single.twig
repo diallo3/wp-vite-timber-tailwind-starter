@@ -1,39 +1,32 @@
 {% extends "@Layouts/layout-base.twig" %}
 
 {% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
-			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
-			<section class="article-content">
-				<h1 class="article-h1">{{ post.title }}</h1>
-				<a href="{{ post.link }}">{{ _e('edit') }}</a>
-				<p class="blog-author">
-					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
+	{% if flexible_content %}
+		{% include "@Layouts/flexible-content.twig" with { flexible_content: flexible_content } %}
+	{% else %}
+		<article class="px-8 py-16 mx-auto max-w-(--breakpoint-md) post-type-{{ post.post_type }}" id="post-{{ post.id }}">
+			<header class="space-y-4">
+				<h1 class="font-bold fluid-text-4xl text-pretty">{{ post.title|esc_html }}</h1>
+				<p class="text-sm text-gray-600">
+					<span>By</span> <a class="underline" href="{{ post.author.link }}">{{ post.author.name|esc_html }}</a>
+					<span aria-hidden="true">&bull;</span>
+					<time datetime="{{ post.date('c') }}">{{ post.date }}</time>
+					{% if post.can_edit %}
+						<span aria-hidden="true">&bull;</span>
+						<a class="underline" href="{{ post.edit_link }}">{{ __('Edit') }}</a>
+					{% endif %}
 				</p>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
+			</header>
 
-			<!-- comment box -->
-			<section class="comment-box">
-				<!-- comments -->
-				<div class="comments">
-				    {% if post.comments %}
-					<h3> comments </h3>
-					{% for cmt in post.comments %}
-					    {% include "comment.twig" with {comment:cmt} %}
-					{% endfor %}
-				    {% endif %}
-				</div>
+			{% if post.thumbnail %}
+				<figure class="my-8 overflow-hidden rounded-lg">
+					<img src="{{ post.thumbnail.src|resize(1200, 600) }}" alt="{{ post.thumbnail.alt }}" width="1200" height="600">
+				</figure>
+			{% endif %}
 
-				{% if post.comment_status == "closed" %}
-					<p> comments for this post are closed </p>
-				{% else %}
-				    <!-- comment form -->
-				    {% include "comment-form.twig" %}
-				{% endif %}
-			</section>
+			<div class="prose max-w-none">
+				{{ post.content|raw }}
+			</div>
 		</article>
-	</div><!-- /content-wrapper -->
+	{% endif %}
 {% endblock %}

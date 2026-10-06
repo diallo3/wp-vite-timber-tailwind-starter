@@ -38,13 +38,13 @@
 
 	{% set attributes = '' %}
 	{% for key, value in options.attributes %}
-		{% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value ~ '"' %}
+		{% set attributes = attributes ~ ' ' ~ key ~ '="' ~ value|e('html_attr') ~ '"' %}
 	{% endfor %}
 
 	{% if options.preview %}
-		<div class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title }}</div>
+		<div class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title|esc_html }}</div>
 	{% else %}
-		<h{{level}} class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title }}</h{{level}}>
+		<h{{level}} class="{{ headingOptions }} tracking-tighter" {% if options.id %} id="{{ options.id }}" {% endif %} {{ attributes|raw }}>{{ options.title|esc_html }}</h{{level}}>
 	{% endif %}
 {% endmacro %}
 

@@ -1,5 +1,5 @@
 <div class="space-y-6 inview-item section-component-content-entry-list__entry inview-container">
-                
+
                 {# title #}
                 <div class="space-y-4 section-component-content-entry-list__title lg:pt-10 inview-item">
                     {% if has_accent and accent %}
@@ -25,7 +25,7 @@
 
                  <div class="section-component-content-entry-list__content flex justify-between inview-item">
                     <div class="max-w-3xl">
-                
+
                     {# Entry content #}
                     {% embed "@Layouts/prose/_embed-prose-section.twig" with {
                         class: 'prose-p:text-base lg:prose-p:text-xl prose-p:leading-8 lg:prose-p:leading-10 max-w-none inview-item'
@@ -37,13 +37,13 @@
                 </div>
 
                 {% if has_ctas and ctas %}
-                    
+
                     <ul class="flex items-end gap-4 stagger-inview-container">
-                        
+
                         {% for cta in ctas %}
                             <script>console.log({{ cta.cta[0] | json_encode | raw }})</script>
                             {% set cta = cta.cta[0] %}
-                            <li class="section-component-content-entry-list__cta-item stagger-inview-item"> 
+                            <li class="section-component-content-entry-list__cta-item stagger-inview-item">
                                 {{ buttons.render_button_link({
                                     text: cta.link.title,
                                     link: cta.link.url,
@@ -55,8 +55,8 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
-                    
+
                  </div>
 
-                
+
             </div>

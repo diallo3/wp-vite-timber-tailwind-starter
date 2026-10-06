@@ -1,86 +1,101 @@
 import { animate, inView, stagger } from "motion";
 
+const EASE = [0.17, 0.55, 0.55, 1];
+
 /**
- * Add a class to indicate Motion One is loaded
- * This allows CSS to respond when animations are available
+ * Add a class to indicate Motion is loaded
+ * This allows CSS to hide `.inview-item` / `.stagger-inview-item` until they animate in
  */
 export const initMotionLoaded = () => {
-    try {
-        // If document is not ready, wait for it
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                document.documentElement.classList.add('motion-loaded');
-            });
-        } else {
-            // Document is already ready
-            document.documentElement.classList.add('motion-loaded');
-        }
-    } catch (error) {
-        console.warn('Failed to initialize motion loaded class:', error);
-    }
+    document.documentElement.classList.add('motion-loaded');
 };
-  
-// Initialize when module loads (Motion One is loaded if import succeeds)
+
+// Initialize when module loads (Motion is loaded if import succeeds)
 initMotionLoaded();
 
 /**
  * Animate navigation header elements on page load
- * Targets: .site-header__logo, .menu-header-nav li, .site-header__cta
+ * Targets: .site-header__logo, top-level items in .site-header__center, items in .site-header__ctas
  */
 export const navHeader = () => {
-  const navHeader = document.querySelector(".site-header__logo");
-  const navItems = document.querySelectorAll(".menu-header-nav li");
-  const navSections = document.querySelectorAll(".site-header__cta");
+  const navLogo = document.querySelector(".site-header__logo");
+  const navItems = document.querySelectorAll(".site-header__center menu > li");
+  const navCtas = document.querySelectorAll(".site-header__ctas li");
 
-  // Only animate if at least one element exists
-  if (!navHeader && !navItems.length && !navSections.length) return;
+  if (!navLogo && !navItems.length && !navCtas.length) return;
 
   try {
-    const animations = [];
-
-    // Logo animation
-    if (navHeader) {
-      animations.push(
-        animate(navHeader,
-          { opacity: [0, 1], y: ["1rem", "0"] },
-          { duration: 0.5, delay: 0 }
-        )
+    if (navLogo) {
+      animate(navLogo,
+        { opacity: [0, 1], y: ["1rem", "0"] },
+        { duration: 0.5 }
       );
     }
 
-    // Navigation items with staggered animation
     if (navItems.length) {
-      navItems.forEach((item, index) => {
-        animations.push(
-          animate(item,
-            { opacity: [0, 1], y: ["-0.85rem", "0"] },
-            { duration: 0.5, delay: index * 0.1 + 0.1 }
-          )
-        );
-      });
+      animate(navItems,
+        { opacity: [0, 1], y: ["-0.85rem", "0"] },
+        { duration: 0.5, delay: stagger(0.1, { startDelay: 0.1 }) }
+      );
     }
 
-    // CTA sections with staggered animation
-    if (navSections.length) {
-      navSections.forEach((section, index) => {
-        animations.push(
-          animate(section,
-            { opacity: [0, 1] },
-            { duration: 0.5, delay: index * 0.1 + 0.2 }
-          )
-        );
-      });
+    if (navCtas.length) {
+      animate(navCtas,
+        { opacity: [0, 1] },
+        { duration: 0.5, delay: stagger(0.1, { startDelay: 0.2 }) }
+      );
     }
-
   } catch (error) {
     console.warn('Navigation animation failed:', error);
   }
 };
 
 /**
- * inview animations use native CSS scroll-driven animations (animation-timeline: view())
- * in module-scroll-animations.css - no JS needed
+ * Animate sections when they come into view
+ * Targets: .inview-container elements and their .inview-item children
  */
+export const generalInView = () => {
+    const items = document.querySelectorAll(".inview-container .inview-item");
+
+    if (!items.length) return;
+
+    inView(items, (element) => {
+        animate(
+            element,
+            { opacity: [0, 1], y: ["1.5rem", "0"] },
+            { duration: 0.6, ease: EASE }
+        );
+    }, {
+        amount: 0.3,
+        margin: "-100px"
+    });
+}
+
+export const staggerInView = () => {
+    const containers = document.querySelectorAll(".stagger-inview-container");
+
+    if (!containers.length) return;
+
+    inView(containers, (element) => {
+        const items = element.querySelectorAll(".stagger-inview-item");
+
+        animate(
+            items,
+            { opacity: [0, 1], y: ["0.5rem", "0"] },
+            { duration: 0.85, ease: EASE, delay: stagger(0.2) }
+        );
+
+        return () => animate(
+            items,
+            { opacity: 0, y: "-0.5rem" },
+            { duration: 0.3 }
+        );
+    }, {
+        amount: 0.3,
+        margin: "-50px"
+    });
+};
+
 
 /**
  * Animate elements on scroll with more control
@@ -91,27 +106,22 @@ export const scrollAnimations = () => {
 
   if (!scrollElements.length) return;
 
+  const animations = {
+    fadeUp: { opacity: [0, 1], y: ["2rem", "0"] },
+    fadeDown: { opacity: [0, 1], y: ["-2rem", "0"] },
+    fadeLeft: { opacity: [0, 1], x: ["2rem", "0"] },
+    fadeRight: { opacity: [0, 1], x: ["-2rem", "0"] },
+    scale: { opacity: [0, 1], scale: [0.8, 1] },
+    slideUp: { y: ["100%", "0"] },
+    slideDown: { y: ["-100%", "0"] }
+  };
+
   try {
     scrollElements.forEach((element) => {
-      const animationType = element.dataset.scrollAnimate || "fadeUp";
-
-      const animations = {
-        fadeUp: { opacity: [0, 1], y: ["2rem", "0"] },
-        fadeDown: { opacity: [0, 1], y: ["-2rem", "0"] },
-        fadeLeft: { opacity: [0, 1], x: ["2rem", "0"] },
-        fadeRight: { opacity: [0, 1], x: ["-2rem", "0"] },
-        scale: { opacity: [0, 1], scale: [0.8, 1] },
-        slideUp: { y: ["100%", "0"] },
-        slideDown: { y: ["-100%", "0"] }
-      };
-
-      const animationProps = animations[animationType] || animations.fadeUp;
+      const animationProps = animations[element.dataset.scrollAnimate] || animations.fadeUp;
 
       inView(element, () => {
-        animate(element, animationProps, {
-          duration: 0.8,
-          easing: [0.17, 0.55, 0.55, 1]
-        });
+        animate(element, animationProps, { duration: 0.8, ease: EASE });
       }, { amount: 0.3 });
     });
   } catch (error) {

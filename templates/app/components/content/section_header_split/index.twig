@@ -10,7 +10,7 @@
         {% import "@Elements/_macro-badge.twig" as badges %}
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
-        
+
         {% set accent = component.accent %}
         {% set title = component.title %}
         {% set subtitle = component.sub_title %}
@@ -31,7 +31,7 @@
 
                     {% if has_title and title %}
                         <div class="flex flex-col lg:flex-row justify-between gap-4">
-                            <hgroup 
+                            <hgroup
                                 class="tracking-tighter section-component-header-simple__headings text-balance max-w-3xl inview-item">
                                 {{ headings.render_heading(2,{
                                     title: title,
@@ -77,8 +77,8 @@
                 </div>
                 </div>
                 <div class="relative lg:-mr-8 xl:mr-0 col-span-1 xl:col-span-5 flex flex-col justify-end inview-container pb-16 xl:pb-0">
-                    <section 
-                        class="aspect-square xl:aspect-auto xl:size-full bg-gray-800 xl:xl:absolute inset-0 rounded-lg xl:rounded-t-none overflow-hidden bg-cover bg-center transition-opacity duration-1000 ease-in-out inview-item" 
+                    <section
+                        class="aspect-square xl:aspect-auto xl:size-full bg-gray-800 xl:xl:absolute inset-0 rounded-lg xl:rounded-t-none overflow-hidden bg-cover bg-center transition-opacity duration-1000 ease-in-out inview-item"
                         style="background-image: url('{{ get_image(image).src | towebp }}')">
                         {% if subtitle %}
                             <div class="flex h-full flex-col gap-4 justify-end relative z-10 text-white px-6 py-24 bg-linear-to-t from-black/70 to-transparent">
@@ -89,12 +89,12 @@
                             {% endif %}
                     </section>
 
-                    
+
                 </div>
             </div>
         </div>
-        
-        
+
+
     {% endblock %}
 
 {% endembed %}

@@ -47,7 +47,7 @@
     }
 
     &.btn-tertiary {
-        &::before { 
+        &::before {
             @apply bg-azure-500;
         }
         &:hover {
@@ -77,7 +77,7 @@
     }
 
     &.btn-ghost {
-        
+
         &::before {
             @apply bg-transparent;
         }

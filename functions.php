@@ -35,7 +35,7 @@ Timber::init();
 /**
  * Sets the directories (inside your theme) to find .twig files
  */
-Timber::$dirname = ['templates', 'views'];
+Timber::$dirname = ['templates'];
 
 new StarterTimber();
 

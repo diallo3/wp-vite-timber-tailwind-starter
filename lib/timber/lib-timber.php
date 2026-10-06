@@ -7,36 +7,17 @@ class StarterTimber extends Site {
 		add_action('after_setup_theme', array($this, 'theme_supports'));
 		add_filter('timber/context', array($this, 'add_to_context'));
 		add_filter('timber/twig', array($this, 'add_to_twig'));
-		add_action('init', array($this, 'register_post_types'));
-		add_action('init', array($this, 'register_taxonomies'));
-		add_action('wp_enqueue_scripts', array($this, 'enqueue_google_fonts'));
+		add_action('wp_enqueue_scripts', array($this, 'dequeue_block_styles'), 100);
 		parent::__construct();
 	}
-	/** This is where you can register custom post types. */
-	public function register_post_types() {
-	}
-	/** This is where you can register custom taxonomies. */
-	public function register_taxonomies() {
-	}
 
-	/** Enqueue Google Fonts */
-	public function enqueue_google_fonts() {
-		wp_enqueue_style(
-			'google-fonts',
-			'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap',
-			array(),
-			null
-		);
-	}
+	// Post types and taxonomies are registered in ACF (acf-json/post_type_*.json).
 
 	/** This is where you add some context
 	 *
 	 * @param string $context context['this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context($context) {
-		$context['foo']   = 'bar';
-		$context['stuff'] = 'I am a value set in your functions.php file';
-		$context['notes'] = 'These values are available everytime you call Timber::context();';
 		$context['site_logo'] = site_logo();
 		$context['privacy_policy_url'] = get_privacy_policy_url();
 
@@ -60,7 +41,8 @@ class StarterTimber extends Site {
 
 		$context['menu'] = $menu;
 		$context['site']  = $this;
-        $context['options'] = get_fields('option');
+        // Not `options` or `theme_options`: the section helpers use those names.
+        $context['site_options'] = get_fields('option');
 		return $context;
 	}
 
@@ -98,25 +80,6 @@ class StarterTimber extends Site {
 		);
 
 		/*
-		 * Enable support for Post Formats.
-		 *
-		 * See: https://codex.wordpress.org/Post_Formats
-		 */
-		add_theme_support(
-			'post-formats',
-			array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'audio',
-			)
-		);
-
-
-		/*
 		 * Enable support for Custom Logo
 		 *
 		 * See: https://developer.wordpress.org/themes/functionality/custom-logo/
@@ -132,36 +95,30 @@ class StarterTimber extends Site {
 		add_theme_support('menus');
 		register_nav_menus(
 			[
-				'header_nav' => esc_html__('Header Nav', 'StarterTimber'),
-				'header_buttons' => esc_html__('Header Buttons', 'StarterTimber'),
-				'footer_nav' => esc_html__('Footer Nav', 'StarterTimber'),
-				'footer_social' => esc_html__('Social Links', 'StarterTimber')
+				'header_nav' => esc_html__('Header Nav', 'wp-theme-timber-vite-acf'),
+				'header_buttons' => esc_html__('Header Buttons', 'wp-theme-timber-vite-acf'),
+				'footer_nav' => esc_html__('Footer Nav', 'wp-theme-timber-vite-acf'),
+				'footer_social' => esc_html__('Social Links', 'wp-theme-timber-vite-acf'),
+				'footer_utility' => esc_html__('Footer Utility', 'wp-theme-timber-vite-acf'),
 			]
 		);
 
-		add_theme_support('wp-block-styles');
-		add_theme_support('align-wide');
-		add_theme_support('align-center');
-		add_theme_support('align-full');
 		add_theme_support('responsive-embeds');
 	}
 
-	/** This Would return 'foo bar!'.
-	 *
-	 * @param string $text being 'foo', then returned 'foo bar!'.
-	 */
-	public function myfoo($text) {
-		$text .= ' bar!';
-		return $text;
+	/** Classic Editor site: drop the block-editor CSS WordPress enqueues on the frontend. */
+	public function dequeue_block_styles() {
+		wp_dequeue_style('wp-block-library');
+		wp_dequeue_style('wp-block-library-theme');
+		wp_dequeue_style('classic-theme-styles');
+		wp_dequeue_style('global-styles');
 	}
 
 	/** This is where you can add your own functions to twig.
 	 *
-	 * @param string $twig get extension.
+	 * @param \Twig\Environment $twig
 	 */
 	public function add_to_twig($twig) {
-		// StringLoaderExtension was removed in Twig 3.0 - not needed if not using template_from_string()
-		$twig->addFilter(new Twig\TwigFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
 	}
 }

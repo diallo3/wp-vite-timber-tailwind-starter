@@ -1,44 +1,4 @@
-{#
-  SECTION WRAPPER - Component Helper
-
-  Purpose: Provides a consistent section wrapper for ACF flexible content components
-           with theme options, background images, and preview mode support
-
-  Usage:
-    {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-      component: component,
-      section_class_name: 'my-component',
-      section_id_name: 'component-id',
-      is_preview: is_preview
-    } %}
-      {% block component_content %}
-        <!-- Your component markup here -->
-      {% endblock %}
-    {% endembed %}
-
-  Required Variables:
-    - component (ACF component data)
-    - section_class_name (CSS class for the section)
-    - section_id_name (ID prefix for the section)
-    - is_preview (boolean - true when in ACF preview mode)
-
-  Optional Content Checks:
-    - component.sections.accent
-    - component.sections.title
-    - component.sections.entry
-    - component.sections.ctas
-
-  Background Image:
-    - component.image_type (boolean - enable background image)
-    - component.image (ACF image object)
-
-  Theme Options:
-    - component.options[0].section.theme (default|light|dark)
-#}
-
-{# ============================================
-   MACRO IMPORTS
-   ============================================ #}
+{# Section Call to Action #}
 {% import "@Elements/_macro-icon.twig" as icons %}
 {% import "@Elements/_macro-heading.twig" as headings %}
 {% import "@Elements/_macro-badge.twig" as badges %}
@@ -46,97 +6,57 @@
 {% import "@Elements/_macro-image-background.twig" as backgrounds %}
 {% import "@Elements/_macro-button.twig" as buttons %}
 
-{# ============================================
-   DATA EXTRACTION
-   ============================================ #}
 {% set component = component.content[0] %}
-{% set position = position ?? 0 %}
 
-{# ============================================
-   CONTENT AVAILABILITY CHECKS
-   ============================================ #}
-{% set sections = component.sections %}
-{% set has_accent = sections.accent %}
-{% set has_title = sections.title %}
-{% set has_entry = sections.entry %}
-{% set has_ctas = sections.ctas %}
+{# intro: values are null when toggled off or empty #}
+{% set intro = section_intro(component) %}
+{% set accent = intro.accent %}
+{% set title = intro.title %}
+{% set sub_title = intro.sub_title %}
+{% set entry = intro.entry %}
+{% set ctas = intro.ctas %}
+{% set has_accent = accent is not empty %}
+{% set has_title = title is not empty %}
+{% set has_sub_title = sub_title is not empty %}
+{% set has_entry = entry is not empty %}
+{% set has_ctas = ctas is not empty %}
 
-{# ============================================
-   CONTENT FIELDS
-   ============================================ #}
-{% set accent = component.accent %}
-{% set title = component.title %}
-{% set entry = component.entry %}
-{% set ctas = component.call_to_actions %}
-
-{# ============================================
-   BACKGROUND IMAGE CONFIGURATION
-   ============================================ #}
+{# background image #}
 {% set if_image_type = component.image_type %}
-{% set background_image = component.background_image %}
+{% set background_image = component.image %}
 
-{# ============================================
-   THEME CONFIGURATION
-   ============================================ #}
 {% set options = component.options[0] %}
 {% set section = options.section %}
-{% set section_theme = section.theme ?? 'default' %}
+{% set theme = section.theme %}
 
-{# Theme classes differ between preview and frontend #}
-{% set section_theme_options = is_preview
-    ? {
-        'default': 'default bg-white',
-        'light': 'bg-gray-200 light',
-        'dark': 'bg-tiber-900 dark'
-      }[section_theme] | default('bg-transparent')
-    : {
-        'default': '',
-        'light': 'light',
-        'dark': 'dark'
-      }[section_theme] | default('bg-transparent')
+{# Define theme options based on preview mode or frontend #}
+{% set theme_options = is_preview
+    ? { 'default': 'bg-gray-100', 'light': 'bg-gray-200', 'dark': 'bg-blue-950 dark' }[theme] | default('bg-gray-100')
+    : { 'default': '', 'light': '', 'dark': '' }[theme] | default('') 
 %}
 
-{# ============================================
-   CLASS COMPOSITION
-   ============================================ #}
+{# Define and merge section classes #}
 {% set section_classes = [
     section_class_name,
-    section_theme_options,
-    position == 1 ? '' : 'relative',
+    theme_options,
+    'relative',
 ] %}
 
-{# Add padding for preview mode #}
+{# Add padding classes if in preview mode #}
 {% if is_preview %}
     {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
 {% endif %}
 
-{# ============================================
-   MARKUP
-   ============================================ #}
-
-{# Build section attributes based on background image #}
 {% if if_image_type and background_image %}
-    {% set section_id = section_id_name ~ '-' ~ loop.index %}
-    {% set section_bg_classes = 'dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40' %}
-    {% set section_bg_attrs = backgrounds.render_background_image(background_image) %}
+    <section id="{{ section_id_name ~ '-' ~ index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image)}}>
 {% else %}
-    {% set section_id = section_id_name ~ '-' ~ loop.index %}
-    {% set section_bg_classes = '' %}
-    {% set section_bg_attrs = '' %}
+    <section id="{{ section_id_name }}-{{ index }}" class="{{ section_classes|join(' ') }}">
 {% endif %}
-
-
-
-<section
-    id="{{ section_id }}"
-    class="{{ section_classes|join(' ') }} {{ section_bg_classes }}"
-    {{ section_bg_attrs }}>
-    <div class="container mx-auto max-w-(--breakpoint-2xl)">
-        {# Component Content Block #}
+    <div class="container mx-auto max-w-(--breakpoint-2xl)"> 
+        {# content #}
         {% block component_content %}{% endblock %}
 
-        {# Component Styles Block #}
+        {# styles #}
         {% block component_styles %}{% endblock %}
     </div>
-
 </section>

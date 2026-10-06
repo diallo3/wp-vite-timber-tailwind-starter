@@ -13,7 +13,6 @@
         {% set logo = component.logo %}
         {% set details = component.details %}
         {% set entry = component.entry %}
-
         <div class="pt-12 pb-8 sm:pb-16 lg:pb-32">
                 <div class="flex flex-col gap-8 lg:flex-row">
                     <div class="px-2 py-4 border-r lg:w-96">
@@ -41,8 +40,10 @@
                     </div>
                     <div class="lg:w-full">
                         <div class="prose sm:prose-lg lg:prose-xl first:prose-p:fluid-text-base">
-                            {{ entry }}
+                            {{ entry|raw }}
                         </div>
+
+                        {% include "@Elements/_partial-ctas.twig" with { ctas: cta_group(component.ctas), class: 'pt-8' } only %}
                     </div>
                 </div>
             </div>

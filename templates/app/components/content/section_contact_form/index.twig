@@ -1,7 +1,7 @@
 {# Section CContact Form #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: block.component_name|replace({'_': '-'}),
-    section_class_name: block.component_name|replace({'_': '-'}) ~ '-component',
+    section_id_name: 'section-component-call_to_action',
+    section_class_name: 'section-component-call_to_action',
 } %}
 
     {% block component_content %}
@@ -11,57 +11,71 @@
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
 
-        {# <script>console.log({{ component | json_encode | raw }})</script> #}
-
-        {% set title = component.title %}
-        {% set entry = component.entry %}
-
         {% set form_type = component.form_type %}
-
-        {# form attributes #}
         {% set form_title = component.form_title %}
-
-        {% set has_shortcode = form_type is same as "shortcode" %}
-        {% set has_acf_form = form_type is same as "frontend_form" %}
-        {% set has_hubspot = form_type is same as "hubspot" %}
-        {% set has_other = form_type is same as "other" %}
-
-        {# forms output #}
         {% set form_shortcode = component.shortcode %}
-        {% set form_acf_form = component.acf_form %}
-        {% set form_hubspot = component.hubspot %}
-        {% set form_other = component.other %}
+        {% set hubspot = component.hubspot %}
+        {% set has_shortcode = form_type == 'shortcode' and form_shortcode %}
+        {% set has_hubspot = form_type == 'hubspot' and hubspot.portal_id and hubspot.form_id %}
 
+        <div class="py-8 mx-auto space-y-6 max-w-7xl lg:mx-0">
+            <div class="relative overflow-hidden bg-blue-900 border rounded-lg isolate dark">
+                <div class="grid grid-cols-1 mx-auto max-w-7xl lg:grid-cols-2">
+                    <div class="relative px-6 pt-4 pb-6 sm:pt-8 lg:static lg:px-8 lg:py-16">
+                        <div class="max-w-2xl mx-auto space-y-4 lg:max-w-md text-gray-50 dark">
+                            
+                            {# contact info #}
+                            {{ headings.render_heading(3,{
+                                title: title,
+                                size: 'fluid-text-2xl lg:fluid-text-4xl',
+                                weight: 'font-bold',
+                                color: 'text-white',
+                                preview: is_preview
+                            }) }}
 
-        <div id="section-contact-form" class="py-8 mx-auto space-y-6 max-w-6xl">
-            <div class="relative overflow-hidden border rounded-lg isolate dark bg-gray-50">
-                <div class="grid grid-cols-1 mx-auto">
+                            <div class="prose-sm prose text-gray-100 prose-p:text-gray-50 first:prose-p:text-lg prose-headings:text-cyan-400 prose-headings:my-2 text-pretty marker:text-gray-100">
+                                {{ entry|raw }}
+                            </div>
 
-                    <div class="px-6 py-16 lg:px-8 xl:px-12">
+                            {% if component.show_company_info %}
+                                {% include "@Content/section_contact_form/partials/_partial-contact-into-general.twig" %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="px-6 py-16 bg-white lg:px-8 xl:px-12">
                         {# form #}
                         <div class="space-y-4 form-container">
                             {{ headings.render_heading(3,{
                                 title: form_title,
-                                size: 'fluid-text-2xl',
+                                size: 'fluid-text-sm/snug',
                                 color: 'text-gray-600',
                                 preview: is_preview
                             }) }}
                             
                             {% if has_shortcode %}
-                                {# filter shortcode #}
-                                {% apply shortcodes %}
-                                   {{ form_shortcode }}
-                                {% endapply %}
-                            {% elseif has_acf_form %}
-                                {{ form_acf_form }}
+                                {{ ('[' ~ form_shortcode ~ ']')|shortcodes|raw }}
+                            {% elseif has_hubspot and is_preview %}
+                                <p class="p-4 text-sm text-gray-500 border border-dashed rounded-md">HubSpot form {{ hubspot.form_id }} (shown on the site)</p>
                             {% elseif has_hubspot %}
-                                {{ form_hubspot }}
-                            {% elseif has_other %}
-                                <section class="">
-                                    {{ form_other.form_code }}
-
-                                    {{ form_other.form_script }}
-                                </section>
+                                {% set target = 'hubspot-form-' ~ index %}
+                                <div id="{{ target }}"></div>
+                                <script>
+                                    (function () {
+                                        var create = function () {
+                                            window.hbspt.forms.create({{ {
+                                                region: hubspot.region ?: 'na1',
+                                                portalId: hubspot.portal_id,
+                                                formId: hubspot.form_id,
+                                                target: '#' ~ target,
+                                            }|merge(hubspot.hubspot_message ? { inlineMessage: hubspot.hubspot_message } : {})|json_encode|raw }});
+                                        };
+                                        if (window.hbspt) return create();
+                                        var script = document.createElement('script');
+                                        script.src = 'https://js.hsforms.net/forms/embed/v2.js';
+                                        script.onload = create;
+                                        document.head.appendChild(script);
+                                    })();
+                                </script>
                             {% endif %}
                         </div>
                     </div>

@@ -1,9 +1,5 @@
 <?php
 
-if (is_admin()) {
-    die('ADMIN CONTEXT FROM INDEX.PHP');
-}
-
 /**
  * The main template file
  * This is the most generic template file in a WordPress theme
@@ -22,9 +18,12 @@ use Timber\Timber;
 
 $context          = Timber::context();
 $context['posts'] = Timber::get_posts();
-$context['foo']   = 'bar';
-$templates        = ['pages/index/index.twig'];
-if (is_home()) {
-	// array_unshift($templates, 'pages/front-page/front-page.twig', 'pages/home/home.twig', 'pages/page/page.twig');
+
+// Blog page: header/related components from its "Post Archive Options".
+$posts_page = (int) get_option('page_for_posts');
+if (is_home() && $posts_page) {
+	$context['title'] = get_the_title($posts_page);
+	$context['archive_fields'] = function_exists('get_fields') ? get_fields($posts_page) : [];
 }
+$templates        = ['pages/index/index.twig'];
 Timber::render($templates, $context);

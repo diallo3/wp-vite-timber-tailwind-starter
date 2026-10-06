@@ -1,47 +1,82 @@
-import ViteRestart from "vite-plugin-restart";
+import fs from "node:fs";
+import path from "node:path";
 import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 import mkcert from "vite-plugin-mkcert";
+import ViteRestart from "vite-plugin-restart";
 import "dotenv/config";
 
-export default defineConfig(({ command }) => {
+const {
+  VITE_OUTPUT_DIR = "dist",
+  VITE_ENTRY_POINT = "src/main.js",
+  VITE_PROTOCOL = "https",
+  VITE_HOST = "localhost",
+  VITE_PORT = "3000",
+} = process.env;
+
+const devServerUrl = `${VITE_PROTOCOL}://${VITE_HOST}:${VITE_PORT}`;
+
+/**
+ * Writes the dev server URL to `.vite-hot` while `vite` is running.
+ * lib/functions/lib-vite.php checks for this file instead of probing the server.
+ */
+function hotFile() {
+  const file = path.resolve(".vite-hot");
+  const remove = () => fs.rmSync(file, { force: true });
+
   return {
-    base: command === "serve" ? "/" : `/${process.env.VITE_OUTPUT_DIR}/`,
-    build: {
-      manifest: true,
-      outDir: process.env.VITE_OUTPUT_DIR,
-      rollupOptions: {
-        input: {
-          app: process.env.VITE_ENTRY_POINT,
-        },
-      },
-    },
-    plugins: [
-      mkcert(),
-      ViteRestart({
-        reload: [
-          "./**/*.html",
-          "./**/*.twig",
-          "./**/*.php",
-          "!vendor/**/*",
-          "!node_modules/**/*",
-        ],
-      }),
-    ],
-    server: {
-      https: process.env.VITE_PROTOCOL === "https",
-      cors: true,
-      fs: {
-        strict: false,
-      },
-      origin: `${process.env.VITE_PROTOCOL}://${process.env.VITE_HOST}:${process.env.VITE_PORT}`,
-      port: parseInt(process.env.VITE_PORT),
-      strictPort: true,
-      hmr: {
-        host: process.env.VITE_HOST,
-        port: parseInt(process.env.VITE_PORT),
-        protocol: process.env.VITE_PROTOCOL === "https" ? "wss" : "ws",
-      },
-      host: true,
+    name: "theme-hot-file",
+    apply: "serve",
+    configureServer(server) {
+      server.httpServer?.once("listening", () => fs.writeFileSync(file, devServerUrl));
+      server.httpServer?.once("close", remove);
+      for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+        process.once(signal, () => {
+          remove();
+          process.exit();
+        });
+      }
+      process.once("exit", remove);
     },
   };
-});
+}
+
+export default defineConfig(({ command }) => ({
+  base: command === "serve" ? "/" : `/${VITE_OUTPUT_DIR}/`,
+  // public/ is served by WordPress directly; nothing needs copying into dist/.
+  publicDir: false,
+  build: {
+    manifest: true,
+    outDir: VITE_OUTPUT_DIR,
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        app: VITE_ENTRY_POINT,
+        admin: "src/admin.css",
+        preview: "src/preview.js",
+      },
+    },
+  },
+  plugins: [
+    tailwindcss(),
+    mkcert(),
+    hotFile(),
+    ViteRestart({
+      reload: ["./**/*.twig", "./**/*.php", "!vendor/**/*", "!node_modules/**/*"],
+    }),
+  ],
+  server: {
+    https: VITE_PROTOCOL === "https",
+    cors: true,
+    fs: {
+      strict: false,
+    },
+    origin: devServerUrl,
+    port: parseInt(VITE_PORT, 10),
+    strictPort: true,
+    hmr: {
+      host: VITE_HOST,
+    },
+    host: true,
+  },
+}));

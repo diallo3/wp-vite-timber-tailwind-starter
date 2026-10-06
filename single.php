@@ -15,6 +15,7 @@ use Timber\Timber;
 $context         = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
+$context['flexible_content'] = render_acf_flexible_content($timber_post->ID);
 
 if (post_password_required($timber_post->ID)) {
 	Timber::render('pages/single-password/single-password.twig', $context);

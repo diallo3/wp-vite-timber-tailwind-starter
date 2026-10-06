@@ -2,47 +2,40 @@
 {% macro render_button_link(options = {}) %}
     {% import "@Elements/_macro-icon.twig" as icons %}
 
+    {# `link` and `href` are accepted interchangeably; styles/sizes match the CTA Group field choices. #}
+    {% set href = options.href ?? options.link ?? null %}
+    {% set target = options.target ?? null %}
+
     {% set options = {
-        text: options.text ?? 'Button Text',
-        style: options.style ?? 'primary',
-        type: options.type ?? 'solid',
-        size: options.size ?? 'default',
-        icon: options.icon ?? null,
-        href: options.href ?? null,
+        text: 'Button Text',
+        icon: null,
+        class: '',
     } | merge(options) %}
 
-    {% set type_class = {
-        solid: '',
-        outline: 'btn-outline',
-        ghost: 'btn-ghost',
-        soft: 'btn-soft',
-        link: 'btn-link',
-    }[options.type] ?? '' %}
-
     {% set style_class = {
-        primary: 'btn-primary ' ~ (options.type == 'outline' ? ' bg-transparent border-tiber-500 text-tiber-600 hover:border-tiber-500' : ' bg-tiber-500 border-tiber-500 text-white hover:border-tiber-500'),
-        secondary: 'btn-secondary ' ~ (options.type == 'outline' ? ' bg-transparent border-metallic-red-500 text-metallic-red-500' : 'bg-metallic-red-500 border-metallic-red-500 text-white'),
-        tertiary: 'btn-tertiary ' ~ (options.type == 'outline' ? ' bg-transparent border-azure-300 text-azure-300' : 'bg-azure-500 border-azure-500 text-white'),
-        white: 'btn-white ' ~ (options.type == 'outline' ? 'bg-transparent border-white text-white' : 'bg-white border-white text-tiber-600'),
-    }[options.style] ?? '' %}
-
-    
+        solid: 'bg-dodger-blue-600 text-white hover:bg-dodger-blue-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100',
+        outline: 'border border-current text-dodger-blue-700 hover:bg-dodger-blue-50 dark:text-white dark:hover:bg-white/10',
+        white: 'bg-white text-gray-900 hover:bg-gray-100',
+        link: 'px-0! text-dodger-blue-700 underline-offset-4 hover:underline dark:text-white',
+    } %}
+    {% set style_class = style_class[options.style ?? 'solid'] ?? style_class.solid %}
 
     {% set size_class = {
-        small: 'btn-sm',
-        default: 'btn-smxl:btn-md',
-        large: 'lg:btn-lg',
-    }[options.size] ?? '' %}
+        small: 'h-9 px-3 text-sm',
+        default: 'h-11 px-5 text-base',
+        large: 'h-13 px-7 text-lg',
+    } %}
+    {% set size_class = size_class[options.size ?? 'default'] ?? size_class.default %}
 
     {% set button_classes = [
+        'inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
         style_class,
-        type_class,
         size_class,
-        'btn rounded-full lg:px-10 px-6 shadow-none whitespace-nowrap'
-    ]|join(' ') %}
+        options.class,
+    ]|join(' ')|trim %}
 
     {% set button_text %}
-        <span class="inline-flex btn__content font-bold">{{ options.text }}</span>
+        <span class="inline-flex">{{ options.text|esc_html }}</span>
         {# Include an optional SVG icon #}
         {% if options.icon is not null %}
             <span class="relative inline-flex items-center justify-center w-5 h-5 bg-current rounded-full">
@@ -51,18 +44,12 @@
         {% endif %}
     {% endset %}
 
-    {% if options.href is not empty %}
-        {% set is_hash_link = options.href starts with '#' %}
-        {# Generate button HTML #}
-        <span x-data>
-        <a href="{{ options.href }}" 
-           {% if is_hash_link %} @click.prevent="document.getElementById('{{ options.href|slice(1) }}').scrollIntoView({ behavior: 'smooth' })"{% endif %}
-           class="{{ button_classes }}">
+    {% if href is not empty %}
+        <a href="{{ href|e('html_attr') }}" class="{{ button_classes }}"{% if target %} target="{{ target|e('html_attr') }}"{% if target == '_blank' %} rel="noopener"{% endif %}{% endif %}>
             {{ button_text }}
         </a>
-        </span>
     {% else %}
-        <button class="{{ button_classes }}">
+        <button type="button" class="{{ button_classes }}">
             {{ button_text }}
         </button>
     {% endif %}

@@ -9,14 +9,6 @@
 		{% import "@Elements/_macro-image-object.twig" as images %}
 		{% import "@Elements/_macro-button.twig" as buttons %}
 
-		<script>
-			console.log({{ component | json_encode | raw }})
-		</script>
-
-		{% set accent = component.accent %}
-		{% set title = component.title %}
-		{% set sub_title = component.sub_title %}
-		{% set entry = component.entry %}
 		{% set stats = component.stats %}
 
 		<div class="max-w-2xl mx-auto lg:max-w-none">
@@ -43,7 +35,7 @@
 				{% if entry %}
 					{% embed "@Layouts/prose/_embed-prose-section.twig" %}
 						{% block prose_content %}
-							{{ entry }}
+							{{ entry|raw }}
 						{% endblock %}
 					{% endembed %}
 				{% endif %}

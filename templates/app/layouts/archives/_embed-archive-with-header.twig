@@ -1,29 +1,51 @@
+{#
+    Archive shell: header, posts (archive_content block), related posts, pagination.
+
+    archive_fields  "Post Archive Options" values: `content` is a Header Simple
+                    component, `related` a Posts component. Both are optional.
+    title           shown as the heading when there is no header component
+#}
+{% set header = (archive_fields.content[0] ?? null) ? archive_fields.content : null %}
+{% set related = (archive_fields.related[0].posts ?? null) ? archive_fields.related : null %}
+
 <div class="archive-container inview-container">
-    
+
     <div class="archive-container__body space-y-8">
-        {# archive hero #}
-        {% embed "@Layouts/sections/_embed-section-full.twig" with {
+        {% if header %}
+            {% include "@Layouts/_flexible-layout.twig" with {
+                name: 'section_header_simple',
+                component: { content: header },
+                index: 1,
+                is_preview: false,
+            } %}
+        {% elseif title ?? false %}
+            {% embed "@Layouts/sections/_embed-section-full.twig" with {
                 inview: 'false',
-                padding_block: 'py-0',
+                padding_block: 'pt-16 pb-0 lg:pt-24',
             } %}
                 {% block section_content %}
-
-                   {% include "@Layouts/archives/partials/_partial-archive-header-default.twig" with {
-                        accent: archive_fields.accent,
-                        title: archive_fields.title,
-                        subtitle: archive_fields.sub_title,
-                        entry: archive_fields.entry,
-                        ctas: archive_fields.call_to_actions
-                   } %}
+                    {% import "@Elements/_macro-heading.twig" as headings %}
+                    {{ headings.render_heading(1, { title: title }) }}
                 {% endblock %}
-        {% endembed %}
-        
+            {% endembed %}
+        {% endif %}
 
         <div class="archive-container__content inview-content">
-            {% block archive_content %}
-                <p>Archive Content</p>
-            {% endblock %}
+            {% block archive_content %}{% endblock %}
         </div>
+
+        {% if related %}
+            {% embed "@Layouts/sections/_embed-section-full.twig" with { component: { content: related } } %}
+                {% block section_content %}
+                    {% include "@Layouts/_flexible-layout.twig" with {
+                        name: 'section_featured_posts',
+                        component: { content: related },
+                        index: 2,
+                        is_preview: false,
+                    } %}
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
 
         {% embed "@Layouts/sections/_embed-section-full.twig" with {
                 inview: 'false',
@@ -35,6 +57,6 @@
                 </div>
             {% endblock %}
         {% endembed %}
-        
+
     </div>
 </div>

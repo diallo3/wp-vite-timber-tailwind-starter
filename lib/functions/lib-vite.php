@@ -1,152 +1,163 @@
 <?php
 
+/**
+ * Loads theme assets from the Vite dev server (when `npm run dev` is running)
+ * or from the built manifest in `dist/`.
+ */
 class WPVite {
+	public const HANDLE = 'wp-theme-timber-vite-acf';
+
 	public string $distUri;
 	public string $distPath;
-	public string $wpEnqueueId;
-	public string $server;
 	public string $entryPoint;
 	public array $jsDeps = [];
+	private string $hotFile;
+	private array $moduleHandles = [];
+	private ?array $manifest = null;
+	public static ?WPVite $instance = null;
+
 	public function __construct($isChild) {
+		self::$instance = $this;
 		$dir = $isChild ? get_stylesheet_directory() : get_template_directory();
 		$dirUri = $isChild ? get_stylesheet_directory_uri() : get_template_directory_uri();
-		$env = parse_ini_file($dir . '/.env');
+
+		// Same defaults as vite.config.js; `.env` is optional.
+		$env = array_merge(
+			['VITE_OUTPUT_DIR' => 'dist', 'VITE_ENTRY_POINT' => 'src/main.js'],
+			file_exists($dir . '/.env') ? (parse_ini_file($dir . '/.env') ?: []) : []
+		);
+
 		$this->distUri = $dirUri . '/' . $env['VITE_OUTPUT_DIR'];
 		$this->distPath = $dir . '/' . $env['VITE_OUTPUT_DIR'];
-		$this->wpEnqueueId = $env['WP_ENQUEUE_ID'];
-		$this->server = $env['VITE_PROTOCOL'] . '://' . $env['VITE_HOST'] . ':' . $env['VITE_PORT'];
 		$this->entryPoint = $env['VITE_ENTRY_POINT'];
+		$this->hotFile = $dir . '/.vite-hot';
 		$this->init();
 	}
 
 	public function init() {
-		$viteIsRunning = $this->checkServer();
-		add_action('wp_enqueue_scripts', function () use ($viteIsRunning) {
-            
-			if ($viteIsRunning === true) {
+		add_action('wp_enqueue_scripts', function () {
+			if ($this->isDevServerRunning()) {
 				$this->viteDevAssets();
 			} else {
 				$this->viteBuiltAssets();
 			}
 		});
 
-        // Initialize editor styles
-        add_action('admin_init', function () {
-            $this->enqueueEditorStyles();
-        });
-	}
-
-
-	/**
-	 * Checks the availability of a the vite server by sending a HEAD request.
-	 *
-	 * @return bool Returns true if the server is reachable and responds with a 200 status code,
-	 *              otherwise returns false.
-	 */
-	public function checkServer(): bool {
-		$ch = curl_init($this->server . '/' . $this->entryPoint);
-		curl_setopt($ch, CURLOPT_HEADER, true);    // Include headers in the response
-		curl_setopt($ch, CURLOPT_NOBODY, true);    // Use HEAD method to reduce data transfer
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return the response as a string
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);     // Set a timeout for the request
-		$output = curl_exec($ch);
-		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		curl_close($ch);
-
-		// Check if the HTTP status code is 200 (OK)
-		if ($httpcode == 200) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-
-	/**
-	 * Retrieves a list of CSS and JavaScript assets from vite's manifest file.
-	 *
-	 * This method reads the manifest file located at the specified distPath and extracts
-	 * the list of CSS and JavaScript assets associated with the entryPoint. The manifest
-	 * file should be in JSON format.
-	 *
-	 * @return array An associative array containing two keys:
-	 *               - 'css' (array): An array of CSS asset paths.
-	 *               - 'js' (array): An array of JavaScript asset paths.
-	 *               If the manifest file or specific assets are not found, empty arrays are returned.
-	 */
-	public function getProductionAssets() {
-		$manifest = json_decode(file_get_contents($this->distPath . '/.vite/manifest.json'), true);
-		$filelist = [
-			'css' => [],
-			'js' => [],
-            'editor_css' => [],
-		];
-
-		if (is_array($manifest)) {
-			if (isset($manifest[$this->entryPoint])) {
-				$files = $manifest[$this->entryPoint];
-				if (isset($files['css'])) {
-					$filelist['css'] = $files['css'];
-				}
-				if (isset($files['file'])) {
-					$filelist['js'][] = $files['file'];
-				}
+		add_filter('script_loader_tag', function ($tag, $handle) {
+			if (in_array($handle, $this->moduleHandles, true)) {
+				$tag = str_replace('<script ', '<script type="module" ', $tag);
 			}
+			return $tag;
+		}, 10, 2);
+	}
+
+	/**
+	 * Whether `npm run dev` is running. Vite writes `.vite-hot` while the server
+	 * is up; it is never trusted outside `local`/`development`.
+	 */
+	public function isDevServerRunning(): bool {
+		return in_array(wp_get_environment_type(), ['local', 'development'], true)
+			&& file_exists($this->hotFile);
+	}
+
+	/**
+	 * Dev server origin, e.g. `https://localhost:3000`.
+	 */
+	public function devServerUrl(): string {
+		return rtrim(trim((string) @file_get_contents($this->hotFile)), '/');
+	}
+
+	/**
+	 * Reads Vite's manifest file once per request.
+	 */
+	public function getManifest(): array {
+		if ($this->manifest === null) {
+			$path = $this->distPath . '/.vite/manifest.json';
+			$manifest = file_exists($path) ? json_decode(file_get_contents($path), true) : null;
+			$this->manifest = is_array($manifest) ? $manifest : [];
+		}
+		return $this->manifest;
+	}
+
+	/**
+	 * Built CSS and JavaScript files for a manifest entry.
+	 *
+	 * @param string|null $entry Manifest key, defaults to the main entry point.
+	 *
+	 * @return array{css: string[], js: string[]} Paths relative to the dist directory.
+	 */
+	public function getProductionAssets(?string $entry = null): array {
+		$files = $this->getManifest()[$entry ?? $this->entryPoint] ?? [];
+		$filelist = ['css' => $files['css'] ?? [], 'js' => []];
+
+		if (isset($files['file'])) {
+			$filelist[str_ends_with($files['file'], '.css') ? 'css' : 'js'][] = $files['file'];
 		}
 		return $filelist;
 	}
 
 	/**
-	 * Enable Vite development mode by adding a Vite script to the WordPress site's head.
+	 * Enqueue a stylesheet entry (e.g. `src/admin.css`, `src/app.css`) from the
+	 * dev server when it is running, otherwise from the build.
 	 *
-	 * This method injects a Vite development script into the WordPress site's head section.
-	 * The script is loaded using the provided 'server' and 'entryPoint' parameters, allowing
-	 * Vite to serve development assets during development mode.
-	 *
-	 * @note Make sure to call this method within a WordPress context.
-	 *
-	 * @return void
+	 * @param string $source Source path relative to the theme root.
+	 * @param string $handle Style handle.
+	 * @param string|null $entry Manifest entry that builds this CSS, when it differs from $source.
 	 */
-	public function viteDevAssets() {
-		$src = $this->server . '/' . $this->entryPoint;
-		add_action('wp_head', function () use ($src) {
-			echo '<script id="vite" type="module" crossorigin src="' . $src . '"></script>';
-		});
+	public function enqueueStyle(string $source, string $handle, ?string $entry = null): void {
+		if ($this->isDevServerRunning()) {
+			wp_enqueue_style($handle, $this->devServerUrl() . '/' . $source, [], null);
+			return;
+		}
+
+		foreach ($this->getProductionAssets($entry ?? $source)['css'] as $i => $file) {
+			wp_enqueue_style($handle . ($i ? '-' . $i : ''), $this->distUri . '/' . $file, [], null);
+		}
 	}
 
 	/**
-	 * Enqueue Vite-built CSS and JavaScript assets in a WordPress theme or plugin.
+	 * Enqueue a JavaScript entry (e.g. `src/preview.js`) as a module, from the
+	 * dev server when it is running, otherwise from the build.
 	 *
-	 * This method enqueues CSS and JavaScript assets generated by Vite for production mode.
-	 * It retrieves the asset list using the 'getProductionAssets()' method and enqueues them
-	 * using WordPress functions 'wp_enqueue_style()' and 'wp_enqueue_script()'.
-	 *
-	 * @note Make sure to call this method within a WordPress theme or plugin context.
-	 *
-	 * @return void
+	 * @param string $source Source path relative to the theme root (also its manifest key).
+	 * @param string $handle Script handle.
 	 */
-	public function viteBuiltAssets() {
-		$filelist = $this->getProductionAssets();
-		$i = 0;
-		foreach ($filelist['css'] as $file) {
-			$i++;
-			wp_enqueue_style($this->wpEnqueueId . '-style-' . $i, $this->distUri . '/' . $file);
+	public function enqueueScript(string $source, string $handle): void {
+		$this->moduleHandles[] = $handle;
+
+		if ($this->isDevServerRunning()) {
+			wp_enqueue_script($handle, $this->devServerUrl() . '/' . $source, [], null, true);
+			return;
 		}
-		$i = 0;
-		foreach ($filelist['js'] as $file) {
-			$i++;
-			wp_enqueue_script($this->wpEnqueueId . '-script-' . $i, $this->distUri . '/' . $file, $this->jsDeps, '', true);
+
+		foreach ($this->getProductionAssets($source)['js'] as $file) {
+			wp_enqueue_script($handle, $this->distUri . '/' . $file, [], null, true);
 		}
 	}
 
-    public function enqueueEditorStyles() {
-        $filelist = $this->getProductionAssets();
-        $i = 0;
-        foreach ($filelist['editor_css'] as $file) {
-            $i++;
-            add_editor_style($this->distUri . '/' . $file);
-        }
-    }
+	/**
+	 * Load the entry point from the Vite dev server.
+	 */
+	public function viteDevAssets(): void {
+		$handle = self::HANDLE . '-dev';
+		$this->moduleHandles[] = $handle;
+		wp_enqueue_script($handle, $this->devServerUrl() . '/' . $this->entryPoint, $this->jsDeps, null, true);
+	}
+
+	/**
+	 * Enqueue Vite-built CSS and JavaScript assets.
+	 */
+	public function viteBuiltAssets(): void {
+		$filelist = $this->getProductionAssets();
+
+		foreach ($filelist['css'] as $i => $file) {
+			wp_enqueue_style(self::HANDLE . '-style-' . ($i + 1), $this->distUri . '/' . $file, [], null);
+		}
+
+		foreach ($filelist['js'] as $i => $file) {
+			$handle = self::HANDLE . '-script-' . ($i + 1);
+			$this->moduleHandles[] = $handle;
+			wp_enqueue_script($handle, $this->distUri . '/' . $file, $this->jsDeps, null, true);
+		}
+	}
 }
-
-

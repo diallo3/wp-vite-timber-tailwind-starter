@@ -9,8 +9,7 @@
         {% import "@Elements/_macro-badge.twig" as badges %}
         {% import "@Elements/_macro-image-object.twig" as images %}
         {% import "@Elements/_macro-button.twig" as buttons %}
-
-        <script>console.log({{ component | json_encode | raw }})</script>
+        {% import "@Elements/_macro-card.twig" as cards %}
 
         {% set entries = component.posts %}
         {% set carousel = component.carousel_options %}
@@ -43,7 +42,7 @@
 
                 {% if has_entry and entry %}
                     <div class="mx-auto prose text-gray-600 lg:fluid-text-base/7 section-component-featured-logos__entry dark:prose-invert">
-                        {{ entry }}
+                        {{ entry|raw }}
                     </div>
                 {% endif %}
             </div>
@@ -56,15 +55,16 @@
                         {% for item in get_posts(entries) %}
                             <div class="max-w-sm slide">
                                 {% if item.type == 'testimonial' %}
-                                    {{ item.title}}
+                                    {{ item.title|esc_html }}
                                 {% elseif item.type == 'customer-story' %}
-                                    {% set id = item.id %}
-                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
-                                    {% set link = item.link %}
-                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
-                                    {% set thumbnail = item.thumbnail %}
-
-                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                    {{ cards.customer_story({
+                                        id: item.id,
+                                        title: item.title,
+                                        entry: item.excerpt,
+                                        image: item.thumbnail.src ?? null,
+                                        image_alt: item.thumbnail.alt ?? "",
+                                        link: item.link,
+                                    }) }}
                                 {% else %}
                                     
                                 {% endif %}
@@ -104,15 +104,16 @@
                             {% for item in get_posts(entries) %}
                             <div class="swiper-slide">
                                 {% if item.type == 'testimonial' %}
-                                    {{ item.title}}
+                                    {{ item.title|esc_html }}
                                 {% elseif item.type == 'customer-story' %}
-                                    {% set id = item.id %}
-                                    {% set title = item.meta('page_content')[0]['content'][0]['title'] %}
-                                    {% set link = item.link %}
-                                    {% set entry = item.excerpt ?? item.meta('page_content')[1]['content'][0]['entry'] | striptags %}
-                                    {% set thumbnail = item.thumbnail %}
-
-                                    {% include "@Components/cards/_component-card-customer-story.twig" %}
+                                    {{ cards.customer_story({
+                                        id: item.id,
+                                        title: item.title,
+                                        entry: item.excerpt,
+                                        image: item.thumbnail.src ?? null,
+                                        image_alt: item.thumbnail.alt ?? "",
+                                        link: item.link,
+                                    }) }}
                                 {% else %}
                                     
                                 {% endif %}

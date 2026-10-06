@@ -60,7 +60,7 @@
             {
                 "param": "post_type_archive",
                 "operator": "==",
-                "value": "customer-story"
+                "value": "solution"
             }
         ],
         [
@@ -99,5 +99,5 @@
         "button_label": "",
         "appearances": ""
     },
-    "modified": 1730253345
+    "modified": 1791310778
 }
