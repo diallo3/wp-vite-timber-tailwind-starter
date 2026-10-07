@@ -4,4 +4,8 @@
 // loaded on every admin screen by enqueue_iconify_for_admin().
 import { initializeAlpine } from './modules/js/module-alpine';
 
+// Same component styles as src/main.js. In dev the preview loads this file,
+// not main.js, so the glob has to live here too.
+import.meta.glob('../templates/**/*.css', { eager: true });
+
 initializeAlpine();

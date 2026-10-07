@@ -1,6 +1,6 @@
 # Frontend
 
-Vite builds three entries: `src/main.js` (frontend JS, which imports `src/app.css`), `src/admin.css` (wp-admin and ACF field styling) and `src/preview.js` (Alpine only, for ACFE layout previews). `lib/functions/lib-vite.php` enqueues them.
+Vite builds three entries: `src/main.js` (frontend JS, which imports `src/app.css`), `src/admin.css` (wp-admin and ACF field styling) and `src/preview.js` (Alpine and component CSS, for ACFE layout previews). `lib/functions/lib-vite.php` enqueues them.
 
 ## Dev server vs built assets
 
@@ -20,7 +20,7 @@ Vite builds three entries: `src/main.js` (frontend JS, which imports `src/app.cs
 - `@theme` holds the tokens: the `dodger-blue-*` colour scale, `wordpress-blue`, the `font-heading` / `font-body` families, breakpoints `xs` (360px) to `3xl` (1920px) and the `text-fluid-*` sizes. Only `@theme` variables generate utilities; a variable in `:root` doesn't. The Brand Guidelines page template reads its colours and fonts from this block.
 - `@plugin "@tailwindcss/typography"` provides `prose` for WYSIWYG output.
 - `dark:` is class-based (`.dark` on an ancestor). Sections opt in through their theme option; nothing sets it from the OS preference.
-- Component CSS: any `templates/**/*.css` file is imported automatically by `main.js`.
+- Component CSS: any `templates/**/*.css` file is imported by `main.js` and by `preview.js`, so the public site and the ACFE preview both get it.
 
 CSS modules in `src/modules/css/`:
 

@@ -47,7 +47,7 @@ Most components embed `@Layouts/sections/_embed-section-component-helper.twig` a
 {% endembed %}
 ```
 
-`name` is the layout name (`section_header_simple` becomes `section-header-simple`). It is set on both the frontend and the ACFE preview. Import a macro only when this template calls it, inside `component_content`, in this order: icons, headings, badges, images, buttons, cards. Optional CSS next to the template (`*.css`) is imported by the Vite glob in `src/main.js`; scope those rules under `section_class` so they do not apply to the rest of the page.
+`name` is the layout name (`section_header_simple` becomes `section-header-simple`). It is set on both the frontend and the ACFE preview. Import a macro only when this template calls it, inside `component_content`, in this order: icons, headings, badges, images, buttons, cards. Optional CSS next to the template (`*.css`) is imported by the Vite glob in `src/main.js` and `src/preview.js`; scope those rules under `section_class` so they do not apply to the rest of the page.
 
 The helper:
 

@@ -1,0 +1,121 @@
+/* Step connector. Codyhouse "How it works" pattern, scoped to this section. */
+
+.section-feature-how-it-works {
+    --hiw-counter-size: 2rem;
+    --hiw-counter-font-size: 1rem;
+    --hiw-line-stroke-width: 2px;
+    --hiw-line-border-radius: 1em;
+    --hiw-items-gap-x: 1.25rem;
+    --hiw-items-gap-y: 5.25rem;
+}
+
+@media (min-width: 64rem) {
+    .section-feature-how-it-works {
+        --hiw-counter-size: 3rem;
+        --hiw-counter-font-size: 1.25rem;
+        --hiw-items-gap-x: 2rem;
+        --hiw-items-gap-y: 8.25rem;
+    }
+}
+
+.section-feature-how-it-works .hiw-list {
+    counter-reset: hiw-list-items;
+}
+
+.section-feature-how-it-works .hiw-list__item {
+    position: relative;
+    counter-increment: hiw-list-items;
+}
+
+.section-feature-how-it-works .hiw-list__item:not(:last-child) {
+    padding-bottom: calc(var(--hiw-items-gap-y) / 2);
+    margin-bottom: calc(var(--hiw-items-gap-y) / 2);
+}
+
+.section-feature-how-it-works .hiw-list__item::before,
+.section-feature-how-it-works .hiw-list__item::after {
+    content: "";
+    position: absolute;
+    width: calc(50% - var(--hiw-counter-size) / 2 + var(--hiw-line-stroke-width) / 2);
+}
+
+.section-feature-how-it-works .hiw-list__item::before {
+    top: calc(var(--hiw-counter-size) + var(--hiw-line-stroke-width));
+    height: calc(100% - var(--hiw-counter-size) - var(--hiw-line-stroke-width));
+    border-bottom: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+}
+
+.section-feature-how-it-works .hiw-list__item::after {
+    top: calc(100% - var(--hiw-line-stroke-width));
+    height: calc(var(--hiw-items-gap-y) / 2);
+    border-top: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n+1) {
+    padding-right: calc(var(--hiw-counter-size) / 2);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n+1)::before {
+    left: calc(var(--hiw-counter-size) / 2 - var(--hiw-line-stroke-width) / 2);
+    border-left: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+    border-bottom-left-radius: var(--hiw-line-border-radius);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n+1)::after {
+    left: 50%;
+    border-top-right-radius: var(--hiw-line-border-radius);
+    border-right: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n) {
+    padding-left: calc(var(--hiw-counter-size) / 2);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n) .hiw-list__item-inner {
+    flex-direction: row-reverse;
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n)::before {
+    border-right: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+    right: calc(var(--hiw-counter-size) / 2 - var(--hiw-line-stroke-width) / 2);
+    border-bottom-right-radius: var(--hiw-line-border-radius);
+}
+
+.section-feature-how-it-works .hiw-list__item:nth-child(2n)::after {
+    right: 50%;
+    border-top-left-radius: var(--hiw-line-border-radius);
+    border-left: var(--hiw-line-stroke-width) dashed hsla(245 58% 51% / 0.25);
+}
+
+.section-feature-how-it-works .hiw-list__item:last-child::before,
+.section-feature-how-it-works .hiw-list__item:last-child::after {
+    display: none;
+}
+
+.section-feature-how-it-works .hiw-list__item-inner {
+    display: flex;
+    gap: var(--hiw-items-gap-x);
+}
+
+.section-feature-how-it-works .hiw-list__counter {
+    width: var(--hiw-counter-size);
+    height: var(--hiw-counter-size);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--hiw-line-stroke-width) solid hsla(245 58% 51% / 0.25);
+    color: var(--color-indigo-700);
+    font-size: var(--hiw-counter-font-size);
+}
+
+.section-feature-how-it-works .hiw-list__counter::before {
+    content: counter(hiw-list-items);
+}
+
+@media (min-width: 64rem) {
+    .section-feature-how-it-works .hiw-list__item:nth-child(2n) .hiw-list__content {
+        flex-direction: row-reverse;
+    }
+}
