@@ -1,13 +1,20 @@
-{# Section Featured Image #}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% set component = component.content[0] %}
+{% set section_class = name|replace({'_': '-'}) %}
 
-<div id="section-component-media-image-{{ index }}" class="section-component section-component-media-image">
-    <div class="aspect-w-16 aspect-h-9">
-        {{ images.render_image({
-            src: component.image.url | towebp,
-            class: ['object-cover', 'w-full', 'h-full'],
-            alt: component.image.alt,
-        }) }}
-    </div>
-</div>
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: section_class,
+    section_class_name: section_class ~ ' relative isolate overflow-hidden',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-image-object.twig" as images %}
+
+        <div data-{{ section_class }}-content class="{{ section_class }}__content">
+            <div class="aspect-w-16 aspect-h-9">
+                {{ images.render_image({
+                    src: component.image.url | towebp,
+                    class: ['object-cover', 'w-full', 'h-full'],
+                    alt: component.image.alt,
+                }) }}
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}

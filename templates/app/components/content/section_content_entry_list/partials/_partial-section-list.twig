@@ -4,8 +4,8 @@
 {% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-button.twig" as buttons %}
 
-<div class="section-component-content-entry-list__items lg:col-span-3 mt-12 xl:mt-24 pb-24">
-    <ul class="grid lg:grid-cols-2 xl:gap-y-12 section-component-content-entry-list__list stagger-inview-container">
+<div class="{{ section_class }}__items lg:col-span-3 mt-12 xl:mt-24 pb-24">
+    <ul class="grid lg:grid-cols-2 xl:gap-y-12 {{ section_class }}__list stagger-inview-container">
 
         {# list items #}
         {% for item in list %}

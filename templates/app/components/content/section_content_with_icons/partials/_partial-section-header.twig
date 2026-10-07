@@ -2,7 +2,7 @@
 {% import "@Elements/_macro-heading.twig" as headings %}
 {% import "@Elements/_macro-badge.twig" as badges %}
 
-<div class="space-y-4 section-component-header-simple__header text-balance">
+<div class="space-y-4 {{ section_class }}__header text-balance">
     {% if has_accent and accent %}
         {{ badges.render_accent_badge({
             title: accent,
@@ -11,7 +11,7 @@
     {% endif %}
 
     {% if has_title and title %}
-        <hgroup class="section-component-header-simple__title">
+        <hgroup class="{{ section_class }}__title">
             {{ headings.render_heading(2,{
                 title: title,
                 color: 'text-gray-800 dark:text-white',

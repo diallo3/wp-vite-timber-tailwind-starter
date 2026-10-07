@@ -1,57 +1,42 @@
-{# Section Featured Posts #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
-{% import "@Elements/_macro-card.twig" as cards %}
+{% set section_class = name|replace({'_': '-'}) %}
 
-{% set component = component.content[0] %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: section_class,
+    section_class_name: section_class ~ ' relative isolate overflow-hidden',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-card.twig" as cards %}
 
-{% set intro = section_intro(component) %}
-{% set accent = intro.accent %}
-{% set title = intro.title %}
-{% set entry = intro.entry %}
-{% set ctas = intro.ctas %}
-{% set has_accent = accent is not empty %}
-{% set has_title = title is not empty %}
-{% set has_entry = entry is not empty %}
-{% set has_ctas = ctas is not empty %}
-{% set posts = get_posts(component.posts) %}
+        {% set posts = get_posts(component.posts) %}
 
-<div id="section-component-featured-posts-{{ index }}" class="section-component-featured-posts {{ is_preview ? 'px-8 py-4' }}">
-	<div class="mx-auto space-y-6 section-component-featured-posts__content inview-container">
-		<div class="space-y-4 lg:mx-0 section-component-featured-posts__header inview-item">
+        <div data-{{ section_class }}-content class="{{ section_class }}__content mx-auto space-y-6 inview-container">
+            <div class="space-y-4 lg:mx-0 {{ section_class }}__header inview-item">
+                {% include "@Components/content/section_featured_posts/partials/_partial-section-header.twig" %}
 
-            {% include "@Components/content/section_featured_posts/partials/_partial-section-header.twig" %}
-			
-            <div class="section-component-featured-posts__entry inview-item lg:max-w-5xl">
-                {% embed "@Layouts/prose/_embed-prose-section.twig" %}
-                    {% block prose_content %}
-                        {{ entry|raw }}
-                    {% endblock %}
-                {% endembed %}
+                <div class="{{ section_class }}__entry inview-item lg:max-w-5xl">
+                    {% embed "@Layouts/prose/_embed-prose-section.twig" %}
+                        {% block prose_content %}
+                            {{ entry|raw }}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
             </div>
-		</div>
-		<ul role="list" class="grid max-w-2xl grid-cols-1 mx-auto gap-x-4 gap-y-8 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 section-component-featured-posts__list">
-            {% for item in posts %}
-			<li id="section-component-featured-post-{{ index }}-{{ loop.index }}" class="section-component-featured-post inview-item">
-                {{ cards.simple({
-                    title: item.title,
-                    entry: item.excerpt,
-                    image: item.thumbnail.src ?? null,
-                    image_alt: item.thumbnail.alt ?? '',
-                    link: item.link,
-                }) }}
-			</li>
-            {% endfor %}
-		</ul>
 
-        {# cte #}
-        {% if has_ctas and ctas %}
-            <div class="flex justify-center mt-8 section-component-featured-posts__cta">
-                {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: "py-6" } only %}
-            </div>
-        {% endif %}
-	</div>
-</div>
+            <ul role="list" class="grid max-w-2xl grid-cols-1 mx-auto gap-x-4 gap-y-8 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 {{ section_class }}__list">
+                {% for item in posts %}
+                    <li id="{{ section_class }}-{{ index }}-{{ loop.index }}" class="{{ section_class }}__item inview-item">
+                        {{ cards.simple({
+                            title: item.title,
+                            entry: item.excerpt,
+                            image: item.thumbnail.src ?? null,
+                            image_alt: item.thumbnail.alt ?? '',
+                            link: item.link,
+                        }) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, class: 'flex justify-center mt-8 py-6' } only %}
+        </div>
+    {% endblock %}
+{% endembed %}

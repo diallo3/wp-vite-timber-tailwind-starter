@@ -1,44 +1,36 @@
+{% set section_class = name|replace({'_': '-'}) %}
 
-{# Section Content Entry List #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
-{% import "@Elements/_macro-button.twig" as buttons %}
-{% import "@Elements/_macro-card.twig" as cards %}
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: section_class,
+    section_class_name: section_class ~ ' relative isolate overflow-hidden',
+} %}
+    {% block component_content %}
+        {% import "@Elements/_macro-heading.twig" as headings %}
+        {% import "@Elements/_macro-card.twig" as cards %}
 
-{% set component = component.content[0] %}
+        {% set testimonials = get_posts(component.testimonials) %}
 
-{% set title = section_intro(component).title %}
-{% set testimonials = get_posts(component.testimonials) %}
+        <div data-{{ section_class }}-content class="{{ section_class }}__content px-4 mx-auto space-y-8 lg:px-8 xl:max-w-(--breakpoint-2xl) inview-container">
+            <div class="text-center {{ section_class }}__header inview-item">
+                {{ headings.render_heading(2, {
+                    title: title,
+                    color: 'text-black',
+                    size: 'fluid-text-3xl',
+                }) }}
+            </div>
 
-<div id="section-component-featured-testimonial-{{ index }}" class="section-component-featured-testimonial">
-	<div class="px-4 mx-auto space-y-8 section-component-featured-testimonial__container lg:px-8 xl:max-w-(--breakpoint-2xl) inview-container">
-		<!-- Heading -->
-		<div class="text-center section-component-featured-testimonial__header inview-item">
-			
-			{{ headings.render_heading(2,{
-                title: title,
-                color: 'text-black',
-                size: 'fluid-text-3xl',
-            })}}
-		</div>
-		<!-- END Heading -->
-
-		<!-- Feedback -->
-		<div class="grid grid-cols-1 gap-4 lg:grid-cols-3 section-component-featured-testimonial__list">
-            {% for testimonial in testimonials %}
-                <div class="inview-item">
-                    {{ cards.testimonial({
-                        id: testimonial.id,
-                        quote: testimonial.meta('quote'),
-                        name: testimonial.meta('name'),
-                        position: testimonial.meta('position'),
-                    }) }}
-                </div>
-            {% endfor %}
-		</div>
-		<!-- END Feedback -->
-	</div>
-</div>
-<!-- END Testimonials Section: Boxed Multiple -->
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 {{ section_class }}__list">
+                {% for testimonial in testimonials %}
+                    <div class="inview-item">
+                        {{ cards.testimonial({
+                            id: testimonial.id,
+                            quote: testimonial.meta('quote'),
+                            name: testimonial.meta('name'),
+                            position: testimonial.meta('position'),
+                        }) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}

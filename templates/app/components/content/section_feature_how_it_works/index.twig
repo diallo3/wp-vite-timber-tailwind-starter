@@ -1,20 +1,17 @@
-{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-how-it-works',
-    section_class_name: 'section-component-how-it-works',
-} %}
+{% set section_class = name|replace({'_': '-'}) %}
 
+{% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
+    section_id_name: section_class,
+    section_class_name: section_class ~ ' relative isolate overflow-hidden',
+} %}
     {% block component_content %}
-        {% import "@Elements/_macro-icon.twig" as icons %}
         {% import "@Elements/_macro-heading.twig" as headings %}
         {% import "@Elements/_macro-badge.twig" as badges %}
-        {% import "@Elements/_macro-image-object.twig" as images %}
-        {% import "@Elements/_macro-button.twig" as buttons %}
 
         {% set steps = component.steps %}
 
-        <div class="space-y-6 inview-item section-component-how-it-works__content">
-            {# title #}
-            <header class="space-y-4 section-component-how-it-works__header lg:pt-10">
+        <div data-{{ section_class }}-content class="{{ section_class }}__content space-y-6 inview-item">
+            <header class="space-y-4 {{ section_class }}__header lg:pt-10">
                 {% if has_accent and accent %}
                     <div class="inview-item">
                         {{ badges.render_accent_badge({
@@ -24,7 +21,7 @@
                 {% endif %}
 
                 {% if has_title and title %}
-                    <div class="tracking-tight inview-item text-pretty dark:text-white section-component-how-it-works__title">
+                    <div class="tracking-tight inview-item text-pretty dark:text-white {{ section_class }}__title">
                         {{ headings.render_heading(2,{
                             title: title,
                             size: 'text-3xl sm:fluid-text-4xl',
@@ -37,7 +34,7 @@
             
             {# Entry content #}
             {% if has_entry and entry %}
-                <div class="section-component-how-it-works__entry lg:max-w-4xl">
+                <div class="{{ section_class }}__entry lg:max-w-4xl">
                     {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                         {% block prose_content %}
                             {{ entry|raw }}
@@ -47,7 +44,7 @@
             {% endif %}
 
             {# step list #}
-            <ol id="featured-step-list" class="mt-8 hiw-list section-component-how-it-works__list step-list inview-container">
+            <ol id="featured-step-list" class="mt-8 hiw-list {{ section_class }}__list step-list inview-container">
                 {% for item in steps %}
                     {% set step_options = item.step_options ?: [] %}
                     <li id="step-{{ loop.index }}" class="hiw-list__item step-list__item inview-item">

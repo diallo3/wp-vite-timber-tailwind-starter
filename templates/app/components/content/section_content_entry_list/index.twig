@@ -1,81 +1,56 @@
+{% set section_class = name|replace({'_': '-'}) %}
 
-{# Section Content Entry List #}
 {% embed "@Layouts/sections/_embed-section-component-helper.twig" with {
-    section_id_name: 'section-component-content-entry-list',
-    section_class_name: 'section-component-content-entry-list',
+    section_id_name: section_class,
+    section_class_name: section_class ~ ' relative isolate overflow-hidden',
 } %}
-
     {% block component_content %}
-        {% import "@Elements/_macro-icon.twig" as icons %}
         {% import "@Elements/_macro-heading.twig" as headings %}
         {% import "@Elements/_macro-badge.twig" as badges %}
-        {% import "@Elements/_macro-image-object.twig" as images %}
-        {% import "@Elements/_macro-button.twig" as buttons %}
 
         {% set list = component.list %}
 
-        <div class="items-start gap-4 space-y-8 lg:gap-8 xl:gap-12 lg:grid lg:grid-cols-5 ">
-            <div class="space-y-6 inview-item section-component-content-entry-list__entry lg:col-span-2">
-                
-                {# title #}
-                <div class="space-y-4 section-component-content-entry-list__title lg:pt-10">
+        <div data-{{ section_class }}-content class="{{ section_class }}__content items-start gap-4 space-y-8 lg:gap-8 xl:gap-12 lg:grid lg:grid-cols-5">
+            <div class="space-y-6 inview-item {{ section_class }}__entry lg:col-span-2">
+                <div class="space-y-4 {{ section_class }}__title lg:pt-10">
                     {% if has_accent and accent %}
                         <div class="inview-item">
                             {{ badges.render_accent_badge({
                                 title: accent,
-                            })}}
+                            }) }}
                         </div>
                     {% endif %}
 
                     {% if has_title and title %}
                         <div class="tracking-tight inview-item text-pretty dark:text-white">
-                            {{ headings.render_heading(2,{
+                            {{ headings.render_heading(2, {
                                 title: title,
                                 size: 'text-3xl sm:fluid-text-4xl',
                                 weight: 'font-bold',
-                                preview: is_preview
+                                preview: is_preview,
                             }) }}
                         </div>
                     {% endif %}
                 </div>
-                
-                {# Entry content #}
+
                 {% embed "@Layouts/prose/_embed-prose-section.twig" %}
                     {% block prose_content %}
                         {{ entry|raw }}
                     {% endblock %}
                 {% endembed %}
 
-                {% if has_ctas and ctas %}
-                    <div class="flex items-end gap-4">
-                        {% for cta in ctas %}
-                            {{ buttons.render_button_link({
-                                text: cta.link.title,
-                                link: cta.link.url,
-                                target: cta.link.target,
-                                size: cta.size,
-                                style: cta.style,
-                            }) }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                {% include "@Elements/_partial-ctas.twig" with { ctas: ctas, list_class: 'flex-row items-end' } only %}
             </div>
 
-            {# List #}
-            <div class="section-component-content-entry-list__items lg:col-span-3">
-                <ul class="grid grid-cols-2 gap-4 lg:gap-8 section-component-content-entry-list__list">
-                
-                    {# list items #}
+            <div class="{{ section_class }}__items lg:col-span-3">
+                <ul class="grid grid-cols-2 gap-4 lg:gap-8 {{ section_class }}__list">
                     {% for item in list %}
-                        <li class="flex flex-col space-y-2 text-base lg:text-lg inview-item section-featured-list__item">
+                        <li class="flex flex-col space-y-2 text-base lg:text-lg inview-item {{ section_class }}__item">
                             <div class="space-y-2">
                                 <span class="inline-flex text-gray-800 dark:text-dodger-blue-700 size-8 dark:text-white">
-                                    <iconify-icon
-                                        icon="{{ item.icon }}"
-                                        width="100%">
-                                    </iconify-icon>
+                                    <iconify-icon icon="{{ item.icon }}" width="100%"></iconify-icon>
                                 </span>
-                                {{ headings.render_heading(3,{
+                                {{ headings.render_heading(3, {
                                     title: item.title,
                                     size: 'text-xl lg:text-2xl tracking-tight',
                                     color: 'text-graay-500 dark:text-cyan-400',
@@ -91,5 +66,4 @@
             </div>
         </div>
     {% endblock %}
-    
 {% endembed %}
