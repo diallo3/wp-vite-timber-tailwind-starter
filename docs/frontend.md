@@ -17,7 +17,7 @@ Vite builds three entries: `src/main.js` (frontend JS, which imports `src/app.cs
 `src/app.css` is the only Tailwind entry:
 
 - `@import "tailwindcss" source(none)` plus explicit `@source` rules for `templates/`, `lib/`, root `*.php` and `src/`. A class used anywhere else (markdown, `node_modules`) is not generated.
-- `@theme` holds the tokens: the `dodger-blue-*` colour scale, `wordpress-blue`, the `font-heading` / `font-body` families, breakpoints `xs` (360px) to `3xl` (1920px) and the `text-fluid-*` sizes. Only `@theme` variables generate utilities; a variable in `:root` doesn't. The Brand Guidelines page template reads its colours and fonts from this block.
+- `@theme` is the reskin surface. Change the `brand-*` scale and the role aliases (`primary`, `ink`, `surface`, `muted`, `line`); `dodger-blue-*` follows `brand`. `azure`, `tiber`, `metallic-red` and `wordpress-blue` stay as named palettes. Also here: `font-heading` / `font-body` (keep them in sync with the Google Fonts link in `layout-base.twig`), breakpoints `xs` (360px) to `3xl` (1920px), `text-fluid-*`, `leading-fluid-*`, `spacing-fluid-*` and `radius-sm` through `radius-xl`. Only `@theme` variables generate utilities. Inside `.dark`, `ink`, `muted`, `surface` and `line` flip; `primary` does not. The Brand Guidelines page reads colours and fonts from this block.
 - `@plugin "@tailwindcss/typography"` provides `prose` for WYSIWYG output.
 - `dark:` is class-based (`.dark` on an ancestor). Sections opt in through their theme option; nothing sets it from the OS preference.
 - Component CSS: any `templates/**/*.css` file is imported by `main.js` and by `preview.js`, so the public site and the ACFE preview both get it.

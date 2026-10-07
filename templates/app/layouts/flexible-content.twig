@@ -1,18 +1,8 @@
 {% for block in flexible_content %}
-    {% set layout_context = {
+    {% include "@Layouts/_flexible-layout.twig" with {
         name: block.component_name,
         component: block.component_data,
         index: loop.index,
         is_preview: false,
     } %}
-
-    {% if loop.first %}
-        {% include "@Layouts/_flexible-layout.twig" with layout_context %}
-    {% else %}
-        {% embed "@Layouts/sections/_embed-section-full.twig" with { component: block.component_data } %}
-            {% block section_content %}
-                {% include "@Layouts/_flexible-layout.twig" with layout_context %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
 {% endfor %}

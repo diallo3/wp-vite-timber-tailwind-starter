@@ -63,19 +63,44 @@
     --color-tiber-900: oklch(0.188 0.039 252.4);
     --color-tiber-950: oklch(0.148 0.027 255.17);
 
-    --color-dodger-blue-50: #eef9ff;
-    --color-dodger-blue-100: #d9f1ff;
-    --color-dodger-blue-200: #bce7ff;
-    --color-dodger-blue-300: #8edaff;
-    --color-dodger-blue-400: #59c3ff;
-    --color-dodger-blue-500: #33a6fd;
-    --color-dodger-blue-600: #1d89f3;
-    --color-dodger-blue-700: #1571df;
-    --color-dodger-blue-800: #185bb5;
-    --color-dodger-blue-900: #1a4e8e;
-    --color-dodger-blue-950: #153056;
+    /* Palette: the values a new site changes. dodger-blue-* follows this scale. */
+    --color-brand-50: #eef9ff;
+    --color-brand-100: #d9f1ff;
+    --color-brand-200: #bce7ff;
+    --color-brand-300: #8edaff;
+    --color-brand-400: #59c3ff;
+    --color-brand-500: #33a6fd;
+    --color-brand-600: #1d89f3;
+    --color-brand-700: #1571df;
+    --color-brand-800: #185bb5;
+    --color-brand-900: #1a4e8e;
+    --color-brand-950: #153056;
 
-    /* Font families (`font-heading`, `font-body`) */
+    --color-dodger-blue-50: var(--color-brand-50);
+    --color-dodger-blue-100: var(--color-brand-100);
+    --color-dodger-blue-200: var(--color-brand-200);
+    --color-dodger-blue-300: var(--color-brand-300);
+    --color-dodger-blue-400: var(--color-brand-400);
+    --color-dodger-blue-500: var(--color-brand-500);
+    --color-dodger-blue-600: var(--color-brand-600);
+    --color-dodger-blue-700: var(--color-brand-700);
+    --color-dodger-blue-800: var(--color-brand-800);
+    --color-dodger-blue-900: var(--color-brand-900);
+    --color-dodger-blue-950: var(--color-brand-950);
+
+    /* Roles: what new UI should use. primary stays the brand color in .dark. */
+    --color-primary: var(--color-brand-600);
+    --color-primary-hover: var(--color-brand-700);
+    --color-primary-soft: var(--color-brand-50);
+    --color-on-primary: #fff;
+    --color-ink: var(--color-gray-900);
+    --color-muted: var(--color-gray-600);
+    --color-surface: #fff;
+    --color-surface-inverse: var(--color-gray-900);
+    --color-line: var(--color-gray-200);
+
+    /* Font families (`font-heading`, `font-body`).
+       Keep these in sync with the Google Fonts link in templates/app/layouts/layout-base.twig. */
     --font-heading: 'Jost', system-ui, -apple-system, sans-serif;
     --font-body: 'Open Sans', system-ui, -apple-system, sans-serif;
 
@@ -93,6 +118,32 @@
     --text-fluid-7xl: clamp(4.25rem, 3.7rem + 2.75vw, 5.25rem); /* 68px → 84px */
     --text-fluid-8xl: clamp(5.25rem, 4.5rem + 3.75vw, 7rem); /* 84px → 112px */
     --text-fluid-9xl: clamp(7rem, 6rem + 5vw, 9rem); /* 112px → 144px */
+
+    /* Fluid line heights (`leading-fluid-*`) */
+    --leading-fluid-tight: clamp(1.1, 1.05 + 0.25vw, 1.25);
+    --leading-fluid-snug: clamp(1.2, 1.15 + 0.25vw, 1.35);
+    --leading-fluid-normal: clamp(1.4, 1.35 + 0.25vw, 1.55);
+    --leading-fluid-relaxed: clamp(1.5, 1.45 + 0.25vw, 1.65);
+
+    /* Fluid spacing (`p-fluid-*`, `m-fluid-*`, `gap-fluid-*`). `--space-fluid-*` feeds the hand-written utilities. */
+    --spacing-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+    --spacing-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
+    --spacing-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    --spacing-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    --spacing-fluid-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+    --spacing-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
+    --space-fluid-xs: var(--spacing-fluid-xs);
+    --space-fluid-sm: var(--spacing-fluid-sm);
+    --space-fluid-md: var(--spacing-fluid-md);
+    --space-fluid-lg: var(--spacing-fluid-lg);
+    --space-fluid-xl: var(--spacing-fluid-xl);
+    --space-fluid-2xl: var(--spacing-fluid-2xl);
+
+    /* Corner radius. Same as Tailwind's defaults, so existing rounded-* classes do not shift. */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
 
     /* Enhanced responsive design tokens */
     --breakpoint-xs: 360px;
@@ -124,20 +175,14 @@
     /* Font families */
     :root {
         font-family: var(--font-body);
+    }
 
-        /* Fluid line heights for better typography */
-        --leading-fluid-tight: clamp(1.1, 1.05 + 0.25vw, 1.25);
-        --leading-fluid-snug: clamp(1.2, 1.15 + 0.25vw, 1.35);
-        --leading-fluid-normal: clamp(1.4, 1.35 + 0.25vw, 1.55);
-        --leading-fluid-relaxed: clamp(1.5, 1.45 + 0.25vw, 1.65);
-
-        /* Fluid spacing system */
-        --space-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
-        --space-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
-        --space-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
-        --space-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-        --space-fluid-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
-        --space-fluid-2xl: clamp(3rem, 2rem + 5vw, 6rem);
+    /* Section theme option. primary stays the brand color. */
+    .dark {
+        --color-ink: #fff;
+        --color-muted: var(--color-gray-300);
+        --color-surface: var(--color-gray-900);
+        --color-line: var(--color-gray-700);
     }
 
     h1, h2, h3, h4, h5, h6 {

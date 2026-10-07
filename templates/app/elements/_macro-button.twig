@@ -13,10 +13,10 @@
     } | merge(options) %}
 
     {% set style_class = {
-        solid: 'bg-dodger-blue-600 text-white hover:bg-dodger-blue-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100',
-        outline: 'border border-current text-dodger-blue-700 hover:bg-dodger-blue-50 dark:text-white dark:hover:bg-white/10',
+        solid: 'bg-primary text-on-primary hover:bg-primary-hover dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100',
+        outline: 'border border-current text-primary hover:bg-primary-soft dark:text-white dark:hover:bg-white/10',
         white: 'bg-white text-gray-900 hover:bg-gray-100',
-        link: 'px-0! text-dodger-blue-700 underline-offset-4 hover:underline dark:text-white',
+        link: 'px-0! text-primary underline-offset-4 hover:underline dark:text-white',
     } %}
     {% set style_class = style_class[options.style ?? 'solid'] ?? style_class.solid %}
 

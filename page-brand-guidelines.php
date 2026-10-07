@@ -18,8 +18,11 @@ $context['post'] = $timber_post;
  * Colour and font tokens from the `@theme` block in src/app.css, so this page
  * shows exactly what Tailwind generates.
  *
+ * Shade scales (`brand-600`, `azure-500`) stay in the palette grid. Role
+ * colours (`primary`, `ink`, `surface`) are one group.
+ *
  * @return array{colors: array<string, array>, fonts: array<string, string>}
- *     Colours grouped by scale (`dodger-blue` => shades), fonts by name (`heading`).
+ *     Colours grouped by scale, plus a `roles` group. Fonts by name (`heading`).
  */
 function brand_theme_tokens(): array {
     $tokens = ['colors' => [], 'fonts' => []];
@@ -28,6 +31,18 @@ function brand_theme_tokens(): array {
     if (!preg_match('/@theme\s*\{(.*?)\n\}/s', $css, $theme)) {
         return $tokens;
     }
+
+    $roles = [
+        'primary',
+        'primary-hover',
+        'primary-soft',
+        'on-primary',
+        'ink',
+        'muted',
+        'surface',
+        'surface-inverse',
+        'line',
+    ];
 
     preg_match_all('/--(color|font)-([a-z0-9-]+):\s*([^;]+);/', $theme[1], $matches, PREG_SET_ORDER);
 
@@ -39,14 +54,21 @@ function brand_theme_tokens(): array {
             continue;
         }
 
-        $group = preg_replace('/-\d+$/', '', $name);
         $rgb = sscanf(ltrim($value, '#'), '%02x%02x%02x');
-        $tokens['colors'][$group][] = [
+        $swatch = [
             'name' => $name,
             'hex' => $value,
             'rgb' => count(array_filter($rgb, 'is_int')) === 3 ? 'rgb(' . implode(', ', $rgb) . ')' : '',
             'usage' => '',
         ];
+
+        if (in_array($name, $roles, true)) {
+            $tokens['colors']['roles'][] = $swatch;
+            continue;
+        }
+
+        $group = preg_replace('/-\d+$/', '', $name);
+        $tokens['colors'][$group][] = $swatch;
     }
 
     return $tokens;

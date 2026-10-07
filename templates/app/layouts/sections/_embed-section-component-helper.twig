@@ -1,10 +1,4 @@
-{# Section Call to Action #}
-{% import "@Elements/_macro-icon.twig" as icons %}
-{% import "@Elements/_macro-heading.twig" as headings %}
-{% import "@Elements/_macro-badge.twig" as badges %}
-{% import "@Elements/_macro-image-object.twig" as images %}
 {% import "@Elements/_macro-image-background.twig" as backgrounds %}
-{% import "@Elements/_macro-button.twig" as buttons %}
 
 {% set component = component.content[0] %}
 
@@ -25,38 +19,57 @@
 {% set if_image_type = component.image_type %}
 {% set background_image = component.image %}
 
-{% set options = component.options[0] %}
-{% set section = options.section %}
-{% set theme = section.theme %}
+{% set options = component.options[0]|default({}) %}
+{% set section = options.section|default({}) %}
+{% set theme = section.theme|default('default') %}
 
-{# Define theme options based on preview mode or frontend #}
 {% set theme_options = is_preview
-    ? { 'default': 'bg-gray-100', 'light': 'bg-gray-200', 'dark': 'bg-blue-950 dark' }[theme] | default('bg-gray-100')
-    : { 'default': '', 'light': '', 'dark': '' }[theme] | default('') 
+    ? { 'default': 'bg-gray-100', 'light': 'bg-gray-200', 'dark': 'bg-blue-950 dark' }[theme]|default('bg-gray-100')
+    : { 'default': '', 'light': 'light bg-white border-y-2 border-blue-100', 'dark': 'dark' }[theme]|default('')
 %}
 
-{# Define and merge section classes #}
+{% set max_width = {
+    'default': 'max-w-(--breakpoint-2xl)',
+    'small': 'max-w-(--breakpoint-md)',
+    'medium': 'max-w-(--breakpoint-lg)',
+    'large': 'max-w-(--breakpoint-xl)',
+}[section.content_width]|default('max-w-(--breakpoint-2xl)') %}
+
+{# The first layout is the hero and stays unpadded. Later layouts use the editor's spacing. #}
+{% set padding_classes = index == 1 ? [] : [
+    {
+        'default': 'py-0',
+        'small': 'py-16',
+        'medium': 'py-24',
+        'large': 'py-32',
+    }[section.padding_block]|default('py-0'),
+    {
+        'default': 'px-8',
+        'small': 'px-4',
+        'medium': 'px-8',
+        'large': 'px-16',
+    }[section.padding_inline]|default('px-8'),
+] %}
+
 {% set section_classes = [
     section_class_name,
     theme_options,
     'relative',
-] %}
+]|merge(padding_classes) %}
 
-{# Add padding classes if in preview mode #}
 {% if is_preview %}
     {% set section_classes = section_classes|merge(['px-8', 'py-8']) %}
 {% endif %}
 
+{% set section_classes = section_classes|filter(v => v) %}
+
 {% if if_image_type and background_image %}
-    <section id="{{ section_id_name ~ '-' ~ index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image)}}>
+    <section id="{{ section_id_name }}-{{ index }}" class="{{ section_classes|join(' ') }} dark bg-cover bg-no-repeat bg-center lazyload overflow-hidden before:absolute before:inset-0 before:bg-black/40" {{ backgrounds.render_background_image(background_image) }}>
 {% else %}
     <section id="{{ section_id_name }}-{{ index }}" class="{{ section_classes|join(' ') }}">
 {% endif %}
-    <div class="container mx-auto max-w-(--breakpoint-2xl)"> 
-        {# content #}
+    <div class="mx-auto w-full {{ max_width }}">
         {% block component_content %}{% endblock %}
-
-        {# styles #}
         {% block component_styles %}{% endblock %}
     </div>
 </section>

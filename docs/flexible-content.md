@@ -16,7 +16,7 @@ page_content (flexible content, ACFE)
 **Frontend:**
 
 1. `page.php` / `single.php` call `render_acf_flexible_content($post_id)` (`lib/acf/lib-flexible-content.php`), which returns `[{component_name, component_data}]` for each row.
-2. `templates/app/layouts/flexible-content.twig` loops over them. Every layout after the first is wrapped in `@Layouts/sections/_embed-section-full.twig`, which adds the outer `<section>` spacing. The first layout (usually a hero) is rendered bare.
+2. `templates/app/layouts/flexible-content.twig` includes each row through `@Layouts/_flexible-layout.twig`. The component helper renders one `<section>` and applies the editor's theme, width, and padding. The first layout (usually a hero) stays unpadded. `@Layouts/sections/_embed-section-full.twig` is only the spacing shell for the blog index, archive titles, and pagination.
 3. Each row goes through `@Layouts/_flexible-layout.twig` with `name`, `component`, `index` (1-based) and `is_preview`.
 4. That includes `@Content/<name>/index.twig`, i.e. `templates/app/components/content/<name>/index.twig`. Unknown layouts show a notice to editors only.
 

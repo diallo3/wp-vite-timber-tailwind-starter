@@ -1,49 +1,54 @@
-{% set options = component.content[0].options[0] %}
-{% set section = options.section %}
-{% set theme = section.theme ?? 'default' %}
+{# Spacing shell for pages that are not a component layout (blog index, archive title, pagination). #}
+{% set section = null %}
+{% if component is defined and component %}
+    {% set section = component.content[0].options[0].section|default(null) %}
+{% endif %}
 
-{% set theme_options = { 
-    'default': '', 
+{% set theme = section ? section.theme|default('default') : 'default' %}
+{% set theme_options = {
+    'default': '',
     'light': 'light bg-white border-y-2 border-blue-100',
-    'dark': 'dark' 
-}[theme] | default('')  %}
+    'dark': 'dark',
+}[theme]|default('') %}
 
-{% set max_width = section.content_width %}
+{% set content_width = section ? section.content_width|default(null) : null %}
+{% set padding_block_value = section ? section.padding_block|default('') : '' %}
+{% set padding_inline_value = section ? section.padding_inline|default('') : '' %}
 
-{# padding Y values: ACF option, then a class string passed by the caller #}
+{# ACF choice, then a class string passed by the caller, then the default. #}
 {% set padding_block_options = {
     'default': 'py-0',
     'small': 'py-16',
     'medium': 'py-24',
-    'large': 'py-32'
-}[section.padding_block ?? ''] ?? padding_block ?? 'py-0' %}
+    'large': 'py-32',
+}[padding_block_value] ?? padding_block ?? 'py-0' %}
 
-{# padding X values: ACF option, then a class string passed by the caller #}
 {% set padding_inline_options = {
     'default': 'px-8',
     'small': 'px-4',
     'medium': 'px-8',
-    'large': 'px-16'
-}[section.padding_inline ?? ''] ?? padding_inline ?? 'px-8' %}
+    'large': 'px-16',
+}[padding_inline_value] ?? padding_inline ?? 'px-8' %}
 
-{# Define and merge section classes #}  
+{% set show_inview = inview ?? true %}
+
 {% set section_classes = [
+    'relative',
     padding_inline_options,
     padding_block_options,
-    inview == 'false' ? '' : 'inview-container',
+    show_inview ? 'inview-container' : '',
     class ?? '',
     theme_options,
-] | join(' ') %}
+]|filter(v => v) %}
 
-{# max width options #}
 {% set max_width_options = {
     'default': 'max-w-(--breakpoint-2xl)',
     'small': 'max-w-(--breakpoint-md)',
     'medium': 'max-w-(--breakpoint-lg)',
     'large': 'max-w-(--breakpoint-xl)',
-}[max_width] | default('max-w-(--breakpoint-2xl)') %}
+}[content_width]|default('max-w-(--breakpoint-2xl)') %}
 
-<section {% if id ?? false %}id="{{ id }}" {% endif %}class="relative {{ section_classes }}" {{ (data ?? '')|raw }}>
+<section {% if id ?? false %}id="{{ id }}" {% endif %}class="{{ section_classes|join(' ') }}" {{ (data ?? '')|raw }}>
     <div class="px-2 mx-auto {{ max_width_options }}">
         {% block section_content %}
             <p>Section Content</p>
